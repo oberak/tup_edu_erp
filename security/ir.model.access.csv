@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tup-edu-erp_tup-edu-erp,tup-edu-erp.tup-edu-erp,model_tup-edu-erp_tup-edu-erp,,1,0,0,0
