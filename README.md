@@ -20,15 +20,18 @@ Make folder named 'custom-addons' under odoo11
 \odoo11\custom-addons\> git clone https://github.com/oberak/tup_edu_erp.git
 ```
 
-### Set a Git username
+### Set a Git user name & email
 
 ```bash
-\> git config --global user.name "Your github.com user name"
+\> git config --global user.name "Won Kilho" # use your name
+\> git config --global user.email happy@bnbb.co.kr # user your email
 ```
 
 ## Install Educational ERP modules
 
 Copy Educational ERP modules to 'custom-addons'
+
+```
 \odoo11\custom-addons\education_core
 \odoo11\custom-addons\education_theme
 \odoo11\custom-addons\education_attendances
@@ -37,6 +40,7 @@ Copy Educational ERP modules to 'custom-addons'
 \odoo11\custom-addons\education_promotion
 \odoo11\custom-addons\education_time_table
 \odoo11\custom-addons\educational_announcement
+```
 
 ### Modify odoo11/odoo.conf
 
@@ -47,7 +51,7 @@ addons_path = E:\dev\odoo11\addons,E:\dev\odoo11\custom-addons
 
 ```bash
 \dev> env-odoo11\Scripts\activate.bat
-(env-odoo11) E:\dev> cd odoo11
+(env-odoo11) E:\dev\> cd odoo11
 (env-odoo11) E:\dev\odoo11\> python odoo-bin
 ```
 
