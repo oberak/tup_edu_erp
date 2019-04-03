@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tup_education_application_tree" model="ir.ui.view">
+        <field name="name">tup.education.application.tree</field>
+        <field name="model">education.application</field>
+        <field name="inherit_id" ref="education_core.view_education_application_tree"/>
+        <field name="arch" type="xml">
+            <field name="application_no" position="after">
+                <field name="nrc_no"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tup_education_application_form">
+        <field name="name">tup.education.application.form</field>
+        <field name="model">education.application</field>
+        <field name="inherit_id" ref="education_core.view_education_application_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            <field name="father_name" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+            <field name="caste_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="mother_tongue" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="guardian_name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="sec_lang" position="replace"/>
+            <field name="medium" position="after">
+               <field name="sec_lang" attrs="{'readonly': [('state', '=', 'done')]}"/>
+            </field>
+            <field name="date_of_birth" position="before">
+                <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
