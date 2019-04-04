@@ -25,3 +25,7 @@ class TupStudentApplication(models.Model):
                                   help="Select the Nationality", default=145) # set default as Myanmar
     guardian_name = fields.Many2one('res.partner', string="Guardian", domain=[('is_parent', '=', True)], required=False,
                                     help="Tell us who will take care of you") # remove required
+    blood_group = fields.Selection([('a+', 'A+'), ('a-', 'A-'), ('b+', 'B+'), ('o+', 'O+'), ('o-', 'O-'),
+                                ('ab-', 'AB-'), ('ab+', 'AB+')],
+                                string='Blood Group', required=False, default='', track_visibility='onchange',
+                                help="Your Blood Group is ")
