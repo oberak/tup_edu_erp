@@ -16,12 +16,18 @@
         <field name="model">education.application</field>
         <field name="inherit_id" ref="education_core.view_education_application_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='last_name']" position="attributes">
+            <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
+                <tr>
+                    <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                </tr>
+                <tr>
+                    <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                    <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                </tr>
+            </xpath>
+            <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
-            <field name="father_name" position="attributes">
-                <attribute name="required">1</attribute>
-            </field>
             <field name="caste_id" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -31,6 +37,10 @@
             <field name="guardian_name" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
+            <field name="medium" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            
             <field name="sec_lang" position="replace"/>
             <field name="medium" position="after">
                <field name="sec_lang" attrs="{'readonly': [('state', '=', 'done')]}"/>
