@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/tup_education_admission.xml',
+        'views/tup_education_faculty.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
