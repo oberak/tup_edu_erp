@@ -11,5 +11,4 @@ class TupEducationStudentSignup(models.Model):
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
     password = fields.Char(string='Password', required=True, help="Enter Password of Student")
     confirm_password = fields.Char(string='Confirm Password', required=True, help="Enter Confirm Password of Student")
-    #nrc_no = fields.One2one('education.admission', string="NRC Number", required=True,
-                             help="Choose Your NRC Number")
+    #nrc_no = fields.One2one('education.admission', string="NRC Number", required=True,         help="Choose Your NRC Number")
