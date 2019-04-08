@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<<<<<<< HEAD
-=======
     
->>>>>>> 66ee83ec6c82aed4ebb81124f2c7d929c3b47e15
     <record model="ir.ui.view" id="view_tup_education_faculty_form">
         <field name="name">tup.education.faculty.form</field>
         <field name="model">education.faculty</field>
         <field name="inherit_id" ref="education_core.view_education_faculty_form"/>
         <field name="arch" type="xml">
-<<<<<<< HEAD
-=======
             
->>>>>>> 66ee83ec6c82aed4ebb81124f2c7d929c3b47e15
             <field name="father_name" position="before">
                 <field name="nrc_no" attrs="{'readonly': []}"/>
             </field>
@@ -22,18 +16,6 @@
             <field name="mother_name" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-<<<<<<< HEAD
-            <xpath expr="//field[@name='last_name']" position="attributes">
-                <attribute name="required">0</attribute>
-            </xpath>
-            <field name="degree" position="replace"/>
-            <field name="father_name" position="after">
-               <field name="degree" />
-            </field>
-        </field>
-    </record>
-</odoo>
-=======
             <field name="degree" position="replace"/>
             <field name="mother_name" position="after">
                <field name="degree" attrs="{'readonly': []}"/>
@@ -46,4 +28,3 @@
         
     </record>
 </odoo>
->>>>>>> 66ee83ec6c82aed4ebb81124f2c7d929c3b47e15

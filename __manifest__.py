@@ -28,13 +28,9 @@
         'views/views.xml',
         'views/templates.xml',
         'views/tup_education_admission.xml',
-<<<<<<< HEAD
         'views/tup_education_admission2.xml',
         'views/tup_education_faculty.xml',
         'views/tup_education_student_signup.xml',
-=======
-        'views/tup_education_faculty.xml',
->>>>>>> 66ee83ec6c82aed4ebb81124f2c7d929c3b47e15
     ],
     # only loaded in demonstration mode
     'demo': [
