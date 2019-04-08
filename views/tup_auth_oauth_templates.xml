@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tup_edu_erp.login" inherit_id="auth_signup.signup" name="Sign up">
+        <xpath expr="//input[@name='csrf_token']" position="after">
+            <div class="form-group field-nrc_no">
+                <label for="nrc_no" class="control-label">Your NRC Number or Addmission Number</label>
+                <input type="text" name="nrc_no" t-att-value="nrc_no" id="nrc_no" class="form-control" autofocus="autofocus"
+                    autocapitalize="off" required="required"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

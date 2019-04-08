@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'education_core'],
+    'depends': ['base', 'web', 'base_setup', 'auth_oauth', 'auth_signup', 'education_core'],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/templates.xml',
         'views/tup_education_application.xml',
         'views/tup_education_faculty.xml',
+        'views/tup_auth_oauth_templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
