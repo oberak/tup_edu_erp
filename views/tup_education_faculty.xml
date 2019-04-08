@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tup_education_faculty_form">
+        <field name="name">tup.education.faculty.form</field>
+        <field name="model">education.faculty</field>
+        <field name="inherit_id" ref="education_core.view_education_faculty_form"/>
+        <field name="arch" type="xml">
+            <field name="father_name" position="before">
+                <field name="nrc_no" attrs="{'readonly': []}"/>
+            </field>
+            <field name="guardian_name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="mother_name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            <field name="degree" position="replace"/>
+            <field name="father_name" position="after">
+               <field name="degree" />
+            </field>
+        </field>
+    </record>
+</odoo>

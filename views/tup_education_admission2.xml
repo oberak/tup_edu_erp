@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_tup_education_admission_tree" model="ir.ui.view">
+        <field name="name">tup.education.admission.tree</field>
+        <field name="model">education.admission</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="roll_no"/>
+                <field name="nrc_no"/>
+                <field name="total_mark"/>
+                <field name="academic_year"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tup_education_admission_form" model="ir.ui.view">
+        <field name="name">tup.education.admission.form</field>
+        <field name="model">education.admission</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="roll_no"/>
+                        <field name="nrc_no"/>
+                        <field name="total_mark"/>
+                        <field name="academic_year"/>
+                    </group>
+                </group>
+                
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_student_admission" name="Student Admission" res_model="education.admission" view_type="form" view_mode="tree,form"/>
+    <menuitem id="menu_education_application" name="Student Admission"
+              parent="education_core.menu_education_admission" sequence="1" action="action_student_admission"/>
+</odoo>

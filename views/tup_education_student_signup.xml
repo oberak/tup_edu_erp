@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tup_education_student_signup_tree" model="ir.ui.view">
+        <field name="name">tup.education.student.signup.tree</field>
+        <field name="model">education.student_signup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="nrc_no"/>
+                <field name="password"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_tup_education_student_signup_form" model="ir.ui.view">
+        <field name="name">tup.education.student.signup.form</field>
+        <field name="model">education.student_signup</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="nrc_no"/>
+                        <field name="password"/>
+                        <field name="confirm_password"/>
+                    </group>
+                </group>
+                
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_student_signup" name="Student Signup" res_model="education.student_signup" view_type="form" view_mode="tree,form"/>
+    <menuitem id="menu_tup_education_student_signup" name="Student Signup"
+              parent="education_core.menu_education_admission" sequence="2" action="action_student_signup"/>
+</odoo>
