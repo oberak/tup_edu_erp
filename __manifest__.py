@@ -27,10 +27,8 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/tup_education_admission.xml',
-        'views/tup_education_admission2.xml',
+        'views/tup_education_application.xml',
         'views/tup_education_faculty.xml',
-        'views/tup_education_student_signup.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
