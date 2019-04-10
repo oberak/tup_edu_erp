@@ -32,6 +32,7 @@
         'views/tup_education_faculty.xml',
         'views/tup_auth_oauth_templates.xml',
         'views/tup_hr_department.xml',
+        'views/tup_education_time_table.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

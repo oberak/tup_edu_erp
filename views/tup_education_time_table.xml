@@ -1,0 +1,14 @@
+<odoo>
+    <record id="tup_education_time_table_search" model="ir.ui.view">
+        <field name="name">tup.education.timetable.search</field>
+        <field name="model">education.timetable</field>
+        <field name="context">{"search_default_education.academic.year":1}</field>
+        <field name="arch" type="xml">
+            <search string="Timetable List">
+                <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
+            </search>
+        </field>
+    </record>
+</odoo>
+
