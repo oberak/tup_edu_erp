@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tup_education_subject_form">
+        <field name="name">tup.education.subject.form</field>
+        <field name="model">education.subject</field>
+        <field name="inherit_id" ref="education_core.view_education_subject_form"/>
+        <field name="arch" type="xml">
+            <field name="is_language" position="after">
+                <field name="major_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
