@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tup_department_form">
+        <field name="name">tup.hr.department.form</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group" position="replace">
+                <group string="Department Information" col="4">
+                    <field name="name"/>
+                    <field name="manager_id"/>
+                    <field name="parent_id"/>
+                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                </group>
+            </xpath>
+            <xpath expr="sheet" position="inside">
+                <group string="Major Information" col="4">
+                    <field name="major_code"/>
+                    <field name="is_major"/>
+                    <field name="can_enroll"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
