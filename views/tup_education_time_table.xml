@@ -1,14 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="tup_education_time_table_search" model="ir.ui.view">
-        <field name="name">tup.education.timetable.search</field>
-        <field name="model">education.timetable</field>
-        <field name="context">{"search_default_education.academic.year":1}</field>
-        <field name="arch" type="xml">
-            <search string="Timetable List">
-                <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+    <data>
+        <!-- add new search view -->
+        <record id="tup_education_time_table_search" model="ir.ui.view">
+            <field name="name">tup.education.timetable.search</field>
+            <field name="model">education.timetable</field>         
+            <field name="arch" type="xml">
+                <search string="Education Timetable">
+                    <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
                             ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
-            </search>
-        </field>
-    </record>
-</odoo>
+                    <separator/>
+                        <group expand="1" string="Group By">
+                            <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
+                        </group>
+                </search>
+            </field>
+        </record>
 
+        <record id="education_time_table.action_education_time_table" model="ir.actions.act_window">
+            <field name="name">Education Timetable</field>
+            <field name="res_model">education.timetable</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_education.academic.year': 1}</field>
+            <field name="search_view_id" ref="tup_education_time_table_search"/>            
+        </record>    
+    </data>
+</odoo>
