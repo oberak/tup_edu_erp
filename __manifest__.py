@@ -24,16 +24,25 @@
 
     # always loaded
     'data': [
-        # 'security/education_security.xml',
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        ## security
+        'security/ir.model.access.csv',
+        'security/education_security.xml',
+
+        ## data
+        'data/auth_sighup_data.xml',
+
+        ## template
+        'views/tup_auth_oauth_templates.xml',
+
+        ## view - hr
+        'views/tup_hr_department.xml',
+
+        ## view - education_core
         'views/tup_education_application.xml',
         'views/tup_education_faculty.xml',
-        'views/tup_auth_oauth_templates.xml',
-        'views/tup_hr_department.xml',
         'views/tup_education_time_table.xml',
         'views/tup_education_subject.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [
