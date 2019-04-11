@@ -25,8 +25,8 @@
     # always loaded
     'data': [
         ## security
-        'security/ir.model.access.csv',
         'security/education_security.xml',
+        'security/ir.model.access.csv',
 
         ## data
         'data/auth_sighup_data.xml',
