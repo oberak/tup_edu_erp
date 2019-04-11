@@ -5,9 +5,28 @@
         <field name="model">education.subject</field>
         <field name="inherit_id" ref="education_core.view_education_subject_form"/>
         <field name="arch" type="xml">
-            <field name="is_language" position="after">
+            <field name="is_language" position="before">
                 <field name="major_id"/>
+            </field>
+            <field name="is_lab" position="before">
+                <field name="is_tutorial"/>
+            </field>
+            <field name="is_lab" position="after">
+                <field name="is_class_work"/>
             </field>
         </field>
     </record>
+
+    <record id="tup_subject_search" model="ir.ui.view">
+        <field name="name">Subjects</field>
+        <field name="model">education.subject</field>
+         <field name="inherit_id" ref="education_core.subject_search"/>
+        <field name="arch" type="xml">
+            <field name="is_lab" position="after">
+                <filter string="Is Class Work" name="is_class_work" domain="[('is_class_work','=', True)]"/> 
+                <filter string="Is Tutorial" name="is_tutorial" domain="[('is_tutorial','=', True)]"/>
+           </field>
+        </field>
+    </record>
+
 </odoo>
