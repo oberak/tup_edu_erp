@@ -25,7 +25,8 @@
     # always loaded
     'data': [
         ## security
-        'security/education_security.xml',
+        'security/education_core/education_security.xml',
+        'security/education_core/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
