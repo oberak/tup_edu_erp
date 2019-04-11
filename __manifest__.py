@@ -31,6 +31,7 @@
 
         ## data
         'data/auth_sighup_data.xml',
+        'data/education_data.xml',
 
         ## template
         'views/tup_auth_oauth_templates.xml',

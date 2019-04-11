@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="education_py_1" model="education.division">
+            <field name="name">1BE</field>
+        </record>
+        <record id="education_py_2" model="education.division">
+            <field name="name">2BE</field>
+        </record>
+        <record id="education_py_3" model="education.division">
+            <field name="name">3BE</field>
+        </record>
+        <record id="education_py_4" model="education.division">
+            <field name="name">4BE</field>
+        </record>
+        <record id="education_py_5" model="education.division">
+            <field name="name">5BE</field>
+        </record>
+        <record id="education_py_6" model="education.division">
+            <field name="name">6BE</field>
+        </record>
+        <record id="major_it" model="hr.department">
+          <field name="name">Information Technology</field>
+          <field name="major_code">IT</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">False</field>
+        </record>
+        <record id="major_ce" model="hr.department">
+          <field name="name">Civil Engineering</field>
+          <field name="major_code">CE</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">True</field>
+        </record>
+        <record id="major_ee" model="hr.department">
+          <field name="name">Electronic Engineering</field>
+          <field name="major_code">EE</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">True</field>
+        </record>
+        <record id="major_ep" model="hr.department">
+          <field name="name">Electrical Power Engineering</field>
+          <field name="major_code">EP</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">True</field>
+        </record>
+        <record id="major_mc" model="hr.department">
+          <field name="name">Mechatronic Engineering</field>
+          <field name="major_code">MC</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">False</field>
+        </record>
+        <record id="major_me" model="hr.department">
+          <field name="name">Mechanical Engineering</field>
+          <field name="major_code">ME</field>
+          <field name="is_major">True</field>
+          <field name="can_enroll">True</field>
+        </record>
+        <record id="major_ph" model="hr.department">
+          <field name="name">Physics</field>
+        </record>
+        <record id="major_ce" model="hr.department">
+          <field name="name">Chemistry</field>
+        </record>
+        <record id="major_my" model="hr.department">
+          <field name="name">Myanmar</field>
+        </record>
+        <record id="major_ma" model="hr.department">
+          <field name="name">Mathematics</field>
+        </record>
+        <record id="major_en" model="hr.department">
+          <field name="name">English</field>
+        </record>
+    </data>
+
+
+</odoo>
