@@ -8,7 +8,7 @@
       <field name="login">portaltemplate</field>
       <field name="active" eval="False"/>
       <field name="groups_id" eval="[(6, 0,  [ref('tup_edu_erp.group_education_student')])]"/>
-      -->
     </record>
+    -->
   </data>
 </odoo>
