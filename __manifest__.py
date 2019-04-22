@@ -43,7 +43,7 @@
         'views/tup_education_application.xml',
         'views/tup_education_faculty.xml',
         'views/tup_education_time_table.xml',
-        #'views/tup_education_subject.xml',
+        'views/tup_education_subject.xml',
 
     ],
     # only loaded in demonstration mode
