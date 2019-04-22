@@ -45,6 +45,32 @@
             <field name="medium" position="after">
                <field name="sec_lang" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
+
+            <field name="admission_class" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="prev_school" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="admission_date" position="after">                
+                <field name="is_new_candidate" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="admission_class" attrs="{'invisible': [('is_new_candidate', '=', True)],'required': [('is_new_candidate', '=', False)]}"/>
+                <field name="prev_school" attrs="{'invisible': [('is_new_candidate', '=', True)],'required': [('is_new_candidate', '=', False)]}"/>
+                <div name="apply_major" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('is_new_candidate','=', False)]}">
+                    <separator string="Apply Major"/>
+                    <group>
+                        <div class="o_address_format">
+                            <field name="first_choice" placeholder="First Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="second_choice" placeholder="Second Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="third_choice" placeholder="Third Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="forth_choice" placeholder="Forth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </div>
+                    </group>
+                </div>
+            </field>
+            
+            
             <field name="date_of_birth" position="before">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>

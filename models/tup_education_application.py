@@ -29,3 +29,22 @@ class TupStudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
+    #add fields if student is new candidate
+    is_new_candidate = fields.Boolean(string="Is New Candidate", default=False,
+                                     help="Tick the field if the student is new candidate")
+    first_choice = fields.Selection([('IT', 'Information Technology'), ('EC', 'Electronic'), ('EP', 'Electrical Power'), ('MC', 'Mechatronics Engineering'),
+                                ('Civil', 'Civil'), ('Mech', 'Mechnical Engineering')],
+                                string='first_choice', required=False, default='', track_visibility='onchange',
+                                help="Your First Choice to apply major is ")
+    second_choice = fields.Selection([('IT', 'Information Technology'), ('EC', 'Electronic'), ('EP', 'Electrical Power'), ('MC', 'Mechatronics Engineering'),
+                                ('Civil', 'Civil'), ('Mech', 'Mechnical Engineering')],
+                                string='second_choice', required=False, default='', track_visibility='onchange',
+                                help="Your Second Choice to apply major is ")
+    third_choice = fields.Selection([('IT', 'Information Technology'), ('EC', 'Electronic'), ('EP', 'Electrical Power'), ('MC', 'Mechatronics Engineering'),
+                                ('Civil', 'Civil'), ('Mech', 'Mechnical Engineering')],
+                                string='third_choice', required=False, default='', track_visibility='onchange',
+                                help="Your Third Choice to apply major is ")
+    forth_choice = fields.Selection([('IT', 'Information Technology'), ('EC', 'Electronic'), ('EP', 'Electrical Power'), ('MC', 'Mechatronics Engineering'),
+                                ('Civil', 'Civil'), ('Mech', 'Mechnical Engineering')],
+                                string='forth_choice', required=False, default='', track_visibility='onchange',
+                                help="Your Forth Choice to apply major is ")
