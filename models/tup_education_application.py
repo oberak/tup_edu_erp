@@ -47,6 +47,4 @@ class TupStudentApplication(models.Model):
     fifth_choice = fields.Many2one('hr.department', string="Major",
                             domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
-    sixth_choice = fields.Many2one('hr.department', string="Major",
-                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+    
