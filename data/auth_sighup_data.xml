@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!--
+    <delete id="auth_signup.default_template_user" model="res.users"/>
+    <record id="default_template_user" model="res.users">
+      <field name="name">Portal User Template</field>
+      <field name="login">portaltemplate</field>
+      <field name="active" eval="False"/>
+      <field name="groups_id" eval="[(6, 0,  [ref('tup_edu_erp.group_education_student')])]"/>
+    </record>
+    -->
+  </data>
+</odoo>

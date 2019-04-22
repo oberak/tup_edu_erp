@@ -42,10 +42,10 @@
             </field>
             
             <field name="sec_lang" position="replace"/>
-            <field name="medium" position="after">
+            <field name="admission_date" position="after">
                <field name="sec_lang" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-
+            
             <field name="admission_class" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -53,10 +53,10 @@
                 <attribute name="invisible">True</attribute>
             </field>
 
-            <field name="admission_date" position="after">                
+            <field name="medium" position="after">                
                 <field name="is_new_candidate" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                <field name="admission_class" attrs="{'invisible': [('is_new_candidate', '=', True)],'required': [('is_new_candidate', '=', False)]}"/>
-                <field name="prev_school" attrs="{'invisible': [('is_new_candidate', '=', True)],'required': [('is_new_candidate', '=', False)]}"/>
+                <field name="admission_class" attrs="{'invisible': [('is_new_candidate', '=', True)]}"/>
+                <field name="prev_school" attrs="{'invisible': [('is_new_candidate', '=', True)]}"/>
                 <div name="apply_major" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('is_new_candidate','=', False)]}">
                     <separator string="Apply Major"/>
                     <group>
