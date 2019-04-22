@@ -25,11 +25,13 @@
     # always loaded
     'data': [
         ## security
-        'security/education_security.xml',
+        'security/education_core/education_security.xml',
+        'security/education_core/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
         'data/auth_sighup_data.xml',
+        'data/education_data.xml',
 
         ## template
         'views/tup_auth_oauth_templates.xml',
