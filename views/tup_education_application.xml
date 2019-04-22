@@ -65,6 +65,8 @@
                             <field name="second_choice" placeholder="Second Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="third_choice" placeholder="Third Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             <field name="forth_choice" placeholder="Forth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="fifth_choice" placeholder="Fifth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="sixth_choice" placeholder="Sixth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
                         </div>
                     </group>
                 </div>
