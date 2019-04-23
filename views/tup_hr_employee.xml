@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record model="ir.ui.view" id="view_tup_employee_form">
+        <field name="name">tup.hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- -->
+            <field name="coach_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            
+        </field>
+        
+    </record>
+</odoo>
