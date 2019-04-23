@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tup_education_student_class_form">
+        <field name="name">tup.education.student.class.form</field>
+        <field name="model">education.student.class</field>
+        <field name="inherit_id" ref="education_core.view_education_student_class_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(education_core.application_create_student)d']" position="replace">
+                <button name="%(education_core.application_create_student)d" string="Assign Batch" type="action" 
+                        class="oe_highlight"
+                        context="{'default_id': active_id, 'default_student_class': class_id,
+                        'default_assigned_by': assigned_by}"
+                        help="Click to assign Batch for selected students"
+                        states="draft"/>
+            </xpath>
+        </field>
+       
+    </record>  
+</odoo>
