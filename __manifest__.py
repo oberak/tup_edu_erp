@@ -49,6 +49,7 @@
         #'views/tup_education_class_division.xml'
         'views/tup_education_student_class.xml',
         
+        'views/tup_hr_employee.xml',
 
     ],
     # only loaded in demonstration mode

@@ -9,3 +9,4 @@ from . import tup_education_time_table
 from . import tup_education_class_division
 from . import tup_academic_year_closing
 from . import tup_education_student_class
+from . import tup_hr_employee
