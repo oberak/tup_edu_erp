@@ -32,19 +32,21 @@ class TupStudentApplication(models.Model):
     #add fields for new candidate
     is_new_candidate = fields.Boolean(string="Is New Candidate", default=False,
                                      help="Tick the field if the student is new candidate")
-    first_choice = fields.Many2one('hr.department', string="Major",
+    first_choice = fields.Many2one('hr.department', string="First Choice",
                             required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
-    second_choice = fields.Many2one('hr.department', string="Major",
+    second_choice = fields.Many2one('hr.department', string="Second Choice",
                             required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
-    third_choice = fields.Many2one('hr.department', string="Major",
+    third_choice = fields.Many2one('hr.department', string="Third Choice",
                             required=True,  domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
-    forth_choice = fields.Many2one('hr.department', string="Major",
+    forth_choice = fields.Many2one('hr.department', string="Forth Choice",
                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
-    fifth_choice = fields.Many2one('hr.department', string="Major",
+    fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
                             domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
                             help="Choose Major")
+    roll_no = fields.Char(string='Roll Number', required=True, help="Enter Matriculation Exam Roll Number of Student")
+    total_marks = fields.Char(string='Total Marks', required=True, help="Enter Matriculation Exam Total Marks of Student")
     

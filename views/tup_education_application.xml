@@ -57,18 +57,13 @@
                 <field name="is_new_candidate" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <field name="admission_class" attrs="{'invisible': [('is_new_candidate', '=', True)]}"/>
                 <field name="prev_school" attrs="{'invisible': [('is_new_candidate', '=', True)]}"/>
-                <div name="apply_major" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('is_new_candidate','=', False)]}">
-                    <separator string="Apply Major"/>
-                    <group>
-                        <div class="o_address_format">
-                            <field name="first_choice" placeholder="First Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                            <field name="second_choice" placeholder="Second Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                            <field name="third_choice" placeholder="Third Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                            <field name="forth_choice" placeholder="Forth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                            <field name="fifth_choice" placeholder="Fifth Choice" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                        </div>
-                    </group>
-                </div>
+                <field name="roll_no" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="total_marks" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="first_choice" placeholder="First Choice" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="second_choice" placeholder="Second Choice" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="third_choice" placeholder="Third Choice" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="forth_choice" placeholder="Forth Choice" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
+                <field name="fifth_choice" placeholder="Fifth Choice" attrs="{'invisible': [('is_new_candidate', '=', False)]}"/>
             </field>
             
             
@@ -76,5 +71,6 @@
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
         </field>
+       
     </record>
 </odoo>
