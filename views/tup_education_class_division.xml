@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tup_education_class_division_tree" model="ir.ui.view">
+        <field name="name">tup.education.class.division.form</field>
+        <field name="model">education.class.division</field>
+        <field name="inherit_id" ref="education_core.action_education_class_division_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name ="string">Affaire</attribute>
+            </xpath>    
+        </field>
+    </record>
+    
+</odoo>

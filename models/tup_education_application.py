@@ -29,3 +29,28 @@ class TupStudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
+    #add fields for new candidate
+    is_new_candidate = fields.Boolean(string="Is New Candidate", default=False,
+                                     help="Tick the field if the student is new candidate")
+    first_choice = fields.Many2one('hr.department', string="First Choice",
+                            required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            help="Choose Major")
+    second_choice = fields.Many2one('hr.department', string="Second Choice",
+                            required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            help="Choose Major")
+    third_choice = fields.Many2one('hr.department', string="Third Choice",
+                            required=True,  domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            help="Choose Major")
+    forth_choice = fields.Many2one('hr.department', string="Forth Choice",
+                           domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            help="Choose Major")
+    fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
+                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            help="Choose Major")
+    admission_no=fields.Char(string='Admission No.', required=True, help="Enter Admission No. of Student", readonly=True)
+    roll_no = fields.Char(string='Roll Number', required=True, help="Enter Matriculation Exam Roll Number of Student",readonly=True)
+    total_marks = fields.Char(string='Total Marks', required=True, help="Enter Matriculation Exam Total Marks of Student",readonly=True)
+    
+    _sql_constraints = [
+        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission number!"),
+    ]
