@@ -10,13 +10,26 @@
             <field name="coach_id" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
+        
+            <field name="passport_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="bank_account_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
             <field name="birthday" position="after">
                 <field name="place_of_birth" attrs="{'readonly': []}"/>
+            </field>
+            <field name="address_home_id" position="after">
+                <field name="emergency_contact" attrs="{'readonly': []}"/>
             </field>
             <!--  -->
             <field name="work_phone" position="after">
                 <field name="certificate_level" attrs="{'readonly': []}"/>
+            </field>
+            <field name="marital" position="after">
+                <field name="have_child" attrs="{'readonly': []}"/>
+                <field name="number_of_children" attrs="{'invisible': [('have_child', '=', False)]}"/>
             </field>
             <field name="certificate_level" position="after">
                 <field name="related_field" attrs="{'readonly': []}"/>
@@ -28,7 +41,19 @@
             <field name="visa_expire" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
+            <field name="identification_id" position="after">
+                <field name="graduated_university" attrs="{'readonly': []}"/>
+                <field name="height" placeholder="eg. 5 feet 5 inches" attrs="{'readonly': []}"/>
+                <field name="hair_color" placeholder="Black" attrs="{'readonly': []}"/>
+                <field name="eye_color" placeholder="Black or Blue" attrs="{'readonly': []}"/>
+                <field name="noticeable" placeholder="eg. remark left face" attrs="{'readonly': []}"/>
+                <field name="complexion" placeholder="Brown or White" attrs="{'readonly': []}"/>
+                <field name="weight" placeholder="120lb" attrs="{'readonly': []}"/>
+            </field>
             <xpath expr="//field[@name='permit_no']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
             
