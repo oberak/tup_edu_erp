@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import models
-from . import tup_education_application
-from . import tup_education_faculty
-from . import tup_hr_department
-from . import tup_education_subject
-from . import tup_education_time_table
-from . import tup_hr_employee
+from . import education_core
+from . import education_promotion
+from . import education_time_table
+from . import hr_recruitment

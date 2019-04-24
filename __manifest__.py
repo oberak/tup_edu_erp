@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'auth_signup', 'education_core'],
+    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion'],
 
     # always loaded
     'data': [
@@ -34,17 +34,22 @@
         'data/education_data.xml',
 
         ## template
-        'views/tup_auth_oauth_templates.xml',
+        'views/auth_signup/auth_oauth_templates.xml',
 
-        ## view - hr
-        'views/tup_hr_department.xml',
+        ## view - hr_recruitment
+        'views/hr_recruitment/hr_department.xml',
+        'views/hr_recruitment/hr_employee.xml',
 
         ## view - education_core
-        'views/tup_education_application.xml',
-        'views/tup_education_faculty.xml',
-        'views/tup_education_time_table.xml',
-        'views/tup_education_subject.xml',
-        'views/tup_hr_employee.xml',
+        'views/education_core/education_application.xml',
+        'views/education_core/education_class.xml',
+        'views/education_core/education_division.xml',
+        'views/education_core/education_faculty.xml',
+        'views/education_core/education_student_class.xml',
+        'views/education_core/education_subject.xml',
+
+        ## view - education_time_table
+        'views/education_time_table/education_time_table.xml',
 
     ],
     # only loaded in demonstration mode

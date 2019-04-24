@@ -29,24 +29,32 @@ class TupStudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
+
+    class_id = fields.Many2one('education.class.division', string='Class',
+                               help="Select the class")
     #add fields for new candidate
-    is_new_candidate = fields.Boolean(string="Is New Candidate", default=False,
-                                     help="Tick the field if the student is new candidate")
+    #fiscalyear_last_month = fields.Selection([(1, 'January'), (2, 'February'), (3, 'March'), (4, 'April'), (5, 'May'), (6, 'June'), (7, 'July'), (8, 'August'), (9, 'September'), (10, 'October'), (11, 'November'), (12, 'December')], default=12, required=True)
+    student_type=fields.Selection([('is_new_candidate','Is New Candidate'),('transfer_in','Is Transfer In Student')], default='transfer_in',required=True)
+    
     first_choice = fields.Many2one('hr.department', string="First Choice",
                             required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+                            help="Choose Major to apply")
     second_choice = fields.Many2one('hr.department', string="Second Choice",
                             required=True, domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+                            help="Choose Major to apply")
     third_choice = fields.Many2one('hr.department', string="Third Choice",
                             required=True,  domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+                            help="Choose Major to apply")
     forth_choice = fields.Many2one('hr.department', string="Forth Choice",
                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+                            help="Choose Major to apply")
     fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
                             domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
-                            help="Choose Major")
+                            help="Choose Major to apply")
+    admission_no=fields.Char(string='Admission No.', required=True, help="Enter Admission No. of Student")
     roll_no = fields.Char(string='Roll Number', required=True, help="Enter Matriculation Exam Roll Number of Student")
     total_marks = fields.Char(string='Total Marks', required=True, help="Enter Matriculation Exam Total Marks of Student")
     
+    _sql_constraints = [
+        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission number!"),
+    ]
