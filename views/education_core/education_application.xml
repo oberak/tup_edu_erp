@@ -40,14 +40,52 @@
             <field name="medium" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-            
-            <field name="sec_lang" position="replace"/>
-            <field name="medium" position="after">
-               <field name="sec_lang" attrs="{'readonly': [('state', '=', 'done')]}"/>
+
+            <field name="admission_class" position="attributes">
+                <attribute name="invisible">True</attribute>
             </field>
+         
+            <field name="prev_school" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="sec_lang" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="admission_date" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+
+            <field name="medium" position="replace">
+                <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+            </field>
+
+
+            <field name="sec_lang" position="after">  
+                <field name="student_type" widget="radio"/>                              
+                    <field name="admission_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="roll_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="total_marks" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/> 
+                <separator string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                  
+                    <field name="first_choice" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="second_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="third_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                    <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                                               
+                
+                    <field name="class_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
+                    <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
+            </field>
+
+            
             <field name="date_of_birth" position="before">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-        </field>
+
+        </field>       
     </record>
+
+    
 </odoo>

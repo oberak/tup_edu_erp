@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record model="ir.ui.view" id="view_tup_employee_form">
+        <field name="name">tup.hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- -->
+            <field name="coach_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="birthday" position="after">
+                <field name="place_of_birth" attrs="{'readonly': []}"/>
+            </field>
+            <!--  -->
+            <field name="work_phone" position="after">
+                <field name="certificate_level" attrs="{'readonly': []}"/>
+            </field>
+            <field name="certificate_level" position="after">
+                <field name="related_field" attrs="{'readonly': []}"/>
+            </field>
+
+            <field name="visa_no" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="visa_expire" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <xpath expr="//field[@name='permit_no']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            
+            
+        </field>
+        
+    </record>
+</odoo>
