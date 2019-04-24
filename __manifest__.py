@@ -40,11 +40,11 @@
         'views/tup_hr_department.xml',
 
         ## view - education_core
+        'views/education_core/education_class.xml',
         'views/tup_education_application.xml',
         'views/tup_education_faculty.xml',
         'views/tup_education_time_table.xml',
         'views/tup_education_subject.xml',
-        'views/tup_education_class.xml',
         'views/tup_education_division.xml',
         #'views/tup_education_class_division.xml'
         'views/tup_education_student_class.xml',
