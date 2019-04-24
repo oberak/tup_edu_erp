@@ -41,13 +41,12 @@
         'views/hr_recruitment/hr_employee.xml',
 
         ## view - education_core
+        'views/education_core/education_application.xml',
         'views/education_core/education_class.xml',
         'views/education_core/education_division.xml',
+        'views/education_core/education_faculty.xml',
         'views/education_core/education_student_class.xml',
         'views/education_core/education_subject.xml',
-
-        'views/tup_education_application.xml',
-        'views/tup_education_faculty.xml',
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
