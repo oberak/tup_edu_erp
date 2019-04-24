@@ -52,6 +52,8 @@
         </field>
     </record>
 
+    <menuitem id="education_core.menu_education_class_conf" name="Batch" parent="education_core.menu_education_main_menu" sequence="0"/>
+    <delete model="ir.ui.menu" id="education_core.menu_action_education_class" />
     <menuitem action="education_core.action_education_class_tree" parent="education_core.menu_education_class_conf"
               id="menu_action_education_class" sequence="1"/>
 
