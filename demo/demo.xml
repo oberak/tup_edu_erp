@@ -34,6 +34,8 @@
             <field name="class_id" ref="education_class_data_2"/>
             <field name="division_id" ref="education_py_1"/>
             <field name="faculty_id" ref="education_core.education_faculty_data"/>
+            <field name="promote_class" ref="education_class_data_2"/>
+            <field name="promote_division" ref="education_py_2"/>
         </record>
         <record id="class_division_data2" model="education.class.division">
             <field name="name">2018-IT-2BE</field>
@@ -42,6 +44,8 @@
             <field name="class_id" ref="education_class_data_2"/>
             <field name="division_id" ref="education_py_2"/>
             <field name="faculty_id" ref="education_core.education_faculty_data"/>
+            <field name="promote_class" ref="education_class_data_2"/>
+            <field name="promote_division" ref="education_py_3"/>
         </record>
     </data>
 </odoo>

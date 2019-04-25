@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_education_attendance_root" name="Attendance" sequence="50"
+            web_icon="education_attendances,static/description/icon.png" />
+
+        <menuitem id="menu_education_attendance_root_submenu" parent="menu_education_attendance_root" name="Attendances"
+                  sequence="10"/>
+
+        <menuitem id="menu_education_attendance_register_sub" name="Attendance Registers"
+            parent="menu_education_attendance_root_submenu" sequence="20"
+            action="act_open_education_attendance_register_view" />
+            
+
+        <menuitem id="menu_education_attendance_sheet_sub" name="Attendance Sheets"
+            parent="menu_education_attendance_root_submenu" sequence="20"
+            action="act_open_education_attendance_sheet_view" />
+           
+
+        <menuitem id="menu_education_attendance_line_sub" name="Attendance lines"
+            parent="menu_education_attendance_root_submenu" sequence="30"
+            action="act_open_education_attendance_line_view" />
+            
+    </data>
+</odoo>
