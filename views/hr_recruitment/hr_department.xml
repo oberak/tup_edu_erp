@@ -15,7 +15,7 @@
             </xpath>
             <xpath expr="sheet" position="inside">
                 <group string="Major Information" col="4">
-                    <field name="major_code"/>
+                    <field name="major_code" attrs="{'required': [('is_major', '=', True)]}"/>
                     <field name="is_major"/>
                     <field name="can_enroll"/>
                 </group>

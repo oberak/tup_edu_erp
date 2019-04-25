@@ -3,7 +3,7 @@
 from odoo import fields, models, _, api
 from odoo.exceptions import ValidationError
 
-class TupStudentApplication(models.Model):
+class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
     _description = 'Applications for the TUP admission'

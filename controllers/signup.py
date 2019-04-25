@@ -44,7 +44,7 @@ class TupAuthSignupHome(AuthSignupHome):
                     _logger.error("%s", e)
                     qcontext['error'] = _("Could not create a new account.")
 
-        response = request.render('tup_edu_erp.signup', qcontext)
+        response = request.render('tup_edu_erp.login', qcontext)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
 
@@ -53,7 +53,7 @@ class TupAuthSignupHome(AuthSignupHome):
         """ Shared helper that creates a res.partner out of a token """
         values = { key: qcontext.get(key) for key in ('login', 'name', 'password', 'nrc_no') }
         nrc = qcontext.get('nrc_no')
-        vv = "14/pathanapN)118893"
+        
         if not values:
             raise UserError(_("The form was not properly filled in."))
         if values.get('password') != qcontext.get('confirm_password'):

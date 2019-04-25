@@ -68,16 +68,15 @@
                     <field name="admission_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
                     <field name="roll_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
                     <field name="total_marks" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/> 
-                <separator string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                  
-                    <field name="first_choice" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="second_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="third_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                                               
-                
+                    <separator string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                  
+                        <field name="first_choice" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="second_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="third_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                                           
                     <field name="class_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
                     <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
-            </field>
+                </field>
 
             
             <field name="date_of_birth" position="before">
