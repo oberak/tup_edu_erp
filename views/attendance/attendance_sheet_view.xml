@@ -63,7 +63,7 @@
                     <field name="total_absent" />
                     <newline />
                     <group expand="0" string="Group By...">
-                        <filter string="Register" domain="[]"
+                        <filter string="Register" name="group_register" domain="[]"
                             context="{'group_by':'register_id'}" />
                         <filter string="Date" domain="[]" context="{'group_by':'attendance_date'}" />
                     </group>
@@ -78,7 +78,7 @@
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_education_attendance_sheet_search" />
             <field name="domain">[]</field>
-            <field name="context">{}</field>
+            <field name="context">{'search_default_group_register': 1}</field>
         </record>
         <record model="ir.actions.act_window.view" id="act_open_education_attendance_sheet_view_form">
             <field name="act_window_id" ref="act_open_education_attendance_sheet_view" />
