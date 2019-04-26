@@ -19,7 +19,8 @@
                     <field name="is_major"/>
                     <field name="can_enroll"/>
                 </group>
-            </xpath>
+            </xpath>        
+
         </field>
     </record>
 </odoo>
