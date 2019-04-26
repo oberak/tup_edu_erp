@@ -19,8 +19,9 @@ class AttendanceLine(models.Model):
         readonly=True)
     division_id = fields.Many2one(
         'education.class.division', 'Class',
-        related='attendance_id.register_id.division_id', store=True,
+         store=True,
         readonly=True)
+        
     remark = fields.Char('Remark', size=256, track_visibility="onchange")
     attendance_date = fields.Date(
         'Date', related='attendance_id.attendance_date', store=True,

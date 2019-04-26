@@ -20,15 +20,12 @@ class AttendanceSheet(models.Model):
                 [('present', '=', False), ('attendance_id', '=', record.id)])
 
     name = fields.Char('Name', required=True, size=32)
-    register_id = fields.Many2one(
-        'education.attendance.register', 'Register', required=True,
-        track_visibility="onchange")
-    
+        
     class_id = fields.Many2one(
         'education.class', store=True,
         readonly=True)
     division_id = fields.Many2one(
-        'education.class.division', 'Class', related='register_id.division_id', store=True,
+        'education.class.division', 'Class',  store=True,
         readonly=True)
     
     attendance_date = fields.Date(

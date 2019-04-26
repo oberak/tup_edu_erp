@@ -5,11 +5,7 @@
             web_icon="education_attendances,static/description/icon.png" />
 
         <menuitem id="menu_education_attendance_root_submenu" parent="menu_education_attendance_root" name="Attendances"
-                  sequence="10"/>
-
-        <menuitem id="menu_education_attendance_register_sub" name="Attendance Registers"
-            parent="menu_education_attendance_root_submenu" sequence="20"
-            action="act_open_education_attendance_register_view" />
+                  sequence="10"/>       
             
 
         <menuitem id="menu_education_attendance_sheet_sub" name="Attendance Sheets"
