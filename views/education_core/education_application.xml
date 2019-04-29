@@ -20,22 +20,37 @@
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" 
-                            help="Click to send the application to apply " attrs="{'invisible':[('state','=','apply')]}"/>                
+                            help="Click to send the application to apply " 
+                            states="draft"/>                
+            </button>
+            <button name="send_to_verify" position="replace">                
+                <button name="send_to_verify" type="object" class="oe_highlight"
+                            string="Send for Verification" groups="base.group_user"
+                            help="Click to send the application for verification purpose"
+                            states="apply"/>               
             </button>
             
             <button name="send_to_verify" position="after">                
                 <button name="paid_fee" type="object" class="oe_highlight"
                             string="Payment for Tution Fee" 
-                            help="Click to send the application for payment " attrs="{'invisible':[('state','=','fee')]}"/>                
+                            help="Click to send the application for payment " states="verification"/>                
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
                             string="Assign Major" 
-                            help="Click to send the application for payment " attrs="{'invisible':[('state','=','major')]}"/>                
+                            help="Click to send the application for payment " states="fee"/>                
             </button>
-           
+
+            <button name="application_verify" position="replace">                
+                <button name="application_verify" type="object" class="oe_highlight"
+                            string="Verify Application" groups="base.group_user"
+                            help="Click to verify the application and documents"
+                            states="major"/>                           
+                </button>
+
+             
             <field name="state" position="replace">
-                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verify,fee,major,approve,done"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done"/>
             </field>
 
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
@@ -98,7 +113,7 @@
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}"/>
                     <group  attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
-                        <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                        <!-- <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/> -->
                         <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
@@ -136,7 +151,14 @@
             <xpath expr="/form/sheet/group[8]" position="after">
             <notebook>
                 <page string="Siblings Info">
-                    <field name="sibling_ids"/>
+                    <field name="sibling_ids" nolabel="1">
+                        <tree string="Siblings Info" editable="bottom">
+                            <field name="name"/>
+                            <field name="nrc_no" required="1"/>
+                            <field name="occupation"/>
+                            <field name="address"/>
+                        </tree>
+                    </field>
                 </page>
             </notebook>
 
