@@ -32,12 +32,12 @@
         ## data
         'data/auth_sighup_data.xml',
         'data/education_data.xml',
+        'data/timetable_period_data.xml',
 
         ## template
         'views/auth_signup/auth_oauth_templates.xml',
 
-        ## view - attendance
-        'views/attendance/attendance_register_view.xml',
+        ## view - attendance        
         'views/attendance/attendance_line_view.xml',
         'views/attendance/attendance_sheet_view.xml',
         'views/attendance/attendance_menu.xml',

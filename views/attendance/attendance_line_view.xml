@@ -53,10 +53,10 @@
                     <field name="present" />
                     <newline />
                     <group expand="0" string="Group By...">
-                        <filter string="Attendance" domain="[]"
+                        <filter string="Attendance" name="group_attendance" domain="[]"
                             context="{'group_by':'attendance_id'}" />
-                        <filter string="Batch" domain="[]" context="{'group_by':'class_id'}" />
-                        <filter string="Class" domain="[]"
+                        <filter string="Batch" name="group_class" domain="[]" context="{'group_by':'class_id'}" />
+                        <filter string="Class" name="group_division" domain="[]"
                             context="{'group_by':'division_id'}" />
                         <filter string="Student" domain="[]" context="{'group_by':'student_id'}" />
                         <filter string="Present ?" domain="[]" context="{'group_by':'present'}" />
@@ -72,7 +72,7 @@
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_education_attendance_line_search" />
             <field name="domain">[]</field>
-            <field name="context">{}</field>
+            <field name="context">{'search_default_group_attendance': 1, 'search_default_group_class': 1, 'search_default_group_division': 1}</field>
         </record>
         <record model="ir.actions.act_window.view" id="act_open_education_attendance_line_view_form">
             <field name="act_window_id" ref="act_open_education_attendance_line_view" />

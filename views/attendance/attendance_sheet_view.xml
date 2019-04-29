@@ -6,10 +6,8 @@
             <field name="model">education.attendance.sheet</field>
             <field name="priority" eval="8" />
             <field name="arch" type="xml">
-                <tree string="Attendance Sheet">
-                    <field name="register_id" />
-                    <field name="name" />
-                    
+                <tree string="Attendance Sheet">                    
+                    <field name="name" />                    
                     <field name="attendance_date" />
                     <field name="total_present" />
                     <field name="total_absent" />
@@ -23,10 +21,8 @@
             <field name="arch" type="xml">
                 <form string="Attendance Sheet">
                     <sheet>
-                        <group col="4" colspan="4">
-                            <field name="register_id" />
-                            <field name="name" />
-                            
+                        <group col="4" colspan="4">                            
+                            <field name="name" />                            
                             <field name="attendance_date" />
                             <field name="class_id" invisible="1" />
                             <field name="division_id" invisible="1" />
@@ -56,15 +52,12 @@
             <field name="model">education.attendance.sheet</field>
             <field name="priority" eval="8" />
             <field name="arch" type="xml">
-                <search string="Attendance Sheet">
-                    <field name="register_id" />
+                <search string="Attendance Sheet">                    
                     <field name="attendance_date" />
                     <field name="total_present" />
                     <field name="total_absent" />
                     <newline />
-                    <group expand="0" string="Group By...">
-                        <filter string="Register" domain="[]"
-                            context="{'group_by':'register_id'}" />
+                    <group expand="0" string="Group By...">                        
                         <filter string="Date" domain="[]" context="{'group_by':'attendance_date'}" />
                     </group>
                 </search>

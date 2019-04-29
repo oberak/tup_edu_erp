@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="timetable_period_1" model="timetable.period">
+            <field name="name">1st</field>
+            <field name="time_from">8.5</field>
+            <field name="time_to">9.5</field>
+        </record>
+        <record id="timetable_period_2" model="timetable.period">
+            <field name="name">2nd</field>
+            <field name="time_from">9.6666666666666666666666666667</field>
+            <field name="time_to">10.6666666666666666666666666667</field>
+        </record>
+        <record id="timetable_period_3" model="timetable.period">
+            <field name="name">3rd</field>
+            <field name="time_from">10.6666666666666666666666666667</field>
+            <field name="time_to">11.6666666666666666666666666667</field>
+        </record>
+        <record id="timetable_period_4" model="timetable.period">
+            <field name="name">4th</field>
+            <field name="time_from">12.6666666666666666666666666667</field>
+            <field name="time_to">13.6666666666666666666666666667</field>
+        </record>
+        <record id="timetable_period_5" model="timetable.period">
+            <field name="name">5th</field>
+            <field name="time_from">13.75</field>
+            <field name="time_to">14.75</field>
+        </record>
+        <record id="timetable_period_6" model="timetable.period">
+            <field name="name">6th</field>
+            <field name="time_from">14.83333333333333333</field>
+            <field name="time_to">15.83333333333333333</field>
+        </record>
+    </data>
+</odoo>
