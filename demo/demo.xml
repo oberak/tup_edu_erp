@@ -3,16 +3,16 @@
     <data noupdate="1">
         <record id="education_core.education_academic_year_data" model="education.academic.year">
             <field name="name">2018-2019</field>
-            <field name="ay_start_date">01-06-2018</field>
-            <field name="ay_end_date">01-04-2019</field>
+            <field name="ay_start_date">11-01-2018</field>
+            <field name="ay_end_date">10-31-2019</field>
             <field name="ay_code">2018</field>
             <field name="active">1</field>
             <field name="sequence">10</field>
         </record>
         <record id="education_academic_year_data_2017" model="education.academic.year">
             <field name="name">2017-2018</field>
-            <field name="ay_start_date">01-06-2017</field>
-            <field name="ay_end_date">01-04-2018</field>
+            <field name="ay_start_date">11-01-2017</field>
+            <field name="ay_end_date">10-31-2018</field>
             <field name="ay_code">2017</field>
             <field name="active">1</field>
             <field name="sequence">9</field>
