@@ -41,9 +41,9 @@
         'views/auth_signup/auth_oauth_templates.xml',
 
         ## view - attendance        
-        'views/attendance/attendance_line_view.xml',
-        'views/attendance/attendance_sheet_view.xml',
-        'views/attendance/attendance_menu.xml',
+        'views/attendance/attendances_line_view.xml',
+        'views/attendance/attendances_sheet_view.xml',
+        'views/attendance/attendances_menu.xml',
 
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',

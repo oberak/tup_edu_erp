@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from . import attendance_line
-from . import attendance_sheet
+from . import attendances_line
+from . import attendances_sheet
