@@ -20,13 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion'],
+    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee'],
 
     # always loaded
     'data': [
         ## security
         'security/education_core/education_security.xml',
         'security/education_core/ir.model.access.csv',
+        'security/education_exam/ir.model.access.csv',
+        'security/education_fee/ir.model.access.csv',
+        'security/education_promotion/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
@@ -38,9 +41,9 @@
         'views/auth_signup/auth_oauth_templates.xml',
 
         ## view - attendance        
-        'views/attendance/attendance_line_view.xml',
-        'views/attendance/attendance_sheet_view.xml',
-        'views/attendance/attendance_menu.xml',
+        'views/attendance/attendances_line_view.xml',
+        'views/attendance/attendances_sheet_view.xml',
+        'views/attendance/attendances_menu.xml',
 
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
@@ -48,6 +51,7 @@
 
         ## view - education_core
         'views/education_core/education_application.xml',
+        'views/education_core/education_class_division.xml',
         'views/education_core/education_class.xml',
         'views/education_core/education_division.xml',
         'views/education_core/education_faculty.xml',
