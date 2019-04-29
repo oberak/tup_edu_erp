@@ -68,4 +68,16 @@
     <record id="education_core.group_education_principal" model="res.groups">
         <field name="implied_ids" eval="[(4, ref('group_education_teacher_dc'))]"/>
     </record>
+
+    <!-- Set domain to same department for Teachers -->
+    <record id="teacher_class_request_rule" model="ir.rule">
+        <field name="name">Teacher class request</field>
+        <field name="model_id" ref="model_education_class_division"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+    </record>
 </odoo>
