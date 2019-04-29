@@ -48,6 +48,7 @@
 
         ## view - education_core
         'views/education_core/education_application.xml',
+        'views/education_core/education_class_division.xml',
         'views/education_core/education_class.xml',
         'views/education_core/education_division.xml',
         'views/education_core/education_faculty.xml',

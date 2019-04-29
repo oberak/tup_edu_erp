@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- add search view -->
+    <record id="view_tup_education_class_search" model="ir.ui.view">
+        <field name="name">education.class.search</field>
+        <field name="model">education.class.division</field>         
+        <field name="arch" type="xml">
+            <search string="Class">
+                <filter string="This Academic Year" name="this_ay" domain="[('class_id.ay_id.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                        ('class_id.ay_id.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
+                <separator/>
+                <filter string="Civil Engineering" name="major_ce" domain="[('class_id.major_id.major_code','=', 'CE')]"/>
+                <filter string="Electronic Engineering" name="major_ee" domain="[('class_id.major_id.major_code','=', 'EE')]"/>
+                <filter string="Electrical Power Engineering" name="major_ep" domain="[('class_id.major_id.major_code','=', 'EP')]"/>
+                <filter string="Information Technology" name="major_it" domain="[('class_id.major_id.major_code','=', 'IT')]"/>
+                <filter string="Mechanical Engineering" name="major_me" domain="[('class_id.major_id.major_code','=', 'ME')]"/>
+                <filter string="Mechatronic Engineering" name="major_mc" domain="[('class_id.major_id.major_code','=', 'MC')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="education_core.action_education_class_division_tree" model="ir.actions.act_window">
+        <field name="name">Class</field>
+        <field name="res_model">education.class.division</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_this_ay': 1}</field>
+        <field name="search_view_id" ref="view_tup_education_class_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first class here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="education_core.action_education_class_division_tree" parent="education_core.menu_education_admission"
+              id="education_core.menu_action_education_class_division" sequence="20"/>
+
+</odoo>
