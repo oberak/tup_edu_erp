@@ -11,7 +11,9 @@ class EducationClass(models.Model):
     name = fields.Char(string='Batch Name', readonly=True) # rename Class to Batch
 
     # add fields for name
-    ay_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, help="Select the Academic Year")
+    ay_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
+                            default=lambda self: self.env['education.academic.year']._get_current_ay(),
+                            help="Select the Academic Year")
     major_id = fields.Many2one('hr.department', string='Major', required=True, domain=[('is_major', '=', True)], help="Select the Major")
 
     # add unique constraint for name
