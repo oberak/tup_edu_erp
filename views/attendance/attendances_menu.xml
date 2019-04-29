@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_attendances_root" name="Attendances" sequence="50"
+            web_icon="education_attendances,static/description/icon.png" />
+
+        <menuitem id="menu_attendances_root_submenu" parent="menu_attendances_root" name="Attendances"
+                  sequence="10"/>       
+            
+
+        <menuitem id="menu_attendances_sheet_sub" name="Attendances Sheets"
+            parent="menu_attendances_root_submenu" sequence="20"
+            action="act_attendances_sheet_view" />
+           
+
+        <menuitem id="menu_attendances_line_sub" name="Attendances lines"
+            parent="menu_attendances_root_submenu" sequence="30"
+            action="act_attendances_line_view" />
+            
+    </data>
+</odoo>
