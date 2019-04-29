@@ -32,6 +32,7 @@
         ## data
         'data/auth_sighup_data.xml',
         'data/education_data.xml',
+        'data/timetable_period_data.xml',
 
         ## template
         'views/auth_signup/auth_oauth_templates.xml',

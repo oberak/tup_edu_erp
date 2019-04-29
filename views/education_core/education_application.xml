@@ -16,6 +16,28 @@
         <field name="model">education.application</field>
         <field name="inherit_id" ref="education_core.view_education_application_form"/>
         <field name="arch" type="xml">
+            
+            <button name="send_to_verify" position="before">                
+                <button name="apply_major" type="object" class="oe_highlight"
+                            string="Send to apply major" 
+                            help="Click to send the application to apply " attrs="{'invisible':[('state','=','apply')]}"/>                
+            </button>
+            
+            <button name="send_to_verify" position="after">                
+                <button name="paid_fee" type="object" class="oe_highlight"
+                            string="Payment for Tution Fee" 
+                            help="Click to send the application for payment " attrs="{'invisible':[('state','=','fee')]}"/>                
+            </button>
+            <button name="paid_fee" position="after">                
+                <button name="assign_major" type="object" class="oe_highlight"
+                            string="Assign Major" 
+                            help="Click to send the application for payment " attrs="{'invisible':[('state','=','major')]}"/>                
+            </button>
+           
+            <field name="state" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verify,fee,major,approve,done"/>
+            </field>
+
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
                 <tr>
                     <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
@@ -25,6 +47,7 @@
                     <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                 </tr>
             </xpath>
+            
             <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
@@ -62,27 +85,63 @@
                 <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
 
-
-            <field name="sec_lang" position="after">  
-                <field name="student_type" widget="radio"/>                              
-                    <field name="admission_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="roll_no" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                    <field name="total_marks" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/> 
-                    <separator string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                  
-                        <field name="first_choice" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                        <field name="second_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                        <field name="third_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
-                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>                                           
-                    <field name="class_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
-                    <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}"/>
-                </field>
+            <field name="admission_date" position="before">
+                <field name="major_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+            </field>
 
             
-            <field name="date_of_birth" position="before">
+     
+            <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
 
+            <xpath expr="/form/sheet/group[1]" position="after">
+                <field name="student_type" widget="radio"  options="{'horizontal':true}"/>
+                    <group  attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
+                        <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                    </group>   
+                    <group string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                           
+                        <field name="student_id" attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')]}"/>
+                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate')]}"/>
+                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')]}"/>                                      
+                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')]}"/>
+                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')]}"/>
+                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')]}"/>
+                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"/>   
+                        
+                    </group>
+                        
+            </xpath>
+
+            <xpath expr="/form/sheet/group[4]" position="after">
+                <group string="Parent's Info">
+                    <group>
+                            <field name="f_nrc" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="f_nationality" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="f_occupation" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="f_religion" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                        <group>
+                            <field name="m_nrc" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="m_nationality" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="m_occupation" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="m_religion" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                </group>
+
+            </xpath>
+            <xpath expr="/form/sheet/group[8]" position="after">
+            <notebook>
+                <page string="Siblings Info">
+                    <field name="sibling_ids"/>
+                </page>
+            </notebook>
+
+                
+            </xpath>
         </field>       
     </record>
 

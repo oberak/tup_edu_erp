@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="education_core.view_education_subject_tree" model="ir.ui.view">
+        <field name="name">education.subject.tree</field>
+        <field name="model">education.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Syllabus Subject">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="major_id"/>
+                <field name="type"/>
+                <field name="is_language"/>
+                <field name="weightage"/>
+            </tree>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="view_tup_education_subject_form">
         <field name="name">tup.education.subject.form</field>
         <field name="model">education.subject</field>
@@ -17,16 +32,48 @@
         </field>
     </record>
 
-    <record id="tup_subject_search" model="ir.ui.view">
+    <record id="education_core.subject_search" model="ir.ui.view">
         <field name="name">Subjects</field>
         <field name="model">education.subject</field>
-         <field name="inherit_id" ref="education_core.subject_search"/>
         <field name="arch" type="xml">
-            <field name="is_lab" position="after">
+            <search string="Search Subjects">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="major_id"/>
+                <field name="weightage"/>
+                <filter string="Is Language" name="is_language" domain="[('is_language','=', True)]"/>
+                <filter string="Is Lab" name="is_lab" domain="[('is_lab','=', True)]"/>
                 <filter string="Is Class Work" name="is_class_work" domain="[('is_class_work','=', True)]"/> 
                 <filter string="Is Tutorial" name="is_tutorial" domain="[('is_tutorial','=', True)]"/>
-           </field>
+                <separator />
+                <filter string="Civil Engineering" name="major_ce" domain="[('major_id.major_code','=', 'CE')]"/>
+                <filter string="Electronic Engineering" name="major_ee" domain="[('major_id.major_code','=', 'EE')]"/>
+                <filter string="Electrical Power Engineering" name="major_ep" domain="[('major_id.major_code','=', 'EP')]"/>
+                <filter string="Information Technology" name="major_it" domain="[('major_id.major_code','=', 'IT')]"/>
+                <filter string="Mechanical Engineering" name="major_me" domain="[('major_id.major_code','=', 'ME')]"/>
+                <filter string="Mechatronic Engineering" name="major_mc" domain="[('major_id.major_code','=', 'MC')]"/>
+                <filter string="My department" name="user_department" domain="[('user_subjects','=', 1)]" groups="tup_edu_erp.group_education_teacher"/>
+                <group expand='0' string='Group by...'>
+                    <filter string='Major' icon="fa-user" domain="[]" context="{'group_by' : 'major_id'}"/>
+                    <filter string='Weightage' icon="fa-user" domain="[]" context="{'group_by' : 'weightage'}"/>
+                    <filter string='Type' icon="fa-genderless" domain="[]" context="{'group_by' : 'type'}"/>
+               </group>
+           </search>
         </field>
     </record>
 
+    <record id="education_core.action_education_subject_tree" model="ir.actions.act_window">
+        <field name="name">Subject</field>
+        <field name="res_model">education.subject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="education_core.subject_search"/>
+        <field name="context">{'search_default_user_department': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first subject here.
+            </p>
+        </field>
+    </record>
 </odoo>
