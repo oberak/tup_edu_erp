@@ -19,6 +19,20 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="education_class_division_promotion_form">
+        <field name="name">education.division.promotion.form</field>
+        <field name="model">education.class.division</field>
+        <field name="inherit_id" ref="education_promotion.education_class_division_promotion_form"/>
+        <field name="arch" type="xml">
+            <field name="promote_class" position="replace">
+                <field name="promote_class" invisible="True"/>
+            </field>
+            <field name="academic_year_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+        </field>
+    </record>
+
     <record id="education_core.action_education_class_division_tree" model="ir.actions.act_window">
         <field name="name">Class</field>
         <field name="res_model">education.class.division</field>
@@ -29,7 +43,7 @@
         <field name="search_view_id" ref="view_tup_education_class_search"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-                Create the your first class here.
+                Create the your first Class here.
             </p>
         </field>
     </record>

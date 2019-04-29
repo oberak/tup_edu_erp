@@ -5,7 +5,7 @@ from odoo import fields, models, api, _
 
 class EducationClass(models.Model):
     _inherit = 'education.class'
-    _description = "Batch : Application Year + Major code"
+    _description = "Batch"
 
     # Modify fields name
     name = fields.Char(string='Batch Name', readonly=True) # rename Class to Batch
@@ -60,21 +60,62 @@ class EducationDivision(models.Model):
 
 class EducationClassDivision(models.Model):
     _inherit = 'education.class.division'
-    _description = "Class: Batch + Program Year"
+    _description = "Class" # Batch + Program Year
 
     # Modify fields name
     #name = fields.Char(string='Name', readonly=True)
     class_id = fields.Many2one('education.class', string='Batch', required=True,
+                               domain=[('ay_id.ay_end_date', '>=', fields.Date.today())],
                                help="Select the Batch") # rename Class to Batch
     division_id = fields.Many2one('education.division', string='Program Year', required=True,
                                   help="Select the Program Year") # rename Division to Program year
     #actual_strength = fields.Integer(string='Class Strength', help="Total strength of the class")
     #faculty_id = fields.Many2one('education.faculty', string='Class Faculty', help="Class teacher/Faculty")
-    #academic_year_id = fields.Many2one('education.academic.year', string='Academic Year',
-    #                                   help="Select the Academic Year", required=True)
+    academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', readonly=True, required=False,
+                                       help="Select the Academic Year")
     #student_ids = fields.One2many('education.student', 'class_id', string='Students')
     #amenities_ids = fields.One2many('education.class.amenities', 'class_id', string='Amenities')
     #student_count = fields.Integer(string='Students Count', compute='_get_student_count')
+    _sql_constraints = [ ('name', 'unique (name)','Class already exists for the Batch and the Program Year!') ]
+
+    @api.model
+    def create(self, vals):
+        """Set promote_class, academic_year_id using class_id"""
+        vals['promote_class'] = self.class_id
+        vals['academic_year_id'] = self.class_id.ay_id
+        return super(EducationClassDivision, self).create(vals)
+
+    @api.multi
+    @api.depends('class_id', 'division_id')
+    def write(self, vals):
+        """Set promote_class, academic_year_id and name"""
+        for rec in self:
+            class_id = rec.class_id
+            division_id = rec.division_id
+            if 'class_id' in vals:
+                vals['promote_class'] = rec.class_id.id
+                vals['academic_year_id'] = rec.class_id.ay_id.id
+                class_id = self.env['education.class'].browse(vals['class_id'])
+            if 'division_id' in vals:
+                division_id = self.env['education.division'].browse(vals['division_id'])
+            vals['name'] = str(class_id.name + '-' + division_id.name)
+        return super(EducationClassDivision, self).write(vals)
+
+    @api.constrains('promote_division', 'division_id')
+    def validate_promote_division(self):
+        """Checking promote_division"""
+        for rec in self:
+            if rec.promote_division == rec.division_id:
+                raise ValidationError(_('Promotion Program Year must not be the same as the Program Year'))
+
+    @api.multi
+    @api.onchange('division_id')
+    def on_change_py(self):
+        for record in self:
+            if record.division_id.name == '6BE':
+                record.is_last_class = True
+            else:
+                record.is_last_class = False
 
 class EducationClassDivisionHistory(models.Model):
     _inherit = 'education.class.history'
