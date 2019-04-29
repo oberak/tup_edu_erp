@@ -20,13 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion'],
+    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee'],
 
     # always loaded
     'data': [
         ## security
         'security/education_core/education_security.xml',
         'security/education_core/ir.model.access.csv',
+        'security/education_exam/ir.model.access.csv',
+        'security/education_fee/ir.model.access.csv',
+        'security/education_promotion/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
