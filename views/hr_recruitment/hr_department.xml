@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- add  form view -->
     <record model="ir.ui.view" id="view_tup_department_form">
         <field name="name">tup.hr.department.form</field>
         <field name="model">hr.department</field>
@@ -19,8 +20,42 @@
                     <field name="is_major"/>
                     <field name="can_enroll"/>
                 </group>
-            </xpath>        
-
+            </xpath>
         </field>
     </record>
+
+    <!-- add new tree view -->
+    <record id="view_tup_department_tree" model="ir.ui.view">
+        <field name="name">hr.department.tree</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="arch" type="xml">
+            <tree string="Companies">                
+                <field name="major_code"  />
+                <field name="is_major" />
+                <field name="can_enroll" />
+            </tree>
+        </field>
+    </record>
+
+     
+    <record id="action_tup_department" model="ir.actions.act_window">
+        <field name="name">Major</field>
+        <field name="res_model">hr.department</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>        
+        <field name="domain">[('is_major', '=', True)]</field>
+        
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first major here.
+            </p>
+        </field>
+    </record>
+
+    <!-- add new menu item for major/department -->
+    <menuitem action="action_tup_department" parent="education_core.menu_education_class_conf"
+              id="menu_action_education_major" sequence="4"/>
+
 </odoo>
