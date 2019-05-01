@@ -37,10 +37,8 @@
         ## template
         'views/auth_signup/auth_oauth_templates.xml',
 
-        ## view - attendance        
-        'views/attendance/attendances_line_view.xml',
-        'views/attendance/attendances_sheet_view.xml',
-        'views/attendance/attendances_menu.xml',
+        ## view - attendance
+        'views/attendance/students_attendance.xml',
 
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
@@ -52,7 +50,7 @@
         'views/education_core/education_division.xml',
         'views/education_core/education_faculty.xml',
         'views/education_core/education_student_class.xml',
-        'views/education_core/education_subject.xml',
+        # 'views/education_core/education_subject.xml',
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
