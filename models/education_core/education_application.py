@@ -11,32 +11,38 @@ class StudentApplication(models.Model):
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
     def apply_major(self):
-        """Create student from the application and data and return the student"""
+        """Apply Major for new candidate"""
         for rec in self:
-            rec.update({
+            if rec.is_new_candidate:
+                values = {
                     'first_choice': rec.first_choice,
                     'second_choice': rec.second_choice,
                     'third_choice': rec.third_choice,
                     'forth_choice': rec.forth_choice,
                     'fifth_choice': rec.fifth_choice,
+                }
+                self.env['education.application'].update(values)
+            
+                rec.write({
+                    'state': 'apply'
                 })
             
-            rec.write({
-                'state': 'apply'
-            })
             return
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
-        self.write({
-	    'state': 'fee'
-        })
+        for rec in self:
+            rec.write({
+                'state': 'fee'
+            })
 
     @api.one
     def assign_major(self):
-        self.write({
-	    'state': 'major'
-        })
+        for rec in self:
+            rec.write({
+                'state': 'major'
+            })
+       
 
 
 
@@ -62,7 +68,7 @@ class StudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
-    state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verify', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
+    state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
                              string='State', required=True, default='draft', track_visibility='onchange')
 

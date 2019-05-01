@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import education_academic
 from . import education_application
 from . import education_class_division
 from . import education_faculty
