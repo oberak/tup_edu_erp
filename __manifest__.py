@@ -61,6 +61,7 @@
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
+        'views/education_time_table/timetable_schedule.xml',
 
     ],
     # only loaded in demonstration mode

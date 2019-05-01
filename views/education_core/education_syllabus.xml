@@ -11,7 +11,7 @@
             <field name="total_hours" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-             <field name="description" position="attributes">
+            <field name="description" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>         
         </field>
