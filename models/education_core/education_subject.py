@@ -31,7 +31,7 @@ class EducationSyllabus(models.Model):
     # modify fields
     name = fields.Char(string='Name', readonly=True)   # change to readonly
 
-    #add fields
+    # add fields
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, domain=[('is_major', '=', True)],
                             help="Choose Major")
@@ -72,13 +72,13 @@ class EducationSyllabuses(models.Model):
 
     subject_id = fields.Many2one('education.subject', string='Subject')
     lecture_hour = fields.Char(string="Lecture (hrs)", required=True, help="Pick lecture hours")
-    tutorial_hour = fields.Char(string="Tutorial (hrs)", required=True, help="Pick Tutorial hours")
-    practical_hour = fields.Char(string="Practical (hrs)", required=True, help="Pick Practical hours")
-    classwork_hour = fields.Char(string="Class Work (hrs)",  required=True, help="Pick Class Work hours") 
+    tutorial_hour = fields.Char(string="Tutorial (hrs)", help="Pick Tutorial hours")
+    practical_hour = fields.Char(string="Practical (hrs)", help="Pick Practical hours")
+    classwork_hour = fields.Char(string="Class Work (hrs)",  help="Pick Class Work hours") 
     syllabus_id = fields.Many2one('education.syllabus', string ='Syllabus', help = "Select the Syllabus")  
         
     @api.onchange('subject_id')
-    def onchange_hour(self):
+    def onchange_subject(self):
         for rec in self:
             if rec.subject_id.is_language:
                 rec.lecture_hour = ""
