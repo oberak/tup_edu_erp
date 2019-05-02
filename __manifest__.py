@@ -43,6 +43,9 @@
         ## view - attendance
         'views/attendance/students_attendance.xml',
 
+        ## view - education_fee
+        'views/education_fee/fee_register.xml',
+
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
         'views/hr_recruitment/hr_employee.xml',
