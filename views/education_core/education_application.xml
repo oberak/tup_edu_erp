@@ -20,8 +20,8 @@
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" 
-                            help="Click to send the application to apply " 
-                            states="draft" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"  />
+                            help="Click to send the application to apply " states="draft" 
+                            attrs="{'invisible': [('state', 'in' , ['apply','fee','major','approve','reject','done'])]}"  />
             </button>
             
             <button name="send_to_verify" position="replace">                
@@ -57,7 +57,7 @@
 
              
             <field name="state" position="replace">
-                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1" domain="[('student_type','=','is_new_candidate')]" />
+                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1"  />
             </field>
 
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
