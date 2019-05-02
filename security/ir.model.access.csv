@@ -1,7 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 student_access_education_class,access.education.class,education_core.model_education_class,group_education_student,1,0,0,0
 student_access_education_class_division,access.education.class.division,education_core.model_education_class_division,group_education_student,1,0,0,0
-student_access_education_academic_year,access.education.academic.year,education_core.model_education_academic_year,group_education_student,1,0,0,0
 student_access_education_division,access.education.division,education_core.model_education_division,group_education_student,1,0,0,0
 student_access_education_faculty,access.education.faculty,education_core.model_education_faculty,group_education_student,1,0,0,0
 student_access_education_subject,access.education.subject,education_core.model_education_subject,group_education_student,1,0,0,0

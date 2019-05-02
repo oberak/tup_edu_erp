@@ -6,7 +6,6 @@ education_core.access_education_academic_year,access.education.academic.year,edu
 education_core.access_education_division,access.education.division,education_core.model_education_division,education_core.group_education_faculty,1,0,0,0
 education_core.access_education_documents,access.education.documents,education_core.model_education_documents,education_core.group_education_faculty,1,0,0,0
 education_core.access_education_medium,access.education.medium,education_core.model_education_medium,education_core.group_education_faculty,1,0,0,0
-education_core.access_education_application,access.education.application,education_core.model_education_application,education_core.group_education_faculty,0,0,0,0
 education_core.access_education_amenities,access.education.amenities,education_core.model_education_amenities,education_core.group_education_faculty,1,0,0,0
 education_core.access_education_class_amenities,access.education.class.amenities,education_core.model_education_class_amenities,education_core.group_education_faculty,1,0,0,0
 education_core.access_application_reject_reason,access.application.reject.reason,education_core.model_application_reject_reason,education_core.group_education_faculty,0,0,0,0
@@ -20,6 +19,7 @@ education_core.access_education_mother_tongue,access.education.mother.tongue,edu
 education_core.access_religion_religion,access.religion.religion,education_core.model_religion_religion,education_core.group_education_faculty,1,0,0,0
 education_core.access_religion_caste,access.religion.caste,education_core.model_religion_caste,education_core.group_education_faculty,0,0,0,0
 
+education_core.access_education_application,access.education.application,education_core.model_education_application,education_core.group_education_faculty,0,0,0,0
 a_education_application_dc,access.education.application,education_core.model_education_application,group_education_teacher_dc,1,0,0,0
 a_education_application_aa,access.education.application,education_core.model_education_application,group_education_aa,1,1,1,0
 a_education_application_haa,access.education.application,education_core.model_education_application,group_education_haa,1,1,1,1
@@ -31,6 +31,10 @@ a_education_student_haa,access.education.student,education_core.model_education_
 a_education_student_sa,access.education.student,education_core.model_education_student,group_education_sa,1,0,0,0
 a_education_student_fs,access.education.student,education_core.model_education_student,group_education_fs,1,0,0,0
 
+a_education_academic_year_s,access.education.academic.year,education_core.model_education_academic_year,group_education_student,1,0,0,0
+a_education_academic_year_t,access.education.academic.year,education_core.model_education_academic_year,group_education_teacher,1,0,0,0
+a_education_academic_year_dc,access.education.academic.year,education_core.model_education_academic_year,group_education_teacher_dc,1,0,0,0
+a_education_academic_year_aa,access.education.academic.year,education_core.model_education_academic_year,group_education_aa,1,1,1,0
 
 
 
