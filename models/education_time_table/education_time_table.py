@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 class EducationTimeTable(models.Model):
-    _name = 'education.timetable'
     _inherit = 'education.timetable'
-    _description = 'Timetable'
-    color = fields.Integer()
-    
 
+    # to modify the name (get_name) 
     name = fields.Char(compute='get_name')
-    period_id = fields.Many2one('timetable.period', string="Period", required=True,)
-    time_from = fields.Float(string='From', required=True,
-                             index=True, help="Start and End time of Period.")
-    time_till = fields.Float(string='Till', required=True)
-    
+        
+    # add fields
+    state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
+                             default='draft')
+
     def get_name(self):
         """To generate name for the model"""
         for i in self:
@@ -27,33 +24,20 @@ class EducationTimeTable(models.Model):
             i.time_from = i.period_id.time_from
             i.time_till = i.period_id.time_to
 
-    state = fields.Selection([('draft', 'Draft'), 
-                              ('confirm', 'Confirm'), ('done', 'Done')],
-                             string='State', required=True, default='draft', track_visibility='onchange')
-
-    # @api.multi
-    # def unlink(self):
-    #     """Return warning if the Record is in done state"""
-    #     for rec in self:
-    #         if rec.state == 'done':
-    #             raise ValidationError(_("Cannot delete Record in Done state"))
-
-    # @api.multi
-    # def timetable_confirm(self):
-    #     """Confirm the Timetable"""
-    #     for rec in self:
-    #         rec.write({
-    #             'state': 'done'
-    #         })
-
+    @api.multi
+    def close_timetable(self):
+        self.state = 'done'
+    
+    @api.multi
+    def confirm_timetable(self):
+        if len(self.timetable_mon) + len(self.timetable_tue) + len(self.timetable_wed) + len(self.timetable_thur) + len(self.timetable_fri) + len(self.timetable_sat) + len(self.timetable_sun)  < 1:
+            raise UserError(_('Please Add Subject schedule'))
+        self.state = 'confirm'
 
 class EducationTimeTableSchedule(models.Model):
-    _name = 'education.timetable.schedule'
     _inherit = 'education.timetable.schedule'
-    _description = 'Timetable Schedule'
     _rec_name = 'period_id'
    
-    
     hours = fields.Float(string='Hours', required=True)
     description = fields.Text(string='Syllabus Modules')
     classroom = fields.Char(string='Class Room')
@@ -62,6 +46,3 @@ class EducationTimeTableSchedule(models.Model):
                             string='Type', default="is_language", required=True,
                             help="Choose the type of the subject")
 
-   
-
-   
