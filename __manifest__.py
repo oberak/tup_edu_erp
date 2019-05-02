@@ -30,6 +30,7 @@
         'security/education_exam/ir.model.access.csv',
         'security/education_fee/ir.model.access.csv',
         'security/education_promotion/ir.model.access.csv',
+        'security/education_time_table/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
