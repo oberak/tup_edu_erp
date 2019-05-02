@@ -8,6 +8,9 @@
             <field name="class_id" position="replace">
                 <field name="major_id"/>
             </field>
+            <field name="subject_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
             <field name="total_hours" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -23,8 +26,8 @@
         <field name="inherit_id" ref="education_core.view_education_syllabus_form"/>
         <field name="arch" type="xml">                                          
             <field name="name" position="replace">
-                <field name="name" required="False"/>
-            </field>            
+                <field name="name" readonly = "True"/>           
+            </field>        
             <field name="class_id" position="attributes">
                 <attribute name="required">0</attribute>
             </field>
