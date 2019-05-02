@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_education_syllabus_tree" model="ir.ui.view">
+        <field name="name">education.syllabus.tree</field>
+        <field name="model">education.syllabus</field>
+        <field name="inherit_id" ref="education_core.view_education_syllabus_tree"/>
+        <field name="arch" type="xml">
+            <field name="class_id" position="replace">
+                <field name="major_id"/>
+            </field>
+            <field name="subject_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="total_hours" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="description" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>         
+        </field>
+    </record>
+    
+    <record id="view_education_syllabus_form" model="ir.ui.view">
+        <field name="name">education.syllabus.form</field>
+        <field name="model">education.syllabus</field>
+        <field name="inherit_id" ref="education_core.view_education_syllabus_form"/>
+        <field name="arch" type="xml">                                          
+            <field name="name" position="replace">
+                <field name="name" readonly = "True"/>           
+            </field>        
+            <field name="class_id" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <field name="class_id" position="replace">
+                <field name="major_id" on_change="0"/>
+            </field>
+            <field name="subject_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>            
+            <field name="total_hours" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="total_hours" position="replace">
+                <field name="division_id" on_change="0"/>
+            </field>
+            <field name="description" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <xpath expr="/form/sheet/group" position="after">
+                <notebook>
+                    <page string="Syllabus">
+                        <field name="syllabus_ids" nolabel="1">
+                            <tree string="Syllabus Items" editable="bottom">                                
+                                <field name="subject_id" required = "1"/>
+                                <field name="lecture_hour" on_change="0"/>                      
+                                <field name="tutorial_hour" on_change="0"/>
+                                <field name="practical_hour" on_change="0"/>
+                                <field name="classwork_hour" on_change="0"/>                               
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>     
+            </xpath>    
+        </field>
+    </record>     
+</odoo>
