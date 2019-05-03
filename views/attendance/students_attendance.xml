@@ -25,6 +25,7 @@
                             <group>
                                 <field name="division_id" attrs="{'readonly': [('attendance_created', '=', True)]}" />
                                 <field name="subject" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="period"/>  
                                 <field name="academic_year" invisible="1" />
                             </group>
                             <group>
@@ -44,12 +45,14 @@
                                 <tree editable="bottom" create="false" delete="false">
                                     <field name="student_id" invisible="1" />
                                     <field name="student_name" readonly="1" style=" width: 500px; " />
-                                    <field name="one" />
+                                    <field name="present" />
+                                    <field name="remark" />
+                                    <!-- <field name="one" />
                                     <field name="two" />
                                     <field name="three" />
                                     <field name="four" />
                                     <field name="five" />
-                                    <field name="six" />
+                                    <field name="six" /> -->
                                     <field name="class_id" invisible="1" />
                                     <field name="division_id" invisible="1" />
                                     <field name="date" invisible="1" />
@@ -68,7 +71,8 @@
                 <tree>
                     <field name="name"/>
                     <field name="division_id"/>
-                    <field name="subject"/>                    
+                    <field name="subject"/>   
+                    <field name="period"/>                 
                     <!-- <field name="class_id"/> -->
                     <field name="date"/>
                     <field name="state"/>
@@ -121,12 +125,14 @@
                                 <field name="division_id"/>
                             </group>
                             <group string="Leave Status (✔️️ = Present)">
-                                <field name="one" readonly="1"/>
+                                <field name="present"/>
+                                <field name="remark"/>
+                                <!-- <field name="one" readonly="1"/>
                                 <field name="two" readonly="1"/>
                                 <field name="three" readonly="1"/>
                                 <field name="four" readonly="1"/>
                                 <field name="five" readonly="1"/>
-                                <field name="six" readonly="1"/>
+                                <field name="six" readonly="1"/> -->
                                 <field name="date"/>
                             </group>
                         </group>

@@ -15,6 +15,8 @@ class EducationStudentsAttendance(models.Model):
     academic_year = fields.Many2one('education.academic.year', string='Academic Year',
                                     related='division_id.academic_year_id', store=True)
     subject = fields.Many2one('education.subject', string='Subject', required=True)
+    period = fields.Many2one('education.timetable.schedule', string='Period', required=True)
+
 
     # Naming Class/Attendance_date
     def get_name(self):
@@ -80,13 +82,17 @@ class EducationAttendanceLine(models.Model):
     date = fields.Date(string='Date', required=True)
 
 # add periods
-    one = fields.Boolean(string='Period one')
-    two = fields.Boolean(string='Period two')
-    three = fields.Boolean(string='Period three')
-    four = fields.Boolean(string='Period four')
-    five = fields.Boolean(string='Period five')
-    six = fields.Boolean(string='Period six')
-    
+    # one = fields.Boolean(string='Period one')
+    # two = fields.Boolean(string='Period two')
+    # three = fields.Boolean(string='Period three')
+    # four = fields.Boolean(string='Period four')
+    # five = fields.Boolean(string='Period five')
+    # six = fields.Boolean(string='Period six')
+
+    present = fields.Boolean(string='Present')
+    remark = fields.Char(string='Remark')
+
+
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')], string='State', default='draft')
 #     academic_year = fields.Many2one('education.academic.year', string='Academic Year',
 #                                     related='division_id.academic_year_id', store=True)
