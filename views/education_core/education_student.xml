@@ -28,20 +28,7 @@
                     </group>
                 </group>                         
             </page>
-            <!-- <page string="Sibling's Info">                           
-                <group>
-                    <group>
-                        <field name="s_name" />
-                        <field name="nrc_no" />
-                        
-                    </group>
-                    <group>
-                        <field name="occupation" />
-                        <field name="address" />
-                        
-                    </group>
-                </group>                         
-            </page> -->
+           
 
             <page string="Siblings Info">
                     <field name="sibling_ids" nolabel="1">
