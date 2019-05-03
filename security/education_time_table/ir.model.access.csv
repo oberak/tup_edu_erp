@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+a_education_timetable_t,access.education.timetable,education_time_table.model_education_timetable,group_education_teacher,1,0,0,0
+a_education_timetable_dc,access.education.timetable,education_time_table.model_education_timetable,group_education_teacher_dc,1,1,1,0
+
+a_education_timetable_schedule_t,access.education.timetable.schedule,education_time_table.model_education_timetable_schedule,group_education_teacher,1,0,0,0
+a_education_timetable_schedule_dc,access.education.timetable.schedule,education_time_table.model_education_timetable_schedule,group_education_teacher_dc,1,1,1,0
+
+a_education_timetable_period_t,access.education.timetable.period,education_time_table.model_timetable_period,group_education_teacher,1,0,0,0
+a_education_timetable_period_dc,access.education.timetable.period,education_time_table.model_timetable_period,group_education_teacher_dc,1,1,1,0

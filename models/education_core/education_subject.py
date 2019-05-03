@@ -4,7 +4,7 @@ from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 class EducationSubject(models.Model):
-    _inherit = 'education.subject'
+    _inherit = 'education.subject'    
     
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, domain=[('is_major', '=', True)],
@@ -14,7 +14,7 @@ class EducationSubject(models.Model):
 
     # check logged user's department
     user_subjects=fields.Char(compute="_compute_user_subjects",search='user_subjects_search')
-    
+
     @api.one
     @api.depends('major_id')
     def _compute_user_subjects(self):
@@ -29,12 +29,13 @@ class EducationSyllabus(models.Model):
     _inherit = 'education.syllabus'
     
     # modify fields
-    name = fields.Char(string='Name', readonly=True)   # change to readonly
+    name = fields.Char(string='Name', required = False)   # change to required = False
 
     # add fields
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, domain=[('is_major', '=', True)],
                             help="Choose Major")
+
     division_id = fields.Many2one('education.division', string='Program Year', required=True,
                                   help="Select the Program Year") 
     syllabus_ids = fields.One2many('education.syllabuses', 'syllabus_id', string="Syllabus")   

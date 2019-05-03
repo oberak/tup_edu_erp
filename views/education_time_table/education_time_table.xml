@@ -9,16 +9,18 @@
                 <xpath expr="/form/sheet" position="before">
                     <header>                       
                         <button name="confirm_timetable" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"
-                                class="oe_highlight" string="Confirm" help="Timetable Draft"/>
+                                class="oe_highlight" string="Confirm" confirm="After have confirmed, you can't modify. Do you want to proceed?" help="Confirm Timetable"/>
                         <button name="close_timetable" type="object" attrs="{'invisible': [('state', '!=', 'confirm')]}"
-                                string="Done" confirm="After closing the timetable, you can't modify. Do you want to proceed?"
-                                help="Confirm the Timetable"/>                    
+                                string="Done"/>                    
                         <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,done"/>
                     </header>
-                </xpath>                                       
+                </xpath> 
+                <field name="class_division" position ="replace">                                                     
+                    <field name="class_division" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </field>
                 <field name="academic_year" position="attributes">
                     <attribute name="invisible">True</attribute>
-                </field>                
+                </field>                 
                 <xpath expr="//page[1]" position="replace">
                     <page string="Monday">
                         <field name="timetable_mon" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 0)]"  context="{'default_week_day': '0'} ">
@@ -38,7 +40,7 @@
                 </xpath>
                 <xpath expr="//page[2]" position="replace">
                     <page string="Tuesday">
-                        <field name="timetable_tue" domain="[('week_day','=', 1)]"  context="{'default_week_day': '1'} ">
+                        <field name="timetable_tue" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 1)]"  context="{'default_week_day': '1'} ">
                             <tree string="Tuesday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -55,7 +57,7 @@
                 </xpath>
                 <xpath expr="//page[3]" position="replace">
                     <page string="Wednesday">
-                        <field name="timetable_wed" domain="[('week_day','=', 2)]"  context="{'default_week_day': '2'} ">
+                        <field name="timetable_wed" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 2)]"  context="{'default_week_day': '2'} ">
                             <tree string="Wednesday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -72,7 +74,7 @@
                 </xpath>
                 <xpath expr="//page[4]" position="replace">
                     <page string="Thursday">
-                        <field name="timetable_thur" domain="[('week_day','=', 3)]"  context="{'default_week_day': '3'} ">
+                        <field name="timetable_thur" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 3)]"  context="{'default_week_day': '3'} ">
                             <tree string="Thursday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -89,7 +91,7 @@
                 </xpath>
                 <xpath expr="//page[5]" position="replace">
                     <page string="Friday">
-                        <field name="timetable_fri" domain="[('week_day','=', 4)]"  context="{'default_week_day': '4'} ">
+                        <field name="timetable_fri" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 4)]"  context="{'default_week_day': '4'} ">
                             <tree string="Friday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -106,7 +108,7 @@
                 </xpath>
                 <xpath expr="//page[6]" position="replace">
                     <page string="Saturday">
-                        <field name="timetable_sat" domain="[('week_day','=', 5)]"  context="{'default_week_day': '5'} ">
+                        <field name="timetable_sat" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 5)]"  context="{'default_week_day': '5'} ">
                             <tree string="Saturday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -123,7 +125,7 @@
                 </xpath> 
                 <xpath expr="//page[7]" position="replace">
                     <page string="Sunday">
-                        <field name="timetable_sun" domain="[('week_day','=', 6)]"  context="{'default_week_day': '6'} ">
+                        <field name="timetable_sun" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 6)]"  context="{'default_week_day': '6'} ">
                             <tree string="Sunday" editable="bottom">
                                 <field name="subject" on_change="0"/>
                                 <field name="sub_type" on_change="0"/>
@@ -147,7 +149,7 @@
             <field name="arch" type="xml">
                 <search string="Education Timetable">
                     <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
-                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                    
                     <separator/>
                         <group expand="1" string="Group By">
                             <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>

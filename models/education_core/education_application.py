@@ -6,28 +6,37 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
+    #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
+    #change status depends on transfer_in student
+    @api.onchange('student_type','state')
+    def on_change_status(self):
+        for rec in self:
+            if rec.student_type == 'transfer_in':
+                rec.state= 'apply'
+                # print(rec.state)
+            return
+
+   
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
-    def apply_major(self):
-        """Apply Major for new candidate"""
+    def apply_major(self, vals):
         for rec in self:
-            if rec.is_new_candidate:
-                values = {
+            values = {
                     'first_choice': rec.first_choice,
                     'second_choice': rec.second_choice,
                     'third_choice': rec.third_choice,
                     'forth_choice': rec.forth_choice,
                     'fifth_choice': rec.fifth_choice,
-                }
-                self.env['education.application'].update(values)
+                    }
+            self.env['education.application'].update(values)
             
-                rec.write({
-                    'state': 'apply'
+            rec.write({
+                'state': 'apply'
                 })
-            
-            return
+        return
+        
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
@@ -42,15 +51,15 @@ class StudentApplication(models.Model):
             rec.write({
                 'state': 'major'
             })
-       
 
-
-
-
+    
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
 
     # modify fields
+    academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
+                            default=lambda self: self.env['education.academic.year']._get_current_ay(),
+                            help="Select the Academic Year")
     medium = fields.Many2one('education.medium', string="Medium", required=False,
                              help="Choose the Medium of class, like English, Hindi etc") # remove required
     sec_lang = fields.Many2one('education.subject', string="Second language",
@@ -68,9 +77,16 @@ class StudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
+    
+    #modify status 
     state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
-                             string='State', required=True, default='draft', track_visibility='onchange')
+                             string='State', default='draft', track_visibility='onchange')
+    
+    #add fields for payment
+    #payment_fee = fields.Integer(string='# Payment')
+
+    #partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
     #add field to check student type

@@ -30,6 +30,7 @@
         'security/education_exam/ir.model.access.csv',
         'security/education_fee/ir.model.access.csv',
         'security/education_promotion/ir.model.access.csv',
+        'security/education_time_table/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
@@ -43,6 +44,9 @@
         ## view - attendance
         'views/attendance/students_attendance.xml',
 
+        ## view - education_fee
+        'views/education_fee/fee_register.xml',
+
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
         'views/hr_recruitment/hr_employee.xml',
@@ -55,6 +59,7 @@
         'views/education_core/education_faculty.xml',
         'views/education_core/education_student_class.xml',
         'views/education_core/education_subject.xml',
+        'views/education_core/education_syllabus.xml',
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
