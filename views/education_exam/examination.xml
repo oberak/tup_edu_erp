@@ -21,7 +21,7 @@
             <field name="name">examination_tree.tree</field>
             <field name="model">education.exam</field>
             <field name="inherit_id" ref="education_exam.examination_tree"/>
-            <field name="arch" type="xml"></field>
+            <field name="arch" type="xml">
                 <xpath expr="//field[@name='class_id']" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </xpath>
