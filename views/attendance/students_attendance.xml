@@ -25,11 +25,13 @@
                             <group>
                                 <field name="division_id" attrs="{'readonly': [('attendance_created', '=', True)]}" />
                                 <field name="subject" attrs="{'readonly': [('attendance_created', '=', True)]}" />
-                                <field name="period"/>  
+                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" /> 
                                 <field name="academic_year" invisible="1" />
                             </group>
                             <group>
-                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="period" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="time_from" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="time_to" attrs="{'readonly': [('attendance_created', '=', True)]}" />
                                 <field name="attendance_created" invisible="1" />
                             </group>
                         </group>
@@ -71,8 +73,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="division_id"/>
-                    <field name="subject"/>   
-                    <field name="period"/>                 
+                    <field name="subject"/>                 
                     <!-- <field name="class_id"/> -->
                     <field name="date"/>
                     <field name="state"/>

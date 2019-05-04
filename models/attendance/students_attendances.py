@@ -14,9 +14,23 @@ class EducationStudentsAttendance(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')], default='draft')
     academic_year = fields.Many2one('education.academic.year', string='Academic Year',
                                     related='division_id.academic_year_id', store=True)
-    subject = fields.Many2one('education.subject', string='Subject', required=True)
-    period = fields.Many2one('education.timetable.schedule', string='Period', required=True)
 
+    # add fields to relate timetable
+    subject = fields.Many2one('education.subject', string='Subject', required=True)
+    period = fields.Char(string="Period", required=True)
+    time_from = fields.Char(string="From")
+    time_to = fields.Char(string="Till")
+
+    # refering from timetable
+    @api.onchange('subject')
+    def onchange_subject(self):
+        for rec in self:
+            if self.env['education.timetable.schedule'].search([('subject', '=', rec.subject.name)]):
+                obj = self.env['education.timetable.schedule'].browse(self.subject.id)
+                rec.period = obj.period_id.name
+                rec.time_from = obj.time_from
+                rec.time_to = obj.time_till
+            return
 
     # Naming Class/Attendance_date
     def get_name(self):
