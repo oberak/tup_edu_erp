@@ -11,7 +11,7 @@
                 <field name="nrc_no"/>
             </field>
             <field name="last_name" position="replace">
-                <field name="student_type"/>
+                <field name="major_id"/>
             </field>
             <field name="blood_group" position="replace">
                 <field name="first_choice"/>
@@ -19,6 +19,10 @@
             <field name="date_of_birth" position="replace">
                 <field name="total_marks"/>
             </field>
+            <field name="application_no" position="replace">
+                <field name="student_id"/>
+            </field>
+            
             
         </field>
     </record>
@@ -33,7 +37,7 @@
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" 
                             help="Click to send the application to apply " states="draft" 
-                            attrs="{'invisible': [('state', 'in' , ['apply','fee','major','approve','reject','done'])]}"  />
+                            attrs="{'invisible': [('state', 'in' , ['apply','fee','verification','major','approve','reject','done'])]}"  />
             </button>
             
             <button name="send_to_verify" position="replace">                
@@ -207,9 +211,9 @@
 
             </xpath>
         </field>
-    </record>
+    </record> 
 
-
+  
     <record id="education_core.action_student_application" model="ir.actions.act_window">
         <field name="name">Student Application</field>
         <field name="res_model">education.application</field>        
@@ -225,6 +229,28 @@
             </p>
         </field>
     </record>
+
+    <!-- add wizard view for assign major-->
+    <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">education.major_assign</field>
+            <field name="arch" type="xml">
+                <form string="Assign Major">
+                    <group>
+                        <field name="major_id" options="{'no_create_edit': True, 'no_create': True}"/>                        
+                    </group>
+                </form>
+            </field>
+        </record>
+   
+     <act_window id="action_assign_major"
+        name="Assign Major"
+        src_model="education.application"
+        res_model="education.major_assign"
+        view_type="form" view_mode="form"
+        key2="client_action_multi" target="new"           
+    /> 
+
 
     
 </odoo>

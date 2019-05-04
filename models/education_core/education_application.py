@@ -53,6 +53,11 @@ class StudentApplication(models.Model):
                 'state': 'major'
             })
 
+    @api.one
+    def IT(self):
+        for rec in self:
+            print('Hello IT >>>>>>>>>>>>>>>>>>')
+
     
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
@@ -144,4 +149,40 @@ class StudentSiblings(models.Model):
     occupation = fields.Char(string='Sibling Occupation',  help="Enter Sibling Occupation ")
     address = fields.Char(string='Address',  help="Enter Sibling Address")
     student_id = fields.Many2one('education.application', string='Student')
-   
+
+
+class AssignMajor(models.TransientModel):
+    _name = 'education.major_assign'
+    #add to assign Major
+    major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)],
+                                 help="Select Major to assign" )
+
+    # #change status 
+    # @api.onchange('major_id')
+    # def on_change_status(self):
+    #     for rec in self:
+    #         major_id = rec.major_id.id
+    #         print(major_id)
+    #         student_id=self.env['education.application'].browse(self._context.get('active_id')).student_id
+    #         print(student_id)
+    #         val = self.env['education.application'].search([('student_id', '=', student_id)])
+    #         if val:
+    #             self.env['education.application'].update({ 'major_id': major_id })
+    #             print(val)
+    #         # self.env.context = dict(self.env.context)
+    #         # self.env.context.update( {'major_id': major_code } )            
+    #         self.env.cr.commit()             
+            
+    #     return
+
+    @api.model
+    def create(self,vals):
+        for rec in self:
+            print(rec.major_id)
+            vals['major_id']=rec.major_id                      
+            student_id = self.env['education.application'].browse(self._context.get('active_id'))   
+            student_id.major_id = vals['major_id']        
+            self.env['education.application'].update(student_id)
+                  
+        print(vals)       
+        return super(AssignMajor, self).create(vals)
