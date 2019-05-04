@@ -13,7 +13,6 @@
                 </xpath>            
             </field>
         </record>
-
         <record id="education_time_table_schedule_tree" model="ir.ui.view">
             <field name="name">education.timetable.schedule.tree</field>
             <field name="model">education.timetable.schedule</field>
