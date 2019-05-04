@@ -41,7 +41,6 @@ class EducationTimeTableSchedule(models.Model):
     hours = fields.Float(string='Hours', required=True)
     description = fields.Text(string='Syllabus Modules')
     classroom = fields.Char(string='Class Room')
-
     sub_type = fields.Selection([('is_language', 'Lecture'), ('is_tutorial', 'Tutorial'), ('is_lab', 'Practical')],
                             string='Type', default="is_language", required=True,
                             help="Choose the type of the subject")

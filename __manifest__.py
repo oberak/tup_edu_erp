@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee'],
+    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee', 'education_exam'],
 
     # always loaded
     'data': [
@@ -64,7 +64,9 @@
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
         'views/education_time_table/timetable_schedule.xml',
-
+        
+        ## view - education_time_table
+        'views/education_exam/examination.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

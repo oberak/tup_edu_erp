@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="examination_form" model="ir.ui.view">
+            <field name="name">examination_form.form</field>
+            <field name="model">education.exam</field>
+            <field name="inherit_id" ref="education_exam.examination_form"/>
+            <field name="arch" type="xml">            
+                <field name="class_id" position="attributes">
+                    <attribute name="required">0</attribute>
+                    <attribute name="invisible">True</attribute>
+                </field>               
+                <field name="class_id" position="replace">
+                    <field name="division_id"
+                        attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('school_class_division_wise', 'not in', 
+                        ['class', 'final'])], 'required': [('school_class_division_wise', 'in', ['class', 'final'])]}"/>
+                </field>                                          
+            </field>
+        </record>
+        <record id="examination_tree" model="ir.ui.view">
+            <field name="name">examination_tree.tree</field>
+            <field name="model">education.exam</field>
+            <field name="inherit_id" ref="education_exam.examination_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='class_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>        
