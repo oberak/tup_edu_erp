@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="contact" inherit_id="education_core.report_student_application">
+            <xpath expr="//table[@class='table table-condensed']" position="replace">
+             <table class="table table-condensed">
+                  <tr>
+                    <td style="text-align:left; padding-left:10px;" class="col-xs-4">
+                        <strong><span t-if="o.academic_year_id">Academic Year:</span></strong>
+                    </td>
+                    <td style="text-align:left;" class="col-xs-4">
+                        <span t-if="o.academic_year_id" t-field="o.academic_year_id.name"/>
+                    </td>
+                </tr>
+                  <tr>
+                        <td>
+                            <strong><span>Student's Name:</span></strong>
+                        </td>
+                        <td>
+                            <span t-field="o.name"/>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><span>Studnent's NRC:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.nrc_no"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><span>Student ID:</span></strong>
+                    </td>
+                    <td>
+                        <span t-field="o.student_id"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><span>Total Marks for Matriculation Exam:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.total_marks"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><span>First Choice to apply Major:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.first_choice"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <strong><span>Second Choice to apply Major:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.second_choice"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <strong><span>Third Choice to apply Major:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.third_choice"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <strong><span>Forth Choice to apply Major:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.forth_choice"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <strong><span>Fifth Choice to apply Major:</span></strong>
+                    </td>
+                    <td>
+                        <span  t-field="o.fifth_choice"/>
+                    </td>
+                </tr>            
+                
+               
+            </table>          
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

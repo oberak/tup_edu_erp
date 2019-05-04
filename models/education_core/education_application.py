@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
+    _order = 'total_marks desc'
     #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
@@ -90,7 +91,7 @@ class StudentApplication(models.Model):
 
    
     #add field to check student type
-    student_type=fields.Selection([('is_new_candidate','Is New Candidate'),('transfer_in','Is Transfer In Student')], default='is_new_candidate',required=True)
+    student_type=fields.Selection([('is_new_candidate','New Candidate'),('transfer_in','Transfer In Student')], default='is_new_candidate',required=True)
     
      #add fields to transfer in student
     major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)], help="Select the Promote Major")

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    
     <record id="view_tup_education_application_tree" model="ir.ui.view">
         <field name="name">tup.education.application.tree</field>
         <field name="model">education.application</field>
@@ -8,6 +10,16 @@
             <field name="application_no" position="after">
                 <field name="nrc_no"/>
             </field>
+            <field name="last_name" position="replace">
+                <field name="student_type"/>
+            </field>
+            <field name="blood_group" position="replace">
+                <field name="first_choice"/>
+            </field>
+            <field name="date_of_birth" position="replace">
+                <field name="total_marks"/>
+            </field>
+            
         </field>
     </record>
 
@@ -156,22 +168,62 @@
 
             </xpath>
             <xpath expr="/form/sheet/group[8]" position="after">
-            <notebook>
-                <page string="Siblings Info">
-                    <field name="sibling_ids" nolabel="1">
-                        <tree string="Siblings Info" editable="bottom">
-                            <field name="name"/>
-                            <field name="nrc_no" required="1"/>
-                            <field name="occupation"/>
-                            <field name="address"/>
-                        </tree>
-                    </field>
-                </page>
-            </notebook>
-
-                
+                <notebook>
+                    <page string="Siblings Info">
+                        <field name="sibling_ids" nolabel="1">
+                            <tree string="Siblings Info" editable="bottom">
+                                <field name="name"/>
+                                <field name="nrc_no" required="1"/>
+                                <field name="occupation"/>
+                                <field name="address"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>                
             </xpath>
         </field>       
+    </record>
+
+     <!-- add search view -->
+     <record id="application_search" model="ir.ui.view">
+        <field name="name">Student Application</field>
+        <field name="model">education.application</field>
+        <field name="inherit_id" ref="education_core.application_search"/>    
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='new_application']" position="before">
+               
+                    <filter string="Major" name="major" domain="[]"/> 
+                    <separator/>
+                    <filter string="Civil Engineering" name="major_ce" domain="[('major_id.major_code','=', 'CE')]"/>
+                    <filter string="Electronic Engineering" name="major_ee" domain="[('major_id.major_code','=', 'EE')]"/>
+                    <filter string="Electrical Power Engineering" name="major_ep" domain="[('major_id.major_code','=', 'EP')]"/>
+                    <filter string="Information Technology" name="major_it" domain="[('major_id.major_code','=', 'IT')]"/>
+                    <filter string="Mechanical Engineering" name="major_me" domain="[('major_id.major_code','=', 'ME')]"/>
+                    <filter string="Mechatronic Engineering" name="major_mc" domain="[('major_id.major_code','=', 'MC')]"/> 
+                    <separator/>              
+            </xpath>
+            <xpath expr="//filter[@name='draft_filter']" position="before">
+                    <separator/>
+
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="education_core.action_student_application" model="ir.actions.act_window">
+        <field name="name">Student Application</field>
+        <field name="res_model">education.application</field>        
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="search_view_id" ref="application_search"/>
+        <field name="context">{'search_default_new_application': 1}</field>
+        <field name="domain">[('student_type', '=', 'is_new_candidate')]</field>        
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student application here.
+            </p>
+        </field>
     </record>
 
     

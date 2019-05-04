@@ -59,6 +59,9 @@
         'views/education_core/education_student_class.xml',
         'views/education_core/education_subject.xml',
         'views/education_core/education_syllabus.xml',
+        
+
+        'reports/student_application_report.xml',
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
