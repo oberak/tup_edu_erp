@@ -65,11 +65,7 @@
                             states="major"/>                           
             </button>
 
-            <!-- <xpath expr="//div[@class='oe_button_box']/button[1]" position="after">
-                <button class="oe_stat_button" name="payment_view" type="object" icon="fa-list-ol">
-                    <field string="Payment" name="payment_fee" widget="statinfo"/>
-                </button>
-            </xpath> -->
+            
 
              
             <field name="state" position="replace">
@@ -124,7 +120,9 @@
             </field>
 
             <field name="admission_date" position="before">
-                <field name="major_id" attrs="{'readonly': [('state', '=', 'done')],'required': [('state', '=', 'fee')]}"/>
+                <field name="major_id" attrs="{'readonly': ['|',('state', 'in' , ['major','approve','done']),
+                                                ('student_type', '=','is_new_candidate')],
+                                                'required': [('state', '=', 'fee')]}"/>
             </field>
 
             
@@ -194,8 +192,7 @@
         <field name="model">education.application</field>
         <field name="inherit_id" ref="education_core.application_search"/>    
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='new_application']" position="before">
-               
+            <xpath expr="//filter[@name='new_application']" position="before">               
                     <filter string="Major" name="major" domain="[]"/> 
                     <separator/>
                     <filter string="Civil Engineering" name="major_ce" domain="[('major_id.major_code','=', 'CE')]"/>
@@ -222,7 +219,7 @@
         <field name="view_mode">tree,form,graph,pivot</field>
         <field name="search_view_id" ref="application_search"/>
         <field name="context">{'search_default_new_application': 1}</field>
-        <field name="domain">[('student_type', '=', 'is_new_candidate')]</field>        
+        <!-- <field name="domain">[('student_type', '=', 'is_new_candidate')]</field>         -->
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student application here.
@@ -239,6 +236,11 @@
                     <group>
                         <field name="major_id" options="{'no_create_edit': True, 'no_create': True}"/>                        
                     </group>
+                    <footer>
+                <button name="assign_major" string="Ok" type="object" class="oe_highlight"/>
+                
+                <button string="Cancel" class="oe_link" special="cancel"/>
+            </footer>
                 </form>
             </field>
         </record>
@@ -248,7 +250,9 @@
         src_model="education.application"
         res_model="education.major_assign"
         view_type="form" view_mode="form"
-        key2="client_action_multi" target="new"           
+        key2="client_action_multi"
+        multi="True" 
+        target="new"        
     /> 
 
 

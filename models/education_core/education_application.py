@@ -53,10 +53,11 @@ class StudentApplication(models.Model):
                 'state': 'major'
             })
 
-    @api.one
-    def IT(self):
+    #change status depends on transfer_in student
+    @api.onchange('student_id')
+    def student_id(self):
         for rec in self:
-            print('Hello IT >>>>>>>>>>>>>>>>>>')
+            print(len(rec.student_id))
 
     
     # add fields
@@ -123,7 +124,7 @@ class StudentApplication(models.Model):
     total_marks = fields.Char(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
     
     _sql_constraints = [
-        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission number!"),
+        ('student_id', 'unique(student_id)', "Another Student already exists with this student_id !"),
     ]
 
     #add fields for parent's info
@@ -157,32 +158,27 @@ class AssignMajor(models.TransientModel):
     major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)],
                                  help="Select Major to assign" )
 
-    # #change status 
-    # @api.onchange('major_id')
-    # def on_change_status(self):
-    #     for rec in self:
-    #         major_id = rec.major_id.id
-    #         print(major_id)
-    #         student_id=self.env['education.application'].browse(self._context.get('active_id')).student_id
-    #         print(student_id)
-    #         val = self.env['education.application'].search([('student_id', '=', student_id)])
-    #         if val:
-    #             self.env['education.application'].update({ 'major_id': major_id })
-    #             print(val)
-    #         # self.env.context = dict(self.env.context)
-    #         # self.env.context.update( {'major_id': major_code } )            
-    #         self.env.cr.commit()             
-            
-    #     return
 
-    @api.model
-    def create(self,vals):
+    #modify major_id to student application (assign major to student)   
+    @api.multi
+    def assign_major(self,vals):        
+        studnet_ids=vals['active_ids']
+        #print(studnet_id)
         for rec in self:
-            print(rec.major_id)
-            vals['major_id']=rec.major_id                      
-            student_id = self.env['education.application'].browse(self._context.get('active_id'))   
-            student_id.major_id = vals['major_id']        
-            self.env['education.application'].update(student_id)
-                  
-        print(vals)       
-        return super(AssignMajor, self).create(vals)
+            #print(rec.major_id)
+            vals['major_id']=rec.major_id 
+        for sid in studnet_ids:
+            #print(sid)
+            student_id = self.env['education.application'].browse(sid)
+            if not student_id.major_id:
+                student_id.major_id = vals['major_id']
+                student_id.state ='major'
+                self.env['education.application'].update(student_id)
+            else:
+                    raise ValidationError(_('These students have been already assigned major'))
+            
+        return
+        
+        
+            
+
