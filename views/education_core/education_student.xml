@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     
+    <record id="view_tupeducation_student_form" model="ir.ui.view">
+        <field name="name">tupeducation.student.form</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="education_core.view_education_student_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            
+           
+            <field name="ad_no" position="replace">
+                <field name="student_id" />
+            </field> 
+        
+            <xpath expr="/form/sheet/notebook/page[1]/group[1]/group[2]" position="inside">
+                <field name="major_id"/>
+            </xpath> 
+
+
+
+            <xpath expr="/form/sheet/notebook" position="inside">
+            <page string="Parent's Info">                           
+            
+                <group>
+                    <group>
+                        <field name="f_nrc" />
+                        <field name="f_nationality" />
+                        <field name="f_occupation" />
+                        <field name="f_religion" />
+                    </group>
+                    <group>
+                        <field name="m_nrc" />
+                        <field name="m_nationality" />
+                        <field name="m_occupation" />
+                        <field name="m_religion" />
+                    </group>
+                </group>                         
+            </page>
+           
+
+            <page string="Siblings Info">
+                    <field name="sibling_ids" nolabel="1">
+                        <tree string="Siblings Info" editable="bottom">
+                            <field name="name"/>
+                            <field name="nrc_no" required="1"/>
+                            <field name="occupation"/>
+                            <field name="address"/>
+                        </tree>
+                    </field>
+            </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
