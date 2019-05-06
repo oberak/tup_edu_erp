@@ -60,7 +60,7 @@ a_education_class_history_haa,access.education.class.history,education_core.mode
 
 education_core.access_education_class_division,access.education.class.division,education_core.model_education_class_division,education_core.group_education_faculty,1,0,0,0
 a_education_class_division_s,access.education.class.division,education_core.model_education_class_division,group_education_student,1,0,0,0
-a_education_class_division_t,access.education.class.division,education_core.model_education_class_division,group_education_teacher,1,0,0,0
+a_education_class_division_t,access.education.class.division,education_core.model_education_class_division,group_education_teacher,1,1,1,0
 a_education_class_division_aa,access.education.class.division,education_core.model_education_class_division,group_education_aa,1,1,1,0
 a_education_class_division_haa,access.education.class.division,education_core.model_education_class_division,group_education_haa,1,1,1,1
 
