@@ -12,8 +12,6 @@ class EducationStudent(models.Model):
     sec_lang = fields.Many2one('education.subject', string="Second language", required=False, domain=[('is_language', '=', True)])
     mother_tongue = fields.Many2one('education.mother.tongue', string="Mother Tongue", required=False, domain=[('is_language', '=', True)])
 
-    
-
     #parent's Info
     f_nrc = fields.Char(string='Father NRC Number')
     m_nrc = fields.Char(string='Mother NRC Number',  help="Enter Mother NRC Number")

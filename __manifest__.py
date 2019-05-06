@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee'],
+    'depends': ['base', 'auth_signup', 'hr_recruitment', 'education_core', 'education_time_table', 'education_promotion', 'education_fee', 'education_exam'],
 
     # always loaded
     'data': [
@@ -60,12 +60,21 @@
         'views/education_core/education_student_class.xml',
         'views/education_core/education_subject.xml',
         'views/education_core/education_syllabus.xml',
+<<<<<<< HEAD
         'views/education_core/education_student.xml',
+=======
+        'views/education_core/education_academic_year.xml',
+        
+
+        'reports/student_application_report.xml',
+>>>>>>> 8a3e14e16acd2f17ee720832fbfb78bccf647fc3
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
         'views/education_time_table/timetable_schedule.xml',
-
+        
+        ## view - education_time_table
+        'views/education_exam/examination.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

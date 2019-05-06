@@ -13,6 +13,7 @@
             
             <xpath expr="/form/sheet/notebook" position="inside">
             <page string="Parent's Info">                           
+            
                 <group>
                     <group>
                         <field name="f_nrc" />
