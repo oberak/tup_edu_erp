@@ -80,8 +80,7 @@ class StudentApplication(models.Model):
                                 help="Your Blood Group is ")
 
     # add field for creating student
-    class_id = fields.Many2one('education.class.division', string='Class',
-                               help="Class") 
+    class_id = fields.Many2one('education.class.division', string='Class',help="Class") 
     
     #modify status 
     state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
@@ -137,7 +136,6 @@ class StudentApplication(models.Model):
     m_religion = fields.Many2one('religion.religion', string="Mother Religion", help="My Mother Religion is ")    
     sibling_ids = fields.One2many('education.application.sibling', 'student_id', string="Student Sibling")
 
-  
 
 class StudentSiblings(models.Model):
     _name = 'education.application.sibling'
@@ -148,13 +146,11 @@ class StudentSiblings(models.Model):
     address = fields.Char(string='Address',  help="Enter Sibling Address")
     student_id = fields.Many2one('education.application', string='Student')
 
-
 class AssignMajor(models.TransientModel):
     _name = 'education.major_assign'
     #add to assign Major
     major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)],
                                  help="Select Major to assign" )
-
 
     #modify major_id to student application (assign major to student)   
     @api.multi

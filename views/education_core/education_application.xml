@@ -130,9 +130,7 @@
                                                 'required': [('state', '=', 'fee')], 
                                                 'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
-            </field>
-
-            
+            </field>           
      
             <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
@@ -261,8 +259,5 @@
         key2="client_action_multi"
         multi="True" 
         target="new"        
-    /> 
-
-
-    
+    />     
 </odoo>
