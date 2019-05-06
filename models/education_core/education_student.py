@@ -26,7 +26,13 @@ class EducationStudent(models.Model):
     f_religion = fields.Many2one('religion.religion', string="Father Religion", help="My Father Religion is ")
     m_religion = fields.Many2one('religion.religion', string="Mother Religion", help="My Mother Religion is ") 
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
+
+
+    major_id = fields.Many2one('hr.department', string="Major",
+                            required=True, domain=[('is_major', '=', True)],
+                            help="Choose Major")
     
+
 class EducationStudentSiblings(models.Model):
     _name = 'education.student.sibling'
     #add fields for sibling's info

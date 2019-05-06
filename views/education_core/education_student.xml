@@ -29,7 +29,13 @@
                 </group>                         
             </page>
            
-
+ <!-- <group>
+                    <group>
+                        <field name="f_nrc" />
+                        <field name="f_nationality" />
+                        <field name="f_occupation" />
+                        <field name="f_religion" />
+                    </group> -->
             <page string="Siblings Info">
                     <field name="sibling_ids" nolabel="1">
                         <tree string="Siblings Info" editable="bottom">

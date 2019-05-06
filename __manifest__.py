@@ -39,16 +39,17 @@
 
         ## template
         'views/auth_signup/auth_oauth_templates.xml',
+        'views/auth_signup/login_home_templates.xml',
 
         ## view - attendance
-        'views/attendance/students_attendance.xml',
+        #'views/attendance/students_attendance.xml',
 
         ## view - education_fee
-        'views/education_fee/fee_register.xml',
+        #'views/education_fee/fee_register.xml',
 
         ## view - hr_recruitment
-        'views/hr_recruitment/hr_department.xml',
-        'views/hr_recruitment/hr_employee.xml',
+        #'views/hr_recruitment/hr_department.xml',
+        #'views/hr_recruitment/hr_employee.xml',
 
         ## view - education_core
         'views/education_core/education_application.xml',
@@ -60,6 +61,7 @@
         'views/education_core/education_subject.xml',
         'views/education_core/education_syllabus.xml',
         'views/education_core/education_student.xml',
+
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
         'views/education_time_table/timetable_schedule.xml',
