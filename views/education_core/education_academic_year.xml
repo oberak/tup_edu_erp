@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="view_tup_education_academic_year_form">
+        <field name="name">tup.education.academic.year.form</field>
+        <field name="model">education.academic.year</field>
+        <field name="inherit_id" ref="education_core.view_education_academic_year_form"/>
+        <field name="arch" type="xml">
+                <xpath expr="/form/sheet" position="replace"> 
+                    <sheet>                  
+                        <div class="oe_button_box" name="button_box">                        
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="ay_start_date"/>
+                                <field name="sequence" invisible ="1" />
+                            </group>
+                            <group>
+                                <field name="ay_code"/>
+                                <field name="ay_end_date"/>
+                                <field name="active" invisible ="1"/>
+                            </group>
+                            <field name="ay_description" placeholder="Enter the description"/>
+                        </group>
+                    </sheet>                      
+                </xpath>               
+                
+        </field>
+        
+</record>
+
+</odoo>

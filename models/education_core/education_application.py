@@ -53,13 +53,7 @@ class StudentApplication(models.Model):
                 'state': 'major'
             })
 
-    #change status depends on transfer_in student
-    @api.onchange('student_id')
-    def student_id(self):
-        for rec in self:
-            print(len(rec.student_id))
-
-    
+   
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
 
@@ -170,12 +164,12 @@ class AssignMajor(models.TransientModel):
         for sid in studnet_ids:
             #print(sid)
             student_id = self.env['education.application'].browse(sid)
-            if not student_id.major_id:
+            if  student_id.state == 'fee':
                 student_id.major_id = vals['major_id']
                 student_id.state ='major'
                 self.env['education.application'].update(student_id)
             else:
-                    raise ValidationError(_('These students have been already assigned major'))
+                    raise ValidationError(_('Assigning major to the student is not permitted'))
             
         return
         
