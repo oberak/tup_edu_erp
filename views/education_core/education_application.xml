@@ -54,7 +54,7 @@
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
-                            string="Assign Major" 
+                            string="Assign Major" groups="tup_edu_erp.group_education_aa"
                             help="Click to send the application for payment " states="fee"/>                
             </button>
 
@@ -119,10 +119,17 @@
                 <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
 
+            <field name="company_id" position="replace">
+                <field name="class_id" attrs="{'readonly': [('state', '=', 'done')],'required': [('state', '=', 'major')],
+                                                'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
+                                                options="{'no_create_edit': True, 'no_create': True}" />
+            </field>
+
             <field name="admission_date" position="before">
-                <field name="major_id" attrs="{'readonly': ['|',('state', 'in' , ['major','approve','done']),
-                                                ('student_type', '=','is_new_candidate')],
-                                                'required': [('state', '=', 'fee')]}"/>
+                <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
+                                                'required': [('state', '=', 'fee')], 
+                                                'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
+                                                options="{'no_create_edit': True, 'no_create': True}"/>
             </field>
 
             
@@ -134,8 +141,10 @@
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}"/>
                     <group  attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
-                        <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
-                        <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
+                                        'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
+                                        'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
                     <group string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                           
@@ -219,7 +228,6 @@
         <field name="view_mode">tree,form,graph,pivot</field>
         <field name="search_view_id" ref="application_search"/>
         <field name="context">{'search_default_new_application': 1}</field>
-        <!-- <field name="domain">[('student_type', '=', 'is_new_candidate')]</field>         -->
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student application here.
@@ -237,7 +245,7 @@
                         <field name="major_id" options="{'no_create_edit': True, 'no_create': True}"/>                        
                     </group>
                     <footer>
-                <button name="assign_major" string="Ok" type="object" class="oe_highlight"/>
+                <button name="assign_major" string="Ok" type="object" class="oe_highlight" groups="tup_edu_erp.group_education_aa"/>
                 
                 <button string="Cancel" class="oe_link" special="cancel"/>
             </footer>

@@ -78,6 +78,10 @@ class StudentApplication(models.Model):
                                 ('ab-', 'AB-'), ('ab+', 'AB+')],
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
+
+    # add field for creating student
+    class_id = fields.Many2one('education.class.division', string='Class',
+                               help="Class") 
     
     #modify status 
     state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
@@ -86,7 +90,6 @@ class StudentApplication(models.Model):
     
     #add fields for payment
     #payment_fee = fields.Integer(string='# Payment')
-
     #partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
