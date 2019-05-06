@@ -123,8 +123,8 @@ class EducationClassDivisionHistory(models.Model):
     _rec_name = 'class_id'
 
     # Modify fields name
-    class_id = fields.Many2one('education.class.division', string='Batch',
-                               help="Select the Batch") # rename Class to Batch
+    class_id = fields.Many2one('education.class.division', string='Class',
+                               help="Select the Class") # rename Class to Batch
     #academic_year_id = fields.Many2one('education.academic.year', string='Academic Year',
     #                                   help="Select the Academic Year")
     #student_id = fields.Many2one('education.student', string='Students')
