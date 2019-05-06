@@ -37,14 +37,18 @@ class StudentApplication(models.Model):
                 'state': 'apply'
                 })
         return
+
         
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
         for rec in self:
-            rec.write({
+            if rec.student_type == 'is_new_candidate':
+                rec.write({
                 'state': 'fee'
-            })
+                })
+            else:
+                rec.state = 'approve'
 
     @api.one
     def assign_major(self):
