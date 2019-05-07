@@ -16,10 +16,8 @@
                         ['final'])], 'required': [('school_class_division_wise', 'in', ['final'])]}"/>
                 </field> 
                 <field name="start_date" position="before">  
-                    <field name="pro_year"  attrs="{'invisible': [('school_class_division_wise', 'in', 
-                        ['school'])]}" force_save="1"/>                
-                    <field name="major_id" attrs="{'invisible': [('school_class_division_wise', 'in', 
-                        ['school'])]}" force_save="1"/>
+                    <field name="pro_year"  attrs="{'invisible': [('school_class_division_wise', 'in', ['school'])]}" force_save="1"/>                
+                    <field name="major_id" attrs="{'invisible': [('school_class_division_wise', 'in', ['school'])]}" force_save="1"/>
                 </field>                                        
             </field>
         </record>
