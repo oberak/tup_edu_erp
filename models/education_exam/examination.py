@@ -7,7 +7,7 @@ class EducationExam(models.Model):
     
     division_id = fields.Many2one('education.class.division', string='Class') # Rename Division to Class
     school_class_division_wise = fields.Selection([('division', 'Class')],
-                                                  related='exam_type.school_class_division_wise')           # Remove exam type (Class)
+                                                  related='exam_type.school_class_division_wise')       # Remove exam type (Class)
 
     # add fields
     major_id = fields.Char(string="Major", readonly = True)                    
@@ -23,10 +23,10 @@ class EducationExam(models.Model):
                 rec.major_id = obj.class_id.major_id.name
             return 
 
-      # modify function
+    # modify function
     @api.onchange('class_division_hider')
     def onchange_class_division_hider(self):
-        self.school_class_division_wise = 'division'            #change from 'school' to 'division'
+        self.school_class_division_wise = 'division'            #change :'school' to 'division'
 
 class EducationExamType(models.Model):
     _name = 'education.exam.type'

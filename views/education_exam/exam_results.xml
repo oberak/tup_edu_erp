@@ -78,8 +78,7 @@
                         <filter string="Class" name="group_division_id" context="{'group_by':'division_id'}"/>
                         <filter string="Exam" name="group_exam_id" context="{'group_by':'exam_id'}"/>
                         <filter string="Subject" name="group_subject_id" context="{'group_by':'subject_id'}"/>
-                        <filter string="Academic Year" name="group_academic_year"
-                                context="{'group_by':'academic_year'}"/>
+                        <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
                     </group>
                 </xpath>
             </field>

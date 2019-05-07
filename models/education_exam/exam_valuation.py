@@ -23,7 +23,7 @@ class EducationExamValuation(models.Model):
                 rec.major_id = obj.class_id.major_id.name
             return
 
-    # modify function : add two to outputs (pro_year , major_id)
+    # modify function : add two (pro_year , major_id)
     @api.multi
     def valuation_completed(self):
         self.name = str(self.exam_id.exam_type.name) + '-' + str(self.exam_id.start_date)[0:10] + ' (' + str(
