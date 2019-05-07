@@ -74,6 +74,12 @@
         'views/education_exam/examination.xml',
         'views/education_exam/exam_valuation.xml',
         'views/education_exam/exam_results.xml',
+
+        ## view - education_promotion
+        'views/education_promotion/education_promotion.xml',
+
+
+
     ],
     # only loaded in demonstration mode
     'demo': [
