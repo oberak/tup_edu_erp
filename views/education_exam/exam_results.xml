@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="examination_result_form" model="ir.ui.view">
+            <field name="name">examination_result_form.form</field>
+            <field name="model">education.exam.results</field>
+            <field name="inherit_id" ref="education_exam.examination_result_form"/>
+            <field name="arch" type="xml">
+                <field name="class_id" position="attributes">
+                    <attribute name="required">0</attribute>
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="division_id" position="after">  
+                    <field name="pro_year"/>                
+                    <field name="major_id"/>
+                </field>
+            </field>
+        </record>                  
+        <record id="examination_result_tree" model="ir.ui.view">
+            <field name="name">examination_result_tree.tree</field>
+            <field name="model">education.exam.results</field>
+            <field name="inherit_id" ref="education_exam.examination_result_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='class_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="examination_result_search" model="ir.ui.view">
+            <field name="name">examination_result_search.search</field>            
+            <field name="model">education.exam.results</field>
+            <field name="inherit_id" ref="education_exam.examination_result_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/group" position="before">
+                    <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                </xpath>  
+                <xpath expr="/search/group" position="replace">
+                    <group expand="1" string="Group By">                        
+                        <filter string="Class" name="group_division_id" context="{'group_by':'division_id'}"/>
+                        <filter string="Exam" name="group_exam_id" context="{'group_by':'exam_id'}"/>
+                        <filter string="Academic Year" name="group_academic_year"
+                                context="{'group_by':'academic_year'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="education_exam.act_exam_result_view" model="ir.actions.act_window">
+            <field name="name">Exam Results</field>
+            <field name="res_model">education.exam.results</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>           
+            <field name="context">{'search_default_education.academic.year': 1}</field>
+            <field name="search_view_id" ref="examination_result_search"/>
+        </record>
+       <record id="examination_result_report_tree" model="ir.ui.view">
+            <field name="name">examination_result_report_tree.tree</field>
+            <field name="model">results.subject.line</field>
+            <field name="inherit_id" ref="education_exam.examination_result_report_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='class_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="examination_result_report_search" model="ir.ui.view">
+            <field name="name">examination_result_report_search.search</field>
+            <field name="model">results.subject.line</field>
+            <field name="inherit_id" ref="education_exam.examination_result_report_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/group" position="before">
+                    <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                </xpath>             
+                <xpath expr="/search/group" position="replace">
+                    <group expand="1" string="Group By">                                            
+                        <filter string="Class" name="group_division_id" context="{'group_by':'division_id'}"/>
+                        <filter string="Exam" name="group_exam_id" context="{'group_by':'exam_id'}"/>
+                        <filter string="Subject" name="group_subject_id" context="{'group_by':'subject_id'}"/>
+                        <filter string="Academic Year" name="group_academic_year"
+                                context="{'group_by':'academic_year'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record> 
+        <record id="education_exam.act_exam_result_report_view" model="ir.actions.act_window">
+            <field name="name">Report</field>
+            <field name="res_model">results.subject.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,tree,form</field>
+            <field name="target">current</field>
+            <field name="context">{'search_default_education.academic.year': 1}</field>                   
+            <field name="search_view_id" ref="examination_result_report_search"/>   
+        </record>             
+    </data>
+</odoo>

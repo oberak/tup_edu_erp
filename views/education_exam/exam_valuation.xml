@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="examination_valuation_form" model="ir.ui.view">
+            <field name="name">examination_valuation_form.form</field>
+            <field name="model">education.exam.valuation</field>
+            <field name="inherit_id" ref="education_exam.examination_valuation_form"/>
+            <field name="arch" type="xml">
+                <field name="class_id" position="attributes">                    
+                    <attribute name="invisible">True</attribute>
+                </field> 
+                <field name="division_id" position="after">                    
+                    <field name="pro_year" force_save="1"/>                
+                    <field name="major_id" force_save="1"/>
+                </field>                
+            </field>
+        </record>
+        <record id="examination_valuation_tree" model="ir.ui.view">
+            <field name="name">examination_valuation_tree.tree</field>
+            <field name="model">education.exam.valuation</field>
+            <field name="inherit_id" ref="education_exam.examination_valuation_tree"/>
+            <field name="arch" type="xml">
+                <field name="class_id" position="attributes">                    
+                    <attribute name="invisible">True</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

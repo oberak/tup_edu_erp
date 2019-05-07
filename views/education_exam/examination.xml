@@ -13,8 +13,14 @@
                 <field name="class_id" position="replace">
                     <field name="division_id"
                         attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('school_class_division_wise', 'not in', 
-                        ['class', 'final'])], 'required': [('school_class_division_wise', 'in', ['class', 'final'])]}"/>
-                </field>                                          
+                        ['final'])], 'required': [('school_class_division_wise', 'in', ['final'])]}"/>
+                </field> 
+                <field name="start_date" position="before">  
+                    <field name="pro_year"  attrs="{'invisible': [('school_class_division_wise', 'in', 
+                        ['school'])]}" force_save="1"/>                
+                    <field name="major_id" attrs="{'invisible': [('school_class_division_wise', 'in', 
+                        ['school'])]}" force_save="1"/>
+                </field>                                        
             </field>
         </record>
         <record id="examination_tree" model="ir.ui.view">
@@ -26,6 +32,30 @@
                     <attribute name="invisible">True</attribute>
                 </xpath>
             </field>
+        </record>
+        <!-- add new search view -->
+        <record id="examination_search" model="ir.ui.view">
+            <field name="name">education.examination.search</field>
+            <field name="model">education.exam</field>         
+            <field name="arch" type="xml">
+                <search string="Education Examination">
+                    <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                    
+                    <separator/>
+                        <group expand="1" string="Group By">
+                            <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
+                        </group>
+                </search>
+            </field>
+        </record>
+        <record id="education_exam.act_examination_view" model="ir.actions.act_window">
+            <field name="name">Exam</field>
+            <field name="res_model">education.exam</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_education.academic.year': 1}</field>
+            <field name="search_view_id" ref="examination_search"/>  
+            <!-- <field name="target">current</field> -->
         </record>
     </data>
 </odoo>        

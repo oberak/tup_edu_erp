@@ -70,8 +70,10 @@
         'views/education_time_table/education_time_table.xml',
         'views/education_time_table/timetable_schedule.xml',
         
-        ## view - education_time_table
+        ## view - education_exam
         'views/education_exam/examination.xml',
+        'views/education_exam/exam_valuation.xml',
+        'views/education_exam/exam_results.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
