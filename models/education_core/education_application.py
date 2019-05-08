@@ -50,13 +50,113 @@ class StudentApplication(models.Model):
             else:
                 rec.state = 'approve'
 
+    #This function is triggered when the user clicks on the button 'Assign Major'
     @api.one
-    def assign_major(self):
+    def assign_major(self, vals):
         for rec in self:
-            rec.write({
-                'state': 'major'
-            })
+            vals['major_id']=rec.major_id
+            rec.state='major'
+            self.env['education.application'].update(vals)            
+        return
 
+   #overwriting 'create student' function and assign class to student
+    @api.multi
+    def create_student(self,vals):
+        """Create student from the application and data and return the student"""
+        for rec in self:
+            # automatically assign class to student depends on academic_year and major                      
+            c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
+            class_id = self.env['education.class.division'].search([('class_id', '=', c_id)]).id          
+            vals['class_id']=class_id
+            self.env['education.application'].update(vals['class_id'])
+            if not class_id:
+                raise ValidationError(_('There is no class for this student !! Need to create class first '))           
+         
+            values = {
+                'name': rec.name,
+                'last_name': rec.last_name,
+                'middle_name': rec.middle_name,
+                'application_id': rec.id,
+                'nrc_no': rec.nrc_no,
+                'student_id': rec.student_id,
+                'father_name': rec.father_name,
+                'mother_name': rec.mother_name,
+                'street': rec.street,
+                'street2': rec.street2,
+                'city': rec.city,
+                'state_id': rec.state_id.id,
+                'country_id': rec.country_id.id,
+                'zip': rec.zip,
+                'is_same_address': rec.is_same_address,
+                'per_street': rec.per_street,
+                'per_street2': rec.per_street2,
+                'per_city': rec.per_city,
+                'per_state_id': rec.per_state_id.id,
+                'per_country_id': rec.per_country_id.id,
+                'per_zip': rec.per_zip,
+                'gender': rec.gender,
+                'date_of_birth': rec.date_of_birth,
+                'blood_group': rec.blood_group,
+                'nationality': rec.nationality.id,
+                'email': rec.email,
+                'mobile': rec.mobile,
+                'phone': rec.phone,
+                'image': rec.image,
+                'is_student': True,
+                'religion_id': rec.religion_id.id,                
+                'major_id' : rec.major_id.id,
+                'mother_tongue': rec.mother_tongue.id,              
+                'class_id': class_id,
+                'f_nrc': rec.f_nrc,
+                'f_nationality':rec.f_nationality.id,
+                'f_occupation':rec.f_occupation,
+                'f_religion': rec.f_religion.id,
+                'm_nrc': rec.m_nrc,
+                'm_nationality':rec.m_nationality.id,
+                'm_occupation':rec.m_occupation,
+                'm_religion': rec.m_religion.id,          
+            }            
+            if not rec.is_same_address:
+                pass
+            else:
+                values.update({
+                    'per_street': rec.street,
+                    'per_street2': rec.street2,
+                    'per_city': rec.city,
+                    'per_state_id': rec.state_id.id,
+                    'per_country_id': rec.country_id.id,
+                    'per_zip': rec.zip,
+                })
+
+            student = self.env['education.student'].create(values)
+
+            # add subling infos to the student
+            stu_id= self.env['education.student'].search([])[-1].id
+
+            if rec.sibling_ids:
+                sibling_ids=rec.sibling_ids                
+                for sid in sibling_ids:
+                    self.env['education.student.sibling'].create({
+                        'name' : sid.name,
+                        'nrc_no' : sid.nrc_no,
+                        'occupation' : sid.occupation,
+                        'address' : sid.address,
+                        'student_id' : stu_id,                        
+                    })   
+            
+            rec.write({
+                'state': 'done',
+                'class_id' : class_id
+            })
+            return {
+                'name': _('Student'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'education.student',
+                'type': 'ir.actions.act_window',
+                'res_id': student.id,
+                'context': self.env.context
+            }
    
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
@@ -84,7 +184,7 @@ class StudentApplication(models.Model):
                                 help="Your Blood Group is ")
 
     # add field for creating student
-    class_id = fields.Many2one('education.class.division', string='Class',help="Class") 
+    class_id = fields.Many2one('education.class.division', string='Class')
     
     #modify status 
     state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
