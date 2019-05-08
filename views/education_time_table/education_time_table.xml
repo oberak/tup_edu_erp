@@ -152,11 +152,11 @@
             <field name="arch" type="xml">
                 <search string="Education Timetable">
                     <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
-                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                     
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                                       
                     <separator/>
-                        <group expand="1" string="Group By">
-                            <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
-                        </group>
+                    <group expand="1" string="Group By">
+                        <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>                              
+                    </group>
                 </search>
             </field>
         </record>
@@ -206,8 +206,11 @@
             <field name="inherit_id" ref="education_time_table.education_time_table_tree"/>
             <field name="arch" type="xml">
                 <field name="academic_year" position="before">                    
-                    <field name="semester"/>                    
-                </field>   
+                    <field name="semester"/>                                 
+                </field>
+                 <field name="academic_year" position="after">                    
+                    <field name="state"/>                    
+                </field>      
             </field>
         </record> 
         <record id="education_time_table.action_education_time_table" model="ir.actions.act_window">
@@ -223,6 +226,6 @@
             id="education_time_table.education_time_table_main_menu"            
             sequence="3"
             name="Timetable"/>
-        
+            
     </data>
 </odoo>
