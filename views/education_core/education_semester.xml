@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_education_semester_tree" model="ir.ui.view">
+        <field name="name">education.semester.tree</field>
+        <field name="model">education.semester</field>
+        <field name="arch" type="xml">
+            <tree string="Semester">
+                <field name="semester"/>
+                <!-- <field name="seme_code"/> -->
+                <field name="seme_start_date"/>
+                <field name="seme_end_date"/>
+                <field name="academic_year"/>       
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_education_semester_form" model="ir.ui.view">
+        <field name="name">education.semester.form</field>
+        <field name="model">education.semester</field>
+        <field name="arch" type="xml">
+            <form string="Semester">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                        </div>
+                    <group>
+                        <group>
+                            <field name="semester"/>
+                            <field name="academic_year"/>                           
+                            <!-- <field name="sequence"/> -->
+                        </group>
+                        <group>
+                            <!-- <field name="seme_code"/> -->
+                            <field name="seme_start_date"/>
+                            <field name="seme_end_date"/>                           
+                        </group>
+                        <field name="seme_description" placeholder="Enter the description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> 
+    <record id="education_semester_search" model="ir.ui.view">
+            <field name="name">education.semester.search</field>
+            <field name="model">education.semester</field>         
+            <field name="arch" type="xml">
+                <search string="Education Semester">
+                    <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Current Semester" name="education.semester" domain="[('seme_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('seme_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                    
+                    <separator/>
+                        <group expand="1" string="Group By">
+                            <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
+                        </group>
+                </search>
+            </field>
+    </record>
+    <record id="action_education_semester" model="ir.actions.act_window">
+        <field name="name">Semester</field>
+        <field name="res_model">education.semester</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_education.academic.year': 1, 'search_default_education.semester': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first semester here.
+            </p>
+        </field>
+    </record> 
+
+    <menuitem action="action_education_semester" parent="education_core.menu_education_main_menu"
+              id="menu_action_education_semester" sequence="3"/> 
+
+</odoo>

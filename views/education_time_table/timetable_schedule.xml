@@ -18,6 +18,9 @@
             <field name="model">education.timetable.schedule</field>
             <field name="inherit_id" ref="education_time_table.education_time_table_schedule_tree"/>
             <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath> 
                 <field name="time_from" position="replace">
                     <field name="time_from" widget="float_time" class="oe_inline"/>
                 </field>

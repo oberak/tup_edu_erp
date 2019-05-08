@@ -62,6 +62,7 @@
         'views/education_core/education_syllabus.xml',
         'views/education_core/education_academic_year.xml',
         'views/education_core/education_student.xml',
+        'views/education_core/education_semester.xml',
         
 
         'reports/student_application_report.xml',
@@ -70,8 +71,16 @@
         'views/education_time_table/education_time_table.xml',
         'views/education_time_table/timetable_schedule.xml',
         
-        ## view - education_time_table
+        ## view - education_exam
         'views/education_exam/examination.xml',
+        'views/education_exam/exam_valuation.xml',
+        'views/education_exam/exam_results.xml',
+
+        ## view - education_promotion
+        'views/education_promotion/education_promotion.xml',
+
+
+
     ],
     # only loaded in demonstration mode
     'demo': [

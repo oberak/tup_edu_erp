@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tupeducation_promotion_form" model="ir.ui.view">
+            <field name="name">tupeducation.promotion.form</field>
+            <field name="model">education.promotion</field>
+            <field name="inherit_id" ref="education_promotion.education_promotion_form"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="/form/sheet/notebook" position="inside">
+                <page string="Class History">
+                            <field name="class_history_ids">
+                                <tree editable="bottom">
+                                    <field name="class_id" required="1"/>
+                                    <field name="academic_year_id" required="1"/>
+                                </tree>
+                            </field>
+                </page>
+
+             </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+   
