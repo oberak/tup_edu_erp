@@ -10,16 +10,19 @@
             <xpath expr="//field[@name='last_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
-            
+
+            <xpath expr="//field[@name='sec_lang']" position="replace">
+                <field name="nrc_no" readonly="1" />
+            </xpath>
+
+            <xpath expr="//field[@name='medium']" position="replace">
+                <field name="major_id" readonly="1" />
+            </xpath>           
            
             <field name="ad_no" position="replace">
                 <field name="student_id" />
             </field> 
-        
-            <xpath expr="/form/sheet/notebook/page[1]/group[1]/group[2]" position="inside">
-                <field name="major_id"/>
-            </xpath> 
-
+    
 
 
             <xpath expr="/form/sheet/notebook" position="inside">

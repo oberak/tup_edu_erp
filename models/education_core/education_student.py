@@ -6,8 +6,12 @@ class EducationStudent(models.Model):
     _inherit = 'education.student'
     _description = 'Student Form'
 
-    #modify fields
 
+    #add field 
+    nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+
+
+    #modify fields
     medium = fields.Many2one('education.medium', string="Medium", required=False)
     sec_lang = fields.Many2one('education.subject', string="Second language", required=False, domain=[('is_language', '=', True)])
     mother_tongue = fields.Many2one('education.mother.tongue', string="Mother Tongue", required=False, domain=[('is_language', '=', True)])
@@ -39,10 +43,7 @@ class EducationStudentSiblings(models.Model):
     nrc_no = fields.Char(string='Sibling NRC Number', help="Enter Sibling NRC Number")
     occupation = fields.Char(string='Sibling Occupation',  help="Enter Sibling Occupation ")
     address = fields.Char(string='Address',  help="Enter Sibling Address")
-    student_id = fields.Many2one('education.application', string='Student')    
+    student_id = fields.Many2one('education.student', string='Student')    
   
 
-    # _sql_constraints = [
-    #     ('student_id', 'unique(student_id)', "Another Student already exists with this student_id number!"),
-    # ]
-   
+    
