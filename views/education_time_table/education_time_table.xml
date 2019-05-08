@@ -20,7 +20,10 @@
                 </field>
                 <field name="academic_year" position="attributes">
                     <attribute name="invisible">True</attribute>
-                </field>                 
+                </field> 
+                <field name="class_division" position="after">                    
+                    <field name="semester" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                    
+                </field>                                 
                 <xpath expr="//page[1]" position="replace">
                     <page string="Monday">
                         <field name="timetable_mon" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 0)]"  context="{'default_week_day': '0'} ">
@@ -149,7 +152,7 @@
             <field name="arch" type="xml">
                 <search string="Education Timetable">
                     <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
-                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                    
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                     
                     <separator/>
                         <group expand="1" string="Group By">
                             <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
@@ -165,7 +168,8 @@
                 <kanban class="tup_education_timetable_kanban">
                     <field name="id"/>                
                     <field name="academic_year"/>
-                    <field name="class_division"/>                              
+                    <field name="class_division"/>
+                    <field name="semester"/>                                  
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_res_partner_kanban">
@@ -184,7 +188,10 @@
                                         </li>
                                         <li t-if="record.class_division.raw_value">
                                             Class : <field name="class_division"/>
-                                        </li>                                     
+                                        </li>
+                                        <li t-if="record.semester.raw_value">
+                                            Semester : <field name="semester"/>
+                                        </li>                                      
                                     </ul>
                                 </div>
                             </div>
@@ -192,8 +199,17 @@
                     </templates>
                 </kanban>
             </field>
-        </record>         
-
+        </record>   
+        <record id="education_time_table_tree" model="ir.ui.view">
+            <field name="name">education.timetable.tree</field>
+            <field name="model">education.timetable</field>
+            <field name="inherit_id" ref="education_time_table.education_time_table_tree"/>
+            <field name="arch" type="xml">
+                <field name="academic_year" position="before">                    
+                    <field name="semester"/>                    
+                </field>   
+            </field>
+        </record> 
         <record id="education_time_table.action_education_time_table" model="ir.actions.act_window">
             <field name="name">Education Timetable</field>
             <field name="res_model">education.timetable</field>
