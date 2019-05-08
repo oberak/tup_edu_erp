@@ -11,11 +11,12 @@ class EducationTimeTable(models.Model):
     # add fields
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
                              default='draft')
+    semester = fields.Selection([('seme1', '1st Semester'), ('seme2', '2nd Semester')], default='seme1')                         
 
     def get_name(self):
         """To generate name for the model"""
         for i in self:
-            i.name = str(i.class_division.name) + "/" + str(i.academic_year.name)
+            i.name = str(i.class_division.name) + "(" + str(i.academic_year.name) +")"
 
     @api.onchange('period_id')
     def onchange_period_id(self):
