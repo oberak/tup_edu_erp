@@ -241,6 +241,7 @@
     </record>
 
     <!-- add wizard view for assign major-->
+    <!-- 'Assign Major' Action on Assign Major list  -->
     <record model="ir.ui.view" id="wizard_form_view">
             <field name="name">wizard.form</field>
             <field name="model">education.major_assign</field>
