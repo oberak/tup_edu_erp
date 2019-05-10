@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
-    _order = 'total_marks desc'
+    #_order = 'total_marks desc'
     #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
@@ -18,7 +18,6 @@ class StudentApplication(models.Model):
                 rec.state= 'apply'
                 # print(rec.state)
             return
-
    
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
@@ -37,7 +36,6 @@ class StudentApplication(models.Model):
                 'state': 'apply'
                 })
         return
-
         
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
@@ -64,14 +62,24 @@ class StudentApplication(models.Model):
     def create_student(self,vals):
         """Create student from the application and data and return the student"""
         for rec in self:
-            # automatically assign class to student depends on academic_year and major                      
-            c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
-            class_id = self.env['education.class.division'].search([('class_id', '=', c_id)]).id          
+            #add student ID automatically 
+            sid = 5578 + rec.id            
+            sid = str(sid)
+            rec.student_id='ptntu - 00'+sid  
+
+            # automatically assign class to student depends on academic_year and major , (for transfer in) division_id
+            if rec.student_type == 'is_new_candidate':
+                c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
+                class_id = self.env['education.class.division'].search([('class_id', '=', c_id)]).id
+            else :
+                c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
+                class_id = self.env['education.class.division'].search(['&',('class_id', '=', c_id),('division_id', '=', rec.division_id.id)]).id
+
             vals['class_id']=class_id
             self.env['education.application'].update(vals['class_id'])
             if not class_id:
-                raise ValidationError(_('There is no class for this student !! Need to create class first '))           
-         
+                raise ValidationError(_('There is no class for this student !! Need to create class first '))         
+           
             values = {
                 'name': rec.name,
                 'last_name': rec.last_name,
@@ -132,7 +140,6 @@ class StudentApplication(models.Model):
 
             # add subling infos to the student
             stu_id= self.env['education.student'].search([])[-1].id
-
             if rec.sibling_ids:
                 sibling_ids=rec.sibling_ids                
                 for sid in sibling_ids:
@@ -200,24 +207,24 @@ class StudentApplication(models.Model):
     student_type=fields.Selection([('is_new_candidate','New Candidate'),('transfer_in','Transfer In Student')], default='is_new_candidate',required=True)
     
      #add fields to transfer in student
-    major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)], help="Select the Promote Major")
-    division_id = fields.Many2one('education.division', string='Promote Program Year', help="Select the promote Program Year")
+    major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)], help="Select the Major")
+    division_id = fields.Many2one('education.division', string='Program Year', help="Select the Program Year")
     
     #add fields for new candidate
     first_choice = fields.Many2one('hr.department', string="First Choice",
-                             domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                             domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
     second_choice = fields.Many2one('hr.department', string="Second Choice",
-                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
     third_choice = fields.Many2one('hr.department', string="Third Choice",
-                             domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                             domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
     forth_choice = fields.Many2one('hr.department', string="Forth Choice",
-                           domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                           domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
     fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
-                            domain=[('can_enroll', '=', True) and ('is_major', '=', True)],
+                            domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
     student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
@@ -231,9 +238,9 @@ class StudentApplication(models.Model):
     f_nrc = fields.Char(string='Father NRC Number',  help="Enter Father NRC Number")
     m_nrc = fields.Char(string='Mother NRC Number',  help="Enter Mother NRC Number")
     f_nationality = fields.Many2one('res.country', string='Father Nationality', ondelete='restrict',
-                                  help="Select the Father Nationality")
+                                  help="Select the Father Nationality" , default=145)
     m_nationality = fields.Many2one('res.country', string='Mother Nationality', ondelete='restrict',
-                                  help="Select the Mother Nationality")
+                                  help="Select the Mother Nationality", default=145)
     f_occupation = fields.Char(string='Father Occupation',  help="Enter Father Occupation ")
     m_occupation = fields.Char(string='Mother Occupation', help="Enter Mother Occupation")
     f_religion = fields.Many2one('religion.religion', string="Father Religion", help="My Father Religion is ")

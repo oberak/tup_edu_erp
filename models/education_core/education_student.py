@@ -7,8 +7,14 @@ class EducationStudent(models.Model):
     _description = 'Student Form'
 
 
+   
     #add field 
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+    student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
+    major_id = fields.Many2one('hr.department', string="Major",
+                            required=True, domain=[('is_major', '=', True)],
+                            help="Choose Major")
+    sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
 
 
     #modify fields
@@ -27,14 +33,6 @@ class EducationStudent(models.Model):
     m_occupation = fields.Char(string='Mother Occupation', help="Enter Mother Occupation")
     f_religion = fields.Many2one('religion.religion', string="Father Religion", help="My Father Religion is ")
     m_religion = fields.Many2one('religion.religion', string="Mother Religion", help="My Mother Religion is ") 
-    sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
-
-
-    major_id = fields.Many2one('hr.department', string="Major",
-                            required=True, domain=[('is_major', '=', True)],
-                            help="Choose Major")
-    student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
-    ad_no = fields.Char(string="Admission Number", readonly=True)
 
 class EducationStudentSiblings(models.Model):
     _name = 'education.student.sibling'

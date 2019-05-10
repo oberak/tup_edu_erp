@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-     
+<odoo>     
     <record id="view_tupeducation_student_form" model="ir.ui.view">
         <field name="name">tupeducation.student.form</field>
         <field name="model">education.student</field>
         <field name="inherit_id" ref="education_core.view_education_student_form"/>
         <field name="arch" type="xml">
-
+            <xpath expr="//div[@class='oe_title']/h3" position="replace">
+                <h3>
+                    <field name="student_id" readonly="1" />
+                </h3>
+            </xpath>
             <xpath expr="//field[@name='last_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
-
             <xpath expr="//field[@name='sec_lang']" position="replace">
                 <field name="nrc_no" readonly="1" />
             </xpath>
-
-            <xpath expr="//field[@name='medium']" position="replace">
+             <field name="medium" position="replace">
                 <field name="major_id" readonly="1" />
-            </xpath>           
-           
-            <field name="ad_no" position="replace">
-                <field name="student_id" />
-            </field> 
-    
-
-
+            </field>
+            <field name="class_id" position="replace">
+                <field name="class_id" readonly="1" />
+            </field>
+            <field name="caste_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>           
+            <field name="guardian_name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>            
             <xpath expr="/form/sheet/notebook" position="inside">
-            <page string="Parent's Info">                           
-            
+            <page string="Parent's Info">                       
                 <group>
                     <group>
                         <field name="f_nrc" />
@@ -42,9 +44,7 @@
                         <field name="m_religion" />
                     </group>
                 </group>                         
-            </page>
-           
-
+            </page>    
             <page string="Siblings Info">
                     <field name="sibling_ids" nolabel="1">
                         <tree string="Siblings Info" editable="bottom">
@@ -58,5 +58,6 @@
             </xpath>
         </field>
     </record>
+   
 
 </odoo>

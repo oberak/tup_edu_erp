@@ -125,7 +125,7 @@
             </field>
 
             <field name="company_id" position="replace">
-                <field name="class_id" attrs="{'readonly': [('state', '=', 'done')],
+                <field name="class_id" attrs="{'readonly': [('state','in' , ['approve','done'])],
                                                 'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
@@ -142,23 +142,22 @@
             </field>
 
             <xpath expr="/form/sheet/group[1]" position="after">
-                <field name="student_type" widget="radio"  options="{'horizontal':true}"/>
-                    <group  attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
+                <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
+                    <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
                         <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
-                    <group string="Apply Major" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                           
-                        <field name="student_id" attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>                                      
-                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
-                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>   
+                    <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                         
+                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
+                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
                         
                     </group>
                         
@@ -203,8 +202,7 @@
         <field name="name">Student Application</field>
         <field name="model">education.application</field>
         <field name="inherit_id" ref="education_core.application_search"/>    
-        <field name="arch" type="xml">
-           
+        <field name="arch" type="xml">           
             <xpath expr="//filter[@name='new_application']" position="before">               
                     <filter string="Major" name="major" domain="[]"/> 
                     <separator/>
@@ -220,6 +218,8 @@
                     <separator/>
                     <filter string="New Candidate" name="new_candidate" domain="[('student_type','=','is_new_candidate')]"/>
                     <separator/>
+                    <filter string="Transfer In Student" name="transfer_in" domain="[('student_type','=','transfer_in')]"/>
+                    <separator/>
             </xpath>
         </field>
     </record> 
@@ -231,8 +231,8 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,graph,pivot</field>
-        <field name="search_view_id" ref="application_search"/>
-        <field name="context">{'search_default_new_candidate': 1}</field>
+        <field name="search_view_id" ref="application_search"/>        
+        <field name="context">{'search_default_new_candidate': 1}</field>       
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student application here.
