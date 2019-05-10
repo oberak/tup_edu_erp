@@ -58,6 +58,34 @@
             </xpath>
         </field>
     </record>
+
+    <record id="student_search" model="ir.ui.view">
+        <field name="name">Students</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="education_core.student_search"/>
+        <field name="arch" type="xml">
+        <xpath expr="//search" position="inside"> 
+            <filter string="Major" name="major" domain="[]"/> 
+                <separator/>
+                <filter string="Civil Engineering" name="major_ce" domain="[('major_id.major_code','=', 'CE')]"/>
+                <filter string="Electronic Engineering" name="major_ee" domain="[('major_id.major_code','=', 'EE')]"/>
+                <filter string="Electrical Power Engineering" name="major_ep" domain="[('major_id.major_code','=', 'EP')]"/>
+                <filter string="Information Technology" name="major_it" domain="[('major_id.major_code','=', 'IT')]"/>
+                <filter string="Mechanical Engineering" name="major_me" domain="[('major_id.major_code','=', 'ME')]"/>
+                <filter string="Mechatronic Engineering" name="major_mc" domain="[('major_id.major_code','=', 'MC')]"/> 
+            <separator/>
+            <filter string="Program Year" name="program_year" domain="[]"/> 
+                <separator/>
+                <filter string="1BE" name="py_1be" domain="[('class_id.division_id.name','=', '1BE')]"/>
+                <filter string="2BE" name="py_2be" domain="[('class_id.division_id.name','=', '2BE')]"/>
+                <filter string="3BE" name="py_3be" domain="[('class_id.division_id.name','=', '3BE')]"/>
+                <filter string="4BE" name="py_4be" domain="[('class_id.division_id.name','=', '4BE')]"/>
+                <filter string="5BE" name="py_5be" domain="[('class_id.division_id.name','=', '5BE')]"/>
+                <filter string="6BE" name="py_6be" domain="[('class_id.division_id.name','=', '6BE')]"/> 
+            <separator/>
+        </xpath> 
+        </field>
+    </record>
    
 
 </odoo>
