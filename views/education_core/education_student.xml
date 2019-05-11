@@ -117,4 +117,59 @@
         </xpath>
         </field>
     </record>
+    <record id="ir_actions_server_transfer_out" model="ir.actions.server">
+        <field name="name">Transfer Out</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.transfer_out()
+        </field>
+        <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record> 
+    <record id="ir_actions_server_drop_off" model="ir.actions.server">
+        <field name="name">Drop Off</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.drop_off()
+        </field>
+        <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record>
+    <record id="ir_actions_server_leave" model="ir.actions.server">
+        <field name="name">Leave</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.leave()
+        </field>
+        <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record>
+    <record id="ir_actions_server_expel" model="ir.actions.server">
+        <field name="name">Expel</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.expel()
+        </field>
+        <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record>
+    <record id="ir_actions_server_graduate" model="ir.actions.server">
+        <field name="name">Graduate</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.graduate()
+        </field>
+        <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record>
 </odoo>

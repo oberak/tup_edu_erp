@@ -5,6 +5,57 @@ class EducationStudent(models.Model):
     _name = 'education.student'
     _inherit = 'education.student'
     _description = 'Student Form'
+
+    #action for drop_off student
+    @api.multi
+    def drop_off(self):
+        active_ids = self.ids
+        for sid in active_ids:            
+            s_id = self.env['education.student'].browse(sid)
+            s_id.state = "drop_off"
+            print(s_id.state)           
+        return 
+
+    #action for transfer_out student
+    @api.multi
+    def transfer_out(self):
+        active_ids = self.ids
+        for sid in active_ids:            
+            s_id = self.env['education.student'].browse(sid)
+            s_id.state = "transfer_out"
+            print(s_id.state)           
+        return 
+    
+    #action for leave student
+    @api.multi
+    def leave(self):
+        active_ids = self.ids
+        for sid in active_ids:            
+            s_id = self.env['education.student'].browse(sid)
+            s_id.state = "leave"
+            print(s_id.state)           
+        return 
+    
+    #action for expel student
+    @api.multi
+    def expel(self):
+        active_ids = self.ids
+        for sid in active_ids:            
+            s_id = self.env['education.student'].browse(sid)
+            s_id.state = "expel"
+            print(s_id.state)           
+        return 
+    
+    #action for graduate student
+    @api.multi
+    def graduate(self):
+        active_ids = self.ids
+        for sid in active_ids:            
+            s_id = self.env['education.student'].browse(sid)
+            s_id.state = "graduate"
+            print(s_id.state)           
+        return 
+
    
     #add field 
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
