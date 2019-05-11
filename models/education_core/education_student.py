@@ -55,7 +55,6 @@ class EducationStudent(models.Model):
             s_id.state = "graduate"
             print(s_id.state)           
         return 
-
    
     #add field 
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
