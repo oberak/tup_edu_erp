@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>     
+<odoo>
+     <record id="view_education_student_tree" model="ir.ui.view">
+        <field name="name">education.student.tree</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="education_core.view_education_student_tree"/>
+        <field name="arch" type="xml">
+            
+            <field name="ad_no" position="replace">
+                <field name="student_id" readonly="1" />
+            </field>
+            <field name="last_name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field> 
+            
+        </field>
+    </record>
     <record id="view_tupeducation_student_form" model="ir.ui.view">
         <field name="name">tupeducation.student.form</field>
         <field name="model">education.student</field>
         <field name="inherit_id" ref="education_core.view_education_student_form"/>
         <field name="arch" type="xml">
+        <!-- Add status for the state of student-->
+            <xpath expr="/form/sheet" position="before">
+                <header>                                      
+                    <field name="state" readonly="1" widget="statusbar"/>
+                </header>
+            </xpath> 
             <xpath expr="//div[@class='oe_title']/h3" position="replace">
                 <h3>
                     <field name="student_id" readonly="1" />
@@ -82,10 +103,18 @@
                 <filter string="4BE" name="py_4be" domain="[('class_id.division_id.name','=', '4BE')]"/>
                 <filter string="5BE" name="py_5be" domain="[('class_id.division_id.name','=', '5BE')]"/>
                 <filter string="6BE" name="py_6be" domain="[('class_id.division_id.name','=', '6BE')]"/> 
-            <separator/>
-        </xpath> 
+            <separator/>           
+        </xpath>
+        <xpath expr="//search/group" position="replace">
+         <group expand='0' string='Group by...'>
+                    <filter string='Class' icon="fa-user" domain="[]" context="{'group_by' : 'class_id'}"/>
+                    <filter string='Gender' icon="fa-genderless" domain="[]" context="{'group_by' : 'gender'}"/>
+                    <filter string='Medium' invisible="1" icon="fa-medium" domain="[]" context="{'group_by' : 'medium'}"/>
+                    <filter string='Religion' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religion_id'}"/>
+                    <filter string='Caste' invisible="1" icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'caste_id'}"/>
+                    <filter string='Mother Tongue' invisible="1" icon="fa fa-language" domain="[]" context="{'group_by' : 'mother_tongue'}"/>
+               </group> 
+        </xpath>
         </field>
     </record>
-   
-
 </odoo>

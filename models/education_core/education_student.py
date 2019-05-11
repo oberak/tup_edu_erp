@@ -5,8 +5,6 @@ class EducationStudent(models.Model):
     _name = 'education.student'
     _inherit = 'education.student'
     _description = 'Student Form'
-
-
    
     #add field 
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
@@ -15,6 +13,9 @@ class EducationStudent(models.Model):
                             required=True, domain=[('is_major', '=', True)],
                             help="Choose Major")
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
+    #add status about the state of student    
+    state = fields.Selection([('in_school', 'In School'),('transfer_out', 'Transfer Out'), ('leave', 'Leave'),('expel', 'expel'),('drop_off', 'Drop Off'),('graduate', 'Graduate')],
+                             string='State', default='in_school', track_visibility='onchange')
 
 
     #modify fields
@@ -41,7 +42,9 @@ class EducationStudentSiblings(models.Model):
     nrc_no = fields.Char(string='Sibling NRC Number', help="Enter Sibling NRC Number")
     occupation = fields.Char(string='Sibling Occupation',  help="Enter Sibling Occupation ")
     address = fields.Char(string='Address',  help="Enter Sibling Address")
-    student_id = fields.Many2one('education.student', string='Student')    
+    student_id = fields.Many2one('education.student', string='Student')
+
+
   
 
     
