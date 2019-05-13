@@ -30,20 +30,19 @@ class EducationStudentsAttendance(models.Model):
         # find timetable using class & semester
         this_semester = self.env['education.semester']._get_current_semester()
         wod = self.week_day[0:3].lower()
-        print(this_semester, this_semester.id,  wod)
-        
-        if this_semester:
-            timetable = self.env['education.timetable'].search([('semester', '=', this_semester.id)])
-            subject_list = []
-            if timetable:
-                for tt_s in eval('timetable.timetable_'+wod):
-                    subject_list.append(tt_s.subject.id)
-            vals = {
-                'domain': {
-                    'subject': [('id', 'in', subject_list)]
+        for record in self:
+            if this_semester and record.class_division:
+                timetable = self.env['education.timetable'].search([('semester', '=', this_semester.id), ('class_division', '=', record.class_division.id)])
+                subject_list = []
+                if timetable:
+                    for tt_s in eval('timetable.timetable_'+wod):
+                        subject_list.append(tt_s.subject.id)
+                vals = {
+                    'domain': {
+                        'subject': [('id', 'in', subject_list)]
+                    }
                 }
-            }
-            return vals
+                return vals
 
     # get_week day from date
     @api.onchange('date')
