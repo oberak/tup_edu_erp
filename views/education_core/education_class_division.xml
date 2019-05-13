@@ -6,8 +6,8 @@
         <field name="model">education.class.division</field>         
         <field name="arch" type="xml">
             <search string="Class">
-                <filter string="This Academic Year" name="this_ay" domain="[('class_id.ay_id.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
-                        ('class_id.ay_id.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
+                <filter string="This Academic Year" name="this_ay" domain="[('academic_year_id.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                        ('academic_year_id.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
                 <separator/>
                 <filter string="Civil Engineering" name="major_ce" domain="[('class_id.major_id.major_code','=', 'CE')]"/>
                 <filter string="Electronic Engineering" name="major_ee" domain="[('class_id.major_id.major_code','=', 'EE')]"/>
@@ -26,9 +26,6 @@
         <field name="arch" type="xml">
             <field name="promote_class" position="replace">
                 <field name="promote_class" invisible="True"/>
-            </field>
-            <field name="academic_year_id" position="attributes">
-                <attribute name="invisible">True</attribute>
             </field>
         </field>
     </record>
