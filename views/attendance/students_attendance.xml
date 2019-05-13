@@ -23,13 +23,13 @@
                         </group>
                         <group>
                             <group>
-                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" />
-                                <field name="week_day" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" readonly="1" />
                                 <field name="class_division" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" />
                                 <field name="subject" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" />
                                 <field name="academic_year" invisible="1" />
                             </group>
                             <group>
+                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="week_day" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" readonly="1" />
                                 <field name="attendance_created" invisible="1" />
                             </group>
                         </group>
