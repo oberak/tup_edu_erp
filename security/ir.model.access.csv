@@ -1,4 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-a_hr_department_t,access.hr.department,hr.model_hr_department,group_education_teacher,1,0,0,0
+a_education_application_sibling_s,access.education.application.sibling,model_education_application_sibling,group_education_student,1,1,0,0
+a_education_application_sibling_dc,access.education.application.sibling,model_education_application_sibling,group_education_teacher_dc,1,0,0,0
+a_education_application_sibling_fs,access.education.application.sibling,model_education_application_sibling,group_education_fs,1,0,0,0
+a_education_application_sibling_aa,access.education.application.sibling,model_education_application_sibling,group_education_aa,1,1,1,0
+a_education_application_sibling_haa,access.education.application.sibling,model_education_application_sibling,group_education_haa,1,1,1,1
 
-a_religion_caste_s,access.religion.caste,education_core.model_religion_caste,group_education_student,1,0,0,0
+a_hr_department_t,access.hr.department,hr.model_hr_department,group_education_teacher,1,0,0,0
