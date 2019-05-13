@@ -8,7 +8,8 @@ class EducationStudentsAttendance(models.Model):
 
     name = fields.Char(compute='get_name', string='Attendance Sheet Name', default='New')
     # class_id = fields.Many2one('education.class', string='Class')
-    class_division = fields.Many2one('education.class.division', string='Class', required=True)
+    class_division = fields.Many2one('education.class.division', string='Class', required=True, 
+        domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
     date = fields.Date(string='Date', default=fields.Date.today, required=True)
     attendance_line = fields.One2many('education.attendances.line', 'attendance_id', string='Attendance Line')
     attendance_created = fields.Boolean(string='Attendance Created')
@@ -24,29 +25,24 @@ class EducationStudentsAttendance(models.Model):
     # application_id = fields.Many2one('education.application', string='Application No',
                                     #  domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
 
-    @api.onchange('week_day')
-    def _get_class(self):
-        print("hi>...........................................")
-        for item in self:
-            print(item.week_day)
-            obj = self.env['education.timetable'].search([( 'company_id', '=', '0')])
-            if obj:
-                print("hi>...........................................")
-                #item.class_division=obj.class_division.name 
-            return
-
-    # get_subject from timetable class
-    @api.onchange('class_division')
-    def onchange_class_division(self):
-        for item in self:
-            print(item.class_division)
-            obj = self.env['education.timetable.schedule'].search([('class_division', '=', item.class_division.name)])
-            if obj:
-                print("hello -----------------------class")
-            # if self.env['education.timetable.schedule'].search([('class_division', '=', rec.class_division.name)]):
-                # obj = self.env['education.timetable.schedule'].browse(self.class_division.id)
-                # rec.subject = obj.subject.name
-            return
+    @api.onchange('class_division', 'date')
+    def _onchange_class(self):
+        # find timetable using class & semester
+        this_semester = self.env['education.semester']._get_current_semester()
+        wod = self.week_day[0:3].lower()
+        for record in self:
+            if this_semester and record.class_division:
+                timetable = self.env['education.timetable'].search([('semester', '=', this_semester.id), ('class_division', '=', record.class_division.id)])
+                subject_list = []
+                if timetable:
+                    for tt_s in eval('timetable.timetable_'+wod):
+                        subject_list.append(tt_s.subject.id)
+                vals = {
+                    'domain': {
+                        'subject': [('id', 'in', subject_list)]
+                    }
+                }
+                return vals
 
     # get_week day from date
     @api.onchange('date')
