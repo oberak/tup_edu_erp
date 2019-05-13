@@ -11,7 +11,7 @@ class EducationTimeTable(models.Model):
     # add fields
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
                              default='draft')
-    semester = fields.Selection([('seme1', '1st Semester'), ('seme2', '2nd Semester')], default='seme1')                         
+    semester = fields.Many2one('education.semester', string="Semester")
 
     def get_name(self):
         """To generate name for the model"""
