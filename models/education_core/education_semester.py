@@ -2,6 +2,7 @@
 
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 class EducationSemester(models.Model):
     _name = 'education.semester'
@@ -25,4 +26,10 @@ class EducationSemester(models.Model):
             if rec.seme_start_date >= rec.seme_end_date:
                 raise ValidationError(_('Start date must be Anterior to End date'))
     
-    
+    @api.model
+    def _get_current_semester(self):
+        domain = [
+            ('seme_start_date', '<=', datetime.now().strftime('%Y-%m-%d')),
+            ('seme_end_date', '>=', datetime.now().strftime('%Y-%m-%d')),
+        ]
+        return self.search(domain, limit=1)
