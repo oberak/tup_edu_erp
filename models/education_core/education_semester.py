@@ -9,7 +9,8 @@ class EducationSemester(models.Model):
     _description = 'Semester'
 
     active = fields.Boolean('Active', default=True)
-    semester = fields.Selection([('seme1', '1st Semester'), ('seme2', '2nd Semester')], default='seme1')
+    name = fields.Char(compute='get_name')
+    semester = fields.Selection([('1st Semester', '1st Semester'), ('2nd Semester', '2nd Semester')], default='seme1')
     seme_start_date = fields.Date(string='Start date', required=True, help='Starting date of semester')
     seme_end_date = fields.Date(string='End date', required=True, help='Ending of semester')
     seme_description = fields.Text(string='Description', help="Description about the semester")
@@ -18,6 +19,11 @@ class EducationSemester(models.Model):
     # seme_code = fields.Char(string='Code', required=True, help='Code of semester')
     # sequence = fields.Integer(string='Sequence', required=True)
 
+    def get_name(self):
+        """To generate name for the model"""
+        for i in self:
+            i.name = str(i.semester) + "(" + str(i.academic_year.name) +")"
+    
     @api.constrains('seme_start_date', 'seme_end_date')
     def validate_date(self):
         """Checking the start and end dates of the syllabus,

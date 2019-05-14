@@ -5,6 +5,7 @@
         <field name="model">education.semester</field>
         <field name="arch" type="xml">
             <tree string="Semester">
+                <field name="name"/>
                 <field name="semester"/>
                 <!-- <field name="seme_code"/> -->
                 <field name="seme_start_date"/>
@@ -29,6 +30,7 @@
                         </div>
                     <group>
                         <group>
+                            <field name="name"/>
                             <field name="semester"/>
                             <field name="academic_year"/>                           
                             <!-- <field name="sequence"/> -->
