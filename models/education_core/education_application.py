@@ -41,6 +41,17 @@ class StudentApplication(models.Model):
     @api.one
     def paid_fee(self):
         for rec in self:
+            values = {
+                'name': rec.name,
+                'street': rec.street,
+                'street2': rec.street2,
+                'email': rec.email,
+                'mobile': rec.mobile,
+                'phone': rec.phone,
+            }
+            partner = self.env['res.partner'].create(values)
+            rec.partner_id = partner.id
+            # TODO: move this logic to payment
             if rec.student_type == 'is_new_candidate':
                 rec.write({
                 'state': 'fee'
@@ -200,7 +211,7 @@ class StudentApplication(models.Model):
     
     #add fields for payment
     #payment_fee = fields.Integer(string='# Payment')
-    #partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
+    partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
     #add field to check student type
