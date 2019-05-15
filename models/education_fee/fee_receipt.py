@@ -11,9 +11,10 @@ class FeeReceipts(models.Model):
     student_id = fields.Many2one('education.student', string='Student ID') # Admission No to Student ID
 
     # add fields
-    # TODO remove 'draft' status
+    # TODO: check duplacated invoice with A.Y when create
     application_id = fields.Many2one('education.application', string='Application No',
-                                     domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
+                                     domain="[('state', '=', 'verification')]")
+    is_application_fee = fields.Boolean(string='Is Application Fee', store=True, default=False)
     
     @api.onchange('student_id', 'fee_category_id', 'payed_from_date', 'payed_to_date', 'application_id')
     def _get_partner_details(self):
@@ -24,6 +25,7 @@ class FeeReceipts(models.Model):
             item.invoice_line_ids = lines
             if item.application_id:
                 item.partner_id = item.application_id.partner_id
+                item.student_name = item.application_id.partner_id.name
             else:
                 item.partner_id = item.student_id.partner_id
             item.class_division_id = item.student_id.class_id
@@ -55,3 +57,17 @@ class FeeReceipts(models.Model):
                         }
                         invoice_line_list.append((0, 0, fee_line))
                 item.payed_line_ids = invoice_line_list
+
+    @api.model
+    def create(self, vals):
+        """ Adding two field to invoice. is_fee use to display fee items only in fee tree view"""
+        partner_id = self.env['res.partner'].browse(vals['partner_id'])
+        if 'fee_category_id' in vals:
+            vals.update({
+                'is_fee': True,
+                'student_name': partner_id.name
+            })
+        if 'application_id' in vals:
+            vals['is_application_fee'] = True
+        res = super(FeeReceipts, self).create(vals)
+        return res

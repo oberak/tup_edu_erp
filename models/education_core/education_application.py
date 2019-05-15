@@ -6,8 +6,6 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
-    #_order = 'total_marks desc'
-    #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
     #change status depends on transfer_in student
@@ -36,11 +34,19 @@ class StudentApplication(models.Model):
                 'state': 'apply'
                 })
         return
-        
-    #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
-    @api.one
-    def paid_fee(self):
+    
+    # Override method for res.partner
+    @api.multi
+    def send_to_verify(self):
+        """Button action for sending the application for the verification"""
         for rec in self:
+            document_ids = self.env['education.documents'].search([('application_ref', '=', rec.id)])
+            if not document_ids:
+                raise ValidationError(_('No Documents provided'))
+            rec.write({
+                'state': 'verification'
+            })
+            # create partner for fee
             values = {
                 'name': rec.name,
                 'street': rec.street,
@@ -51,6 +57,11 @@ class StudentApplication(models.Model):
             }
             partner = self.env['res.partner'].create(values)
             rec.partner_id = partner.id
+
+    #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
+    @api.one
+    def paid_fee(self):
+        for rec in self:
             # TODO: move this logic to payment
             if rec.student_type == 'is_new_candidate':
                 rec.write({
@@ -133,7 +144,8 @@ class StudentApplication(models.Model):
                 'm_nrc': rec.m_nrc,
                 'm_nationality':rec.m_nationality.id,
                 'm_occupation':rec.m_occupation,
-                'm_religion': rec.m_religion.id,          
+                'm_religion': rec.m_religion.id,
+                'partner_id': rec.partner_id.id, # for fee
             }            
             if not rec.is_same_address:
                 pass
@@ -178,6 +190,7 @@ class StudentApplication(models.Model):
    
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+    partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
 
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
@@ -211,7 +224,6 @@ class StudentApplication(models.Model):
     
     #add fields for payment
     #payment_fee = fields.Integer(string='# Payment')
-    partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
     #add field to check student type
