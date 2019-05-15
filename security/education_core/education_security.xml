@@ -80,40 +80,7 @@
         <field name="perm_unlink" eval="False"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
-
-    <!-- Set domain for exam-->
-    <record id="teacher_exam_request_rule" model="ir.rule">
-        <field name="name">Teacher exam request</field>
-        <field name="model_id" ref="model_education_exam"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
-    </record>
-    <record id="teacher_exam_valuation_request_rule2" model="ir.rule">
-        <field name="name">Teacher exam valuation request</field>
-        <field name="model_id" ref="model_education_exam_valuation"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
-    </record>
-    <record id="teacher_exam_results_request_rule" model="ir.rule">
-        <field name="name">Teacher exam result request</field>
-        <field name="model_id" ref="model_education_exam_results"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
-    </record>
-
-     <!-- Set domain for student list-->
+    <!-- Set domain for student list-->
     <record id="student_list_request_rule" model="ir.rule">
         <field name="name">Student List request</field>
         <field name="model_id" ref="model_education_student"/>
@@ -124,4 +91,17 @@
         <field name="perm_unlink" eval="False"/>
         <field name="domain_force">[('major_id','=',user.employee_ids.department_id.ids)]</field>
     </record>
+    <!-- Set domain for timetable (teacher)-->
+    <record id="teacher_timetable_request_rule" model="ir.rule">
+        <field name="name">Student timetable request</field>
+        <field name="model_id" ref="model_education_timetable"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('class_division.class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+    </record>
+    <record id="teacher_timetable_schedule_request_rule" model="ir.rule">
+        <field name="name">Student timetable request</field>
+        <field name="model_id" ref="model_education_timetable_schedule"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record> 
 </odoo>
