@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tupeducation_student_form_f">
+        <field name="name">tup.f.education.srudent.form</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="tup_edu_erp.view_tupeducation_student_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('education_core.group_education_faculty')])]" />
+        <field name="arch" type="xml">
+         <!--Access to edit important fields -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>       
+            <xpath expr="//field[@name='nrc_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>  
+             <xpath expr="//field[@name='major_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+             <xpath expr="//field[@name='class_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+        <!-- Update Personal Info -->            
+            <xpath expr="//field[@name='date_of_birth']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='gender']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='nationality']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='blood_group']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='religion_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='father_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='mother_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        <!-- Update Contact Address-->
+            <xpath expr="//field[@name='street']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        <!--Update Contact Detail -->
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        <!-- Access to edit Parent's info  -->
+            <xpath expr="//field[@name='f_nrc']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='m_nrc']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='f_nationality']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='m_nationality']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='f_occupation']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='m_occupation']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='f_religion']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+             <xpath expr="//field[@name='m_religion']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        <!-- Access to edit sibling infos -->
+            <xpath expr="//field[@name='sibling_ids']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>   
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_tupeducation_student_form_aa">
+        <field name="name">tup.aa.education.student.form</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="tup_edu_erp.view_tupeducation_student_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_aa')])]" />
+        <field name="arch" type="xml">
+          <!--Access to edit important fields -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>       
+            <xpath expr="//field[@name='nrc_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>  
+             <xpath expr="//field[@name='major_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+             <xpath expr="//field[@name='class_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+       
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_tupeducation_student_form_haa">
+        <field name="name">tup.aa.education.student.form</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="tup_edu_erp.view_tupeducation_student_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_haa')])]" />
+        <field name="arch" type="xml">
+         <!--Access to edit important fields -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath>       
+            <xpath expr="//field[@name='nrc_no']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath>  
+             <xpath expr="//field[@name='major_id']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath> 
+             <xpath expr="//field[@name='class_id']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath>        
+        </field>
+    </record>
+
+  
+</odoo>
