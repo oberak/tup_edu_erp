@@ -112,4 +112,17 @@
         <field name="perm_unlink" eval="False"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
+
+    <record id="student_login_rule" model="ir.rule">
+       <field name="name">Application for student</field>
+       <field name="model_id" ref="model_education_application"/>
+       <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+       <field name="perm_read" eval="True"/>
+       <field name="perm_write" eval="True"/>
+       <field name="perm_create" eval="False"/>
+       <field name="perm_unlink" eval="False"/>
+       <field name="domain_force">[('email','=',user.login)]</field>
+    </record>
+
+    
 </odoo>

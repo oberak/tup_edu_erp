@@ -11,7 +11,7 @@ a_document_document_aa,access.document.document,education_core.model_document_do
 a_document_document_haa,access.document.document,education_core.model_document_document,group_education_haa,1,1,1,1
 
 education_core.access_education_documents,access.education.documents,education_core.model_education_documents,education_core.group_education_faculty,1,0,0,0
-a_education_documents_t,access.education.documents,education_core.model_education_documents,group_education_student,1,1,1,0
+a_education_documents_s,access.education.documents,education_core.model_education_documents,group_education_student,1,1,1,0
 a_education_documents_t,access.education.documents,education_core.model_education_documents,group_education_teacher,1,0,0,0
 a_education_documents_dc,access.education.documents,education_core.model_education_documents,group_education_teacher_dc,1,1,1,0
 a_education_documents_aa,access.education.documents,education_core.model_education_documents,group_education_aa,1,1,1,0

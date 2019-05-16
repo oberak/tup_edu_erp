@@ -167,6 +167,7 @@ class StudentApplication(models.Model):
    
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+    is_registered = fields.Boolean(string="Check Signup", default=False)
 
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
