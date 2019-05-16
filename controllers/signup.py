@@ -13,7 +13,6 @@ from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
-
 class TupAuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True, sitemap=False)
     def web_auth_signup(self, *args, **kw):
@@ -51,7 +50,6 @@ class TupAuthSignupHome(AuthSignupHome):
         response = request.render('tup_edu_erp.login', qcontext)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
-
 
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
