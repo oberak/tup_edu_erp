@@ -65,7 +65,7 @@ class StudentApplication(models.Model):
             #add student ID automatically 
             sid = 5578 + rec.id            
             sid = str(sid)
-            rec.student_id='ptntu - 00'+sid  
+            student_id='ptntu - 00'+sid  
 
             # automatically assign class to student depends on academic_year and major , (for transfer in) division_id
             if rec.student_type == 'is_new_candidate':
@@ -86,7 +86,7 @@ class StudentApplication(models.Model):
                 'middle_name': rec.middle_name,
                 'application_id': rec.id,
                 'nrc_no': rec.nrc_no,
-                'student_id': rec.student_id,
+                'student_id': student_id,
                 'father_name': rec.father_name,
                 'mother_name': rec.mother_name,
                 'street': rec.street,
@@ -227,12 +227,12 @@ class StudentApplication(models.Model):
     fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
                             domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
-    student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
+    admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
     total_marks = fields.Char(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
     
     _sql_constraints = [
-        ('student_id', 'unique(student_id)', "Another Student already exists with this student_id !"),
+        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
     ]
 
     #add fields for parent's info

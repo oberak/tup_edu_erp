@@ -20,10 +20,8 @@
                 <field name="total_marks"/>
             </field>
             <field name="application_no" position="replace">
-                <field name="student_id"/>
-            </field>
-            
-            
+                <field name="admission_no"/>
+            </field>            
         </field>
     </record>
 
