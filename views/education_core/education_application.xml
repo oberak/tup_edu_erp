@@ -30,13 +30,14 @@
             
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
-                            string="Send to apply major" 
+                            string="Send to apply major" groups="tup_edu_erp.group_education_student"
                             help="Click to send the application to apply " states="draft" 
                             attrs="{'invisible': [('state', 'in' , ['apply','fee','verification','major','approve','reject','done'])]}"  />
             </button>
             
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
+<<<<<<< HEAD
                             string="Send for Verification"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
@@ -47,6 +48,17 @@
                         context="{'active_id':active_id}"
                         help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
                         />
+=======
+                            string="Send for Verification" groups="tup_edu_erp.group_education_aa"
+                            help="Click to send the application for verification purpose"
+                            states="apply" />               
+            </button>
+            
+            <button name="send_to_verify" position="after">                
+                <button name="paid_fee" type="object" class="oe_highlight"
+                            string="Payment for Tution Fee" 
+                            help="Click to send the application for payment " states="verification"/>                
+>>>>>>> 0f3c93e051419b519c7d372e87078335c9e47cc1
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
@@ -56,12 +68,12 @@
 
             <button name="application_verify" position="replace">                
                 <button name="application_verify" type="object" class="oe_highlight"
-                            string="Verify Application" groups="base.group_user"
+                            string="Verify Application" groups="tup_edu_erp.group_education_aa"
                             help="Click to verify the application and documents"
                             states="major"/>                           
             </button>
             <button name="create_student" position="replace">
-                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_aa"
+                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_haa"
                                 type="object" class="oe_highlight"
                                 help="Click to create Student"
                                 states="approve"/>
@@ -136,12 +148,13 @@
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
-                    <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                         
-                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
-                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                    <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">
+                        <field name="admission_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />                         
+                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />
+                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
+                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
                     </group>                        
