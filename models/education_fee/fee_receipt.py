@@ -12,8 +12,9 @@ class FeeReceipts(models.Model):
 
     # add fields
     # TODO: check duplacated invoice with A.Y when create
-    application_id = fields.Many2one('education.application', string='Application No',
-                                     domain="[('state', '=', 'verification')]")
+    application_id = fields.Many2one('education.application', string='Application No',  
+        default=lambda self: self.env.context.get('active_id'),
+        domain="[('state', '=', 'verification')]")
     is_application_fee = fields.Boolean(string='Is Application Fee', store=True, default=False)
     
     @api.onchange('student_id', 'fee_category_id', 'payed_from_date', 'payed_to_date', 'application_id')
