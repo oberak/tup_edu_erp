@@ -37,7 +37,6 @@
             
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
-<<<<<<< HEAD
                             string="Send for Verification"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
@@ -48,17 +47,6 @@
                         context="{'active_id':active_id}"
                         help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
                         />
-=======
-                            string="Send for Verification" groups="tup_edu_erp.group_education_aa"
-                            help="Click to send the application for verification purpose"
-                            states="apply" />               
-            </button>
-            
-            <button name="send_to_verify" position="after">                
-                <button name="paid_fee" type="object" class="oe_highlight"
-                            string="Payment for Tution Fee" 
-                            help="Click to send the application for payment " states="verification"/>                
->>>>>>> 0f3c93e051419b519c7d372e87078335c9e47cc1
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
