@@ -16,10 +16,7 @@
             </field>
             <field name="date_of_birth" position="replace">
                 <field name="total_marks"/>
-            </field>
-            <field name="application_no" position="replace">
-                <field name="student_id"/>
-            </field>          
+            </field>        
         </field>
     </record>
     <record model="ir.ui.view" id="view_tup_education_application_form">
@@ -29,12 +26,12 @@
         <field name="arch" type="xml">            
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
-                            string="Send to apply major" 
+                            string="Send to apply major" groups="tup_edu_erp.group_education_student"
                             help="Click to send the application to apply " states="draft"/>
             </button>            
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
-                            string="Send for Verification"
+                            string="Send for Verification" groups="tup_edu_erp.group_education_aa"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
             <button name="send_to_verify" position="after">                
@@ -67,8 +64,7 @@
                     <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                     <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                 </tr>
-            </xpath>
-            
+            </xpath>            
             <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
@@ -84,19 +80,15 @@
             <field name="medium" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="admission_class" position="attributes">
                 <attribute name="invisible">True</attribute>
-            </field>
-         
+            </field>         
             <field name="prev_school" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="sec_lang" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="admission_date" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -120,18 +112,15 @@
                                                 'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
-
             <field name="admission_date" position="before">
                 <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
                                                 'required': [('state', '=', 'fee')], 
                                                 'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
-            </field>           
-     
+            </field>        
             <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
                     <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">

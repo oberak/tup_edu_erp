@@ -30,10 +30,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <strong><span>Student ID:</span></strong>
+                        <strong><span>Admmision No:</span></strong>
                     </td>
                     <td>
-                        <span t-field="o.student_id"/>
+                        <span t-field="o.admission_no"/>
                     </td>
                 </tr>
                 <tr>
