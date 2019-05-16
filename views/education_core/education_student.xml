@@ -23,25 +23,34 @@
         <!-- Add status for the state of student-->
             <xpath expr="/form/sheet" position="before">
                 <header>                                      
-                    <field name="state" readonly="1" widget="statusbar"/>
+                    <field name="state"  widget="statusbar"/>
                 </header>
             </xpath> 
+            <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
+                <tr>
+                    <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name"/></td>
+                </tr>
+                <tr>
+                    <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" /></td>
+                    <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" /></td>
+                </tr>
+            </xpath>
             <xpath expr="//div[@class='oe_title']/h3" position="replace">
                 <h3>
-                    <field name="student_id" readonly="1" />
+                    <field name="student_id"  />
                 </h3>
             </xpath>
             <xpath expr="//field[@name='last_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
             <xpath expr="//field[@name='sec_lang']" position="replace">
-                <field name="nrc_no" readonly="1" />
+                <field name="nrc_no" />
             </xpath>
              <field name="medium" position="replace">
-                <field name="major_id" readonly="1" />
+                <field name="major_id"  />
             </field>
             <field name="class_id" position="replace">
-                <field name="class_id" readonly="1" />
+                <field name="class_id"  />
             </field>
             <field name="caste_id" position="attributes">
                 <attribute name="invisible">True</attribute>

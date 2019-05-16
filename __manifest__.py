@@ -62,6 +62,7 @@
         'views/education_core/education_syllabus.xml',
         'views/education_core/education_academic_year.xml',
         'views/education_core/education_student.xml',
+        'views/education_core/education_student2.xml',
         'views/education_core/education_semester.xml',
         
 
