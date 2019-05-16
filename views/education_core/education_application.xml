@@ -37,15 +37,16 @@
             
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
-                            string="Send for Verification" groups="tup_edu_erp.group_education_aa"
-                            help="Click to send the application for verification purpose"
-                            states="apply" />               
-            </button>
-            
-            <button name="send_to_verify" position="after">                
-                <button name="paid_fee" type="object" class="oe_highlight"
-                            string="Payment for Tution Fee" 
-                            help="Click to send the application for payment " states="verification"/>                
+                            string="Send for Verification"
+                            help="Click to send the application for verification purpose" states="apply" />               
+            </button>            
+            <button name="send_to_verify" position="after">
+                <button name="paid_fee" type="object" class="oe_highlight"  string="Payment for Tution Fee[for test]" 
+                        help="Click to send the application for payment " states="verification"/>
+                <button name="%(receipt_wizard_action_button)d" type="action" class="oe_highlight"  string="Create receipt"
+                        context="{'active_id':active_id}"
+                        help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
+                        />
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
@@ -244,6 +245,16 @@
         view_type="form" view_mode="form"
         key2="client_action_multi"
         multi="True" 
-        target="new"        
-    />     
+        target="new"/>
+
+    <!-- Create receipt button action -->
+    <record id="receipt_wizard_action_button" model="ir.actions.act_window">
+        <field name="name">Application fee</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice</field>
+        <field name="view_id" ref="tup_receipt_form"/>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 </odoo>
