@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-
-    
+<odoo>    
     <record id="view_tup_education_application_tree" model="ir.ui.view">
         <field name="name">tup.education.application.tree</field>
         <field name="model">education.application</field>
@@ -24,7 +22,6 @@
             </field>            
         </field>
     </record>
-
     <record model="ir.ui.view" id="view_tup_education_application_form">
         <field name="name">tup.education.application.form</field>
         <field name="model">education.application</field>
@@ -52,7 +49,7 @@
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
-                            string="Assign Major" groups="tup_edu_erp.group_education_aa"
+                            string="Assign Major" groups="tup_edu_erp.group_education_haa"
                             help="Click to send the application for payment " states="fee"/>                
             </button>
 
@@ -62,19 +59,15 @@
                             help="Click to verify the application and documents"
                             states="major"/>                           
             </button>
-
             <button name="create_student" position="replace">
                 <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_aa"
                                 type="object" class="oe_highlight"
                                 help="Click to create Student"
                                 states="approve"/>
-            </button>            
-
-             
+            </button>          
             <field name="state" position="replace">
                 <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1"  />
             </field>
-
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
                 <tr>
                     <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
@@ -83,8 +76,7 @@
                     <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                     <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                 </tr>
-            </xpath>
-            
+            </xpath>            
             <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
@@ -116,8 +108,6 @@
             <field name="admission_date" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
-
             <field name="medium" position="replace">
                 <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
@@ -127,18 +117,15 @@
                                                 'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
-
             <field name="admission_date" position="before">
                 <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
                                                 'required': [('state', '=', 'fee')], 
                                                 'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
-            </field>           
-     
+            </field>          
             <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
                     <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
@@ -156,11 +143,8 @@
                         <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
-                        
-                    </group>
-                        
+                    </group>                        
             </xpath>
-
             <xpath expr="/form/sheet/group[4]" position="after">
                 <group string="Parent's Info">
                     <group>
@@ -176,7 +160,6 @@
                             <field name="m_religion" attrs="{'readonly': [('state', '=', 'done')]}"/>
                         </group>
                 </group>
-
             </xpath>
             <xpath expr="/form/sheet/group[8]" position="after">
                 <notebook>
@@ -194,7 +177,6 @@
             </xpath>
         </field>       
     </record>
-
      <!-- add search view -->
      <record id="application_search" model="ir.ui.view">
         <field name="name">Student Application</field>
@@ -220,9 +202,7 @@
                     <separator/>
             </xpath>
         </field>
-    </record> 
-
-  
+    </record>   
     <record id="education_core.action_student_application" model="ir.actions.act_window">
         <field name="name">Student Application</field>
         <field name="res_model">education.application</field>        
@@ -237,7 +217,6 @@
             </p>
         </field>
     </record>
-
     <!-- add wizard view for assign major-->
     <!-- 'Assign Major' Action on Assign Major list  -->
     <record model="ir.ui.view" id="wizard_form_view">

@@ -5,4 +5,11 @@ a_education_application_sibling_fs,access.education.application.sibling,model_ed
 a_education_application_sibling_aa,access.education.application.sibling,model_education_application_sibling,group_education_aa,1,1,1,0
 a_education_application_sibling_haa,access.education.application.sibling,model_education_application_sibling,group_education_haa,1,1,1,1
 
+a_education_student_sibling_s,access.education.student.sibling,model_education_student_sibling,group_education_student,1,1,0,0
+a_education_student_sibling_t,access.education.student.sibling,model_education_student_sibling,group_education_teacher,1,1,0,0
+a_education_student_sibling_dc,access.education.student.sibling,model_education_student_sibling,group_education_teacher_dc,1,0,0,0
+a_education_student_sibling_fs,access.education.student.sibling,model_education_student_sibling,group_education_fs,1,0,0,0
+a_education_student_sibling_aa,access.education.student.sibling,model_education_student_sibling,group_education_aa,1,1,1,0
+a_education_student_sibling_haa,access.education.student.sibling,model_education_student_sibling,group_education_haa,1,1,1,1
+
 a_hr_department_t,access.hr.department,hr.model_hr_department,group_education_teacher,1,0,0,0
