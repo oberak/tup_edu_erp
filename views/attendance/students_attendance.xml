@@ -23,13 +23,15 @@
                         </group>
                         <group>
                             <group>
-                                <field name="class_division" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" />
-                                <field name="subject" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" />
+                                <field name="division_id" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="subject" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" /> 
                                 <field name="academic_year" invisible="1" />
                             </group>
                             <group>
-                                <field name="date" attrs="{'readonly': [('attendance_created', '=', True)]}" />
-                                <field name="week_day" attrs="{'readonly': [('attendance_created', '=', True)]}" options="{'no_create_edit': True, 'no_create': True}" readonly="1" />
+                                <field name="period" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="time_from" attrs="{'readonly': [('attendance_created', '=', True)]}" />
+                                <field name="time_to" attrs="{'readonly': [('attendance_created', '=', True)]}" />
                                 <field name="attendance_created" invisible="1" />
                             </group>
                         </group>
@@ -45,15 +47,16 @@
                                 <tree editable="bottom" create="false" delete="false">
                                     <field name="student_id" invisible="1" />
                                     <field name="student_name" readonly="1" style=" width: 500px; " />
-                                    <field name="one" />
+                                    <field name="present" />
+                                    <field name="remark" />
+                                    <!-- <field name="one" />
                                     <field name="two" />
                                     <field name="three" />
                                     <field name="four" />
                                     <field name="five" />
-                                    <field name="six" />
-                                    <field name="remark" />
+                                    <field name="six" /> -->
                                     <field name="class_id" invisible="1" />
-                                    <field name="class_division" invisible="1" />
+                                    <field name="division_id" invisible="1" />
                                     <field name="date" invisible="1" />
                                 </tree>
                             </field>
@@ -69,7 +72,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="class_division"/>
+                    <field name="division_id"/>
                     <field name="subject"/>                 
                     <!-- <field name="class_id"/> -->
                     <field name="date"/>
@@ -91,7 +94,7 @@
                             ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
                     <group expand="1" string="Group By">
                         <!-- <filter string="Batch" name="group_class_id" context="{'group_by':'class_id'}"/> -->
-                        <filter string="Class" name="group_class_division" context="{'group_by':'class_division'}"/>
+                        <filter string="Class" name="group_division_id" context="{'group_by':'division_id'}"/>
                     </group>
                 </search>
             </field>
@@ -103,7 +106,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
-            <field name="context">{'search_default_today': 1, 'search_default_group_class_division': 1}</field>
+            <field name="context">{'search_default_today': 1, 'search_default_group_division_id': 1}</field>
         </record>
 
         <record id="student_attendances_line_form" model="ir.ui.view">
@@ -120,16 +123,17 @@
                                 <field name="student_id" invisible="1"/>
                                 <field name="student_name"/>
                                 <!-- <field name="class_id"/> -->
-                                <field name="class_division"/>
+                                <field name="division_id"/>
                             </group>
                             <group string="Leave Status (✔️️ = Present)">
-                                <field name="one" readonly="1"/>
+                                <field name="present"/>
+                                <field name="remark"/>
+                                <!-- <field name="one" readonly="1"/>
                                 <field name="two" readonly="1"/>
                                 <field name="three" readonly="1"/>
                                 <field name="four" readonly="1"/>
                                 <field name="five" readonly="1"/>
-                                <field name="six" readonly="1"/>
-                                <field name="remark"/>
+                                <field name="six" readonly="1"/> -->
                                 <field name="date"/>
                             </group>
                         </group>
@@ -146,7 +150,7 @@
                     <field name="student_id" invisible="1"/>
                     <field name="student_name"/>
                     <field name="class_id"/>
-                    <field name="class_division"/>
+                    <field name="division_id"/>
                     <field name="date"/>
                     <field name="state"/>
                 </tree>
@@ -166,7 +170,7 @@
                     <filter string="Done" name="done_state" domain="[('state','!=','draft')]"/>
                     <group expand="1" string="Group By">
                         <filter string="Batch" name="group_class_id" context="{'group_by':'class_id'}"/>
-                        <filter string="Class" name="group_class_division" context="{'group_by':'class_division'}"/>
+                        <filter string="Class" name="group_division_id" context="{'group_by':'division_id'}"/>
                         <filter string="Day" name="group_date" context="{'group_by':'date:day'}"/>
                     </group>
                 </search>

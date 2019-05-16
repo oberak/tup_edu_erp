@@ -10,7 +10,7 @@ class EducationSemester(models.Model):
 
     active = fields.Boolean('Active', default=True)
     name = fields.Char(compute='get_name')
-    semester = fields.Selection([('1st Semester', '1st Semester'), ('2nd Semester', '2nd Semester')], default='seme1')
+    semester = fields.Selection([('1st Semester', '1st Semester'), ('2nd Semester', '2nd Semester')], default='1st Semester')    
     seme_start_date = fields.Date(string='Start date', required=True, help='Starting date of semester')
     seme_end_date = fields.Date(string='End date', required=True, help='Ending of semester')
     seme_description = fields.Text(string='Description', help="Description about the semester")
@@ -23,7 +23,7 @@ class EducationSemester(models.Model):
         """To generate name for the model"""
         for i in self:
             i.name = str(i.semester) + "(" + str(i.academic_year.name) +")"
-    
+
     @api.constrains('seme_start_date', 'seme_end_date')
     def validate_date(self):
         """Checking the start and end dates of the syllabus,
@@ -31,11 +31,12 @@ class EducationSemester(models.Model):
         for rec in self:
             if rec.seme_start_date >= rec.seme_end_date:
                 raise ValidationError(_('Start date must be Anterior to End date'))
-    
+
     @api.model
     def _get_current_semester(self):
         domain = [
             ('seme_start_date', '<=', datetime.now().strftime('%Y-%m-%d')),
             ('seme_end_date', '>=', datetime.now().strftime('%Y-%m-%d')),
         ]
-        return self.search(domain, limit=1)
+        return self.search(domain, limit=1) 
+    

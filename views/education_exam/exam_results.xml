@@ -24,7 +24,7 @@
                 <xpath expr="//field[@name='class_id']" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </xpath>
-                 <xpath expr="//field[@name='division_id']" position="after">
+                <xpath expr="//field[@name='division_id']" position="after">
                     <field name="exam_id"/> 
                 </xpath>
             </field>

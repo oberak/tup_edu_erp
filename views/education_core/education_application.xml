@@ -18,22 +18,26 @@
                 <field name="total_marks"/>
             </field>
             <field name="application_no" position="replace">
-                <field name="student_id"/>
-            </field>          
+                <field name="admission_no"/>
+            </field>            
         </field>
     </record>
     <record model="ir.ui.view" id="view_tup_education_application_form">
         <field name="name">tup.education.application.form</field>
         <field name="model">education.application</field>
         <field name="inherit_id" ref="education_core.view_education_application_form"/>
-        <field name="arch" type="xml">            
+        <field name="arch" type="xml">
+            
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" 
-                            help="Click to send the application to apply " states="draft"/>
-            </button>            
+                            help="Click to send the application to apply " states="draft" 
+                            attrs="{'invisible': [('state', 'in' , ['apply','fee','verification','major','approve','reject','done'])]}"  />
+            </button>
+            
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
+<<<<<<< HEAD
                             string="Send for Verification"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
@@ -44,25 +48,39 @@
                         context="{'active_id':active_id}"
                         help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
                         />
+=======
+                            string="Send for Verification" groups="base.group_user"
+                            help="Click to send the application for verification purpose"
+                            states="apply" />               
+            </button>
+            
+            <button name="send_to_verify" position="after">                
+                <button name="paid_fee" type="object" class="oe_highlight"
+                            string="Payment for Tution Fee" 
+                            help="Click to send the application for payment " states="verification"/>                
+>>>>>>> 03473fe17569ecb20fd120311430c040a0c13dc4
             </button>
             <button name="paid_fee" position="after">                
-                <button name="assign_major" type="object" class="oe_highlight"  string="Assign Major"
-                            groups="tup_edu_erp.group_education_haa"
+                <button name="assign_major" type="object" class="oe_highlight"
+                            string="Assign Major" groups="tup_edu_erp.group_education_haa"
                             help="Click to send the application for payment " states="fee"/>                
             </button>
+
             <button name="application_verify" position="replace">                
                 <button name="application_verify" type="object" class="oe_highlight"
-                            string="Verify Application" help="Click to verify the application and documents"
+                            string="Verify Application" groups="base.group_user"
+                            help="Click to verify the application and documents"
                             states="major"/>                           
             </button>
             <button name="create_student" position="replace">
-                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_haa"
-                                type="object" class="oe_highlight" help="Click to create Student" states="approve"/>
-            </button>                  
+                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_aa"
+                                type="object" class="oe_highlight"
+                                help="Click to create Student"
+                                states="approve"/>
+            </button>          
             <field name="state" position="replace">
                 <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1"  />
             </field>
-
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
                 <tr>
                     <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
@@ -71,8 +89,7 @@
                     <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                     <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                 </tr>
-            </xpath>
-            
+            </xpath>            
             <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
@@ -107,35 +124,21 @@
             <field name="medium" position="replace">
                 <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-            <field name="street" position="replace">
-                <field name="street" required="1" placeholder="Home No ......" class="o_address_street" attrs="{'readonly': [('state', '=', 'done')]}"/>
-            </field>
-            <field name="street2" position="replace">
-                <field name="street2" required="1" placeholder="Street ......" class="o_address_street" attrs="{'readonly': [('state', '=', 'done')]}"/>
-            </field>
-            <field name="per_street" position="replace">
-                <field name="per_street" placeholder="Home No..." class="o_address_street"/>
-            </field>
-            <field name="per_street2" position="replace">
-                <field name="per_street2" placeholder="Street..." class="o_address_street"/>
-            </field>
+
             <field name="company_id" position="replace">
                 <field name="class_id" attrs="{'readonly': [('state','in' , ['approve','done'])],
                                                 'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
-
             <field name="admission_date" position="before">
                 <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
                                                 'required': [('state', '=', 'fee')], 
                                                 'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
-            </field>           
-     
+            </field>          
             <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
                     <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
@@ -145,20 +148,15 @@
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
-                    <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}"> 
-                        <group>                        
-                            <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate'),('state', 'in' , ['apply'])],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                            <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate'),('state', 'in' , ['apply'])],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
-                            <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate'),('state', 'in' , ['apply'])],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        </group>
-                        <group>
-                            <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate'),('state', 'in' , ['apply'])],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                            <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate'),('state', 'in' , ['apply'])],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                            <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                            <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
-                        </group>
-                    </group>
-                        
+                    <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">                         
+                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
+                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('student_type', '=', 'is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
+                    </group>                        
             </xpath>
             <xpath expr="/form/sheet/group[4]" position="after">
                 <group string="Parent's Info">
@@ -179,12 +177,12 @@
             <xpath expr="/form/sheet/group[8]" position="after">
                 <notebook>
                     <page string="Siblings Info">
-                        <field name="sibling_ids" nolabel="1" attrs="{'readonly': [('state', '=', 'done')]}">
+                        <field name="sibling_ids" nolabel="1">
                             <tree string="Siblings Info" editable="bottom">
-                                <field name="name"  />
+                                <field name="name"/>
                                 <field name="nrc_no" required="1"/>
-                                <field name="occupation" />
-                                <field name="address" />
+                                <field name="occupation"/>
+                                <field name="address"/>
                             </tree>
                         </field>
                     </page>
@@ -249,7 +247,8 @@
             </footer>
                 </form>
             </field>
-        </record>   
+        </record>
+   
      <act_window id="action_assign_major"
         name="Assign Major"
         src_model="education.application"
@@ -257,6 +256,7 @@
         view_type="form" view_mode="form"
         key2="client_action_multi"
         multi="True" 
+<<<<<<< HEAD
         target="new"/>
 
     <!-- Create receipt button action -->
@@ -269,4 +269,8 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
+=======
+        target="new"        
+    />     
+>>>>>>> 03473fe17569ecb20fd120311430c040a0c13dc4
 </odoo>

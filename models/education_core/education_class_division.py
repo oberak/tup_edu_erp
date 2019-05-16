@@ -71,8 +71,7 @@ class EducationClassDivision(models.Model):
                                   help="Select the Program Year") # rename Division to Program year
     #actual_strength = fields.Integer(string='Class Strength', help="Total strength of the class")
     #faculty_id = fields.Many2one('education.faculty', string='Class Faculty', help="Class teacher/Faculty")
-    academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True,
-                                       default=lambda self: self.env['education.academic.year']._get_current_ay(),
+    academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', readonly=True, required=False,
                                        help="Select the Academic Year")
     #student_ids = fields.One2many('education.student', 'class_id', string='Students')
     #amenities_ids = fields.One2many('education.class.amenities', 'class_id', string='Amenities')
@@ -83,6 +82,7 @@ class EducationClassDivision(models.Model):
     def create(self, vals):
         """Set promote_class, academic_year_id using class_id"""
         vals['promote_class'] = self.class_id
+        vals['academic_year_id'] = self.class_id.ay_id
         return super(EducationClassDivision, self).create(vals)
 
     @api.multi

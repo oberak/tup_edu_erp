@@ -5,7 +5,7 @@
             <div class="form-group field-nrc_no">
                 <label for="nrc_no" class="control-label">Your NRC Number or Addmission Number</label>
                 <input type="text" name="nrc_no" t-att-value="nrc_no" id="nrc_no" class="form-control" autofocus="autofocus"
-                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+                    autocapitalize="off" required="required" placeholder="e.g 2019xxxx or 1/xxxxxx(N)xxxxx" t-att-readonly="'readonly' if only_passwords else None"/>
             </div>
         </xpath>
     </template>

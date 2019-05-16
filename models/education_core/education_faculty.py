@@ -22,6 +22,6 @@ class EducationFaculty(models.Model):
             }
             emp_id = self.env['hr.employee'].create(values)
             rec.employee_id = emp_id.id
-   
+
     #add field
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Faculty")

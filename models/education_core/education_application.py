@@ -6,6 +6,8 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
+    #_order = 'total_marks desc'
+    #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
     #change status depends on transfer_in student
@@ -34,35 +36,11 @@ class StudentApplication(models.Model):
                 'state': 'apply'
                 })
         return
-    
-    # Override method for res.partner
-    @api.multi
-    def send_to_verify(self):
-        """Button action for sending the application for the verification"""
-        for rec in self:
-            document_ids = self.env['education.documents'].search([('application_ref', '=', rec.id)])
-            if not document_ids:
-                raise ValidationError(_('No Documents provided'))
-            rec.write({
-                'state': 'verification'
-            })
-            # create partner for fee
-            values = {
-                'name': rec.name,
-                'street': rec.street,
-                'street2': rec.street2,
-                'email': rec.email,
-                'mobile': rec.mobile,
-                'phone': rec.phone,
-            }
-            partner = self.env['res.partner'].create(values)
-            rec.partner_id = partner.id
-
+        
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
         for rec in self:
-            # TODO: move this logic to payment
             if rec.student_type == 'is_new_candidate':
                 rec.write({
                 'state': 'fee'
@@ -87,7 +65,7 @@ class StudentApplication(models.Model):
             #add student ID automatically 
             sid = 5578 + rec.id            
             sid = str(sid)
-            rec.student_id='ptntu - 00'+sid  
+            student_id='ptntu - 00'+sid  
 
             # automatically assign class to student depends on academic_year and major , (for transfer in) division_id
             if rec.student_type == 'is_new_candidate':
@@ -108,7 +86,7 @@ class StudentApplication(models.Model):
                 'middle_name': rec.middle_name,
                 'application_id': rec.id,
                 'nrc_no': rec.nrc_no,
-                'student_id': rec.student_id,
+                'student_id': student_id,
                 'father_name': rec.father_name,
                 'mother_name': rec.mother_name,
                 'street': rec.street,
@@ -144,8 +122,7 @@ class StudentApplication(models.Model):
                 'm_nrc': rec.m_nrc,
                 'm_nationality':rec.m_nationality.id,
                 'm_occupation':rec.m_occupation,
-                'm_religion': rec.m_religion.id,
-                'partner_id': rec.partner_id.id, # for fee
+                'm_religion': rec.m_religion.id,          
             }            
             if not rec.is_same_address:
                 pass
@@ -190,7 +167,7 @@ class StudentApplication(models.Model):
    
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
-    partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
+    is_registered = fields.Boolean(string="Check Signup", default=False)
 
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
@@ -224,6 +201,7 @@ class StudentApplication(models.Model):
     
     #add fields for payment
     #payment_fee = fields.Integer(string='# Payment')
+    #partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
     #add field to check student type
@@ -249,12 +227,12 @@ class StudentApplication(models.Model):
     fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
                             domain=[('is_major', '=', True)],
                             help="Choose Major to apply")
-    student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
+    admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
     total_marks = fields.Char(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
     
     _sql_constraints = [
-        ('student_id', 'unique(student_id)', "Another Student already exists with this student_id !"),
+        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
     ]
 
     #add fields for parent's info

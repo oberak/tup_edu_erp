@@ -14,7 +14,6 @@
             </tree>
         </field>
     </record>
-
     <record id="view_education_semester_form" model="ir.ui.view">
         <field name="name">education.semester.form</field>
         <field name="model">education.semester</field>

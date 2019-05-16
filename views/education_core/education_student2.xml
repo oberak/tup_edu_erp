@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>    
+<odoo>
     <record model="ir.ui.view" id="view_tupeducation_student_form_aa">
         <field name="name">tup.aa.education.student.form</field>
         <field name="model">education.student</field>
@@ -8,26 +8,27 @@
         <field name="arch" type="xml">
           <!--Access to edit important fields -->
             <xpath expr="//field[@name='student_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>
             <xpath expr="//field[@name='middle_name']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath> 
             <xpath expr="//field[@name='last_name']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
-            </xpath>  
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>       
             <xpath expr="//field[@name='nrc_no']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>  
              <xpath expr="//field[@name='major_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath> 
              <xpath expr="//field[@name='class_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
-            </xpath>        
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+
         </field>
     </record>
     <record model="ir.ui.view" id="view_tupeducation_student_form_haa">
@@ -37,18 +38,23 @@
         <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_haa')])]" />
         <field name="arch" type="xml">
          <!--Access to edit important fields -->
+            <xpath expr="//field[@name='student_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
-                <attribute name="attrs">{'readonly':False}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>       
             <xpath expr="//field[@name='nrc_no']" position="attributes">
-                <attribute name="attrs">{'readonly':False}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>  
              <xpath expr="//field[@name='major_id']" position="attributes">
-                <attribute name="attrs">{'readonly':False}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath> 
              <xpath expr="//field[@name='class_id']" position="attributes">
-                <attribute name="attrs">{'readonly':False}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>        
         </field>
-    </record>  
-</odoo>
+    </record>
+
+
+</odoo> 
