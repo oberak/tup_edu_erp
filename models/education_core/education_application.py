@@ -36,10 +36,34 @@ class StudentApplication(models.Model):
                 'state': 'apply'
                 })
         return
+    
+    # Override method for res.partner
+    @api.multi
+    def send_to_verify(self):
+        """Button action for sending the application for the verification"""
+        for rec in self:
+            document_ids = self.env['education.documents'].search([('application_ref', '=', rec.id)])
+            if not document_ids:
+                raise ValidationError(_('No Documents provided'))
+            rec.write({
+                'state': 'verification'
+            })
+            # create partner for fee
+            values = {
+                'name': rec.name,
+                'street': rec.street,
+                'street2': rec.street2,
+                'email': rec.email,
+                'mobile': rec.mobile,
+                'phone': rec.phone,
+            }
+            partner = self.env['res.partner'].create(values)
+            rec.partner_id = partner.id
         
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
+        # TODO: move this logic to payment
         for rec in self:
             if rec.student_type == 'is_new_candidate':
                 rec.write({
@@ -122,7 +146,8 @@ class StudentApplication(models.Model):
                 'm_nrc': rec.m_nrc,
                 'm_nationality':rec.m_nationality.id,
                 'm_occupation':rec.m_occupation,
-                'm_religion': rec.m_religion.id,          
+                'm_religion': rec.m_religion.id,
+                'partner_id': rec.partner_id.id, # for fee
             }            
             if not rec.is_same_address:
                 pass
@@ -168,6 +193,7 @@ class StudentApplication(models.Model):
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
+    partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
 
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
@@ -201,7 +227,6 @@ class StudentApplication(models.Model):
     
     #add fields for payment
     #payment_fee = fields.Integer(string='# Payment')
-    #partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade")
 
    
     #add field to check student type
