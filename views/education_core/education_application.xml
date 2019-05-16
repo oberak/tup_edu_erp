@@ -37,7 +37,6 @@
             
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
-<<<<<<< HEAD
                             string="Send for Verification"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
@@ -48,17 +47,6 @@
                         context="{'active_id':active_id}"
                         help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
                         />
-=======
-                            string="Send for Verification" groups="base.group_user"
-                            help="Click to send the application for verification purpose"
-                            states="apply" />               
-            </button>
-            
-            <button name="send_to_verify" position="after">                
-                <button name="paid_fee" type="object" class="oe_highlight"
-                            string="Payment for Tution Fee" 
-                            help="Click to send the application for payment " states="verification"/>                
->>>>>>> 03473fe17569ecb20fd120311430c040a0c13dc4
             </button>
             <button name="paid_fee" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
@@ -256,7 +244,6 @@
         view_type="form" view_mode="form"
         key2="client_action_multi"
         multi="True" 
-<<<<<<< HEAD
         target="new"/>
 
     <!-- Create receipt button action -->
@@ -269,8 +256,4 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-=======
-        target="new"        
-    />     
->>>>>>> 03473fe17569ecb20fd120311430c040a0c13dc4
 </odoo>

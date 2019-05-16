@@ -11,7 +11,6 @@ class FeeReceipts(models.Model):
     student_id = fields.Many2one('education.student', string='Student ID') # Admission No to Student ID
 
     # add fields
-<<<<<<< HEAD
     # TODO: check duplacated invoice with A.Y when create
     application_id = fields.Many2one('education.application', string='Application No',  
         default=lambda self: self.env.context.get('active_id'),
@@ -73,8 +72,3 @@ class FeeReceipts(models.Model):
             vals['is_application_fee'] = True
         res = super(FeeReceipts, self).create(vals)
         return res
-=======
-    # TODO remove 'draft' status
-    application_id = fields.Many2one('education.application', string='Application No',
-                                     domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
->>>>>>> 03473fe17569ecb20fd120311430c040a0c13dc4
