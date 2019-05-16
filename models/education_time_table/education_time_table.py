@@ -11,7 +11,7 @@ class EducationTimeTable(models.Model):
     # add fields
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
                              default='draft')
-    semester = fields.Selection([('seme1', '1st Semester'), ('seme2', '2nd Semester')], default='seme1')                         
+    semester = fields.Many2one('education.semester', string="Semester")                       
 
     def get_name(self):
         """To generate name for the model"""
@@ -45,4 +45,3 @@ class EducationTimeTableSchedule(models.Model):
     sub_type = fields.Selection([('is_language', 'Lecture'), ('is_tutorial', 'Tutorial'), ('is_lab', 'Practical')],
                             string='Type', default="is_language", required=True,
                             help="Choose the type of the subject")
-

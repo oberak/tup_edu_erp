@@ -8,7 +8,9 @@ class EducationExam(models.Model):
     division_id = fields.Many2one('education.class.division', string='Class') # Rename Division to Class
     school_class_division_wise = fields.Selection([('division', 'Class')],
                                                   related='exam_type.school_class_division_wise')       # Remove exam type (Class)
-
+    semester = fields.Many2one('education.semester', string='Semester',
+                                       help="Select the Semester", required=True)  
+    
     # add fields
     major_id = fields.Char(string="Major", readonly = True)                    
     pro_year = fields.Char(string='Program Year', readonly=True)
@@ -32,6 +34,5 @@ class EducationExamType(models.Model):
     _name = 'education.exam.type'
     _inherit = 'education.exam.type'
 
-    school_class_division_wise = fields.Selection([('division', 'Class'), ('final', 'Final Exam (Exam that promotes students to the next class)')],
+    school_class_division_wise = fields.Selection([('division', 'Class'), ('midterm', 'Midterm Exam'), ('final', 'Final Exam (Exam that promotes students to the next class)')],
                                                   string='Exam Type', default='division')           # Remove exam type (Class)
-    
