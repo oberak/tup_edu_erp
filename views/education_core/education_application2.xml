@@ -7,6 +7,15 @@
         <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_student')])]" />
         <field name="arch" type="xml">
         <!--Access to edit Personal Info -->
+            <xpath expr="//field[@name='roll_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='total_marks']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='admission_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="attrs">{'readonly':[('state','not in',['draft','apply'])]}</attribute> 
             </xpath>
