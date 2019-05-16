@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record model="ir.ui.view" id="view_tupeducation_student_form_s">
+        <field name="name">tup.aa.education.student.form</field>
+        <field name="model">education.student</field>
+        <field name="inherit_id" ref="tup_edu_erp.view_tupeducation_student_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_student')])]" />
+        <field name="arch" type="xml">
+          <!--Access to edit important fields -->
+            <xpath expr="//field[@name='student_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='middle_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>       
+            <xpath expr="//field[@name='nrc_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>  
+             <xpath expr="//field[@name='major_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath> 
+             <xpath expr="//field[@name='class_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>          
+        <!--Access to edit Contact Detail -->
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        </field>
+    </record>
     <record model="ir.ui.view" id="view_tupeducation_student_form_aa">
         <field name="name">tup.aa.education.student.form</field>
         <field name="model">education.student</field>
