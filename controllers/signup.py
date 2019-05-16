@@ -125,13 +125,6 @@ class TupAuthSignupHome(AuthSignupHome):
             if user_sudo.is_registered == True:
                     raise UserError(_("Your admission no is already registered!!"))
                 
-        # TODO check NRC or ADM NO
-                    # if NRC
-                        # if New student : check in applicaions table
-                        # else Old one: check in students table
-                    # if Addmission No : new student
-
-                    # if not exists return error
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
     
