@@ -2,7 +2,7 @@
 
 import datetime
 from odoo import models, fields, api, _
-
+from odoo.exceptions import UserError, ValidationError
 
 class FeeReceipts(models.Model):
     _inherit = 'account.invoice'
@@ -11,7 +11,6 @@ class FeeReceipts(models.Model):
     student_id = fields.Many2one('education.student', string='Student ID') # Admission No to Student ID
 
     # add fields
-    # TODO: check duplacated invoice with A.Y when create
     application_id = fields.Many2one('education.application', string='Application No',  
         default=lambda self: self.env.context.get('active_id'),
         domain="[('state', '=', 'verification')]")
@@ -70,5 +69,10 @@ class FeeReceipts(models.Model):
             })
         if 'application_id' in vals:
             vals['is_application_fee'] = True
+            # check duplacated invoice with same application_id and fee_structure
+            if 'fee_structure' in vals:
+                app_id = self.env['account.invoice'].sudo().search([('application_id', '=', vals['application_id']), ('fee_structure', '=', vals['fee_structure'])])
+                if app_id:
+                    raise UserError(_("You have already issued a receipt for this application with same fee structure."))
         res = super(FeeReceipts, self).create(vals)
         return res
