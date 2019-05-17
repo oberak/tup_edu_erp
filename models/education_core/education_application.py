@@ -6,8 +6,6 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
-    #_order = 'total_marks desc'
-    #_inherits = {'res.partner': 'partner_id'}
     _description = 'Applications for the TUP admission'
 
     #change status depends on transfer_in student
@@ -41,14 +39,9 @@ class StudentApplication(models.Model):
     @api.multi
     def send_to_verify(self):
         """Button action for sending the application for the verification"""
+        super(StudentApplication, self).send_to_verify()
+        # create partner for fee
         for rec in self:
-            document_ids = self.env['education.documents'].search([('application_ref', '=', rec.id)])
-            if not document_ids:
-                raise ValidationError(_('No Documents provided'))
-            rec.write({
-                'state': 'verification'
-            })
-            # create partner for fee
             values = {
                 'name': rec.name,
                 'street': rec.street,
@@ -63,7 +56,7 @@ class StudentApplication(models.Model):
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
     def paid_fee(self):
-        # TODO: move this logic to payment
+        # TODO: remove this function and button
         for rec in self:
             if rec.student_type == 'is_new_candidate':
                 rec.write({
@@ -189,11 +182,35 @@ class StudentApplication(models.Model):
                 'res_id': student.id,
                 'context': self.env.context
             }
-   
+
+    @api.multi
+    def action_view_receipts(self):
+        self.ensure_one()
+        view = self.env.ref('tup_edu_erp.tup_receipt_tree')
+        domain = [('application_id', '=', self.id)]
+        return {
+            'name': _('Receipts'),
+            'domain': domain,
+            'res_model': 'account.invoice',
+            'type': 'ir.actions.act_window',
+            'view_id': view.id,
+            'view_mode': 'tree',
+            'view_type': 'form',
+            'limit': 80,
+        }
+
+    @api.multi
+    def _receipt_count(self):
+        """Return the count of the receipts"""
+        for rec in self:
+            receipt_ids = self.env['account.invoice'].search([('application_id', '=', rec.id), ('state', '!=', 'cancel')])
+            rec.receipt_count = len(receipt_ids)
+
     # add fields
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
+    receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
 
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
