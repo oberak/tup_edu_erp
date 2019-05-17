@@ -71,7 +71,8 @@ class FeeReceipts(models.Model):
             vals['is_application_fee'] = True
             # check duplacated invoice with same application_id and fee_structure
             if 'fee_structure' in vals:
-                app_id = self.env['account.invoice'].sudo().search([('application_id', '=', vals['application_id']), ('fee_structure', '=', vals['fee_structure'])])
+                app_id = self.env['account.invoice'].sudo().search([('application_id', '=', vals['application_id']),
+                    ('fee_structure', '=', vals['fee_structure']), ('state', '!=', 'cancel')])
                 if app_id:
                     raise UserError(_("You have already issued a receipt for this application with same fee structure."))
         res = super(FeeReceipts, self).create(vals)
