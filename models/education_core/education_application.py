@@ -94,7 +94,7 @@ class StudentApplication(models.Model):
             # automatically assign class to student depends on academic_year and major , (for transfer in) division_id
             if rec.student_type == 'is_new_candidate':
                 c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
-                class_id = self.env['education.class.division'].search([('class_id', '=', c_id)]).id
+                class_id = self.env['education.class.division'].search([('class_id', '=', c_id),('division_id', '=', '1BE')]).id
             else :
                 c_id = self.env['education.class'].search(['&',('ay_id', '=',rec.academic_year_id.id),('major_id', '=', rec.major_id.id)]).id         
                 class_id = self.env['education.class.division'].search(['&',('class_id', '=', c_id),('division_id', '=', rec.division_id.id)]).id

@@ -130,7 +130,7 @@ class TupAuthSignupHome(AuthSignupHome):
         print('In valuessssssssssssssssssssssss')
         db, login, password = request.env['res.users'].sudo().signup(values, token)
         if len(values.get('nrc_no')) == 7 :
-            student_id = request.env['education.application'].sudo().search([('student_id', '=', values.get('nrc_no'))])
+            student_id = request.env['education.application'].sudo().search([('admission_no', '=', values.get('nrc_no'))])
         if len(values.get('nrc_no')) >= 17 and len(values.get('nrc_no')) <= 21 :
             student_id = request.env['education.application'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
         student_id.email = values.get('login')
