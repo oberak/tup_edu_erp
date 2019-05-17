@@ -56,6 +56,29 @@ class EducationStudent(models.Model):
             print(s_id.state)           
         return 
    
+    @api.multi
+    def action_view_receipts(self):
+        self.ensure_one()
+        view = self.env.ref('education_fee.receipt_tree')
+        domain = [('student_id', '=', self.id)]
+        return {
+            'name': _('Receipts'),
+            'domain': domain,
+            'res_model': 'account.invoice',
+            'type': 'ir.actions.act_window',
+            'view_id': view.id,
+            'view_mode': 'tree',
+            'view_type': 'form',
+            'limit': 80,
+        }
+
+    @api.multi
+    def _receipt_count(self):
+        """Return the count of the receipts"""
+        for rec in self:
+            receipt_ids = self.env['account.invoice'].search([('student_id', '=', rec.id), ('state', '!=', 'cancel')])
+            rec.receipt_count = len(receipt_ids)
+
     #add field 
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
@@ -64,6 +87,8 @@ class EducationStudent(models.Model):
                             required=True, domain=[('is_major', '=', True)],
                             help="Choose Major")
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
+    receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
+    
     #add status about the state of student    
     state = fields.Selection([('in_school', 'In School'),('transfer_out', 'Transfer Out'), ('leave', 'Leave'),('expel', 'expel'),('drop_off', 'Drop Off'),('graduate', 'Graduate')],
                              string='State', default='in_school', track_visibility='onchange')
