@@ -122,3 +122,7 @@ education_core.access_education_faculty,access.education.faculty,education_core.
 a_education_faculty_s,access.education.faculty,education_core.model_education_faculty,group_education_student,1,0,0,0
 a_education_faculty_t,access.education.faculty,education_core.model_education_faculty,group_education_teacher,1,0,0,0
 a_education_faculty_dc,access.education.faculty,education_core.model_education_faculty,group_education_teacher_dc,1,0,0,0
+
+a_education_semester_s,access.education.semester,model_education_semester,group_education_student,1,0,0,0
+a_education_semester_t,access.education.semester,model_education_semester,group_education_teacher,1,0,0,0
+a_education_semester_dc,access.education.semester,model_education_semester,group_education_teacher_dc,1,0,0,0

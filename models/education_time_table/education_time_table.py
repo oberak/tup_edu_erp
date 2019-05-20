@@ -16,7 +16,7 @@ class EducationTimeTable(models.Model):
     def get_name(self):
         """To generate name for the model"""
         for i in self:
-            i.name = str(i.class_division.name) + "(" + str(i.academic_year.name) +")"
+            i.name = str(i.class_division.name) + "(" + str(i.semester.name) +")"
 
     @api.onchange('period_id')
     def onchange_period_id(self):
@@ -33,8 +33,8 @@ class EducationTimeTable(models.Model):
     def confirm_timetable(self):
         if len(self.timetable_mon) + len(self.timetable_tue) + len(self.timetable_wed) + len(self.timetable_thur) + len(self.timetable_fri) + len(self.timetable_sat) + len(self.timetable_sun)  < 1:
             raise UserError(_('Please Add Subject schedule'))
-        self.state = 'confirm'
-
+        self.state = 'confirm' 
+        
 class EducationTimeTableSchedule(models.Model):
     _inherit = 'education.timetable.schedule'
     _rec_name = 'period_id'

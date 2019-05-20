@@ -18,9 +18,9 @@
                 <field name="class_division" position ="replace">                                                     
                     <field name="class_division" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 </field>
-                <field name="academic_year" position="attributes">
+                <!-- <field name="academic_year" position="attributes">
                     <attribute name="invisible">True</attribute>
-                </field> 
+                </field>  -->
                 <field name="class_division" position="after">                    
                     <field name="semester" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                    
                 </field>                                 
@@ -152,10 +152,13 @@
             <field name="arch" type="xml">
                 <search string="Education Timetable">
                     <filter string="Current Academic Year" name="education.academic.year" domain="[('academic_year.ay_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
-                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                                       
+                            ('academic_year.ay_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/> 
+                    <!-- <filter string="Current Semester" name="education.semester" domain="[('semester.seme_start_date', '&lt;=', context_today().strftime('%Y-%m-%d')),
+                            ('semester.seme_end_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>                                      -->
                     <separator/>
                     <group expand="1" string="Group By">
-                        <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>                              
+                        <filter string="Academic Year" name="group_academic_year" context="{'group_by':'academic_year'}"/>
+                        <filter string="Semester" name="group_semester" context="{'group_by':'semester'}"/>                              
                     </group>
                 </search>
             </field>
@@ -185,7 +188,7 @@
                                     <ul style="text-align:center !important;">                                    
                                         <li t-if="record.academic_year.raw_value">
                                             Academic Year : <field name="academic_year"/>
-                                        </li>
+                                        </li> 
                                         <li t-if="record.class_division.raw_value">
                                             Class : <field name="class_division"/>
                                         </li>
@@ -208,6 +211,9 @@
                 <field name="academic_year" position="before">                    
                     <field name="semester"/>                                 
                 </field>
+                <field name="academic_year" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field> 
                  <field name="academic_year" position="after">                    
                     <field name="state"/>                    
                 </field>      
