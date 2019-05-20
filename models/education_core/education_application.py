@@ -167,6 +167,12 @@ class StudentApplication(models.Model):
                         'occupation' : sid.occupation,
                         'address' : sid.address,
                         'student_id' : stu_id,                        
+                    })
+            # add class history to student
+            self.env['education.class.history'].create({
+                        'student_id':stu_id,
+                        'academic_year_id':rec.academic_year_id.id,
+                        'class_id': class_id,
                     })   
             
             rec.write({

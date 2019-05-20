@@ -81,8 +81,6 @@
         ## view - education_promotion
         'views/education_promotion/education_promotion.xml',
 
-
-
     ],
     # only loaded in demonstration mode
     'demo': [

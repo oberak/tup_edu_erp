@@ -6,18 +6,20 @@
             <field name="model">education.promotion</field>
             <field name="inherit_id" ref="education_promotion.education_promotion_form"/>
             <field name="arch" type="xml">
-
-            <xpath expr="/form/sheet/notebook" position="inside">
-                <page string="Class History">
-                            <field name="class_history_ids">
-                                <tree editable="bottom">
-                                    <field name="class_id" required="1"/>
-                                    <field name="academic_year_id" required="1"/>
-                                </tree>
-                            </field>
-                </page>
-
-             </xpath>
+                <field name='name' position='after'>                    
+                        <field name="class_id" attrs="{'readonly': [('state','!=', 'draft')]}" 
+                             options="{'no_create_edit': True, 'no_create': True}" />                                      
+                </field>
+            </field>
+        </record>
+        <record id="education_promotion_tree" model="ir.ui.view">
+            <field name="name">education.promotion.tree</field>
+            <field name="model">education.promotion</field>
+            <field name="inherit_id" ref="education_promotion.education_promotion_tree"/>
+            <field name="arch" type="xml">
+                <field name='name' position='after'>                    
+                        <field name="class_id" />                                      
+                </field>
             </field>
         </record>
     </data>

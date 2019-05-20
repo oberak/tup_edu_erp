@@ -9,7 +9,7 @@ class EducationExam(models.Model):
     school_class_division_wise = fields.Selection([('division', 'Class')],
                                                   related='exam_type.school_class_division_wise')       # Remove exam type (Class)
     semester = fields.Many2one('education.semester', string='Semester',
-                                       help="Select the Semester", required=True)  
+                                       help="Select the Semester")  
     
     # add fields
     major_id = fields.Char(string="Major", readonly = True)                    

@@ -15,12 +15,12 @@
                         attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('school_class_division_wise', 'not in', 
                         ['midterm','final'])], 'required': [('school_class_division_wise', 'in', ['midterm','final'])]}"/>
                 </field>
-                <field name="academic_year" position="replace">
+                <!-- <field name="academic_year" position="replace">
                     <field name="semester"
                         attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': ['|', ('school_class_division_wise', 'in', 
                         ['division']), ('exam_type', '=', False)], 'required': [('division_id', '=', False)]}" 
                         options="{'no_create_edit': True, 'no_create':True}"/> 
-                </field>
+                </field> -->
                 <field name="start_date" position="before">  
                     <field name="pro_year"  attrs="{'invisible': [('school_class_division_wise', 'in', ['school'])]}" force_save="1"/>                
                     <field name="major_id" attrs="{'invisible': [('school_class_division_wise', 'in', ['school'])]}" force_save="1"/>

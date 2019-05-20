@@ -51,12 +51,12 @@
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" groups="tup_edu_erp.group_education_student"
                             help="Click to send the application to apply " states="draft" 
-                            attrs="{'invisible': [('state', 'in' , ['apply','fee','verification','major','approve','reject','done'])]}"  />
+                />
             </button>
             
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
-                            string="Send for Verification"
+                            string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
             <button name="send_to_verify" position="after">
