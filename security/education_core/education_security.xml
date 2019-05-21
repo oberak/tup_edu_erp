@@ -99,7 +99,7 @@
     <record id="teacher_exam_request_rule" model="ir.rule">
         <field name="name">Teacher exam request</field>
         <field name="model_id" ref="model_education_exam"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>   
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
     <record id="teacher_exam_valuation_request_rule" model="ir.rule">
@@ -120,10 +120,6 @@
         <field name="name">Student List request</field>
         <field name="model_id" ref="model_education_student"/>
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
         <field name="domain_force">[('major_id','=',user.employee_ids.department_id.ids)]</field>
     </record>
 
@@ -137,5 +133,10 @@
        <field name="perm_create" eval="False"/>
        <field name="perm_unlink" eval="False"/>
        <field name="domain_force">[('email','=',user.login)]</field>
-    </record>  
+    </record> 
+
+    <record id="education_core.education_year_ending_menu" model="ir.ui.menu">       
+        <field name="groups_id" eval="[(4,ref('group_education_aa'))]"/>
+    </record>
+   
 </odoo>
