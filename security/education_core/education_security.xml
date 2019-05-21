@@ -74,13 +74,9 @@
         <field name="name">Teacher class request</field>
         <field name="model_id" ref="model_education_class_division"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
-    
+  
     <!-- Set domain for timetable (teacher)-->
     <record id="teacher_timetable_request_rule" model="ir.rule">
         <field name="name">Teacher timetable request</field>
@@ -116,11 +112,24 @@
     </record>
 
     <!-- Set domain for student list-->
-    <record id="department_teacher_request_rule" model="ir.rule">
+    <record id="department_teacher_student_list_request_rule" model="ir.rule">
         <field name="name">Student List request</field>
         <field name="model_id" ref="model_education_student"/>
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('major_id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
+    <record id="subject_teacher_student_list_request_rule" model="ir.rule">
+        <field name="name">Student List request</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('major_id','=',user.employee_ids.department_id.ids),
+                                    ('class_id','=',user.employee_ids.get_class(user.employee_ids.id))]</field>
+    </record>
+    <record id="student_student_list_request_rule" model="ir.rule">
+        <field name="name">Student List request</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('email','=',user.login)]</field>
     </record>
 
     <!--  set domain for student signup -->
@@ -128,15 +137,12 @@
        <field name="name">Application for student</field>
        <field name="model_id" ref="model_education_application"/>
        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-       <field name="perm_read" eval="True"/>
-       <field name="perm_write" eval="True"/>
-       <field name="perm_create" eval="False"/>
-       <field name="perm_unlink" eval="False"/>
        <field name="domain_force">[('email','=',user.login)]</field>
     </record> 
 
+     <!--  set group for 'Year Ending' menu -->
     <record id="education_core.education_year_ending_menu" model="ir.ui.menu">       
-        <field name="groups_id" eval="[(4,ref('group_education_aa'))]"/>
+        <field name="groups_id" eval="[(3,ref('group_education_aa'))]"/>
     </record>
    
 </odoo>

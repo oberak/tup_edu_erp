@@ -5,6 +5,14 @@ class EmployeeCategory(models.Model):
     _inherit = 'hr.employee'
     _description = "Employee"
     
+    # get student list for subject teacher 
+    @api.multi
+    def get_class(self,values):
+        faculty_id= self.env['education.faculty'].search([('employee_id', '=', values)]).id
+        obj = self.env['education.timetable.schedule'].search([('faculty_id', '=', faculty_id)])
+        class_id = obj.class_division.id
+        return class_id
+       
 
     #add field
     place_of_birth = fields.Char(string='Place Of Birth', required=True, help="Enter Place of Birth")
