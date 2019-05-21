@@ -89,7 +89,7 @@
         <field name="domain_force">[('class_division.class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
     <record id="teacher_timetable_schedule_request_rule" model="ir.rule">
-        <field name="name">Teacher timetable request</field>
+        <field name="name">Teacher timetable schedule request</field>
         <field name="model_id" ref="model_education_timetable_schedule"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('faculty_id.employee_id','=', user.employee_ids.id)]</field>
@@ -135,8 +135,23 @@
        <field name="domain_force">[('email','=',user.login)]</field>
     </record> 
 
-    <record id="education_core.education_year_ending_menu" model="ir.ui.menu">       
+    <record id="education_core.education_year_ending_menu" model="ir.ui.menu">
+        <field name="name">Year Ending</field>
         <field name="groups_id" eval="[(4,ref('group_education_aa'))]"/>
     </record>
+
+    <!-- Set domain for timetable (student)-->
+    <record id="student_timetable_request_rule" model="ir.rule">
+        <field name="name">Student timetable request</field>
+        <field name="model_id" ref="model_education_timetable"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+    </record> 
+    <record id="student_timetable_schedule_request_rule" model="ir.rule">
+        <field name="name">Student timetable schedule request</field>
+        <field name="model_id" ref="model_education_timetable_schedule"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+    </record>  
    
 </odoo>
