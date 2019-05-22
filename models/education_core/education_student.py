@@ -46,15 +46,6 @@ class EducationStudent(models.Model):
             print(s_id.state)           
         return 
     
-    #action for graduate student
-    @api.multi
-    def graduate(self):
-        active_ids = self.ids
-        for sid in active_ids:            
-            s_id = self.env['education.student'].browse(sid)
-            s_id.state = "graduate"
-            print(s_id.state)           
-        return 
    
     @api.multi
     def action_view_receipts(self):
