@@ -20,9 +20,9 @@ class EducationPromotion(models.Model):
     def compute_final_result(self):
         self.state = 'result_computed'
         obj=self.env['education.exam'].search([('academic_year', '=', self.name.id),('division_id', '=', self.class_id.id)])
-        for i in self.env['education.exam.results'].search([('exam_id', '=', obj.id)]):
-            for student in i.division_id.students_details:
-                student.unlink()
+        # for i in self.env['education.exam.results'].search([('exam_id', '=', obj.id)]):
+        #     for student in i.division_id.students_details:
+        #         student.unlink()
         for i in self.env['education.exam.results'].search([('exam_id', '=', obj.id)]):            
             if i.exam_id.exam_type.school_class_division_wise == 'final':
                     if i.overall_pass:
@@ -83,17 +83,12 @@ class EducationPromotion(models.Model):
             promote_division = 7
            
         print('promote division >>>>>>>',promote_division)
+        print('division name >>>>>>>',obj2.division_id.name)
         if obj2.is_last_class:
-            self.env['education.class.division'].create({
-                'name': obj2.name,
-                'actual_strength': obj2.actual_strength,
-                'academic_year_id': self.name.id,
-                'class_id': obj2.is_last_class,
-                'division_id': obj2.division_id.id,
-                'is_last_class': obj2.class_id.id,
-            })
+            pass                        
         else:
-            promote_class= self.env['education.class.division'].create({
+            if obj2.division_id.name != "5BE" :
+                promote_class= self.env['education.class.division'].create({
                             'actual_strength': obj2.actual_strength,
                             'academic_year_id': new_academic_year.id,
                             'class_id': class_id,
@@ -101,12 +96,19 @@ class EducationPromotion(models.Model):
                             'is_last_class': False,
                             'promote_division': promote_division,               
                         })
-        print('>>>>>>>>>>>>>>>>')
-
+            else :                
+                promote_class= self.env['education.class.division'].create({
+                        'actual_strength': obj2.actual_strength,
+                        'academic_year_id': new_academic_year.id,
+                        'class_id': class_id,
+                        'division_id': division_id,
+                        'is_last_class': True,
+                    })
+            
 
         for j in self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', obj.division_id.id)]):
             current_class = self.env['education.class.division'].search([
-                                                    ('name', '=', j.name), ('academic_year_id', '=', j.academic_year_id.id)])
+                                                    ('division_id', '=', j.division_id.id), ('academic_year_id', '=', new_academic_year.id)])
             print('current_class',current_class)
             if j.is_last_class:
                 promotion_class = False
@@ -117,22 +119,34 @@ class EducationPromotion(models.Model):
 
             for k in j.students_details:
                 if k.final_result == 'pass':
-                    # add class history to student
-                    self.env['education.class.history'].create({
-                        'student_id':k.student_id.id,
-                        'academic_year_id':promotion_class.academic_year_id.id,
-                        'class_id': promotion_class.id,
-                    })  
-                    
-                    k.student_id.class_id = promotion_class
-                    print(k.student_id.id,'>>>>>>>> and ',k.student_id.class_id)                
-                    self.env['education.student.final.result'].create({
-                        'student_id': k.student_id.id,
-                        'final_result': 'na',
-                        'division_id':  promotion_class.id,
-                        'academic_year': promotion_class.academic_year_id.id,
+                    if promotion_class == False :
+                        k.student_id.state = 'graduate'
+                        self.env['education.class.history'].create({
+                            'student_id':k.student_id.id,
+                            'academic_year_id':j.academic_year_id.id,
+                            'class_id': j.id,
+                        })               
+                        self.env['education.student.final.result'].create({
+                            'student_id': k.student_id.id,
+                            'final_result': 'na',
+                            'division_id':  j.id,
+                            'academic_year': j.academic_year_id.id,
+                         })    
+                    else :
+                        self.env['education.class.history'].create({
+                            'student_id':k.student_id.id,
+                            'academic_year_id':promotion_class.academic_year_id.id,
+                            'class_id': promotion_class.id,
+                        })                          
+                        k.student_id.class_id = promotion_class
+                        print(k.student_id.id,'>>>>>>>> and ',k.student_id.class_id)                
+                        self.env['education.student.final.result'].create({
+                            'student_id': k.student_id.id,
+                            'final_result': 'na',
+                            'division_id':  promotion_class.id,
+                            'academic_year': promotion_class.academic_year_id.id,
 
-                    })
+                         })
 
                 elif k.final_result == 'fail':
                     k.student_id.class_id = current_class.id
