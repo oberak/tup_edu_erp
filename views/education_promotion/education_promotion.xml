@@ -22,6 +22,12 @@
                 </field>
             </field>
         </record>
+        <menuitem
+                id="education_core.education_year_ending_menu"
+                name="Year Ending"
+                parent="education_core.menu_education_root"
+                sequence="5"
+                groups="tup_edu_erp.group_education_aa" />
     </data>
 </odoo>
    

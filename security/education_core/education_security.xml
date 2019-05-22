@@ -76,6 +76,12 @@
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
+    <record id="teacher_class_request_rule" model="ir.rule">
+        <field name="name">Teacher class request</field>
+        <field name="model_id" ref="model_education_class_division"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('id','=',user.employee_ids.get_class(user.employee_ids.id))]</field>
+    </record>
     <record id="student_class_request_rule" model="ir.rule">
         <field name="name">Student class request</field>
         <field name="model_id" ref="model_education_class_division"/>
