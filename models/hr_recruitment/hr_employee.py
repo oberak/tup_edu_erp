@@ -13,6 +13,7 @@ class EmployeeCategory(models.Model):
         for rec in self.env['education.timetable.schedule'].search([('faculty_id', '=', faculty_id)]):         
             class_id = rec.class_division.id
             class_list.append(class_id)
+        class_list = list(dict.fromkeys(class_list))
         return class_list
        
 
