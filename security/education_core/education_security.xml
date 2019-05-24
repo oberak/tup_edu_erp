@@ -152,11 +152,6 @@
        <field name="domain_force">[('email','=',user.login)]</field>
     </record> 
 
-     <!--  set group for 'Year Ending' menu -->
-    <record id="education_core.education_year_ending_menu" model="ir.ui.menu">       
-        <field name="groups_id" eval="[(3,ref('group_education_aa'))]"/>
-    </record>
-
     <!-- Set domain for timetable (student)-->
     <record id="student_timetable_request_rule" model="ir.rule">
         <field name="name">Student timetable request</field>

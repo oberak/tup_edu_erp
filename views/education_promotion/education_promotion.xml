@@ -6,6 +6,10 @@
             <field name="model">education.promotion</field>
             <field name="inherit_id" ref="education_promotion.education_promotion_form"/>
             <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="name" attrs="{'readonly': [('state','!=', 'draft')]}" 
+                                options="{'no_create_edit': True, 'no_create': True}" />
+                </field>
                 <field name='name' position='after'>                    
                         <field name="class_id" attrs="{'readonly': [('state','!=', 'draft')]}" 
                              options="{'no_create_edit': True, 'no_create': True}" />                                      
@@ -22,6 +26,7 @@
                 </field>
             </field>
         </record>
+       
         <menuitem
                 id="education_core.education_year_ending_menu"
                 name="Year Ending"

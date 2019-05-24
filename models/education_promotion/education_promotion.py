@@ -8,15 +8,28 @@ class EducationPromotion(models.Model):
     _inherit = 'education.promotion'    
     _description = 'Promotion'
 
+    #modify field
+    name = fields.Many2one('education.academic.year', default=lambda self: self.env['education.academic.year']._get_current_ay(), 
+                            string="Academic Year")
+    #add field
     class_id = fields.Many2one('education.class.division', string='Class')
 
-    # @api.onchange('name')
-    # def onchange_class(self):
-    #     for rec in self.env['education.class.division'].search([('academic_year_id', '=', self.name.id)]):
-    #         self.class_id = rec.id       
-    #         print(rec.id)
-    #     return 
+    @api.onchange('name')
+    def onchange_class(self):
+        for record in self:
+            ay_name = self.env['education.class.division'].search([('academic_year_id', '=', record.name.id)])            
+            class_list = []
+            if ay_name :
+                for c_id in ay_name:                   
+                    class_list.append(c_id.id)           
+            vals = {
+                'domain': {
+                    'class_id': [('id', 'in', class_list)]
+                }
+            }
+            return vals 
    
+   #overwrite method
     def compute_final_result(self):
         self.state = 'result_computed'
         obj=self.env['education.exam'].search([('academic_year', '=', self.name.id),('division_id', '=', self.class_id.id)])
@@ -41,11 +54,13 @@ class EducationPromotion(models.Model):
                             'academic_year': i.division_id.academic_year_id.id,
                             'closing_id': self.id,
                         })
-    
+                        
+     #overwrite method
     def close_academic_year(self):
         self.state = 'close'
         name = str(fields.Date.from_string(self.name.ay_end_date).year)+"-" + str(fields.Date.from_string(self.name.ay_end_date).year + 1) 
-        new_academic_year = self.env['education.academic.year'].search([('name', '=',name)])       
+        new_academic_year = self.env['education.academic.year'].search([('name', '=',name)])
+        """ Creating New Academic Year"""       
         if not new_academic_year:
             new_academic_year = self.env['education.academic.year'].create(
                 {
@@ -60,17 +75,17 @@ class EducationPromotion(models.Model):
         print('obj.division_id.id >>>>>>>>>',obj.division_id.id)
         obj2 = self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', obj.division_id.id)])
         print('obj2 >>>>>>>>>>>>',obj2)
-       # For the class is not last_class
+       
         major_id = obj.class_id.major_id.id
+        """ Creating New Batch"""
         promote_batch = self.env['education.class'].create({
                     'ay_id':new_academic_year.id,
                     'major_id':major_id,
                     })
         class_id = promote_batch.id
-        print('class id >>>>>>>>>>>',class_id)
-        division_id = obj2.promote_division.id 
-        print('division id >>>>>>>>>', division_id)       
 
+        """ Program Year or Division_id """       
+        division_id = obj2.promote_division.id           
         if division_id == 2:
             promote_division = 3
         elif division_id == 3:
@@ -81,9 +96,8 @@ class EducationPromotion(models.Model):
             promote_division = 6
         else :
             promote_division = 7
-           
-        print('promote division >>>>>>>',promote_division)
-        print('division name >>>>>>>',obj2.division_id.name)
+        
+        """ Creating New Class"""
         if obj2.is_last_class:
             pass                        
         else:
@@ -105,7 +119,6 @@ class EducationPromotion(models.Model):
                         'is_last_class': True,
                     })
             
-
         for j in self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', obj.division_id.id)]):
             current_class = self.env['education.class.division'].search([
                                                     ('division_id', '=', j.division_id.id), ('academic_year_id', '=', new_academic_year.id)])
