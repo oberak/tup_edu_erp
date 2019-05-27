@@ -93,8 +93,8 @@
     <record id="teacher_timetable_request_rule" model="ir.rule">
         <field name="name">Teacher timetable request</field>
         <field name="model_id" ref="model_education_timetable"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="domain_force">[('class_division.class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>        
+        <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
     <record id="teacher_timetable_schedule_request_rule" model="ir.rule">
         <field name="name">Teacher timetable schedule request</field>
@@ -108,19 +108,19 @@
         <field name="name">Teacher exam request</field>
         <field name="model_id" ref="model_education_exam"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+        <field name="domain_force">[('division_id.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
     <record id="teacher_exam_valuation_request_rule" model="ir.rule">
         <field name="name">Teacher exam valuation request</field>
         <field name="model_id" ref="model_education_exam_valuation"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+        <field name="domain_force">[('division_id.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
     <record id="teacher_exam_results_request_rule" model="ir.rule">
         <field name="name">Teacher exam result request</field>
         <field name="model_id" ref="model_education_exam_results"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
-        <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
+        <field name="domain_force">[('division_id.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
 
     <!-- Set domain for student list-->
@@ -151,6 +151,11 @@
        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
        <field name="domain_force">[('email','=',user.login)]</field>
     </record> 
+
+     <!--  set group for 'Year Ending' menu -->
+    <record id="education_core.education_year_ending_menu" model="ir.ui.menu">       
+        <field name="groups_id" eval="[(3,ref('group_education_aa'))]"/>
+    </record>
 
     <!-- Set domain for timetable (student)-->
     <record id="student_timetable_request_rule" model="ir.rule">

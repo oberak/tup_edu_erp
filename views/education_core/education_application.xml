@@ -46,14 +46,12 @@
                     <field string="Receipts" name="receipt_count" widget="statinfo"/>
                 </button>
             </div>
-
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply major" groups="tup_edu_erp.group_education_student"
                             help="Click to send the application to apply " states="draft" 
                 />
-            </button>
-            
+            </button>            
             <button name="send_to_verify" position="replace">                
                 <button name="send_to_verify" type="object" class="oe_highlight"
                             string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
@@ -72,7 +70,6 @@
                             string="Assign Major" groups="tup_edu_erp.group_education_haa"
                             help="Click to send the application for payment " states="fee"/>                
             </button>
-
             <button name="application_verify" position="replace">                
                 <button name="application_verify" type="object" class="oe_highlight"
                             string="Verify Application" groups="tup_edu_erp.group_education_aa"
@@ -112,7 +109,6 @@
             <field name="medium" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="admission_class" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -131,7 +127,6 @@
             <field name="medium" position="replace">
                 <field name="admission_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-
             <field name="company_id" position="replace">
                 <field name="class_id" attrs="{'readonly': [('state','in' , ['approve','done'])],
                                                 'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
@@ -156,14 +151,18 @@
                         <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
                     <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">
-                        <field name="admission_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />                         
-                        <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />
-                        <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
-                        <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
+                        <group>
+                            <field name="admission_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />                         
+                            <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />
+                            <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
+                            <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="second_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                            <field name="third_choice"    attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                            <field name="forth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
+                            <field name="fifth_choice"  attrs="{'invisible': [('student_type', '=', 'transfer_in')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>   
+                        </group>
                     </group>                        
             </xpath>
             <xpath expr="/form/sheet/group[4]" position="after">
@@ -249,8 +248,7 @@
                         <field name="major_id" options="{'no_create_edit': True, 'no_create': True}"/>                        
                     </group>
                     <footer>
-                <button name="assign_major" string="Ok" type="object" class="oe_highlight" groups="tup_edu_erp.group_education_aa"/>
-                
+                <button name="assign_major" string="Ok" type="object" class="oe_highlight" groups="tup_edu_erp.group_education_aa"/>                
                 <button string="Cancel" class="oe_link" special="cancel"/>
             </footer>
                 </form>
