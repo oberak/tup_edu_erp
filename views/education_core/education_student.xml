@@ -122,14 +122,14 @@
             <separator/>           
         </xpath>
         <xpath expr="//search/group" position="replace">
-         <group expand='0' string='Group by...'>
-                    <filter string='Class' icon="fa-user" domain="[]" context="{'group_by' : 'class_id'}"/>
+        <group expand='0' string='Group by...'>
+                    <filter string='Class' name="group_class" icon="fa-user" domain="[]" context="{'group_by' : 'class_id'}"/>
                     <filter string='Gender' icon="fa-genderless" domain="[]" context="{'group_by' : 'gender'}"/>
                     <filter string='Medium' invisible="1" icon="fa-medium" domain="[]" context="{'group_by' : 'medium'}"/>
                     <filter string='Religion' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religion_id'}"/>
                     <filter string='Caste' invisible="1" icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'caste_id'}"/>
                     <filter string='Mother Tongue' invisible="1" icon="fa fa-language" domain="[]" context="{'group_by' : 'mother_tongue'}"/>
-               </group> 
+        </group> 
         </xpath>
         </field>
     </record>
@@ -176,5 +176,19 @@
                 action = records.expel()
         </field>
         <field name="binding_model_id" ref="education_core.model_education_student"/>
+    </record>
+    <record id="education_core.action_student" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">education.student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="student_search"/>
+        <field name="context">{'create': True, 'search_default_group_class': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student here.
+            </p>
+        </field>
     </record>
 </odoo>
