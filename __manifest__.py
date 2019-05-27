@@ -31,6 +31,7 @@
         'security/education_fee/ir.model.access.csv',
         'security/education_promotion/ir.model.access.csv',
         'security/education_time_table/ir.model.access.csv',
+        'security/education_attendances/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
@@ -42,9 +43,9 @@
         'views/auth_signup/auth_oauth_templates.xml',
 
         ## view - attendance
-        'views/attendance/students_attendance.xml',
-        'views/attendance/student_monthly_attendances.xml',
-        'views/attendance/student_overall_attendances.xml',
+        'views/education_attendances/students_attendance.xml',
+        'views/education_attendances/student_monthly_attendances.xml',
+        'views/education_attendances/student_overall_attendances.xml',
 
         ## view - education_fee
         'views/education_fee/fee_register.xml',

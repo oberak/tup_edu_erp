@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import attendance
+from . import education_attendances
 from . import education_core
 from . import education_fee
 from . import education_promotion
