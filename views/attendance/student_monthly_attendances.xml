@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="education_student_attendances_form" model="ir.ui.view">
+            <field name="name">education_student_attendances_form.form</field>
+            <field name="model">education.student.attendances</field>
+            <field name="arch" type="xml">
+                <form>
+                    <!-- <header>
+                        <button name="overall_attendance" type="object"
+                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('attendance_created', '=', False)]}"
+                            class="oe_highlight" string="Done" />
+                        <button name="set_to_draft" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"
+                            string="Set to Draft" />
+                        <field name="state" readonly="1" widget="statusbar" />
+                    </header> -->
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </group>
+                        <group>
+                            <group>                                
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" />
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="month" />
+                                <field name="stu_m_attendances" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="education_student_attendances_tree" model="ir.ui.view">
+            <field name="name">education_student_attendances_tree.tree</field>
+            <field name="model">education.student.attendances</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="class_division"/>
+                    <field name="student_id"/>                 
+                </tree>
+            </field>
+        </record>
+         <record id="act_monthly_attendances_view" model="ir.actions.act_window">
+            <field name="name">Student Monthly Attendance</field>
+            <field name="res_model">education.student.attendances</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student here.
+            </p>
+        </field>
+        </record>
+        <menuitem id="student_overall_attendances_main_menu" parent="student_attendances_root_menu" name="Overall Attendance"
+                  sequence="4"/>
+
+        <menuitem id="student_monthly_attendance_sub_menu" parent="student_overall_attendances_main_menu"
+                  action="act_monthly_attendances_view" name="Monthly Attendance" sequence="10"/>
+
+       
+    </data>
+</odoo>

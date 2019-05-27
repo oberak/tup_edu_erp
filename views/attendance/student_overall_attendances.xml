@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="education_overall_attendances_form" model="ir.ui.view">
+            <field name="name">education_overall_attendances_form.form</field>
+            <field name="model">education.overall.attendances</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="overall_attendance" type="object" states="draft"
+                            class="oe_highlight" string="Calculate Overall Attendance" 
+                            style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" required="1"  />
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </group>
+                        <group>
+                            <group>                                
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            </group>
+                            <group>
+                                <field name="stu_overall_attendances" readonly= '1' />
+                                <field name="stu_overall_percent" readonly= '1' />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="education_overall_attendances_tree" model="ir.ui.view">
+            <field name="name">education_overall_attendances_tree.tree</field>
+            <field name="model">education.overall.attendances</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="class_division"/>
+                    <field name="student_id"/>                 
+                </tree>
+            </field>
+        </record>
+        <!-- add search view -->
+        <record id="attendance_search" model="ir.ui.view">
+            <field name="name">Student Overall Attendances</field>
+            <field name="model">education.overall.attendances</field>    
+            <field name="arch" type="xml">
+                <search string="Search Subjects">
+                    <group expand='0' string='Group by...'>           
+                        <filter string='Class' name='group_class' icon="fa-user" domain="[]" context="{'group_by' : 'class_division'}"/> 
+                    </group> 
+                </search>       
+            </field>
+        </record>   
+
+         <record id="act_overall_attendances_view" model="ir.actions.act_window">
+            <field name="name">Student Overall Attendance</field>
+            <field name="res_model">education.overall.attendances</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="attendance_search"/>
+            <field name="context">{'search_default_group_class': 1}</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student here.
+            </p>
+        </field>
+        </record>
+        
+        <menuitem id="student_overall_attendance_sub_menu" parent="student_overall_attendances_main_menu"
+                  action="act_overall_attendances_view" name="Overall Attendance" sequence="11"/>
+
+       
+    </data>
+</odoo>

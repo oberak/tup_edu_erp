@@ -43,6 +43,8 @@
 
         ## view - attendance
         'views/attendance/students_attendance.xml',
+        'views/attendance/student_monthly_attendances.xml',
+        'views/attendance/student_overall_attendances.xml',
 
         ## view - education_fee
         'views/education_fee/fee_register.xml',
