@@ -12,7 +12,16 @@ class EducationAcademic(models.Model):
     sequence = fields.Integer(string='Sequence', required=False)
     ay_code = fields.Char(string='Code', required=False, help='Code of academic year', readonly=True)
     active = fields.Boolean(string='Active', default=True)
+    no_students= fields.Integer(compute='_get_student_count', string='Number of student')
 
+    def _get_student_count(self):
+        """Return the number of students in the class"""
+        for rec in self:
+            students = self.env['education.application'].search([('academic_year_id', '=', rec.id)])
+            student_count = len(students) if students else 0
+            rec.update({
+                'no_students': student_count
+            })
     @api.model
     def _get_current_ay(self):
         domain = [
