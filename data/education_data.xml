@@ -70,7 +70,40 @@
         <record id="major_en" model="hr.department">
           <field name="name">English</field>
         </record>
+        <record id="rec" model="tup.job">
+          <field name="name">Rector</field>
+          <field name="salary"></field>
+          <field name="pay_scale"></field>
+        </record>
+        <record id="professor" model="tup.job">
+          <field name="name">Professor</field>
+          <field name="salary">380000</field>
+          <field name="pay_scale">380000-4000</field>
+        </record>
+        <record id="ap" model="tup.job">
+          <field name="name">Associate Professor</field>
+          <field name="salary">340000</field>
+          <field name="pay_scale">340000-4000</field>
+        </record>
+        <record id="l" model="tup.job">
+          <field name="name">Lecturer</field>
+          <field name="salary">308000</field>
+          <field name="pay_scale">308000-4000</field>
+        </record>
+        <record id="al" model="tup.job">
+          <field name="name">Assistant Lecturer</field>
+          <field name="salary">280000</field>
+          <field name="pay_scale">280000-4000</field>
+        </record>
+        <record id="t" model="tup.job">
+          <field name="name">Tutor</field>
+          <field name="salary">180000</field>
+          <field name="pay_scale">180000-4000</field>
+        </record>
+        <record id="d" model="tup.job">
+          <field name="name">Demonstrator</field>
+          <field name="salary">180000</field>
+          <field name="pay_scale">180000-4000</field>
+        </record>
     </data>
-
-
 </odoo>

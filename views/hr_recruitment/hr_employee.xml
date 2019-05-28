@@ -6,14 +6,32 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
-            <!-- -->
+            <!-- --> 
             <field name="coach_id" position="attributes">
                 <attribute name="invisible">True</attribute>
-            </field>            
-            <field name="address_id" position="after">
-                <field name="research_id" attrs="{'readonly': []}" />
-        </field>
+            </field> 
+            <field name="resource_calendar_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="job_id" position="replace">
+                <field name="job_position"/>
+            </field>
+            <field name="job_position" position="after">
+                <field name="degree"/>
+            </field>
+            <field name="address_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>  
+            <field name="identification_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>          
             <field name="passport_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+             <field name="address_home_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="work_location" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
             <field name="bank_account_id" position="attributes">
@@ -25,18 +43,11 @@
             <field name="address_home_id" position="after">
                 <field name="emergency_contact" attrs="{'readonly': []}" />
             </field>
-            <!--  -->
-            <field name="work_phone" position="after">
-                <field name="certificate_level" attrs="{'readonly': []}" />
-            </field>
+            <!--  -->            
             <field name="marital" position="after">
                 <field name="have_child" attrs="{'readonly': []}" />
                 <field name="number_of_children" attrs="{'invisible': [('have_child', '=', False)]}" />
             </field>
-            <field name="certificate_level" position="after">
-                <field name="related_field" attrs="{'readonly': []}" />
-            </field>
-
             <field name="visa_no" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
@@ -44,7 +55,6 @@
                 <attribute name="invisible">True</attribute>
             </field>
             <field name="identification_id" position="after">
-                <field name="graduated_university" attrs="{'readonly': []}" />
                 <field name="height" placeholder="eg. 5 feet 5 inches" attrs="{'readonly': []}" />
                 <field name="hair_color" placeholder="Black" attrs="{'readonly': []}" />
                 <field name="eye_color" placeholder="Black or Blue" attrs="{'readonly': []}" />
@@ -58,48 +68,75 @@
             <xpath expr="//field[@name='country_id']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page string='Education History' name='edu_history' >  
+                    <field name="edu_ids" nolabel="1">
+                        <tree string="Education History" editable="bottom">
+                            <field name="edu_place" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="city" />
+                            <field name="rank" />
+                        </tree>
+                    </field>
+                </page>                     
+            </xpath>
+            <xpath expr="//page[@name='edu_history']" position="after">
+                <page string='Job History' name='job_history'>  
+                    <field name="job_ids" nolabel="1">
+                        <tree string="Job History" editable="bottom">
+                            <field name="job_place" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="position" />
+                        </tree>
+                    </field>
+                </page>                     
+            </xpath>
+            <xpath expr="//page[@name='job_history']" position="after">
+                <page string='Abroad Experience' name='abroad_exp'>  
+                    <field name="abroad_ids" nolabel="1">
+                        <tree string="Abroad Experience" editable="bottom">
+                            <field name="country" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="reason" />
+                            <field name="withdraw_money" />
+                        </tree>
+                    </field>
+                </page>                     
+            </xpath>
+             <xpath expr="//page[@name='abroad_exp']" position="after">
+                <page string='Research Record' name='research'>  
+                    <field name="paper_ids" nolabel="1">
+                        <tree string="Research Record" editable="bottom">
+                            <field name="title" />
+                            <field name="paper_type" />
+                            <field name="name" />
+                            <field name="specialization" />
+                            <field name="pub_date" />
+                            <field name="vol_no" />
+                            <field name="page_range" />
+                        </tree>
+                    </field>
+                </page>                     
+            </xpath>
+            <xpath expr="//page[@name='research']" position="after">
+                <page string='Relationship' name='relation'>  
+                    <field name="relation_ids" nolabel="1">
+                        <tree string="Relationship" editable="bottom">
+                            <field name="name" />
+                            <field name="nationality" />
+                            <field name="relation" />
+                            <field name="gender" />
+                            <field name="occupation" />
+                            <field name="address" />
+                        </tree>
+                    </field>
+                </page>                     
+            </xpath>
         </field>
     </record>
-
-
-       <!-- add paper publicatio record -->
-    <record id="view_tup_hr_paper_publication_tree" model="ir.ui.view">
-        <field name="name">tup.hr.paperpublication.tree</field>
-        <field name="model">hr.paperpublication</field>
-        <field name="arch" type="xml">            
-            <tree string="Paper Publication Record">
-                <field name="title_of_research_article"/>                
-                <field name="author_id"/>
-                <field name="rel_sub"/>
-                <field name="publicated_date"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_tup_hr_paper_publication_form" model="ir.ui.view">
-        <field name="name">tup.hr.paperpublication.form</field>
-        <field name="model">hr.paperpublication</field>
-        <field name="arch" type="xml">
-
-            <form string="Paper Publication Record">
-                    <sheet>
-                        <group col="4" colspan="4">
-                            <field name="title_of_research_article" />
-                            <field name="author_id" />
-                            <field name="rel_sub" />
-                            <field name="publicated_date" />
-                        </group>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>   
-            </form>
-        </field>
-    </record>
-
-    <act_window id="action_hr_paper_publication_record" name="Paper Publication Record" res_model="hr.paperpublication" view_type="form" view_mode="tree,form"/>
-    <menuitem id="menu_hr_paper_publication_record" name="Paper Publication"
-              parent="hr.menu_hr_root" sequence="76" action="action_hr_paper_publication_record"/>
 
 </odoo>
+
