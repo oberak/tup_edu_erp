@@ -134,17 +134,19 @@ class EducationPromotion(models.Model):
                 if k.final_result == 'pass':
                     if promotion_class == False :
                         k.student_id.state = 'graduate'
-                        self.env['education.class.history'].create({
-                            'student_id':k.student_id.id,
+                        self.env['education.graduation'].create({
                             'academic_year_id':j.academic_year_id.id,
                             'class_id': j.id,
+                            'student_id':k.student_id.id,
+                            'nrc_no' : k.student_id.nrc_no,
+                            'f_name' : k.student_id.father_name,
+                            'f_nrc_no' : k.student_id.f_nrc,
+                            'm_name' : k.student_id.mother_name,
+                            'm_nrc_no' : k.student_id.m_nrc,
+                            'address' : k.student_id.per_street,
+                            'mobile' : k.student_id.mobile,
+                            'email' : k.student_id.email,
                         })               
-                        self.env['education.student.final.result'].create({
-                            'student_id': k.student_id.id,
-                            'final_result': 'na',
-                            'division_id':  j.id,
-                            'academic_year': j.academic_year_id.id,
-                         })    
                     else :
                         self.env['education.class.history'].create({
                             'student_id':k.student_id.id,
