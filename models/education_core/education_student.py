@@ -71,6 +71,7 @@ class EducationStudent(models.Model):
             rec.receipt_count = len(receipt_ids)
 
     #add field 
+    name = fields.Char('Name')
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")

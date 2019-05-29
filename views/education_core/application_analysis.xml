@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem name="Reports"
+              id="education_core.menu_application_report" 
+              parent="education_core.menu_education_root" 
+              sequence="6"
+              groups="tup_edu_erp.group_education_aa" />
+
+</odoo>

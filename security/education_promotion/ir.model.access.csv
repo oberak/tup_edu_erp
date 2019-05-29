@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-a_education_promotion_s,access.education.promotion,education_promotion.model_education_promotion,group_education_student,1,0,0,0
+a_education_promotion_s,access.education.promotion,education_promotion.model_education_promotion,group_education_student,0,0,0,0
 a_education_promotion_t,access.education.promotion,education_promotion.model_education_promotion,group_education_teacher,1,0,0,0
 a_education_promotion_aa,access.education.promotion,education_promotion.model_education_promotion,group_education_aa,1,1,1,0
 a_education_promotion_haa,access.education.promotion,education_promotion.model_education_promotion,group_education_haa,1,1,1,1

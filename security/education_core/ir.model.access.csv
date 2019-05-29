@@ -4,7 +4,7 @@ education_core.access_education_mother_tongue,access.education.mother.tongue,edu
 education_core.access_religion_caste,access.religion.caste,education_core.model_religion_caste,education_core.group_education_faculty,0,0,0,0
 
 education_core.access_document_document,access.document.document,education_core.model_document_document,education_core.group_education_faculty,1,0,0,0
-a_document_document_s,access.document.document,education_core.model_document_document,group_education_student,1,0,0,0
+a_document_document_s,access.document.document,education_core.model_document_document,group_education_student,0,0,0,0
 a_document_document_t,access.document.document,education_core.model_document_document,group_education_teacher,1,0,0,0
 a_document_document_dc,access.document.document,education_core.model_document_document,group_education_teacher_dc,1,0,0,0
 a_document_document_aa,access.document.document,education_core.model_document_document,group_education_aa,1,1,1,0
@@ -41,7 +41,7 @@ a_education_syllabus_t,access.education.syllabus,education_core.model_education_
 a_education_syllabus_dc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_dc,1,1,1,0
 
 education_core.access_education_class,access.education.class,education_core.model_education_class,education_core.group_education_faculty,1,0,0,0
-a_education_class_s,access.education.class,education_core.model_education_class,group_education_student,1,0,0,0
+a_education_class_s,access.education.class,education_core.model_education_class,group_education_student,0,0,0,0
 a_education_class_t,access.education.class,education_core.model_education_class,group_education_teacher,1,0,0,0
 a_education_class_aa,access.education.class,education_core.model_education_class,group_education_aa,1,1,1,0
 a_education_class_haa,access.education.class,education_core.model_education_class,group_education_haa,1,1,1,1
@@ -71,11 +71,13 @@ a_education_division_aa,access.education.division,education_core.model_education
 a_education_division_haa,access.education.division,education_core.model_education_division,group_education_haa,1,1,1,1
 
 education_core.access_education_amenities,access.education.amenities,education_core.model_education_amenities,education_core.group_education_faculty,1,0,0,0
+a_education_amenities_s,access.education.amenities,education_core.model_education_amenities,group_education_student,1,0,0,0
 a_education_amenities_t,access.education.amenities,education_core.model_education_amenities,group_education_teacher,1,0,0,0
 a_education_amenities_aa,access.education.amenities,education_core.model_education_amenities,group_education_aa,1,1,1,0
 a_education_amenities_haa,access.education.amenities,education_core.model_education_amenities,group_education_haa,1,1,1,1
 
 education_core.access_education_class_amenities,access.education.class.amenities,education_core.model_education_class_amenities,education_core.group_education_faculty,1,0,0,0
+a_education_class_amenities_s,access.education.class.amenities,education_core.model_education_class_amenities,group_education_student,1,0,0,0
 a_education_class_amenities_t,access.education.class.amenities,education_core.model_education_class_amenities,group_education_teacher,1,0,0,0
 a_education_class_amenities_aa,access.education.class.amenities,education_core.model_education_class_amenities,group_education_aa,1,1,1,0
 a_education_class_amenities_haa,access.education.class.amenities,education_core.model_education_class_amenities,group_education_haa,1,1,1,1
@@ -88,7 +90,7 @@ a_education_application_aa,access.education.application,education_core.model_edu
 a_education_application_haa,access.education.application,education_core.model_education_application,group_education_haa,1,1,1,1
 
 education_core.access_application_reject_reason,access.application.reject.reason,education_core.model_application_reject_reason,education_core.group_education_faculty,0,0,0,0
-a_application_reject_reason_s,access.application.reject.reason,education_core.model_application_reject_reason,group_education_student,1,0,0,0
+a_application_reject_reason_s,access.application.reject.reason,education_core.model_application_reject_reason,group_education_student,0,0,0,0
 a_application_reject_reason_dc,access.application.reject.reason,education_core.model_application_reject_reason,group_education_teacher_dc,1,0,0,0
 a_application_reject_reason_aa,access.application.reject.reason,education_core.model_application_reject_reason,group_education_aa,1,1,1,0
 a_application_reject_reason_haa,access.application.reject.reason,education_core.model_application_reject_reason,group_education_haa,1,1,1,1
@@ -108,7 +110,7 @@ a_education_student_sa,access.education.student,education_core.model_education_s
 a_education_student_fs,access.education.student,education_core.model_education_student,group_education_fs,1,0,0,0
 
 education_core.access_education_student_class,access.education.student.class,education_core.model_education_student_class,education_core.group_education_faculty,1,0,0,0
-a_education_student_class_s,access.education.student.class,education_core.model_education_student_class,group_education_student,1,0,0,0
+a_education_student_class_s,access.education.student.class,education_core.model_education_student_class,group_education_student,0,0,0,0
 a_education_student_class_t,access.education.student.class,education_core.model_education_student_class,group_education_teacher,1,0,0,0
 a_education_student_class_aa,access.education.student.class,education_core.model_education_student_class,group_education_aa,1,1,1,0
 a_education_student_class_haa,access.education.student.class,education_core.model_education_student_class,group_education_haa,1,1,1,1
