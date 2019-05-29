@@ -6,6 +6,11 @@
             <field name="model">education.exam.valuation</field>
             <field name="inherit_id" ref="education_exam.examination_valuation_form"/>
             <field name="arch" type="xml">
+                <field name="exam_id" position="replace">
+                    <field name="exam_id"
+                        attrs="{'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}"
+                        options="{'no_create_edit': True, 'no_create': True}"/>
+                    </field>
                 <field name="class_id" position="attributes">                    
                     <attribute name="invisible">True</attribute>
                 </field> 
