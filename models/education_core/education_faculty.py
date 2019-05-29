@@ -25,3 +25,4 @@ class EducationFaculty(models.Model):
 
     #add field
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Faculty")
+    department_id = fields.Many2one('hr.department', 'Department')

@@ -32,6 +32,7 @@
         'security/education_promotion/ir.model.access.csv',
         'security/education_time_table/ir.model.access.csv',
         'security/education_attendances/ir.model.access.csv',
+        'security/hr_recruitment/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data

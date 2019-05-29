@@ -254,9 +254,24 @@
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
         <field name="domain_force">[('major_id','=', user.get_major(user.login))]</field>
     </record>
-      <!--  set group for 'Application Report' menu -->
+    <!--  set group for 'Application Report' menu -->
     <record id="education_core.menu_application_report" model="ir.ui.menu">
         <field name="name">Reports</field>
         <field name="groups_id" eval="[(3,ref('group_education_aa'))]"/>
     </record>
+     <!-- Set domain for Employee (student)--> 
+    <record id="student_employee_request_rule" model="ir.rule">
+        <field name="name">Student Employee request</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('department_id','=', user.get_major(user.login))]</field>
+    </record>
+     <!-- Set domain for Faculty (student)--> 
+    <record id="student_faculty_request_rule" model="ir.rule">
+        <field name="name">Student Faculty request</field>
+        <field name="model_id" ref="model_education_faculty"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('department_id','=', user.get_major(user.login))]</field>
+    </record>
+    
 </odoo>

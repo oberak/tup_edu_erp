@@ -19,6 +19,7 @@
             <field name="degree" position="replace"/>
             <field name="mother_name" position="after">
                <field name="degree" attrs="{'readonly': []}"/>
+               <field name="department_id" attrs="{'readonly': []}"/>
             </field>
             <xpath expr="//field[@name='last_name']" position="attributes">
                 <attribute name="required">0</attribute>
