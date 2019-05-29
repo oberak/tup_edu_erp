@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="education_graduation_tree" model="ir.ui.view">
-            <field name="name">education.graduation.tree</field>
-            <field name="model">education.graduation</field>
+        <record id="education_graduation_class_tree" model="ir.ui.view">
+            <field name="name">education.graduation.class.tree</field>
+            <field name="model">education.graduation.class</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="student_id"/>
-                    <field name="nrc_no"/>
-                    <field name="class_id"/>
-                    <field name="academic_year"/>                 
+                    <field name="academic_year"/>
+                    <field name="class_id"/>                 
                 </tree>
+            </field>
+        </record>
+        <record id="education_graduation_class_form" model="ir.ui.view">
+            <field name="name">education.graduation.class.form</field>
+            <field name="model">education.graduation.class</field>
+            <field name="arch" type="xml">
+                <form string='Graduation'>
+                    <sheet string="Graduation Class">  
+                        <group>
+                            <field name="academic_year"/>
+                        </group>   
+                        <group>
+                            <field name="class_id"/>
+                        </group>
+                        <notebook>
+                            <page string='Graduated Students' name='grad_students'>  
+                                <field name="student_ids" nolabel="1">
+                                    <tree string="Graduated Student" editable="bottom">
+                                        <field name="student_id" readonly="1"/>
+                                        <field name="nrc_no" readonly="1"/>
+                                        <field name="f_name" readonly="1"/>
+                                        <field name="f_nrc_no" readonly="1"/>
+                                        <field name="m_name" readonly="1" />  
+                                        <field name="m_nrc_no" readonly="1" />
+                                        <field name="email" readonly="1"/> 
+                                        <field name="address" readonly="1" />          
+                                    </tree>
+                                </field>
+                            </page>      
+                        </notebook>
+                    </sheet>
+                </form>
             </field>
         </record>
         <record id="education_graduation_form" model="ir.ui.view">
@@ -23,11 +53,7 @@
                             <group>
                                 <field name="student_id" readonly="1"/>
                                 <field name="nrc_no" readonly="1"/>                                
-                            </group>
-                            <group>
-                                <field name="class_id" readonly="1"/>
-                                <field name="academic_year" readonly="1"/>   
-                            </group>                                 
+                            </group>                              
                         </group>
                         <group string="Parents Info">
                             <group>
@@ -48,8 +74,8 @@
             </field>
         </record>
         <record id="act_graduation_view" model="ir.actions.act_window">
-            <field name="name">Graduated Students</field>
-            <field name="res_model">education.graduation</field>
+            <field name="name">Classes</field>
+            <field name="res_model">education.graduation.class</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
