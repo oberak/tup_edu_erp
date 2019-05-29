@@ -31,7 +31,7 @@
                         <group>
                             <field name="name"/>
                             <field name="semester"/>
-                            <field name="academic_year"/>                           
+                            <field name="academic_year" options="{'no_create_edit': True, 'no_create':True}"/>                           
                             <!-- <field name="sequence"/> -->
                         </group>
                         <group>
