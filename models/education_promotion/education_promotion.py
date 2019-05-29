@@ -124,17 +124,17 @@ class EducationPromotion(models.Model):
         for j in self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', obj.division_id.id)]):
             if j.is_last_class:
                 promotion_class = False
+                graduate_class = self.env['education.graduation.class'].create({
+                                    'academic_year':j.academic_year_id.id,
+                                    'class_id': j.id,
+                                })  
             else:
                 promotion_class = self.env['education.class.division'].search([('name', '=', promote_class.name),
                                                                 ('academic_year_id', '=', new_academic_year.id)])
             
             for k in j.students_details:
                 if k.final_result == 'pass':
-                    if promotion_class == False:                         
-                        graduate_class = self.env['education.graduation.class'].create({
-                                    'academic_year':j.academic_year_id.id,
-                                    'class_id': j.id,
-                                })                        
+                    if promotion_class == False:                                               
                         k.student_id.state = "graduate"
                         self.env['education.graduation'].create({
                             'graduate_class_id': graduate_class.id,                           

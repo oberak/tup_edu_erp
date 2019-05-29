@@ -18,10 +18,10 @@
                 <form string='Graduation'>
                     <sheet string="Graduation Class">  
                         <group>
-                            <field name="academic_year"/>
+                            <field name="academic_year" readonly= '1' />
                         </group>   
                         <group>
-                            <field name="class_id"/>
+                            <field name="class_id" readonly= '1'/>
                         </group>
                         <notebook>
                             <page string='Graduated Students' name='grad_students'>  
