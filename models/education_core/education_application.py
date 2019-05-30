@@ -23,7 +23,6 @@ class StudentApplication(models.Model):
             
             rec.write({
                 'state': 'apply',
-                'admission_date':fields.Datetime.now,
                 })
         return
     
