@@ -12,12 +12,41 @@ class EducationTimeTable(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
                              default='draft')
     semester = fields.Many2one('education.semester', string="Semester")                       
+    major_id = fields.Many2one('hr.department','Major')                      
 
     def get_name(self):
         """To generate name for the model"""
         for i in self:
             i.name = str(i.class_division.name) + "(" + str(i.semester.name) +")"
 
+  
+    @api.onchange('class_division')
+    @api.constrains('class_division')
+    def onchange_class_division(self):
+        """Gets the major_id"""
+        for i in self:
+            i.academic_year = i.class_division.academic_year_id
+            obj = self.env['education.class.division'].search([('id','=',i.class_division.id)])
+            obj2 = self.env['education.class'].search([('id','=',obj.class_id.id)])
+            i.major_id =obj2.major_id.id
+        return
+
+    @api.onchange('academic_year')
+    def onchange_academic_year(self):
+        """Gets the Semesters"""
+        for record in self:
+            obj = self.env['education.semester'].search([('academic_year', '=', record.academic_year.id)])            
+            sem_list = []
+            if obj :
+                for sem_id in obj:                   
+                    sem_list.append(sem_id.id)           
+            vals = {
+                'domain': {
+                    'semester': [('id', 'in', sem_list)]
+                }
+            }
+            return vals 
+ 
     @api.onchange('period_id')
     def onchange_period_id(self):
         """Gets the start and end time of the period"""

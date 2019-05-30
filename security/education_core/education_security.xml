@@ -70,10 +70,10 @@
     </record>
 
     <!-- Set domain to same department for Teachers -->
-    <record id="teacher_class_request_rule" model="ir.rule">
+    <record id="teacher_dc_class_request_rule" model="ir.rule">
         <field name="name">Teacher class request</field>
         <field name="model_id" ref="model_education_class_division"/>
-        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
     <record id="teacher_class_request_rule" model="ir.rule">
@@ -101,7 +101,20 @@
         <field name="model_id" ref="model_education_timetable_schedule"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('faculty_id.employee_id','=', user.employee_ids.id)]</field>
-    </record> 
+    </record>
+    <!-- Set domain for timetable (teacher_dc)-->
+    <record id="teacher_dc_timetable_request_rule" model="ir.rule">
+        <field name="name">Department Chair timetable request</field>
+        <field name="model_id" ref="model_education_timetable"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('major_id','in', user.employee_ids.department_id.ids)]</field>
+    </record>
+    <record id="teacher_dc_timetable_schedule_request_rule" model="ir.rule">
+        <field name="name">Department Chair timetable schedule request</field>
+        <field name="model_id" ref="model_education_timetable_schedule"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('timetable_id.major_id','in', user.employee_ids.department_id.ids)]</field>
+    </record>  
 
     <!-- Set domain for exam (teacher)-->
     <record id="teacher_exam_request_rule" model="ir.rule">

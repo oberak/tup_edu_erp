@@ -21,7 +21,8 @@
                 <!-- <field name="academic_year" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </field>  -->
-                <field name="class_division" position="after">                    
+                <field name="class_division" position="after">
+                    <field name="major_id" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_create': True}"/>                    
                     <field name="semester" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_create': True}"/>                    
                 </field>                                 
                 <xpath expr="//page[1]" position="replace">
