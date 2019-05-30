@@ -137,6 +137,13 @@
             </xpath>
         </field>
     </record>
+    
+     <menuitem
+            id="hr.menu_hr_root"
+            name="Employees"
+            groups="tup_edu_erp.group_education_hsa"
+            web_icon="hr,static/description/icon.png"
+            sequence="75"/>
 
 </odoo>
 

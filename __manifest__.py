@@ -32,7 +32,7 @@
         'security/education_promotion/ir.model.access.csv',
         'security/education_time_table/ir.model.access.csv',
         'security/education_attendances/ir.model.access.csv',
-        'security/hr_recruitment/ir.model.access.csv',
+        'security/hr/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data
@@ -53,7 +53,10 @@
 
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
-        'views/hr_recruitment/hr_employee.xml',
+        
+
+        # view - hr
+        'views/hr/hr_views.xml',
 
         ## view - education_core
         'views/education_core/education_application.xml',

@@ -259,6 +259,11 @@
         <field name="name">Reports</field>
         <field name="groups_id" eval="[(3,ref('group_education_aa'))]"/>
     </record>
+     <!--  set group for 'Employee' menu -->
+    <record id="hr.menu_hr_root" model="ir.ui.menu">
+        <field name="name">Employee</field>
+        <field name="groups_id" eval="[(3,ref('group_education_hsa'))]"/>
+    </record>
      <!-- Set domain for Employee (student)--> 
     <record id="student_employee_request_rule" model="ir.rule">
         <field name="name">Student Employee request</field>
