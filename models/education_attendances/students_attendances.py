@@ -47,8 +47,6 @@ class EducationStudentsAttendance(models.Model):
                     }
                 }
                 return vals
-
-  
     # Naming Class/Attendance_date
     def get_name(self):
         """To generate name for the model"""

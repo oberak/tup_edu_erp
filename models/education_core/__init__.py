@@ -8,3 +8,4 @@ from . import education_student_class
 from . import education_subject
 from . import education_student
 from . import education_semester
+from . import education_documents

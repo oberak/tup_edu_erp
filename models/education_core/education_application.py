@@ -8,15 +8,6 @@ class StudentApplication(models.Model):
     _inherit = 'education.application'
     _description = 'Applications for the TUP admission'
 
-    #change status depends on transfer_in student
-    @api.onchange('student_type','state')
-    def on_change_status(self):
-        for rec in self:
-            if rec.student_type == 'transfer_in':
-                rec.state= 'apply'
-                # print(rec.state)
-            return
-   
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
     def apply_major(self, vals):
@@ -31,7 +22,8 @@ class StudentApplication(models.Model):
             self.env['education.application'].update(values)
             
             rec.write({
-                'state': 'apply'
+                'state': 'apply',
+                'admission_date':fields.Datetime.now,
                 })
         return
     
@@ -213,7 +205,7 @@ class StudentApplication(models.Model):
             rec.receipt_count = len(receipt_ids)
 
     # add fields
-    nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+    nrc_no = fields.Char(string='NRC Number',  help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
@@ -222,6 +214,7 @@ class StudentApplication(models.Model):
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
                             default=lambda self: self.env['education.academic.year']._get_current_ay(),
                             help="Select the Academic Year")
+    admission_date = fields.Datetime('Admission Date')
     medium = fields.Many2one('education.medium', string="Medium", required=False,
                              help="Choose the Medium of class, like English, Hindi etc") # remove required
     sec_lang = fields.Many2one('education.subject', string="Second language",
@@ -281,6 +274,7 @@ class StudentApplication(models.Model):
     
     _sql_constraints = [
         ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
+        ('nrc_no', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),
     ]
 
     #add fields for parent's info

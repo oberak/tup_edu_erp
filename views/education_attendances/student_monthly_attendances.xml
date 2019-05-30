@@ -46,11 +46,25 @@
                 </tree>
             </field>
         </record>
+         <!-- add search view -->
+        <record id="attendance_search" model="ir.ui.view">
+            <field name="name">Student Monthly Attendances</field>
+            <field name="model">education.student.attendances</field>    
+            <field name="arch" type="xml">
+                <search string="Search Subjects">
+                    <group expand='0' string='Group by...'>           
+                        <filter string='Class' name='group_class' icon="fa-user" domain="[]" context="{'group_by' : 'class_division'}"/> 
+                    </group> 
+                </search>       
+            </field>
+        </record>   
          <record id="act_monthly_attendances_view" model="ir.actions.act_window">
             <field name="name">Student Monthly Attendance</field>
             <field name="res_model">education.student.attendances</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+             <field name="search_view_id" ref="attendance_search"/>
+            <field name="context">{'search_default_group_class': 1}</field>
             <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student here.

@@ -48,7 +48,9 @@
             </div>
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
-                            string="Send to apply major" groups="tup_edu_erp.group_education_student"
+                            string="Send to apply" 
+                            groups="tup_edu_erp.group_education_student,tup_edu_erp.group_education_aa"
+                            attrs="{'invisible': [('student_type', '=' ,'transfer_in')]}"
                             help="Click to send the application to apply " states="draft" 
                 />
             </button>            
@@ -58,14 +60,12 @@
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
             <button name="send_to_verify" position="after">
-                <button name="paid_fee" type="object" class="oe_highlight"  string="Payment for Tution Fee[for test]" 
-                        help="Click to send the application for payment " states="verification"/>
                 <button name="%(receipt_wizard_action_button)d" type="action" class="oe_highlight"  string="Create receipt"
                         context="{'active_id':active_id}"
                         help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
                         />
             </button>
-            <button name="paid_fee" position="after">                
+            <button name="%(receipt_wizard_action_button)d" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
                             string="Assign Major" groups="tup_edu_erp.group_education_haa"
                             help="Click to send the application for payment " states="fee"/>                

@@ -4,7 +4,7 @@ education_core.access_education_mother_tongue,access.education.mother.tongue,edu
 education_core.access_religion_caste,access.religion.caste,education_core.model_religion_caste,education_core.group_education_faculty,0,0,0,0
 
 education_core.access_document_document,access.document.document,education_core.model_document_document,education_core.group_education_faculty,1,0,0,0
-a_document_document_s,access.document.document,education_core.model_document_document,group_education_student,0,0,0,0
+a_document_document_s,access.document.document,education_core.model_document_document,group_education_student,1,1,0,0
 a_document_document_t,access.document.document,education_core.model_document_document,group_education_teacher,1,0,0,0
 a_document_document_dc,access.document.document,education_core.model_document_document,group_education_teacher_dc,1,0,0,0
 a_document_document_aa,access.document.document,education_core.model_document_document,group_education_aa,1,1,1,0

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model='ir.ui.view' id='education_documents_form_view'>
+        <field name="name">education.documents.form</field>
+        <field name="model">education.documents</field>
+        <field name="inherit_id" ref="education_core.education_documents_form_view"/>
+        <field name="arch" type="xml">
+            <button name="verify_document" position="replace">
+                <button name="verify_document" type="object" class="oe_highlight"
+                            string="Verify" groups="tup_edu_erp.group_education_aa"
+                            help="Click to verify the document"
+                            states="draft,correction"/>
+            </button>
+            <button name="need_correction" position="replace">
+                <button name="need_correction" type="object" class="oe_highlight"
+                            string="Need Correction" groups="tup_edu_erp.group_education_aa"
+                            help="Need correction of the document"
+                            states="draft"/>
+            </button>
+            <button name="hard_copy_returned" position="replace">
+                <button name="hard_copy_returned" type="object" class="oe_highlight"
+                            string="Hard copy Returned" groups="base.group_user"
+                            help="Hard copy of documents returned"
+                            attrs="{'invisible':['|', ('has_hard_copy', '=', False), ('state', '!=', 'done')]}"/>
+            </button>
+        </field>
+    </record>
+</odoo>
