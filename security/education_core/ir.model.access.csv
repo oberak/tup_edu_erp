@@ -132,9 +132,9 @@ a_education_semester_s,access.education.semester,model_education_semester,group_
 a_education_semester_t,access.education.semester,model_education_semester,group_education_teacher,1,0,0,0
 a_education_semester_dc,access.education.semester,model_education_semester,group_education_teacher_dc,1,0,0,0
 
-a_account_invoice_t,access.account.invoice,model_account_invoice,group_education_t,1,0,0,0
-a_account_invoice_dc,access.account.invoice,model_account_invoice,group_education_dc,1,0,0,0
+a_account_invoice_t,access.account.invoice,model_account_invoice,group_education_teacher,1,0,0,0
+a_account_invoice_dc,access.account.invoice,model_account_invoice,group_education_teacher_dc,1,0,0,0
 a_account_invoice_aa,access.account.invoice,model_account_invoice,group_education_aa,1,0,0,0
 a_account_invoice_haa,access.account.invoice,model_account_invoice,group_education_haa,1,0,0,0
 a_account_invoice_fs,access.account.invoice,model_account_invoice,group_education_fs,1,1,1,0
-a_account_invoice_hf,access.account.invoice,model_account_invoice,group_education_hf,1,1,1,1
+a_account_invoice_hfs,access.account.invoice,model_account_invoice,group_education_hfs,1,1,1,1
