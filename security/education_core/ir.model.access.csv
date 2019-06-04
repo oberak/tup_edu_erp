@@ -38,7 +38,15 @@ a_education_subject_dc,access.education.subject,education_core.model_education_s
 education_core.access_education_syllabus,access.education.syllabus,education_core.model_education_syllabus,education_core.group_education_faculty,1,0,0,0
 a_education_syllabus_s,access.education.syllabus,education_core.model_education_syllabus,group_education_student,1,0,0,0
 a_education_syllabus_t,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher,1,0,0,0
-a_education_syllabus_dc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_dc,1,1,1,0
+a_education_syllabus_dc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_dc,1,1,1,1
+a_education_syllabus_aa,access.education.syllabus,education_core.model_education_syllabus,group_education_aa,1,0,0,0
+a_education_syllabus_haa,access.education.syllabus,education_core.model_education_syllabus,group_education_haa,1,0,0,0
+
+a_education_syllabuses_s,access.education.syllabuses,model_education_syllabuses,group_education_student,1,0,0,0
+a_education_syllabuses_t,access.education.syllabuses,model_education_syllabuses,group_education_teacher,1,0,0,0
+a_education_syllabuses_dc,access.education.syllabuses,model_education_syllabuses,group_education_teacher_dc,1,1,1,1
+a_education_syllabuses_aa,access.education.syllabuses,model_education_syllabuses,group_education_aa,1,0,0,0
+a_education_syllabuses_haa,access.education.syllabuses,model_education_syllabuses,group_education_haa,1,0,0,0
 
 education_core.access_education_class,access.education.class,education_core.model_education_class,education_core.group_education_faculty,1,0,0,0
 a_education_class_s,access.education.class,education_core.model_education_class,group_education_student,0,0,0,0
@@ -88,7 +96,7 @@ a_education_class_amenities_haa,access.education.class.amenities,education_core.
 education_core.access_education_application,access.education.application,education_core.model_education_application,education_core.group_education_faculty,0,0,0,0
 a_education_application_s,access.education.application,education_core.model_education_application,group_education_student,1,1,0,0
 a_education_application_dc,access.education.application,education_core.model_education_application,group_education_teacher_dc,1,0,0,0
-a_education_application_fs,access.education.application,education_core.model_education_application,group_education_fs,1,0,0,0
+a_education_application_fs,access.education.application,education_core.model_education_application,group_education_fs,1,1,0,0
 a_education_application_aa,access.education.application,education_core.model_education_application,group_education_aa,1,1,1,0
 a_education_application_haa,access.education.application,education_core.model_education_application,group_education_haa,1,1,1,1
 
@@ -131,10 +139,20 @@ a_education_faculty_dc,access.education.faculty,education_core.model_education_f
 a_education_semester_s,access.education.semester,model_education_semester,group_education_student,1,0,0,0
 a_education_semester_t,access.education.semester,model_education_semester,group_education_teacher,1,0,0,0
 a_education_semester_dc,access.education.semester,model_education_semester,group_education_teacher_dc,1,0,0,0
+a_education_semester_haa,access.education.semester,model_education_semester,group_education_haa,1,1,1,1
+a_education_semester_hsa,access.education.semester,model_education_semester,group_education_hsa,1,0,0,0
 
+a_account_invoice_s,access.account.invoice,model_account_invoice,group_education_student,1,0,0,0
 a_account_invoice_t,access.account.invoice,model_account_invoice,group_education_teacher,1,0,0,0
 a_account_invoice_dc,access.account.invoice,model_account_invoice,group_education_teacher_dc,1,0,0,0
 a_account_invoice_aa,access.account.invoice,model_account_invoice,group_education_aa,1,0,0,0
 a_account_invoice_haa,access.account.invoice,model_account_invoice,group_education_haa,1,0,0,0
 a_account_invoice_fs,access.account.invoice,model_account_invoice,group_education_fs,1,1,1,0
 a_account_invoice_hfs,access.account.invoice,model_account_invoice,group_education_hfs,1,1,1,1
+
+a_account_journal_t,access.account.journal,account.model_account_journal,group_education_teacher,1,0,0,0
+a_account_journal_dc,access.account.journal,account.model_account_journal,group_education_teacher_dc,1,0,0,0
+a_account_journal_aa,access.account.journal,account.model_account_journal,group_education_aa,1,0,0,0
+a_account_journal_haa,access.account.journal,account.model_account_journal,group_education_haa,1,0,0,0
+a_account_journal_fs,access.account.journal,account.model_account_journal,group_education_fs,1,1,1,0
+a_account_journal_hfs,access.account.journal,account.model_account_journal,group_education_hfs,1,1,1,1
