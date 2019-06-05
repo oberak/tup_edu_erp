@@ -9,9 +9,10 @@
                 <xpath expr="/form/sheet" position="before">
                     <header>                       
                         <button name="confirm_timetable" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}"
-                                class="oe_highlight" string="Confirm" confirm="After have confirmed, you can't modify. Do you want to proceed?" help="Confirm Timetable"/>
+                                class="oe_highlight" string="Confirm" confirm="After have confirmed, you can't modify. Do you want to proceed?" 
+                                groups="tup_edu_erp.group_education_teacher_dc" help="Confirm Timetable"/>
                         <button name="close_timetable" type="object" attrs="{'invisible': [('state', '!=', 'confirm')]}"
-                                string="Done"/>                    
+                                string="Done" groups="tup_edu_erp.group_education_teacher_dc"/>                    
                         <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,confirm,done"/>
                     </header>
                 </xpath> 
