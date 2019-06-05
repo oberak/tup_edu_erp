@@ -6,24 +6,27 @@ from odoo.exceptions import ValidationError
 class StudentApplication(models.Model):
     _name = 'education.application'
     _inherit = 'education.application'
+    _order = 'total_marks desc'
     _description = 'Applications for the TUP admission'
 
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
     def apply_major(self, vals):
-        for rec in self:
-            values = {
-                    'first_choice': rec.first_choice,
-                    'second_choice': rec.second_choice,
-                    'third_choice': rec.third_choice,
-                    'forth_choice': rec.forth_choice,
-                    'fifth_choice': rec.fifth_choice,
-                    }
-            self.env['education.application'].update(values)
-            
-            rec.write({
-                'state': 'apply',
-                })
+        for rec in self:         
+            if  rec.first_choice.id == False or rec.second_choice.id == False or rec.third_choice.id == False:
+                raise ValidationError(_('Student needs to apply at least three majors'))            
+            else :
+                values = {
+                        'first_choice': rec.first_choice,
+                        'second_choice': rec.second_choice,
+                        'third_choice': rec.third_choice,
+                        'forth_choice': rec.forth_choice,
+                        'fifth_choice': rec.fifth_choice,
+                        }
+                self.env['education.application'].update(values)                
+                rec.write({
+                    'state': 'apply',
+                    })
         return
     
     # Override method for res.partner
@@ -41,8 +44,9 @@ class StudentApplication(models.Model):
                 'mobile': rec.mobile,
                 'phone': rec.phone,
             }
-            partner = self.env['res.partner'].create(values)
-            rec.partner_id = partner.id
+            #partner = self.env['res.partner'].create(values)
+            #print(partner.id,'>>>>>>>>>>in partner >>>')
+            #rec.partner_id = partner.id
         
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
@@ -270,10 +274,10 @@ class StudentApplication(models.Model):
     admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
     total_marks = fields.Char(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
-    
+
     _sql_constraints = [
-        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
-        ('nrc_no', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),
+        ('admission_no_uniq', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
+        ('nrc_no_uniq', 'unique(nrc_no)', "Another Student already exists with this NRC No !")
     ]
 
     #add fields for parent's info

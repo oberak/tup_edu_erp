@@ -135,6 +135,8 @@ class TupAuthSignupHome(AuthSignupHome):
             student_id = request.env['education.application'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
         student_id.email = values.get('login')
         student_id.is_registered = True
+        partner_id = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])
+        student_id.partner_id = partner_id.id
         request.env['education.application'].update(student_id)
         request.env.cr.commit()     # as authenticate will use its own cursor we need to commit the current transaction
         uid = request.session.authenticate(db, login, password)
