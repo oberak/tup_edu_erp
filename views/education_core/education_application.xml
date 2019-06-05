@@ -22,7 +22,6 @@
             </field>            
         </field>
     </record>
-
     <!-- Create receipt button action -->
     <record id="receipt_wizard_action_button" model="ir.actions.act_window">
         <field name="name">Application fee</field>
@@ -49,8 +48,7 @@
             <button name="send_to_verify" position="before">                
                 <button name="apply_major" type="object" class="oe_highlight"
                             string="Send to apply" 
-                            groups="tup_edu_erp.group_education_student,tup_edu_erp.group_education_aa"
-                            
+                            groups="tup_edu_erp.group_education_student,tup_edu_erp.group_education_aa"                            
                             help="Click to send the application to apply " states="draft" 
                 />
             </button>            
@@ -72,7 +70,7 @@
             </button>
             <button name="application_verify" position="replace">                
                 <button name="application_verify" type="object" class="oe_highlight"
-                            string="Verify Application" groups="tup_edu_erp.group_education_aa"
+                            string="Verify Application" groups="tup_edu_erp.group_education_haa"
                             help="Click to verify the application and documents"
                             states="major"/>                           
             </button>
@@ -112,15 +110,12 @@
             <field name="admission_class" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-         
             <field name="prev_school" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="sec_lang" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
-
             <field name="admission_date" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>

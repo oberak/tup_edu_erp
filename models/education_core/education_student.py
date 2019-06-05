@@ -45,8 +45,7 @@ class EducationStudent(models.Model):
             s_id.state = "expel"
             print(s_id.state)           
         return 
-    
-   
+        
     @api.multi
     def action_view_receipts(self):
         self.ensure_one()
@@ -79,16 +78,22 @@ class EducationStudent(models.Model):
                             help="Choose Major")
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
-    
+
+    _sql_constraints = [
+        ('nrc_no_uniq', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),
+        ('student_id_uniq', 'unique(student_id)', "Another Student already exists with this student_id !")
+    ]
     #add status about the state of student    
     state = fields.Selection([('in_school', 'In School'),('transfer_out', 'Transfer Out'), ('leave', 'Leave'),('expel', 'expel'),('drop_off', 'Drop Off'),('graduate', 'Graduate')],
                              string='State', default='in_school', track_visibility='onchange')
-
 
     #modify fields
     medium = fields.Many2one('education.medium', string="Medium", required=False)
     sec_lang = fields.Many2one('education.subject', string="Second language", required=False, domain=[('is_language', '=', True)])
     mother_tongue = fields.Many2one('education.mother.tongue', string="Mother Tongue", required=False, domain=[('is_language', '=', True)])
+    blood_group = fields.Selection([('a+', 'A+'), ('a-', 'A-'), ('b+', 'B+'), ('o+', 'O+'), ('o-', 'O-'),
+                                    ('ab-', 'AB-'), ('ab+', 'AB+')],
+                                   string='Blood Group', required=False, default='a+', track_visibility='onchange')
 
     #parent's Info
     f_nrc = fields.Char(string='Father NRC Number')
