@@ -133,50 +133,6 @@
         </xpath>
         </field>
     </record>
-    <record id="ir_actions_server_transfer_out" model="ir.actions.server">
-        <field name="name">Transfer Out</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_education_student"/>
-        <field name="state">code</field>
-        <field name="code">
-            if records:
-                action = records.transfer_out()
-        </field>
-        <field name="binding_model_id" ref="education_core.model_education_student"/>
-    </record> 
-    <record id="ir_actions_server_drop_off" model="ir.actions.server">
-        <field name="name">Drop Off</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_education_student"/>
-        <field name="state">code</field>
-        <field name="code">
-            if records:
-                action = records.drop_off()
-        </field>
-        <field name="binding_model_id" ref="education_core.model_education_student"/>
-    </record>
-    <record id="ir_actions_server_leave" model="ir.actions.server">
-        <field name="name">Leave</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_education_student"/>
-        <field name="state">code</field>
-        <field name="code">
-            if records:
-                action = records.leave()
-        </field>
-        <field name="binding_model_id" ref="education_core.model_education_student"/>
-    </record>
-    <record id="ir_actions_server_expel" model="ir.actions.server">
-        <field name="name">Expel</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_education_student"/>
-        <field name="state">code</field>
-        <field name="code">
-            if records:
-                action = records.expel()
-        </field>
-        <field name="binding_model_id" ref="education_core.model_education_student"/>
-    </record>
     <record id="education_core.action_student" model="ir.actions.act_window">
         <field name="name">Student</field>
         <field name="res_model">education.student</field>
@@ -191,4 +147,29 @@
             </p>
         </field>
     </record>
+    <!-- add wizard view for State of student-->
+    <!-- 'Student State' Action on Student list  -->
+    <record model="ir.ui.view" id="wizard_form_view">
+        <field name="name">wizard.form</field>
+        <field name="model">education.student.state</field>
+        <field name="arch" type="xml">
+            <form string="Student State">
+                <group>
+                    <field name="student_state"/>                        
+                </group>
+                <footer>
+            <button name="set_student_state" string="Ok" type="object" class="oe_highlight" groups="tup_edu_erp.group_education_haa"/>                
+            <button string="Cancel" class="oe_link" special="cancel"/>
+        </footer>
+            </form>
+        </field>
+    </record>
+     <act_window id="action_student_state"
+        name="Student State"
+        src_model="education.student"
+        res_model="education.student.state"
+        view_type="form" view_mode="form"
+        key2="client_action_multi"
+        multi="True" 
+        target="new"/>
 </odoo>

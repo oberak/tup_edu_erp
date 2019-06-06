@@ -5,46 +5,6 @@ class EducationStudent(models.Model):
     _name = 'education.student'
     _inherit = 'education.student'
     _description = 'Student Form'
-
-    #action for drop_off student
-    @api.multi
-    def drop_off(self):
-        active_ids = self.ids
-        for sid in active_ids:            
-            s_id = self.env['education.student'].browse(sid)
-            s_id.state = "drop_off"
-            print(s_id.state)           
-        return 
-
-    #action for transfer_out student
-    @api.multi
-    def transfer_out(self):
-        active_ids = self.ids
-        for sid in active_ids:            
-            s_id = self.env['education.student'].browse(sid)
-            s_id.state = "transfer_out"
-            print(s_id.state)           
-        return 
-    
-    #action for leave student
-    @api.multi
-    def leave(self):
-        active_ids = self.ids
-        for sid in active_ids:            
-            s_id = self.env['education.student'].browse(sid)
-            s_id.state = "leave"
-            print(s_id.state)           
-        return 
-    
-    #action for expel student
-    @api.multi
-    def expel(self):
-        active_ids = self.ids
-        for sid in active_ids:            
-            s_id = self.env['education.student'].browse(sid)
-            s_id.state = "expel"
-            print(s_id.state)           
-        return 
         
     @api.multi
     def action_view_receipts(self):
@@ -116,7 +76,20 @@ class EducationStudentSiblings(models.Model):
     address = fields.Char(string='Address',  help="Enter Sibling Address")
     student_id = fields.Many2one('education.student', string='Student')
 
-
-  
-
+class SetStudentState(models.TransientModel):
+    _name = 'education.student.state'
+    #add to state of student
+    student_state = fields.Selection([('drop_off', 'Drop Off'), ('transfer_out', 'Transfer Out'), ('expel', 'Expel'), ('leave', 'Leave')],string='Student State',  track_visibility='onchange')
+    
+    #modify state of student  
+    @api.multi
+    def set_student_state(self,vals):        
+        studnet_ids=vals['active_ids']        
+        for rec in self:           
+            vals['student_state']=rec.student_state 
+        for sid in studnet_ids:            
+            student_id = self.env['education.student'].browse(sid)          
+            student_id.state = vals['student_state']                
+            self.env['education.student'].update(student_id)
+        return
     
