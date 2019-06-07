@@ -134,7 +134,7 @@
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
             </field>          
             <field name="date_of_birth" position="after">
-                <field name="nrc_no" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="nrc_no" attrs="{'readonly':[('state', '=', 'done')]}"/>
             </field>
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
@@ -234,7 +234,7 @@
     </record>
     <!-- add wizard view for assign major-->
     <!-- 'Assign Major' Action on Assign Major list  -->
-    <record model="ir.ui.view" id="wizard_form_view">
+    <record model="ir.ui.view" id="wizard_assign_major_form_view">
             <field name="name">wizard.form</field>
             <field name="model">education.major_assign</field>
             <field name="arch" type="xml">

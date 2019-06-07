@@ -84,10 +84,10 @@ class SetStudentState(models.TransientModel):
     #modify state of student  
     @api.multi
     def set_student_state(self,vals):        
-        studnet_ids=vals['active_ids']        
+        student_ids=vals['active_ids']        
         for rec in self:           
             vals['student_state']=rec.student_state 
-        for sid in studnet_ids:            
+        for sid in student_ids:            
             student_id = self.env['education.student'].browse(sid)          
             student_id.state = vals['student_state']                
             self.env['education.student'].update(student_id)

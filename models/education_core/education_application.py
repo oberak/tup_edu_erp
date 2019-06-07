@@ -12,19 +12,27 @@ class StudentApplication(models.Model):
     #This function is triggered when the user clicks on the button 'Apply Major'
     @api.one
     def apply_major(self, vals):
-        for rec in self:         
-            if  rec.first_choice.id == False or rec.second_choice.id == False or rec.third_choice.id == False:
-                raise ValidationError(_('Student needs to apply at least three majors'))            
-            else :
-                values = {
-                        'first_choice': rec.first_choice,
-                        'second_choice': rec.second_choice,
-                        'third_choice': rec.third_choice,
-                        'forth_choice': rec.forth_choice,
-                        'fifth_choice': rec.fifth_choice,
-                        }
-                self.env['education.application'].update(values)                
-                rec.write({
+        for rec in self:
+            if rec.student_type == 'is_new_candidate':         
+                if  rec.first_choice.id == False or rec.second_choice.id == False or rec.third_choice.id == False:
+                    raise ValidationError(_('Student needs to apply at least three majors'))            
+                else :
+                    values = {
+                            'first_choice': rec.first_choice,
+                            'second_choice': rec.second_choice,
+                            'third_choice': rec.third_choice,
+                            'forth_choice': rec.forth_choice,
+                            'fifth_choice': rec.fifth_choice,
+                            }
+                    self.env['education.application'].update(values)
+                    rec.write({
+                    'state': 'apply',
+                    })
+            else:
+                if  rec.nrc_no == False:
+                    raise ValidationError(_('Student needs to input NRC Number')) 
+                else:               
+                    rec.write({
                     'state': 'apply',
                     })
         return
@@ -312,12 +320,12 @@ class AssignMajor(models.TransientModel):
     #modify major_id to student application (assign major to student)   
     @api.multi
     def assign_major(self,vals):        
-        studnet_ids=vals['active_ids']
+        student_ids=vals['active_ids']
         #print(studnet_id)
         for rec in self:
             #print(rec.major_id)
             vals['major_id']=rec.major_id 
-        for sid in studnet_ids:
+        for sid in student_ids:
             #print(sid)
             student_id = self.env['education.application'].browse(sid)
             if  student_id.state == 'fee':
