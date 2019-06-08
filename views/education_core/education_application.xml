@@ -130,7 +130,7 @@
             <field name="admission_date" position="before">
                 <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
                                                 'required': [('state', '=', 'fee')], 
-                                                'invisible': [('state', 'in' , ['draft','verification','apply'])]}"
+                                                'invisible': ['|',('state', 'in' , ['draft','verification','apply']),('student_type', '=','transfer_in')]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
             </field>          
             <field name="date_of_birth" position="after">
