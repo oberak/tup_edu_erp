@@ -70,7 +70,7 @@ class FeeReceipts(models.Model):
         if 'application_id' in vals:
             vals['is_application_fee'] = True
             # check duplacated invoice with same application_id and fee_structure
-            if 'fee_structure' in vals:
+            if 'fee_structure' in vals and vals['fee_structure'] != False:
                 app_id = self.env['account.invoice'].sudo().search([('application_id', '=', vals['application_id']),
                     ('fee_structure', '=', vals['fee_structure']), ('state', '!=', 'cancel')])
                 if app_id:
