@@ -139,11 +139,11 @@
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
                     <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
-                        <field name="major_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
+                        <field name="major_id" attrs="{'readonly': [('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="division_id" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],
+                        <field name="division_id" attrs="{'readonly':[('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
-                        <field name="prev_school" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
+                        <field name="prev_school" attrs="{'readonly':[('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>
                     </group>   
                     <group string="Apply Major For New Candidate" attrs="{'invisible': [('student_type', '=', 'transfer_in')]}">
                         <group>
@@ -182,7 +182,7 @@
                         <field name="sibling_ids" nolabel="1">
                             <tree string="Siblings Info" editable="bottom">
                                 <field name="name"/>
-                                <field name="nrc_no" required="1"/>
+                                <field name="nrc_no"/>
                                 <field name="occupation"/>
                                 <field name="address"/>
                             </tree>
