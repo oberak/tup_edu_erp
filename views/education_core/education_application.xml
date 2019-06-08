@@ -91,6 +91,9 @@
             </field>
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
                 <tr>
+                    <td style="padding-right:10px;" colspan="2"><field name="m_name" placeholder="Name (Myanmar)" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                </tr>
+                <tr>
                     <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
                 </tr>
                 <tr>
