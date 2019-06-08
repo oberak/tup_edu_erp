@@ -52,9 +52,8 @@ class StudentApplication(models.Model):
                 'mobile': rec.mobile,
                 'phone': rec.phone,
             }
-            #partner = self.env['res.partner'].create(values)
-            #print(partner.id,'>>>>>>>>>>in partner >>>')
-            #rec.partner_id = partner.id
+            partner = self.env['res.partner'].create(values)
+            rec.partner_id = partner.id
         
     #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
     @api.one
