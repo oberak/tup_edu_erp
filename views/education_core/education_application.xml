@@ -79,7 +79,13 @@
                                 type="object" class="oe_highlight"
                                 help="Click to create Student"
                                 states="approve"/>
-            </button>          
+            </button>   
+             <button name="%(education_core.application_reject_action)d" position="replace">                
+                <button name="%(education_core.application_reject_action)d" string="Reject"
+                                type="action" groups="tup_edu_erp.group_education_haa"
+                                context="{'default_application_id': active_id}"
+                                states="approve"/>              
+            </button>
             <field name="state" position="replace">
                 <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1"  />
             </field>
@@ -124,7 +130,7 @@
             </field>
             <field name="company_id" position="replace">
                 <field name="class_id" attrs="{'readonly': [('state','in' , ['approve','done'])],
-                                                'invisible': [('state', 'in' , ['draft','verification','apply','fee'])]}"
+                                                'invisible': [('state', 'in' , ['draft','verification','apply','fee','major'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
             <field name="admission_date" position="before">

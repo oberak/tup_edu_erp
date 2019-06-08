@@ -55,18 +55,6 @@ class StudentApplication(models.Model):
             partner = self.env['res.partner'].create(values)
             rec.partner_id = partner.id
         
-    #This function is triggered when the user clicks on the button 'Payment for Tution Fee'
-    @api.one
-    def paid_fee(self):
-        # TODO: remove this function and button
-        for rec in self:
-            if rec.student_type == 'is_new_candidate':
-                rec.write({
-                'state': 'fee'
-                })
-            else:
-                rec.state = 'approve'
-
     #This function is triggered when the user clicks on the button 'Assign Major'
     @api.one
     def assign_major(self, vals):

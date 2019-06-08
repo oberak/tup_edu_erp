@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="tup_edu_erp.view_tup_education_application_form"/>
         <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_student')])]" />
         <field name="arch" type="xml">
-        <!--Access to edit Personal Info -->
+        <!--Access to edit Edu Info -->
             <xpath expr="//field[@name='major_id']" position="attributes">
                 <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>
@@ -17,6 +17,18 @@
                 <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>
         <!--Access to edit Personal Info -->
+             <xpath expr="//field[@name='middle_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='academic_year_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='admission_date']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='roll_no']" position="attributes">
                 <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>
@@ -140,6 +152,18 @@
         <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_aa')])]" />
         <field name="arch" type="xml">
         <!--Access to edit Personal Info -->
+            <xpath expr="//field[@name='middle_name']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','in',['approve','reject','done'])]}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','in',['approve','reject','done'])]}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='academic_year_id']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','in',['approve','reject','done'])]}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='admission_date']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','in',['approve','reject','done'])]}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="attrs">{'readonly':[('state','in',['approve','reject','done'])]}</attribute> 
             </xpath>
@@ -236,6 +260,12 @@
         <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_haa')])]" />
         <field name="arch" type="xml">
         <!--Access to edit Personal Info -->
+            <xpath expr="//field[@name='middle_name']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="attrs">{'readonly':False}</attribute> 
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>

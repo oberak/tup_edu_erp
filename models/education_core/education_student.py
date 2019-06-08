@@ -30,7 +30,7 @@ class EducationStudent(models.Model):
             rec.receipt_count = len(receipt_ids)
 
     #add fields
-    nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Student")
+    nrc_no = fields.Char(string='NRC Number',help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     student_id=fields.Char(string='Student ID.',  help="Enter Student ID of Student")
     major_id = fields.Many2one('hr.department', string="Major",
