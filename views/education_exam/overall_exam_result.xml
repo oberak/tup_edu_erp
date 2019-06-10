@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="overall_exam_result_form" model="ir.ui.view">
+            <field name="name">overall_exam_result_form.form</field>
+            <field name="model">education.overall.exam.result</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>                                          
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </group>                                              
+                        <group>
+                            <group>
+                                <field name="class_division" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly':[('state','=','done')]}"/>
+                            </group> 
+                            <group>
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly':[('state','=','done')]}"/>                                 
+                                
+                            </group>                         
+                        </group>
+                        <div style="padding-bottom: 10px;">
+                            <button
+                                style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;"
+                                string="Get Overall Results" name="get_overall_exam_results" type="object"
+                                class="oe_highlight" states="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                        </div>
+                                                        
+                    </sheet>
+                </form>
+            </field>
+        </record> 
+      
+        <record id="act_overall_exam_result_view" model="ir.actions.act_window">
+            <field name="name">Overall Exam Results</field>
+            <field name="res_model">education.overall.exam.result</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+            
+        </record>
+
+        <menuitem id="examination_result_main_menu" parent="education_exam.examination_main_menu" name="Exam Results"
+                  sequence="20"/>       
+        <menuitem id="overall_exam_result_menu" parent="education_exam.examination_result_main_menu"
+                  action="act_overall_exam_result_view" name="Overall Exam Results" sequence="24"/>
+        
+    </data>
+</odoo>  

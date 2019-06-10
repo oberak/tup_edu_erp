@@ -94,6 +94,8 @@
             <field name="target">current</field>
             <field name="context">{'search_default_education.academic.year': 1}</field>                   
             <field name="search_view_id" ref="examination_result_report_search"/>   
-        </record>             
+        </record>
+
+               
     </data>
 </odoo>
