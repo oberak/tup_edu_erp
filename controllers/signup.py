@@ -133,11 +133,17 @@ class TupAuthSignupHome(AuthSignupHome):
             student_id = request.env['education.application'].sudo().search([('admission_no', '=', values.get('nrc_no'))])
         if len(values.get('nrc_no')) >= 17 and len(values.get('nrc_no')) <= 21 :
             student_id = request.env['education.application'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
-        student_id.email = values.get('login')
-        student_id.is_registered = True
-        partner_id = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])
-        student_id.partner_id = partner_id.id
-        request.env['education.application'].update(student_id)
+            if not student_id:
+                student_id2 = request.env['education.student'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
+                student_id2.email = values.get('login')
+                student_id2.is_registered = True
+                request.env['education.student'].update(student_id2)
+            else:
+                student_id.email = values.get('login')
+                student_id.is_registered = True
+                partner_id = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])
+                student_id.partner_id = partner_id.id
+                request.env['education.application'].update(student_id)
         request.env.cr.commit()     # as authenticate will use its own cursor we need to commit the current transaction
         uid = request.session.authenticate(db, login, password)
         if not uid:

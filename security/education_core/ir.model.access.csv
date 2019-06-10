@@ -140,6 +140,7 @@ a_education_semester_s,access.education.semester,model_education_semester,group_
 a_education_semester_t,access.education.semester,model_education_semester,group_education_teacher,1,0,0,0
 a_education_semester_dc,access.education.semester,model_education_semester,group_education_teacher_dc,1,0,0,0
 a_education_semester_haa,access.education.semester,model_education_semester,group_education_haa,1,1,1,1
+a_education_semester_aa,access.education.semester,model_education_semester,group_education_aa,1,0,0,0
 a_education_semester_hsa,access.education.semester,model_education_semester,group_education_hsa,1,0,0,0
 
 a_account_invoice_s,access.account.invoice,model_account_invoice,group_education_student,1,0,0,0
