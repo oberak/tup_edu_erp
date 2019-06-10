@@ -117,6 +117,7 @@ class ExamOverallResultsLine(models.Model):
     student_id = fields.Many2one('education.student',string = 'Student')
     state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
     result_ids = fields.One2many('education.subject.overallresults','overall_result_id',string='Result Ids')
+    total_avg_score = fields.Float(string='Total Average Score', readonly= True)
    
     def get_name(self):
         """To generate name for the model"""
@@ -141,15 +142,22 @@ class ExamOverallResultsLine(models.Model):
             return vals 
     
     def get_overall_exam_results(self):
-        
+        total_marks = 0.0
         for record in self:
             obj = self.env['education.subject.overallresults'].search([('class_division','=',record.class_division.id),('student_id','=', record.student_id.id)])
-
             if obj:
                 for res in obj:
-                    res.overall_result_id= self.ids
-                    self.env['education.subject.overallresults'].update(res)
+                    total_marks += res.actual_mark
+
+                    res.overall_result_id=self.id
+                    r_id=res.overall_result_id
+                    data={
+                        'overall_result_id':r_id.id,
+                    }
+                    self.env['education.subject.overallresults'].update(data)
+            record.total_avg_score = total_marks
+            record.state='done'
                     
-                    print(">>>>>>>>>>>>>>>>>..res", res.subject_id.id, ">>actual mark",res.actual_mark)  
+                   
     
 

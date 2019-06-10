@@ -20,8 +20,7 @@
                                 <field name="class_division" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly':[('state','=','done')]}"/>
                             </group> 
                             <group>
-                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly':[('state','=','done')]}"/>                                 
-                                
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly':[('state','=','done')]}"/>                                                                
                             </group>                         
                         </group>
                         <div style="padding-bottom: 10px;">
@@ -30,7 +29,23 @@
                                 string="Get Overall Results" name="get_overall_exam_results" type="object"
                                 class="oe_highlight" states="draft" attrs="{'invisible':[('state','=','done')]}"/>
                         </div>
-                                                        
+                        <notebook>
+                            <page string="Subject Result">
+                                <field name="result_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                    <tree create="0" editable="bottom">
+                                        <field name="subject_id" />
+                                        <field name="actual_mark" readonly="1"/>                                        
+                                        <field name="pass_or_fail" widget="boolean_toggle"/>                                        
+                                    </tree>                                    
+                                </field>
+                            </page>
+                        </notebook> 
+                        <group>
+                            <group>
+                                <field name="total_avg_score" sum="Scored Total" />
+                            </group>                                                      
+                        </group>
+                        <div class="oe_clear"/>                                                         
                     </sheet>
                 </form>
             </field>
@@ -41,8 +56,7 @@
             <field name="res_model">education.overall.exam.result</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="target">current</field>
-            
+            <field name="target">current</field>            
         </record>
 
         <menuitem id="examination_result_main_menu" parent="education_exam.examination_main_menu" name="Exam Results"
