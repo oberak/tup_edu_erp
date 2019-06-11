@@ -17,7 +17,6 @@ class EducationStudentsAttendance(models.Model):
     academic_year = fields.Many2one('education.academic.year', string='Academic Year',
                                     related='class_division.academic_year_id', store=True)
     
-    
     # add fields to relate timetable
     #week_day = fields.Date(string='Week Day', default=datetime.today().strftime("%A"))
     week_day = fields.Char('Week Day')
@@ -120,7 +119,6 @@ class EducationStudentsAttendance(models.Model):
             records.state = 'draft'
         self.state = 'draft'
 
-
 class EducationAttendanceLine(models.Model):
     _name = 'education.attendances.line'
 
@@ -128,12 +126,10 @@ class EducationAttendanceLine(models.Model):
     attendance_id = fields.Many2one('education.attendances', string='Attendance Id')
     student_id = fields.Many2one('education.student', string='Student')
     student_name = fields.Char(string='Student', related='student_id.name', store=True)
-    class_division = fields.Many2one('education.class.division', string='Class', required=True)
-    date = fields.Date(string='Date', required=True)
-    
-
-# add periods
-    period= fields.Many2one('timetable.period', string="Period", required=True,)
+    class_division = fields.Many2one('education.class.division', string='Class')
+    date = fields.Date(string='Date')   
+    # add periods
+    period= fields.Many2one('timetable.period', string="Period")
     hours = fields.Float('Durition')
     remark = fields.Boolean(string='Present')
 
