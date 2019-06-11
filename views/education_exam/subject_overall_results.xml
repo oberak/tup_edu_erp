@@ -47,7 +47,7 @@
                             </group>
                             <group>
                                 <field name="actual_mark" />
-                                 <field name="pass_or_fail" widget="boolean_toggle"/> 
+                                <field name="pass_or_fail" widget="boolean_toggle"/> 
                             </group>                            
                         </group>
                         <div class="oe_clear"/>                                    
