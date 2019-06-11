@@ -118,6 +118,7 @@ class ExamOverallResultsLine(models.Model):
     state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
     result_ids = fields.One2many('education.subject.overallresults','overall_result_id',string='Result Ids')
     total_avg_score = fields.Float(string='Total Average Score', readonly= True)
+    pass_or_fail = fields.Boolean(string='Pass/Fail')
    
     def get_name(self):
         """To generate name for the model"""
@@ -143,18 +144,26 @@ class ExamOverallResultsLine(models.Model):
     
     def get_overall_exam_results(self):
         total_marks = 0.0
+        check = True
         for record in self:
             obj = self.env['education.subject.overallresults'].search([('class_division','=',record.class_division.id),('student_id','=', record.student_id.id)])
             if obj:
                 for res in obj:
                     total_marks += res.actual_mark
-
+                    if res.pass_or_fail == True:
+                        check = True
+                    else:
+                        check = False
                     res.overall_result_id=self.id
                     r_id=res.overall_result_id
                     data={
                         'overall_result_id':r_id.id,
                     }
                     self.env['education.subject.overallresults'].update(data)
+            if check == True:
+                record.pass_or_fail = True
+            else:
+                record.pass_or_fail = False
             record.total_avg_score = total_marks
             record.state='done'
                     

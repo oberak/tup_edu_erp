@@ -40,22 +40,37 @@
                                 </field>
                             </page>
                         </notebook> 
-                        <group>
+                        <group>                            
                             <group>
                                 <field name="total_avg_score" sum="Scored Total" />
-                            </group>                                                      
+                            </group>   
+                            <group>
+                                <field name="pass_or_fail" widget="boolean_toggle"/> 
+                            </group>                                                                                 
                         </group>
                         <div class="oe_clear"/>                                                         
                     </sheet>
                 </form>
             </field>
         </record> 
-      
+        <record id="overall_exam_result_tree" model="ir.ui.view">
+            <field name="name">overall_exam_result_tree.tree</field>
+            <field name="model">education.overall.exam.result</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>                    
+                    <field name="student_id"/>                                
+                    <field name="class_division"/>  
+                    <field name="total_avg_score"/>
+                    <field name="pass_or_fail" widget="boolean_toggle"/>                  
+                </tree>
+            </field>
+        </record>      
         <record id="act_overall_exam_result_view" model="ir.actions.act_window">
             <field name="name">Overall Exam Results</field>
             <field name="res_model">education.overall.exam.result</field>
             <field name="view_type">form</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
             <field name="target">current</field>            
         </record>
 
