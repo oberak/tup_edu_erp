@@ -1,42 +1,58 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 education_exam.access_education_exam,access.education.exam,education_exam.model_education_exam,education_core.group_education_faculty,0,0,0,0
 a_education_exam_s,access.education.exam,education_exam.model_education_exam,group_education_student,1,0,0,0
-a_education_exam_t,access.education.exam,education_exam.model_education_exam,group_education_teacher,1,1,1,1
+a_education_exam_t,access.education.exam,education_exam.model_education_exam,group_education_teacher,1,0,0,0
 a_education_exam_dc,access.education.exam,education_exam.model_education_exam,group_education_teacher_dc,1,1,1,1
 a_education_exam_aa,access.education.exam,education_exam.model_education_exam,group_education_aa,1,0,0,0
+a_education_exam_haa,access.education.exam,education_exam.model_education_exam,group_education_haa,1,0,0,0
 
 education_exam.access_education_exam_results,access.education.exam.results,education_exam.model_education_exam_results,education_core.group_education_faculty,0,0,0,0
 a_education_exam_results_s,access.education.exam.results,education_exam.model_education_exam_results,group_education_student,1,0,0,0
 a_education_exam_results_t,access.education.exam.results,education_exam.model_education_exam_results,group_education_teacher,1,1,1,0
 a_education_exam_results_dc,access.education.exam.results,education_exam.model_education_exam_results,group_education_teacher_dc,1,1,1,0
 a_education_exam_results_aa,access.education.exam.results,education_exam.model_education_exam_results,group_education_aa,1,0,0,0
+a_education_exam_results_haa,access.education.exam.results,education_exam.model_education_exam_results,group_education_haa,1,0,0,0
 
 education_exam.access_results_subject_line,access.results.subject.line,education_exam.model_results_subject_line,education_core.group_education_faculty,0,0,0,0
 a_results_subject_line_s,access.results.subject.line,education_exam.model_results_subject_line,group_education_student,1,0,0,0
 a_results_subject_line_t,access.results.subject.line,education_exam.model_results_subject_line,group_education_teacher,1,1,1,0
 a_results_subject_line_dc,access.results.subject.line,education_exam.model_results_subject_line,group_education_teacher_dc,1,1,1,0
 a_results_subject_line_aa,access.results.subject.line,education_exam.model_results_subject_line,group_education_aa,1,0,0,0
+a_results_subject_line_haa,access.results.subject.line,education_exam.model_results_subject_line,group_education_haa,1,0,0,0
+
+a_education_subject_overallresults_t,access.education.subject.overallresults,model_education_subject_overallresults,group_education_teacher,1,1,1,0
+a_education_subject_overallresults_dc,access.education.subject.overallresults,model_education_subject_overallresults,group_education_teacher_dc,1,1,1,1
+
+a_education_subject_overallresult_line_t,access.education.subject.overallresult.line,model_education_subject_overallresult_line,group_education_teacher,1,1,1,0
+a_education_subject_overallresult_line_dc,access.education.subject.overallresult.line,model_education_subject_overallresult_line,group_education_teacher_dc,1,1,1,1
+
+a_education_overall_exam_result_dc,access.education.overall.exam.result,model_education_overall_exam_result,group_education_teacher_dc,1,1,1,1
+a_education_overall_exam_result_haa,access.education.overall.exam.result,model_education_overall_exam_result,group_education_haa,1,0,0,0
 
 education_exam.access_education_exam_valuation,access.education.exam.valuation,education_exam.model_education_exam_valuation,education_core.group_education_faculty,0,0,0,0
 a_education_exam_valuation_s,access.education.exam.valuation,education_exam.model_education_exam_valuation,group_education_student,0,0,0,0
 a_education_exam_valuation_t,access.education.exam.valuation,education_exam.model_education_exam_valuation,group_education_teacher,1,1,1,0
 a_education_exam_valuation_dc,access.education.exam.valuation,education_exam.model_education_exam_valuation,group_education_teacher_dc,1,1,1,0
 a_education_exam_valuation_aa,access.education.exam.valuation,education_exam.model_education_exam_valuation,group_education_aa,1,0,0,0
+a_education_exam_valuation_haa,access.education.exam.valuation,education_exam.model_education_exam_valuation,group_education_haa,1,0,0,0
 
 education_exam.access_exam_valuation_line,access.exam.valuation.line,education_exam.model_exam_valuation_line,education_core.group_education_faculty,0,0,0,0
 a_exam_valuation_line_s,access.exam.valuation.line,education_exam.model_exam_valuation_line,group_education_student,0,0,0,0
 a_exam_valuation_line_t,access.exam.valuation.line,education_exam.model_exam_valuation_line,group_education_teacher,1,1,1,0
 a_exam_valuation_line_dc,access.exam.valuation.line,education_exam.model_exam_valuation_line,group_education_teacher_dc,1,1,1,0
 a_exam_valuation_line_aa,access.exam.valuation.line,education_exam.model_exam_valuation_line,group_education_aa,1,0,0,0
+a_exam_valuation_line_haa,access.exam.valuation.line,education_exam.model_exam_valuation_line,group_education_haa,1,0,0,0
 
 education_exam.access_education_subject_line,access.education.subject.line,education_exam.model_education_subject_line,education_core.group_education_faculty,0,0,0,0
 a_education_subject_line_s,access.education.subject.line,education_exam.model_education_subject_line,group_education_student,1,0,0,0
 a_education_subject_line_t,access.education.subject.line,education_exam.model_education_subject_line,group_education_teacher,1,1,1,1
 a_education_subject_line_dc,access.education.subject.line,education_exam.model_education_subject_line,group_education_teacher_dc,1,1,1,1
 a_education_subject_line_aa,access.education.subject.line,education_exam.model_education_subject_line,group_education_aa,1,0,0,0
+a_education_subject_line_haa,access.education.subject.line,education_exam.model_education_subject_line,group_education_haa,1,0,0,0
 
 education_exam.access_education_exam_type,access.education.exam.type,education_exam.model_education_exam_type,education_core.group_education_faculty,0,0,0,0
 a_education_exam_type_s,access.education.exam.type,education_exam.model_education_exam_type,group_education_student,0,0,0,0
 a_education_exam_type_t,access.education.exam.type,education_exam.model_education_exam_type,group_education_teacher,1,1,0,0
 a_education_exam_type_dc,access.education.exam.type,education_exam.model_education_exam_type,group_education_teacher_dc,1,1,1,1
 a_education_exam_type_aa,access.education.exam.type,education_exam.model_education_exam_type,group_education_aa,1,0,0,0
+a_education_exam_type_haa,access.education.exam.type,education_exam.model_education_exam_type,group_education_haa,1,0,0,0
