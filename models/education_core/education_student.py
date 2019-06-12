@@ -5,7 +5,78 @@ class EducationStudent(models.Model):
     _name = 'education.student'
     _inherit = 'education.student'
     _description = 'Student Form'
-        
+
+    @api.multi
+    def _document_count(self):
+        """Return the count of the documents provided"""
+        for rec in self:
+            document_ids = self.env['education.documents'].search([('student_ref', '=', rec.id)])
+            rec.document_view = len(document_ids)
+
+    @api.multi
+    def document_view(self):
+        """Return the list of documents provided along with this application"""
+        self.ensure_one()
+        domain = [
+            ('student_ref', '=', self.id)]
+        return {
+            'name': _('Documents'),
+            'domain': domain,
+            'res_model': 'education.documents',
+            'type': 'ir.actions.act_window',
+            'view_id': False,
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+            'help': _('''<p class="oe_view_nocontent_create">
+                               Click to Create for New Documents
+                            </p>'''),
+            'limit': 80,
+            'context': "{'default_student_ref': '%s'}" % self.id
+        }
+
+    @api.multi
+    def send_to_verify(self):
+        """Button action for sending the application for the verification"""
+        for rec in self:
+            document_ids = self.env['education.documents'].search([('student_ref', '=', rec.id)])
+            if not document_ids:
+                raise ValidationError(_('No Documents provided'))
+            rec.write({
+                'state': 'verification'
+            })
+
+    @api.multi
+    def student_documents(self):
+        """Return the documents student submitted
+        along with the admission application"""
+        self.ensure_one()
+        if self.application_id.id:
+            documents = self.env['education.documents'].search([('application_ref', '=', self.application_id.id)])
+            documents_list = documents.mapped('id')
+            return {
+                'domain': [('id', 'in', documents_list)],
+                'name': _('Documents'),
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'education.documents',
+                'view_id': False,
+                'context': {'default_application_ref': self.application_id.id},
+                'type': 'ir.actions.act_window'
+            }
+        if self.id:
+            documents = self.env['education.documents'].search([('student_ref', '=', self.id)])
+            documents_list = documents.mapped('id')
+            return {
+                'domain': [('id', 'in', documents_list)],
+                'name': _('Documents'),
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'education.documents',
+                'view_id': False,
+                'context': {'default_student_ref': self.id},
+                'type': 'ir.actions.act_window'
+            }
+
     @api.multi
     def action_view_receipts(self):
         self.ensure_one()
@@ -28,6 +99,14 @@ class EducationStudent(models.Model):
         for rec in self:
             receipt_ids = self.env['account.invoice'].search([('student_id', '=', rec.id), ('state', '!=', 'cancel')])
             rec.receipt_count = len(receipt_ids)
+            rec.state = 'done'
+
+    @api.model
+    def _get_students(self):
+        domain = [
+            ('student_state', '=','in_school')          
+        ]
+        return self.search(domain)
 
     #add fields
     nrc_no = fields.Char(string='NRC Number',help="Enter NRC Number of Student")
@@ -38,14 +117,17 @@ class EducationStudent(models.Model):
                             help="Choose Major")
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
+    document_count = fields.Integer(compute='_document_count', string='# Documents')
 
     _sql_constraints = [
         ('nrc_no_uniq', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),
         ('student_id_uniq', 'unique(student_id)', "Another Student already exists with this student_id !")
     ]
     #add status about the state of student    
-    state = fields.Selection([('in_school', 'In School'),('transfer_out', 'Transfer Out'), ('leave', 'Leave'),('expel', 'expel'),('drop_off', 'Drop Off'),('graduate', 'Graduate')],
-                             string='State', default='in_school', track_visibility='onchange')
+    student_state = fields.Selection([('in_school', 'In School'),('transfer_out', 'Transfer Out'), ('leave', 'Leave'),('expel', 'expel'),('drop_off', 'Drop Off'),('graduate', 'Graduate')],
+                             string='Student State', default='in_school',readonly= True)
+    state = fields.Selection([('draft', 'Draft'),('verification', 'Verify'),('done', 'Done')],
+                             string='State', default='draft', track_visibility='onchange')
 
     #modify fields
     medium = fields.Many2one('education.medium', string="Medium", required=False)
@@ -89,7 +171,7 @@ class SetStudentState(models.TransientModel):
             vals['student_state']=rec.student_state 
         for sid in student_ids:            
             student_id = self.env['education.student'].browse(sid)          
-            student_id.state = vals['student_state']                
+            student_id.student_state = vals['student_state']                
             self.env['education.student'].update(student_id)
         return
-    
+

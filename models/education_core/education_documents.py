@@ -10,4 +10,5 @@ class EducationDocuments(models.Model):
 
     #Modify fields
     reference = fields.Char(string='Document Name', required=True, copy=False)
+    student_ref = fields.Many2one('education.student', invisible=1, copy=False)
    

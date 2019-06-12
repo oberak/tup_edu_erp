@@ -4,15 +4,16 @@
         <field name="name">education.student.tree</field>
         <field name="model">education.student</field>
         <field name="inherit_id" ref="education_core.view_education_student_tree"/>
-        <field name="arch" type="xml">
-            
+        <field name="arch" type="xml">            
             <field name="ad_no" position="replace">
                 <field name="student_id" readonly="1" />
             </field>
             <field name="last_name" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field> 
-            
+            <field name="phone" position="after">
+                <field name="student_state"  />
+            </field>            
         </field>
     </record>
     <record id="view_tupeducation_student_form" model="ir.ui.view">
@@ -20,13 +21,28 @@
         <field name="model">education.student</field>
         <field name="inherit_id" ref="education_core.view_education_student_form"/>
         <field name="arch" type="xml">
+            <xpath expr='/form/sheet' position='before'>
+                <header>
+                    <button name="send_to_verify" type="object" class="oe_highlight"
+                            string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
+                            help="Click to send the student for verification purpose" states="draft" />
+                </header>
+            </xpath>
             <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="document_view" type="object" icon="fa-list-ol" attrs="{'invisible': [('state', 'in' , ['verification','fee','reject','done'])]}" >
+                    <field string="Documents" name="document_count" widget="statinfo"/>
+                </button>           
                 <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_view_receipts"
                     groups="tup_edu_erp.group_education_aa,tup_edu_erp.group_education_fa"
                     attrs="{'invisible': [('state', 'in' , ['draft','verification','reject'])]}">
                     <field string="Receipts" name="receipt_count" widget="statinfo"/>
                 </button>
             </div>
+            <xpath expr="//button[@name='student_documents']" position="replace">
+                <button name="student_documents" type="object" widget="statinfo"
+                        class="oe_stat_button" icon="fa-calendar" string="Documents"
+                        attrs="{'invisible': [('state', 'in' , ['draft','verification','reject'])]}" />
+            </xpath>
             <!-- Add status for the state of student-->
             <xpath expr="/form/sheet" position="before">
                 <header>                                      
@@ -53,8 +69,11 @@
             <xpath expr="//field[@name='sec_lang']" position="replace">
                 <field name="nrc_no" />
             </xpath>
-             <field name="medium" position="replace">
+            <field name="medium" position="replace">
                 <field name="major_id"  />
+            </field>
+            <field name="major_id" position="after">
+                <field name="student_state"  />
             </field>
             <field name="class_id" position="replace">
                 <field name="class_id"  />
@@ -83,14 +102,14 @@
                 </group>                         
             </page>    
             <page string="Siblings Info">
-                    <field name="sibling_ids" nolabel="1">
-                        <tree string="Siblings Info" editable="bottom">
-                            <field name="name"/>
-                            <field name="nrc_no" required="1"/>
-                            <field name="occupation"/>
-                            <field name="address"/>
-                        </tree>
-                    </field>
+                <field name="sibling_ids" nolabel="1">
+                    <tree string="Siblings Info" editable="bottom">
+                        <field name="name"/>
+                        <field name="nrc_no" required="1"/>
+                        <field name="occupation"/>
+                        <field name="address"/>
+                    </tree>
+                </field>
             </page>
             </xpath>
         </field>

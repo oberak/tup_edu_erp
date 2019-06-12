@@ -74,6 +74,7 @@ class EducationClassDivision(models.Model):
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True,
                                        default=lambda self: self.env['education.academic.year']._get_current_ay(),
                                        help="Select the Academic Year")
+    student_ids = fields.One2many('education.student', 'class_id', string='Students',domain=[('student_state','=','in_school')])
     #student_ids = fields.One2many('education.student', 'class_id', string='Students')
     #amenities_ids = fields.One2many('education.class.amenities', 'class_id', string='Amenities')
     #student_count = fields.Integer(string='Students Count', compute='_get_student_count')

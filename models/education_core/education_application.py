@@ -131,6 +131,7 @@ class StudentApplication(models.Model):
                 'm_occupation':rec.m_occupation,
                 'm_religion': rec.m_religion.id,
                 'partner_id': rec.partner_id.id, # for fee
+                'state' : 'done'
             }            
             if not rec.is_same_address:
                 pass
