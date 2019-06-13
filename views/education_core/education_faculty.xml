@@ -33,8 +33,15 @@
             <xpath expr="//field[@name='mobile']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
-            
-        </field>
-        
+             <xpath expr="/form/sheet/notebook" position="inside">
+                <page string="Classes">
+                    <field name="class_ids" nolabel="1">
+                        <tree string="Classes" editable="bottom">
+                            <field name="class_id" options="{'no_create_edit': True, 'no_create': True}"/>
+                        </tree> 
+                    </field>
+                </page>
+             </xpath>            
+        </field>        
     </record>
 </odoo>

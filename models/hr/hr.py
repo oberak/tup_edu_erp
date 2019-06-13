@@ -9,10 +9,11 @@ class EmployeeCategory(models.Model):
     @api.multi
     def get_class(self,values):
         class_list = []
-        faculty_id= self.env['education.faculty'].search([('employee_id', '=', values)]).id
-        for rec in self.env['education.timetable.schedule'].search([('faculty_id', '=', faculty_id)]):         
-            class_id = rec.class_division.id
-            class_list.append(class_id)
+        faculty_id= self.env['education.faculty'].search([('employee_id','=', values)]).id
+        obj = self.env['education.faculty.classes'].search([('faculty_id', '=', faculty_id)])        
+        for rec in obj:         
+            c_id = rec.class_id.id
+            class_list.append(c_id)
         class_list = list(dict.fromkeys(class_list))
         return class_list
 

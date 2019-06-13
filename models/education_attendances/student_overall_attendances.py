@@ -39,10 +39,12 @@ class EducationStudentsAttendance(models.Model):
             obj = self.env['education.attendances.line'].search([('student_id','=',rec.student_id.id),('class_division','=',rec.class_division.id)])
             for dat in obj:
                 month = datetime.strftime(datetime.strptime(dat.date, "%Y-%m-%d"), "%m")
+                print(month,'>>>>>>>>>>>>>>>>>>>>>>>>>>')
                 if month == self.month:
-                    att = self.env['education.attendances.line'].search([('date','=',dat.date)])
-                    if att.remark == True :
-                        m_att += att.hours
+                    att = self.env['education.attendances.line'].search([('student_id','=',rec.student_id.id),('date','=',dat.date)])
+                    for att_id in att :
+                        if att_id.remark == True :
+                            m_att += att_id.hours
             rec.stu_m_attendances= m_att
          
        
@@ -132,7 +134,7 @@ class EducationStudentsOverallAttendance(models.Model):
             for o_att in obj:
                 overall_att += o_att.stu_m_attendances
             rec.stu_overall_attendances= overall_att 
-        
+        print('all attendance >>>>>>>>',all_attends)
         self.stu_overall_percent = overall_att * 100 / all_attends
         self.state = 'done'     
 

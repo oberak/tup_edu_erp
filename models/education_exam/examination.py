@@ -5,7 +5,8 @@ class EducationExam(models.Model):
     _name = 'education.exam'
     _inherit = 'education.exam'
     
-    division_id = fields.Many2one('education.class.division', string='Class') # Rename Division to Class
+    division_id = fields.Many2one('education.class.division', string='Class',
+                                    domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)]) # Rename Division to Class
     school_class_division_wise = fields.Selection([('division', 'Class')],
                                                   related='exam_type.school_class_division_wise')       # Remove exam type (Class)
     semester = fields.Many2one('education.semester', string='Semester',

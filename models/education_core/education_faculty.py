@@ -26,3 +26,11 @@ class EducationFaculty(models.Model):
     #add field
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Faculty")
     department_id = fields.Many2one('hr.department', 'Department')
+    class_ids = fields.One2many('education.faculty.classes', 'faculty_id', string="Classes")
+    
+class EducationFacultyClasses(models.Model):
+    _name = 'education.faculty.classes'
+
+    class_id = fields.Many2one('education.class.division', string='Class',
+                                domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
+    faculty_id = fields.Many2one('education.faculty',string='Faculty')

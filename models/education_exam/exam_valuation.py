@@ -7,7 +7,8 @@ class EducationExamValuation(models.Model):
 
     # modify fields
     class_id = fields.Many2one('education.class', string='Class', required=False)
-    division_id = fields.Many2one('education.class.division', string='Class', required=False) # change name : Division to Class
+    division_id = fields.Many2one('education.class.division', string='Class', required=False,
+                                domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)]) # change name : Division to Class
 
     # add fields
     major_id = fields.Char(string="Major", readonly=True)                    

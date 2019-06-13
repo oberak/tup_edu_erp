@@ -13,7 +13,12 @@
                     </field>
                 <field name="class_id" position="attributes">                    
                     <attribute name="invisible">True</attribute>
-                </field> 
+                </field>
+                <field name="division_id" position="replace">
+                   <field name="division_id"
+                       attrs="{'readonly': ['|', ('mark_sheet_created', '=', True), ('state', '!=', 'draft')]}"
+                       options="{'no_create_edit': True, 'no_create': True}"/>
+               </field> 
                 <field name="division_id" position="after">                    
                     <field name="pro_year" force_save="1"/>                
                     <field name="major_id" force_save="1"/>

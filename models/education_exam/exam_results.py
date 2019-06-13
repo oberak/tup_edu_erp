@@ -4,7 +4,8 @@ from odoo.exceptions import ValidationError, UserError
 class EducationExamResults(models.Model):
     _inherit = 'education.exam.results'
 
-    division_id = fields.Many2one('education.class.division', string='Class')  # Rename Division to Class
+    division_id = fields.Many2one('education.class.division', string='Class',
+                                domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])  # Rename Division to Class
 
     # add fields
     major_id = fields.Char(string="Major")                    

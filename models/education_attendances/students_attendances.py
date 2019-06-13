@@ -104,7 +104,7 @@ class EducationStudentsAttendance(models.Model):
                 'class_division': self.class_division.id,
                 'date': self.date,
             }
-            attendance_line_obj.create(data)        
+            attendance_line_obj.sudo().create(data)        
         self.attendance_created = True
            
     @api.multi

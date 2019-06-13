@@ -135,6 +135,25 @@
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('division_id.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
+    <!-- Set domain for exam (teacher DC)-->
+    <record id="teacher_dc_exam_request_rule" model="ir.rule">
+        <field name="name">Department Chair exam request</field>
+        <field name="model_id" ref="model_education_exam"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('division_id.class_id.major_id.id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
+    <record id="teacher_dc_exam_valuation_request_rule" model="ir.rule">
+        <field name="name">Department Chair exam valuation request</field>
+        <field name="model_id" ref="model_education_exam_valuation"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('division_id.class_id.major_id.id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
+    <record id="teacher_dc_exam_results_request_rule" model="ir.rule">
+        <field name="name">Department Chair exam result request</field>
+        <field name="model_id" ref="model_education_exam_results"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('division_id.class_id.major_id.id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
 
     <!-- Set domain for student list-->
     <record id="department_teacher_student_list_request_rule" model="ir.rule">
