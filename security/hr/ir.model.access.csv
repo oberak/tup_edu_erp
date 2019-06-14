@@ -1,11 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hr_employee,access.hr.employee,hr.model_hr_employee,education_core.group_education_faculty,1,0,0,0
 a_hr_employee_s,access.hr.employee,hr.model_hr_employee,group_education_student,0,0,0,0
-a_hr_employee_t,access.hr.employee,hr.model_hr_employee,group_education_teacher,1,1,1,0
-a_hr_employee_dc,access.hr.employee,hr.model_hr_employee,group_education_teacher_dc,1,1,1,0
-a_hr_employee_aa,access.hr.employee,hr.model_hr_employee,group_education_aa,1,1,1,0
-a_hr_employee_haa,access.hr.employee,hr.model_hr_employee,group_education_haa,1,1,1,0
-a_hr_employee_sa,access.hr.employee,hr.model_hr_employee,group_education_sa,1,1,1,0
+a_hr_employee_t,access.hr.employee,hr.model_hr_employee,group_education_teacher,1,1,0,0
+a_hr_employee_dc,access.hr.employee,hr.model_hr_employee,group_education_teacher_dc,1,1,0,0
+a_hr_employee_aa,access.hr.employee,hr.model_hr_employee,group_education_aa,1,1,0,0
+a_hr_employee_haa,access.hr.employee,hr.model_hr_employee,group_education_haa,1,1,0,0
+a_hr_employee_sa,access.hr.employee,hr.model_hr_employee,group_education_sa,1,1,0,0
 a_hr_employee_hsa,access.hr.employee,hr.model_hr_employee,group_education_hsa,1,1,1,1
 
 access_education_research,access.education.research,model_education_research,education_core.group_education_faculty,1,0,0,0
