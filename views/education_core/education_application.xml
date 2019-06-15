@@ -138,9 +138,9 @@
                                                 options="{'no_create_edit': True, 'no_create': True}" />
             </field>
             <field name="admission_date" position="before">
-                <field name="major_id" attrs="{'readonly': [('state', 'in' , ['major','approve','done']),('student_type', '=','is_new_candidate')],
-                                                'required': [('state', '=', 'fee')], 
-                                                'invisible': ['|',('state', 'in' , ['draft','verification','apply']),('student_type', '=','transfer_in')]}"
+                <field name="major_id" attrs="{'readonly': [('state', 'in' , ['apply','verify','major','approve','done'])],
+                                                'required': ['|',('state', '=', 'fee'),('student_type', '=', 'transfer_in')],
+                                                'invisible': [('student_type', '=', 'is_new_candidate'),('state', 'in', ['draft','apply','verify'])]}"
                                                 options="{'no_create_edit': True, 'no_create': True}"/>
             </field>          
             <field name="date_of_birth" position="after">
@@ -149,8 +149,6 @@
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
                     <group  string="Transfer In Student" attrs="{'invisible': [('student_type', '=', 'is_new_candidate')]}">
-                        <field name="major_id" attrs="{'readonly': [('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],
-                                        'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="division_id" attrs="{'readonly':[('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],
                                         'required': [('student_type', '=', 'transfer_in')]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         <field name="prev_school" attrs="{'readonly':[('state', 'in' ,['apply','verify','fee','approve','done'])],'invisible': [('student_type', '=', 'is_new_candidate')],'required': [('student_type', '=', 'transfer_in')]}"/>

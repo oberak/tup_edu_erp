@@ -98,16 +98,15 @@ class EducationStudent(models.Model):
         """Return the count of the receipts"""
         for rec in self:
             receipt_ids = self.env['account.invoice'].search([('student_id', '=', rec.id), ('state', '!=', 'cancel')])
-            rec.receipt_count = len(receipt_ids)
-            rec.state = 'done'
-
-    @api.model
-    def _get_students(self):
-        domain = [
-            ('student_state', '=','in_school')          
-        ]
-        return self.search(domain)
-
+            rec.receipt_count = len(receipt_ids)           
+                   
+    @api.multi
+    def approve(self):
+        """Button action for sending the application for the approve"""
+        for rec in self:
+            if rec.receipt_count >= 1:
+                rec.state = 'done'
+                
     #add fields
     nrc_no = fields.Char(string='NRC Number',help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)

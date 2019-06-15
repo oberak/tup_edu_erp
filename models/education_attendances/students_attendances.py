@@ -21,7 +21,7 @@ class EducationStudentsAttendance(models.Model):
     #week_day = fields.Date(string='Week Day', default=datetime.today().strftime("%A"))
     week_day = fields.Char('Week Day')
     subject = fields.Many2one('education.subject', string='Subject', required=True)
-    
+    #matt_id = fields.Many2one('education.monthly.attendances',string='Monlhly Attendance ID')
     # application_id = fields.Many2one('education.application', string='Application No',
                                     #  domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
 

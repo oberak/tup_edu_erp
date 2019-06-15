@@ -185,7 +185,7 @@
         <field name="name">Student List request</field>
         <field name="model_id" ref="model_education_student"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('email','=',user.login)]</field>
+        <field name="domain_force">[('partner_id','=', user.partner_id.ids)]</field>
     </record>
 
     <!--  set domain for student signup -->
@@ -250,7 +250,7 @@
     </record> 
     <record id="student_monthly_attendance_request_rule" model="ir.rule">
         <field name="name">Student Monthly Attendance request</field>
-        <field name="model_id" ref="model_education_student_attendances"/>
+        <field name="model_id" ref="model_education_monthly_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
         <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
     </record>
@@ -275,7 +275,7 @@
     </record>
     <record id="monthly_attendance_request_rule" model="ir.rule">
         <field name="name">Teacher Monthly Attendance request</field>
-        <field name="model_id" ref="model_education_student_attendances"/>
+        <field name="model_id" ref="model_education_monthly_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
@@ -300,7 +300,7 @@
     </record>
     <record id="dc_monthly_attendance_request_rule" model="ir.rule">
         <field name="name">Teacher DC Monthly Attendance request</field>
-        <field name="model_id" ref="model_education_student_attendances"/>
+        <field name="model_id" ref="model_education_monthly_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('class_division.class_id.major_id.id','=',user.employee_ids.department_id.ids)]</field>
     </record>

@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="education_student_attendances_form" model="ir.ui.view">
-            <field name="name">education_student_attendances_form.form</field>
-            <field name="model">education.student.attendances</field>
+        <record id="education_monthly_attendances_form" model="ir.ui.view">
+            <field name="name">education_monthly_attendances_form.form</field>
+            <field name="model">education.monthly.attendances</field>
             <field name="arch" type="xml">
                 <form>
                     <!-- <header>
@@ -38,9 +38,9 @@
                 </form>
             </field>
         </record>
-        <record id="education_student_attendances_tree" model="ir.ui.view">
-            <field name="name">education_student_attendances_tree.tree</field>
-            <field name="model">education.student.attendances</field>
+        <record id="education_monthly_attendances_tree" model="ir.ui.view">
+            <field name="name">education_monthly_attendances_tree.tree</field>
+            <field name="model">education.monthly.attendances</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
@@ -52,7 +52,7 @@
          <!-- add search view -->
         <record id="attendance_search" model="ir.ui.view">
             <field name="name">Student Monthly Attendances</field>
-            <field name="model">education.student.attendances</field>    
+            <field name="model">education.monthly.attendances</field>    
             <field name="arch" type="xml">
                 <search string="Search Subjects">
                     <group expand='0' string='Group by...'>           
@@ -63,7 +63,7 @@
         </record>   
          <record id="act_monthly_attendances_view" model="ir.actions.act_window">
             <field name="name">Student Monthly Attendance</field>
-            <field name="res_model">education.student.attendances</field>
+            <field name="res_model">education.monthly.attendances</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
              <field name="search_view_id" ref="attendance_search"/>

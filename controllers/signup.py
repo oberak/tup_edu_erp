@@ -127,18 +127,26 @@ class TupAuthSignupHome(AuthSignupHome):
         request.env.cr.commit()
     
     def _signup_with_values(self, token, values):
-        print('In valuessssssssssssssssssssssss')
         db, login, password = request.env['res.users'].sudo().signup(values, token)
         if len(values.get('nrc_no')) == 7 :
             student_id = request.env['education.application'].sudo().search([('admission_no', '=', values.get('nrc_no'))])
+            student_id.email = values.get('login')
+            student_id.is_registered = True
+            partner_id = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])
+            student_id.partner_id = partner_id.id
+            request.env['education.application'].update(student_id)
         if len(values.get('nrc_no')) >= 17 and len(values.get('nrc_no')) <= 21 :
             student_id = request.env['education.application'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
             if not student_id:
                 student_id2 = request.env['education.student'].sudo().search([('nrc_no', '=', values.get('nrc_no'))])
                 student_id2.email = values.get('login')
                 student_id2.is_registered = True
+                partner_ids = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])
+                for p_id in partner_ids :
+                    partner_id = p_id.id
+                student_id2.partner_id = partner_id
                 request.env['education.student'].update(student_id2)
-            else:
+            if student_id:
                 student_id.email = values.get('login')
                 student_id.is_registered = True
                 partner_id = request.env['res.partner'].sudo().search([('email', '=', values.get('login'))])

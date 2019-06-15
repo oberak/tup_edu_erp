@@ -52,8 +52,8 @@ class StudentApplication(models.Model):
                 'mobile': rec.mobile,
                 'phone': rec.phone,
             }
-            partner = self.env['res.partner'].create(values)
-            rec.partner_id = partner.id
+            self.env['res.partner'].create(values)
+            #rec.partner_id = partner.id
         
     #This function is triggered when the user clicks on the button 'Assign Major'
     @api.one
@@ -234,7 +234,7 @@ class StudentApplication(models.Model):
                                 help="Your Blood Group is ")
     date_of_birth = fields.Date(string="Date Of birth", required=False, help="Enter your DOB")
 
-    # add field for creating student
+    # add field for creating student    
     class_id = fields.Many2one('education.class.division', string='Class')
     
     #modify status 

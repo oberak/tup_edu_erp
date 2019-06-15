@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError, UserError
 import calendar
 
 class EducationStudentsAttendance(models.Model):
-    _name = 'education.student.attendances'
+    _name = 'education.monthly.attendances'
 
     name = fields.Char(compute='get_name', string='Monthly Attendance Name', default='New')
     class_division = fields.Many2one('education.class.division', string='Class', required=True, 
@@ -19,6 +19,7 @@ class EducationStudentsAttendance(models.Model):
     m_attendances_percent = fields.Float('Monthly Attendance (%) ')
     ay_id = fields.Many2one('education.academic.year',string='Academic Year',default=lambda self: self.env['education.academic.year']._get_current_ay())
     oatt_id = fields.Many2one('education.overall.attendances',string='Overall Attendance ID')
+    #datt_ids = fields.One2many('education.attendances','matt_id',string='Daily Attendance by subject')
 
     @api.onchange('class_division')
     def _onchange_class(self):
@@ -85,7 +86,7 @@ class EducationStudentsAttendance(models.Model):
     @api.model
     def create(self, vals):
         res = super(EducationStudentsAttendance, self).create(vals)        
-        m_attendance = self.env['education.student.attendances'].search(
+        m_attendance = self.env['education.monthly.attendances'].search(
             [('month', '=', res.month), ('student_id', '=', res.student_id.id) ])
         if len(m_attendance) > 1:
             raise ValidationError(
@@ -104,7 +105,7 @@ class EducationStudentsOverallAttendance(models.Model):
     stu_overall_percent = fields.Float('Overall Attendance (%)')    
     stu_overall_attendances = fields.Float('Overall Attendance')
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')],string='State', default='draft', track_visibility='onchange')
-    matt_ids = fields.One2many('education.student.attendances','oatt_id',string='Monthly Attendance Ids')
+    matt_ids = fields.One2many('education.monthly.attendances','oatt_id',string='Monthly Attendance Ids')
 
     @api.onchange('class_division')
     def _onchange_class(self):
@@ -129,7 +130,7 @@ class EducationStudentsOverallAttendance(models.Model):
         this_ay = self.env['education.academic.year']._get_current_ay()      
         overall_att = 0.0        
         for rec in self:    
-            obj = self.env['education.student.attendances'].search([('student_id','=',rec.student_id.id),('class_division','=',self.class_division.id),('ay_id','=',this_ay.id)])
+            obj = self.env['education.monthly.attendances'].search([('student_id','=',rec.student_id.id),('class_division','=',self.class_division.id),('ay_id','=',this_ay.id)])
             if obj :
                 for m_att in obj:                    
                     overall_att += m_att.stu_m_attendances
@@ -138,7 +139,7 @@ class EducationStudentsOverallAttendance(models.Model):
                     data ={
                         'oatt_id' : oatt.id,
                     }
-                    self.env['education.student.attendances'].update(data)                    
+                    self.env['education.monthly.attendances'].update(data)                    
             rec.stu_overall_attendances= overall_att        
             rec.stu_overall_percent = rec.stu_overall_attendances * 100 / rec.total_attendances
             rec.state = 'done' 
