@@ -21,7 +21,6 @@ class EducationStudentsAttendance(models.Model):
     #week_day = fields.Date(string='Week Day', default=datetime.today().strftime("%A"))
     week_day = fields.Char('Week Day')
     subject = fields.Many2one('education.subject', string='Subject', required=True)
-    #matt_id = fields.Many2one('education.monthly.attendances',string='Monlhly Attendance ID')
     # application_id = fields.Many2one('education.application', string='Application No',
                                     #  domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
 
@@ -32,7 +31,6 @@ class EducationStudentsAttendance(models.Model):
         self.week_day = calendar.day_name[selected.weekday()]
         wod = self.week_day[0:3].lower()
         this_semester = self.env['education.semester']._get_current_semester()
-        print(this_semester.id,' and ',wod,'>>>>>>>>>>>>>>>>>>')
         for record in self:
             if this_semester and record.class_division:
                 timetable = self.env['education.timetable'].search([('semester', '=', this_semester.id), ('class_division', '=', record.class_division.id)])
@@ -132,7 +130,7 @@ class EducationAttendanceLine(models.Model):
     period= fields.Many2one('timetable.period', string="Period")
     hours = fields.Float('Durition')
     remark = fields.Boolean(string='Present')
-
+    sub_att_id = fields.Many2one('education.subject.attendances',string='Monlhly Attendance ID')
 
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')], string='State', default='draft')
 #     academic_year = fields.Many2one('education.academic.year', string='Academic Year',

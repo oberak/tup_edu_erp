@@ -7,14 +7,12 @@
             <field name="model">education.monthly.attendances</field>
             <field name="arch" type="xml">
                 <form>
-                    <!-- <header>
-                        <button name="overall_attendance" type="object"
-                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('attendance_created', '=', False)]}"
-                            class="oe_highlight" string="Done" />
-                        <button name="set_to_draft" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"
-                            string="Set to Draft" />
-                        <field name="state" readonly="1" widget="statusbar" />
-                    </header> -->
+                    <header>
+                        <button name="monthly_attendance" type="object" states="draft"
+                            class="oe_highlight" string="Calculate Monthly Attendance" 
+                            style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" required="1"  />
+                    </header>
                     <sheet>
                         <group>
                             <h1>
@@ -24,16 +22,34 @@
                         <group>
                             <group>
                                 <field name="ay_id" readonly="1" force_save="1" />                                
-                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" />
-                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}"/>
-                                <field name="total_attendances" required='1' />                                
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>                              
                             </group>
                             <group>
-                                <field name="month" />                                
-                                <field name="stu_m_attendances" readonly="1" force_save="1" />                                
-                                <field name="m_attendances_percent" readonly="1" force_save="1"/>
+                                <field name="month" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>                                
+                                <field name="total_attendances" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>                                  
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Monthly Attendance By Subject">
+                                <field name="sub_att_ids">
+                                    <tree create="0" editable="bottom">
+                                        <field name="subject" />
+                                        <field name="subject_attendance" readonly="1"/>
+                                        <field name="percent_s_attendance" readonly="1"/>                                                                               
+                                    </tree>                                    
+                                </field>
+                            </page>
+                        </notebook> 
+                        <group>                            
+                            <group>
+                                <field name="stu_m_attendances" readonly= '1'/>
+                            </group>   
+                            <group>
+                                <field name="m_attendances_percent" readonly= '1'/> 
+                            </group>                                                                                 
+                        </group>
+                        <div class="oe_clear"/>
                     </sheet>
                 </form>
             </field>
@@ -74,11 +90,8 @@
             </p>
         </field>
         </record>
-        <menuitem id="student_overall_attendances_main_menu" parent="student_attendances_root_menu" name="Overall Attendance"
-                  sequence="4"/>
-
         <menuitem id="student_monthly_attendance_sub_menu" parent="student_overall_attendances_main_menu"
-                  action="act_monthly_attendances_view" name="Monthly Attendance" sequence="10"/>
+                  action="act_monthly_attendances_view" name="Monthly Attendance" sequence="11"/>
 
        
     </data>

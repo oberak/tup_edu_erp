@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="education_overall_attendances_form" model="ir.ui.view">
-            <field name="name">education_overall_attendances_form.form</field>
-            <field name="model">education.overall.attendances</field>
+        <record id="education_subject_attendances_form" model="ir.ui.view">
+            <field name="name">education_subject_attendances_form.form</field>
+            <field name="model">education.subject.attendances</field>
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="overall_attendance" type="object" states="draft"
-                            class="oe_highlight" string="Calculate Overall Attendance" 
+                        <button name="sub_attendance" type="object" states="draft"
+                            class="oe_highlight" string="Calculate Subject Attendance" 
                             style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;" />
                         <field name="state" widget="statusbar" statusbar_visible="draft,done" required="1"  />
                     </header>
@@ -20,32 +20,32 @@
                         </group>
                         <group>
                             <group>                               
-                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" required='1'/>
+                                <field name="subject"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" required='1'/>
+                                <field name="student_id" options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" required='1'/>
                             </group>
                             <group>
-                                <field name="ay_id" readonly="1" force_save="1" />
-                                <field name="total_attendances" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="month" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="total_s_attendances" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>
                             </group>
                         </group>
                         <notebook>
-                            <page string="Monthly Attendance">
-                                <field name="matt_ids">
+                            <page string="Daily Attendance">
+                                <field name="d_att_ids">
                                     <tree create="0" editable="bottom">
-                                        <field name="month" />
-                                        <field name="total_attendances" />
-                                        <field name="stu_m_attendances" readonly="1"/>                                        
-                                        <field name="m_attendances_percent" />                                        
+                                        <field name="date" readonly= '1'/>
+                                        <field name="hours" readonly= '1'/>
+                                        <field name="remark" widget="boolean_toggle" readonly= '1'/>                                       
                                     </tree>                                    
-                                </field>
+                                </field>                               
                             </page>
                         </notebook> 
                         <group>                            
                             <group>
-                                <field name="stu_overall_attendances" readonly= '1' />
+                                <field name="subject_attendance" readonly= '1' />
                             </group>   
                             <group>
-                                <field name="stu_overall_percent" readonly= '1' /> 
+                                <field name="percent_s_attendance" readonly= '1' /> 
                             </group>                                                                                 
                         </group>
                         <div class="oe_clear"/> 
@@ -53,13 +53,14 @@
                 </form>
             </field>
         </record>
-        <record id="education_overall_attendances_tree" model="ir.ui.view">
-            <field name="name">education_overall_attendances_tree.tree</field>
-            <field name="model">education.overall.attendances</field>
+        <record id="education_subject_attendances_tree" model="ir.ui.view">
+            <field name="name">education_subject_attendances_tree.tree</field>
+            <field name="model">education.subject.attendances</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
                     <field name="class_division"/>
+                    <field name="subject"/> 
                     <field name="student_id"/>                 
                 </tree>
             </field>
@@ -67,7 +68,7 @@
         <!-- add search view -->
         <record id="attendance_search" model="ir.ui.view">
             <field name="name">Student Overall Attendances</field>
-            <field name="model">education.overall.attendances</field>    
+            <field name="model">education.subject.attendances</field>    
             <field name="arch" type="xml">
                 <search string="Search Subjects">
                     <group expand='0' string='Group by...'>           
@@ -77,9 +78,9 @@
             </field>
         </record>   
 
-         <record id="act_overall_attendances_view" model="ir.actions.act_window">
-            <field name="name">Student Overall Attendance</field>
-            <field name="res_model">education.overall.attendances</field>
+         <record id="act_subject_attendances_view" model="ir.actions.act_window">
+            <field name="name">Sudent Attendance By Subject</field>
+            <field name="res_model">education.subject.attendances</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="attendance_search"/>
@@ -90,9 +91,10 @@
             </p>
         </field>
         </record>
-        
-        <menuitem id="student_overall_attendance_sub_menu" parent="student_overall_attendances_main_menu"
-                  action="act_overall_attendances_view" name="Overall Attendance" sequence="12"/>
+        <menuitem id="student_overall_attendances_main_menu" parent="student_attendances_root_menu" name="Overall Attendance"
+                  sequence="4"/>        
+        <menuitem id="student_subject_attendance_sub_menu" parent="student_overall_attendances_main_menu"
+                  action="act_subject_attendances_view" name="Subject Attendance" sequence="10"/>
 
        
     </data>
