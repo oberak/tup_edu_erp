@@ -48,7 +48,7 @@ class EducationPromotion(models.Model):
                         'student_id': i.student_id.id,
                         'final_result': 'fail',
                         'division_id': i.class_division.id,
-                        'academic_year': i.division_id.academic_year_id.id,
+                        'academic_year': i.class_division.academic_year_id.id,
                         'closing_id': self.id,
                     })                        
      #overwrite method
@@ -132,7 +132,7 @@ class EducationPromotion(models.Model):
             for k in j.students_details:
                 if k.final_result == 'pass':
                     if promotion_class == False:                                               
-                        k.student_id.state = "graduate"
+                        k.student_id.student_state = "graduate"
                         self.env['education.graduation'].create({
                             'graduate_class_id': graduate_class.id,                           
                             'student_id':k.student_id.id,

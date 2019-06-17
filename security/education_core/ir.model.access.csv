@@ -115,6 +115,7 @@ a_education_institute_haa,access.education.institute,education_core.model_educat
 education_core.access_education_student,access.education.student,education_core.model_education_student,education_core.group_education_faculty,0,0,0,0
 a_education_student_s,access.education.student,education_core.model_education_student,group_education_student,1,1,0,0
 a_education_student_t,access.education.student,education_core.model_education_student,group_education_teacher,1,0,0,0
+a_education_student_dc,access.education.student,education_core.model_education_student,group_education_teacher_dc,1,1,1,0
 a_education_student_aa,access.education.student,education_core.model_education_student,group_education_aa,1,1,1,0
 a_education_student_haa,access.education.student,education_core.model_education_student,group_education_haa,1,1,1,1
 a_education_student_sa,access.education.student,education_core.model_education_student,group_education_sa,1,0,0,0

@@ -53,7 +53,7 @@ class EducationSubjectAttendance(models.Model):
                     for d_att in daily_att:
                         month = datetime.strftime(datetime.strptime(d_att.date, "%Y-%m-%d"), "%m")
                         if month == rec.month:
-                            att = self.env['education.attendances.line'].search([('id','=',d_att.id),('student_id','=',rec.student_id.id),('date','=',d_att.date),('state','=','done')])
+                            att = self.env['education.attendances.line'].search([('id','=',d_att.id),('student_id','=',rec.student_id.id),('date','=',d_att.date),('state','=','done'),('remark','=',True)])
                             for datt in att:
                                 sub_atts += datt.hours
                                 datt.sub_att_id = self.id

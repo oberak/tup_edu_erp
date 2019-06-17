@@ -145,14 +145,14 @@ class StudentApplication(models.Model):
                     'per_zip': rec.zip,
                 })
 
-            student = self.env['education.student'].create(values)
+            student = self.env['education.student'].sudo().create(values)
 
             # add subling infos to the student
             stu_id= self.env['education.student'].search([])[-1].id
             if rec.sibling_ids:
                 sibling_ids=rec.sibling_ids                
                 for sid in sibling_ids:
-                    self.env['education.student.sibling'].create({
+                    self.env['education.student.sibling'].sudo().create({
                         'name' : sid.name,
                         'nrc_no' : sid.nrc_no,
                         'occupation' : sid.occupation,
@@ -160,7 +160,7 @@ class StudentApplication(models.Model):
                         'student_id' : stu_id,                        
                     })
             # add class history to student
-            self.env['education.class.history'].create({
+            self.env['education.class.history'].sudo().create({
                         'student_id':stu_id,
                         'academic_year_id':rec.academic_year_id.id,
                         'class_id': class_id,
