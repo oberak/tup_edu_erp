@@ -208,8 +208,7 @@ class StudentApplication(models.Model):
     is_registered = fields.Boolean(string="Check Signup", default=False)
     partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
-    m_name = fields.Char('Name (Myanmar)')
-    
+       
     # modify fields
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
                             default=lambda self: self.env['education.academic.year']._get_current_ay(),

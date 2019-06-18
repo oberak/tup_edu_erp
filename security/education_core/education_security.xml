@@ -359,12 +359,46 @@
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
         <field name="domain_force">[('department_id','=', user.get_major(user.login))]</field>
     </record>
-     <!-- Set domain for Faculty (student)--> 
-    <record id="student_faculty_request_rule" model="ir.rule">
-        <field name="name">Student Faculty request</field>
-        <field name="model_id" ref="model_education_faculty"/>
-        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('department_id','=', user.get_major(user.login))]</field>
+     <!-- Set domain for Employee (Teacher)--> 
+    <record id="teacher_employee_request_rule" model="ir.rule">
+        <field name="name">Employee request by Teacher</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('id','=', user.employee_ids.id)]</field>
     </record>
-    
+     <!-- Set domain for Employee (Teacher DC)--> 
+    <record id="teacher_dc_employee_request_rule" model="ir.rule">
+        <field name="name">Employee request by Teacher DC</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('department_id.id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
+     <!-- Set domain for Faculty (Teacher)--> 
+    <record id="teacher_faculty_request_rule" model="ir.rule">
+        <field name="name">Faculty request by Teacher</field>
+        <field name="model_id" ref="model_education_faculty"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('employee_id','=', user.employee_ids.id)]</field>
+    </record>
+      <!-- Set domain for Faculty (Teacher DC)--> 
+    <record id="student_faculty_request_rule" model="ir.rule">
+        <field name="name">Faculty request by Teacher DC</field>
+        <field name="model_id" ref="model_education_faculty"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('department_id','=', user.employee_ids.department_id.ids)]</field>
+    </record>
+     <!-- Set domain for Subject (Teacher)--> 
+    <record id="teacher_subject_request_rule" model="ir.rule">
+        <field name="name">Subject List request by Teacher</field>
+        <field name="model_id" ref="model_education_subject"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('major_id.id','=', user.employee_ids.department_id.ids)]</field>
+    </record>
+      <!-- Set domain for Subject (Teacher DC)--> 
+    <record id="teacher_dc_subject_request_rule" model="ir.rule">
+        <field name="name">Subject List request by Teacher DC</field>
+        <field name="model_id" ref="model_education_subject"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('major_id.id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
 </odoo>

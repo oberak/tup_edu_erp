@@ -95,7 +95,6 @@ a_education_class_amenities_haa,access.education.class.amenities,education_core.
 
 education_core.access_education_application,access.education.application,education_core.model_education_application,education_core.group_education_faculty,0,0,0,0
 a_education_application_s,access.education.application,education_core.model_education_application,group_education_student,1,1,0,0
-a_education_application_dc,access.education.application,education_core.model_education_application,group_education_teacher_dc,1,0,0,0
 a_education_application_fs,access.education.application,education_core.model_education_application,group_education_fs,1,1,0,0
 a_education_application_aa,access.education.application,education_core.model_education_application,group_education_aa,1,1,1,0
 a_education_application_haa,access.education.application,education_core.model_education_application,group_education_haa,1,1,1,1
@@ -133,7 +132,6 @@ a_education_student_list_aa,access.education.student.list,education_core.model_e
 a_education_student_list_haa,access.education.student.list,education_core.model_education_student_list,group_education_haa,1,1,1,1
 
 education_core.access_education_faculty,access.education.faculty,education_core.model_education_faculty,education_core.group_education_faculty,1,1,0,0
-a_education_faculty_s,access.education.faculty,education_core.model_education_faculty,group_education_student,1,0,0,0
 a_education_faculty_t,access.education.faculty,education_core.model_education_faculty,group_education_teacher,1,1,0,0
 a_education_faculty_dc,access.education.faculty,education_core.model_education_faculty,group_education_teacher_dc,1,1,0,0
 a_education_faculty_hsa,access.education.faculty,education_core.model_education_faculty,group_education_hsa,1,1,1,1
@@ -160,8 +158,7 @@ a_account_journal_haa,access.account.journal,account.model_account_journal,group
 a_account_journal_fs,access.account.journal,account.model_account_journal,group_education_fs,1,1,1,0
 a_account_journal_hfs,access.account.journal,account.model_account_journal,group_education_hfs,1,1,1,1
 
-education_core.access_education_faculty_classes,access.education.faculty.classes,model_education_faculty_classes,education_core.group_education_faculty,1,1,0,0
-a_education_faculty_classes_s,access.education.faculty.classes,model_education_faculty_classes,group_education_student,1,0,0,0
-a_education_faculty_classes_t,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher,1,1,0,0
-a_education_faculty_classes_dc,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher_dc,1,1,0,0
+education_core.access_education_faculty_classes,access.education.faculty.classes,model_education_faculty_classes,education_core.group_education_faculty,1,0,0,0
+a_education_faculty_classes_t,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher,1,0,0,0
+a_education_faculty_classes_dc,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher_dc,1,1,1,1
 a_education_faculty_classes_hsa,access.education.faculty.classes,model_education_faculty_classes,group_education_hsa,1,1,1,1

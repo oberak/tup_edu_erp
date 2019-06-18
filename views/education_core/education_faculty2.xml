@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <record model="ir.ui.view" id="view_tup_education_faculty_form_teacher">
+        <field name="name">tup.teacher.education.faculty.form</field>
+        <field name="model">education.faculty</field>
+        <field name="inherit_id" ref="tup_edu_erp.view_tup_education_faculty_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('tup_edu_erp.group_education_teacher')])]" />
+        <field name="arch" type="xml">
+        <!--Access to edit Personal Info -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='last_name']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='nrc_no']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='degree']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='class_id']" position="attributes">
+                <attribute name="attrs">{'readonly':True}</attribute> 
+            </xpath>
+        </field>
+    </record>
+</odoo>
