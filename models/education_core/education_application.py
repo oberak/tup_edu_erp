@@ -85,8 +85,7 @@ class StudentApplication(models.Model):
             vals['class_id']=class_id
             self.env['education.application'].update(vals['class_id'])
             if not class_id:
-                raise ValidationError(_('There is no class for this student !! Need to create class first '))         
-           
+                raise ValidationError(_('There is no class for this student !! Need to create class first '))        
             values = {
                 'name': rec.name,
                 'last_name': rec.last_name,
@@ -164,8 +163,7 @@ class StudentApplication(models.Model):
                         'student_id':stu_id,
                         'academic_year_id':rec.academic_year_id.id,
                         'class_id': class_id,
-                    })   
-            
+                    })               
             rec.write({
                 'state': 'done',
                 'class_id' : class_id
@@ -234,17 +232,11 @@ class StudentApplication(models.Model):
     date_of_birth = fields.Date(string="Date Of birth", required=False, help="Enter your DOB")
 
     # add field for creating student    
-    class_id = fields.Many2one('education.class.division', string='Class')
-    
+    class_id = fields.Many2one('education.class.division', string='Class')    
     #modify status 
-    state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('fee', 'Tution Fee'),('major', 'Assign Major'),
-                              ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+    state = fields.Selection([('draft', 'Draft'), ('apply', 'Apply'),('verification', 'Verify'),('approve', 'Approve'),('fee', 'Tution Fee'),('major', 'Assign Major'),
+                              ('reject', 'Reject'), ('done', 'Done')],
                              string='State', default='draft', track_visibility='onchange')
-    
-    #add fields for payment
-    #payment_fee = fields.Integer(string='# Payment')
-
-   
     #add field to check student type
     student_type=fields.Selection([('is_new_candidate','New Candidate'),('transfer_in','Transfer In Student')], default='is_new_candidate',required=True)
     

@@ -58,37 +58,37 @@
                             string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
                             help="Click to send the application for verification purpose" states="apply" />               
             </button>            
-            <button name="send_to_verify" position="after">
-                <button name="%(receipt_wizard_action_button)d" type="action" class="oe_highlight"  string="Create receipt"
-                        context="{'active_id':active_id}"
-                        help="Click to send the application for payment " states="verification" groups="tup_edu_erp.group_education_fs"
-                        />
+            <button name="application_verify" position="replace"> 
+                <button name="application_verify" type="object" class="oe_highlight"
+                            string="Approve" groups="tup_edu_erp.group_education_haa"
+                            help="Click to verify the application and documents"
+                            states="verification"/>
+            </button>                
+            <button name="application_verify" position="after">                
+                 <button name="%(receipt_wizard_action_button)d" type="action" class="oe_highlight"  string="Create receipt"
+                        context="{'active_id':active_id}" 
+                        help="Click to send the application for payment " states="approve" groups="tup_edu_erp.group_education_fs"
+                        />                           
             </button>
             <button name="%(receipt_wizard_action_button)d" position="after">                
                 <button name="assign_major" type="object" class="oe_highlight"
                             string="Assign Major" groups="tup_edu_erp.group_education_haa"
                             help="Click to send the application for payment " states="fee"/>                
             </button>
-            <button name="application_verify" position="replace">                
-                <button name="application_verify" type="object" class="oe_highlight"
-                            string="Verify Application" groups="tup_edu_erp.group_education_haa"
-                            help="Click to verify the application and documents"
-                            states="major"/>                           
-            </button>
             <button name="create_student" position="replace">
-                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_haa"
+                <button name="create_student" string="Create Student" groups="tup_edu_erp.group_education_haa,tup_edu_erp.group_education_aa"
                                 type="object" class="oe_highlight"
                                 help="Click to create Student"
-                                states="approve"/>
+                                states="major"/>
             </button>   
              <button name="%(education_core.application_reject_action)d" position="replace">                
                 <button name="%(education_core.application_reject_action)d" string="Reject"
                                 type="action" groups="tup_edu_erp.group_education_haa"
                                 context="{'default_application_id': active_id}"
-                                states="approve"/>              
+                                states="major"/>              
             </button>
             <field name="state" position="replace">
-                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,fee,major,approve,done" required="1"  />
+                <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,approve,fee,major,done" required="1"  />
             </field>
             <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
                 <tr>
