@@ -51,7 +51,7 @@
                     <page string="Syllabus">
                         <field name="syllabus_ids" nolabel="1">
                             <tree string="Syllabus Items" editable="bottom">                                
-                                <field name="subject_id" required = "1"/>
+                                <field name="subject_id" required = "1" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="lecture_hour" on_change="0"/>                      
                                 <field name="tutorial_hour" on_change="0"/>
                                 <field name="practical_hour" on_change="0"/>

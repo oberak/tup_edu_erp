@@ -17,17 +17,20 @@ class StudentApplication(models.Model):
                 if  rec.first_choice.id == False or rec.second_choice.id == False or rec.third_choice.id == False:
                     raise ValidationError(_('Student needs to apply at least three majors'))            
                 else :
-                    values = {
-                            'first_choice': rec.first_choice,
-                            'second_choice': rec.second_choice,
-                            'third_choice': rec.third_choice,
-                            'forth_choice': rec.forth_choice,
-                            'fifth_choice': rec.fifth_choice,
-                            }
-                    self.env['education.application'].update(values)
-                    rec.write({
-                    'state': 'apply',
-                    })
+                    if rec.first_choice == rec.second_choice or rec.first_choice == rec.third_choice or rec.first_choice == rec.forth_choice or rec.first_choice == rec.fifth_choice  or rec.second_choice == rec.third_choice or rec.second_choice == rec.forth_choice or rec.second_choice == rec.fifth_choice or rec.third_choice == rec.forth_choice or rec.third_choice == rec.fifth_choice or rec.forth_choice == rec.fifth_choice:
+                        raise ValidationError(_('Student needs to apply major differently')) 
+                    else :
+                        values = {
+                                'first_choice': rec.first_choice,
+                                'second_choice': rec.second_choice,
+                                'third_choice': rec.third_choice,
+                                'forth_choice': rec.forth_choice,
+                                'fifth_choice': rec.fifth_choice,
+                                }
+                        self.env['education.application'].update(values)
+                        rec.write({
+                        'state': 'apply',
+                        })
             else:
                 if  rec.nrc_no == False:
                     raise ValidationError(_('Student needs to input NRC Number')) 
@@ -246,19 +249,19 @@ class StudentApplication(models.Model):
     
     #add fields for new candidate
     first_choice = fields.Many2one('hr.department', string="First Choice",
-                             domain=[('is_major', '=', True)],
+                             domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     second_choice = fields.Many2one('hr.department', string="Second Choice",
-                            domain=[('is_major', '=', True)],
+                            domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     third_choice = fields.Many2one('hr.department', string="Third Choice",
-                             domain=[('is_major', '=', True)],
+                             domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     forth_choice = fields.Many2one('hr.department', string="Forth Choice",
-                           domain=[('is_major', '=', True)],
+                           domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     fifth_choice = fields.Many2one('hr.department', string="Fifth Choice",
-                            domain=[('is_major', '=', True)],
+                            domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")

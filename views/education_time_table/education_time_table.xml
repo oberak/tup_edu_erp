@@ -30,7 +30,7 @@
                     <page string="Monday">
                         <field name="timetable_mon" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 0)]"  context="{'default_week_day': '0'} ">
                             <tree string="Monday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/>
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1'/>
@@ -47,7 +47,7 @@
                     <page string="Tuesday">
                         <field name="timetable_tue" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 1)]"  context="{'default_week_day': '1'} ">
                             <tree string="Tuesday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/>
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
@@ -64,7 +64,7 @@
                     <page string="Wednesday">
                         <field name="timetable_wed" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 2)]"  context="{'default_week_day': '2'} ">
                             <tree string="Wednesday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/>
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
@@ -81,7 +81,7 @@
                     <page string="Thursday">
                         <field name="timetable_thur" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 3)]"  context="{'default_week_day': '3'} ">
                             <tree string="Thursday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/> 
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
@@ -98,7 +98,7 @@
                     <page string="Friday">
                         <field name="timetable_fri" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 4)]"  context="{'default_week_day': '4'} ">
                             <tree string="Friday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/> 
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
@@ -115,7 +115,7 @@
                     <page string="Saturday">
                         <field name="timetable_sat" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 5)]"  context="{'default_week_day': '5'} ">
                             <tree string="Saturday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/> 
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
@@ -132,7 +132,7 @@
                     <page string="Sunday">
                         <field name="timetable_sun" attrs="{'readonly': [('state', '!=', 'draft')]}" domain="[('week_day','=', 6)]"  context="{'default_week_day': '6'} ">
                             <tree string="Sunday" editable="bottom">
-                                <field name="subject" on_change="0"/>
+                                <field name="subject" on_change="0" options="{'no_create_edit': True, 'no_create': True}"/>
                                 <field name="sub_type" on_change="0"/>
                                 <field name="period_id"/> 
                                 <field name="time_from" widget="float_time" class="oe_inline" invisible='1' />
