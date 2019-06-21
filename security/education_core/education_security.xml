@@ -15,6 +15,11 @@
         <field name="implied_ids" eval="[(4, ref('group_education_user'))]"/>
         <field name="category_id" ref="education_core.module_category_education"/>
     </record>
+    <record id="group_education_family_teacher" model="res.groups">
+        <field name="name">Family Teacher</field>
+        <field name="implied_ids" eval="[(4, ref('group_education_user'))]"/>
+        <field name="category_id" ref="education_core.module_category_education"/>
+    </record>
     <record id="group_education_teacher_dc" model="res.groups">
         <field name="name">Department Chair</field>
         <field name="implied_ids" eval="[(4, ref('group_education_teacher'))]"/>
@@ -267,35 +272,66 @@
         <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
     </record>  
     <!-- Set domain for Attendance (teacher)-->
-    <record id="attendance_request_rule" model="ir.rule">
+    <record id="teacher_attendance_request_rule" model="ir.rule">
         <field name="name">Teacher Attendance request</field>
         <field name="model_id" ref="model_education_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
-    <record id="attendance_line_request_rule" model="ir.rule">
+    <record id="teacher_attendance_line_request_rule" model="ir.rule">
         <field name="name">Teacher Attendance Line request</field>
         <field name="model_id" ref="model_education_attendances_line"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
-    <record id="subject_attendance_request_rule" model="ir.rule">
+    <record id="teacher_subject_attendance_request_rule" model="ir.rule">
         <field name="name">Attendance by subject request by teacher</field>
         <field name="model_id" ref="model_education_subject_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
-    <record id="monthly_attendance_request_rule" model="ir.rule">
+    <record id="teacher_monthly_attendance_request_rule" model="ir.rule">
         <field name="name">Teacher Monthly Attendance request</field>
         <field name="model_id" ref="model_education_monthly_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
-    <record id="overall_attendance_results_request_rule" model="ir.rule">
+    <record id="teacher_overall_attendance_results_request_rule" model="ir.rule">
         <field name="name">Teacher Overall Attendance request</field>
         <field name="model_id" ref="model_education_overall_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
+    </record>
+     <!-- Set domain for Attendance (Family teacher)-->
+    <record id="family_teacher_attendance_request_rule" model="ir.rule">
+        <field name="name">Family Teacher Attendance request</field>
+        <field name="model_id" ref="model_education_attendances"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record>
+    <record id="family_teacher_attendance_line_request_rule" model="ir.rule">
+        <field name="name">Family Teacher Attendance Line request</field>
+        <field name="model_id" ref="model_education_attendances_line"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record>
+    <record id="family_teacher_subject_attendance_request_rule" model="ir.rule">
+        <field name="name">Family Attendance by subject request by teacher</field>
+        <field name="model_id" ref="model_education_subject_attendances"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record>
+    <record id="family_teacher_monthly_attendance_request_rule" model="ir.rule">
+        <field name="name">Family Teacher Monthly Attendance request</field>
+        <field name="model_id" ref="model_education_monthly_attendances"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record>
+    <record id="family_teacher_overall_attendance_results_request_rule" model="ir.rule">
+        <field name="name">Family Teacher Overall Attendance request</field>
+        <field name="model_id" ref="model_education_overall_attendances"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
     </record>
      <!-- Set domain for Attendance (teacherdc)-->
     <record id="dc_attendance_request_rule" model="ir.rule">
