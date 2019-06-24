@@ -20,12 +20,16 @@
         <field name="implied_ids" eval="[(4, ref('group_education_user'))]"/>
         <field name="category_id" ref="education_core.module_category_education"/>
     </record>
+    <record id="group_education_teacher_adc" model="res.groups">
+        <field name="name">Academic Department Chair</field>
+        <field name="implied_ids" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="category_id" ref="education_core.module_category_education"/>
+    </record>
     <record id="group_education_teacher_dc" model="res.groups">
         <field name="name">Department Chair</field>
         <field name="implied_ids" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="category_id" ref="education_core.module_category_education"/>
     </record>
-
     <record id="education_core.group_education_faculty" model="res.groups">
         <field name="implied_ids" eval="[(4, ref('group_education_user'))]"/>
     </record>
@@ -81,6 +85,11 @@
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('class_id.major_id','in',user.employee_ids.department_id.ids)]</field>
     </record>
+    <record id="teacher_adc_class_request_rule" model="ir.rule">
+        <field name="name">Class request by Teacher ADC </field>
+        <field name="model_id" ref="model_education_class_division"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_adc'))]"/>
+    </record>
     <record id="teacher_class_request_rule" model="ir.rule">
         <field name="name">Class request by Teacher</field>
         <field name="model_id" ref="model_education_class_division"/>
@@ -120,7 +129,6 @@
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('timetable_id.major_id','in', user.employee_ids.department_id.ids)]</field>
     </record>  
-
     <!-- Set domain for exam (teacher)-->
     <record id="teacher_exam_request_rule" model="ir.rule">
         <field name="name">Teacher exam request</field>
@@ -179,6 +187,11 @@
         <field name="model_id" ref="model_education_student"/>
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('major_id','=',user.employee_ids.department_id.ids)]</field>
+    </record>
+     <record id="academic_department_teacher_student_list_request_rule" model="ir.rule">
+        <field name="name">Student List request by Teacher ADC</field>
+        <field name="model_id" ref="model_education_student"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_adc'))]"/>
     </record>
     <record id="subject_teacher_student_list_request_rule" model="ir.rule">
         <field name="name">Student List request by Teacher</field>

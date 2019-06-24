@@ -35,5 +35,5 @@ class EducationExamType(models.Model):
     _name = 'education.exam.type'
     _inherit = 'education.exam.type'
 
-    school_class_division_wise = fields.Selection([('division', 'Class'), ('midterm', 'Midterm Exam'), ('final', 'Final Exam (Exam that promotes students to the next class)')],
+    school_class_division_wise = fields.Selection([('division', 'Class'), ('midterm', 'Midterm Exam'), ('final', 'Final Exam')],
                                                   string='Exam Type', default='division')           # Remove exam type (Class)
