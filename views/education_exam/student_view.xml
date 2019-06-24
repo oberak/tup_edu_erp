@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="student_smart_button_exam_form" model="ir.ui.view">
+            <field name="name">student_smart_button_exam_form.form</field>
+            <field name="model">education.student</field>
+            <field name="inherit_id" ref="education_exam.student_smart_button_exam_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='education_exam.view_exam_results_students']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

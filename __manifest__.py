@@ -89,6 +89,7 @@
         'views/education_exam/exam_results.xml',
         'views/education_exam/subject_overall_results.xml',
         'views/education_exam/overall_exam_result.xml',
+        'views/education_exam/student_view.xml',
 
         ## view - education_promotion
         'views/education_promotion/education_promotion.xml',

@@ -106,7 +106,7 @@ class EducationStudent(models.Model):
         for rec in self:
             if rec.receipt_count >= 1:
                 rec.state = 'done'
-                
+
     #add fields
     nrc_no = fields.Char(string='NRC Number',help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
@@ -117,6 +117,7 @@ class EducationStudent(models.Model):
     sibling_ids = fields.One2many('education.student.sibling', 'student_id', string="Student Sibling")
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
     document_count = fields.Integer(compute='_document_count', string='# Documents')
+    total_marks = fields.Integer(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
 
     _sql_constraints = [
         ('nrc_no_uniq', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),

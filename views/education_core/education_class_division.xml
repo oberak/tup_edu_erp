@@ -27,6 +27,16 @@
             <field name="promote_class" position="replace">
                 <field name="promote_class" invisible="True"/>
             </field>
+            <xpath expr="//form/sheet/notebook/page[1]" position="replace">
+                <page string="Students">
+                    <field name="student_ids" nolabel="1">
+                        <tree string="Students" editable="bottom" create="false">
+                            <field name="name"/>
+                            <field name="class_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath> 
         </field>
     </record>
 

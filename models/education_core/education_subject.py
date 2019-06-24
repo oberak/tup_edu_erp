@@ -7,8 +7,7 @@ class EducationSubject(models.Model):
     _inherit = 'education.subject'    
     
     major_id = fields.Many2one('hr.department', string="Major",
-                            required=True, domain=[('is_major', '=', True)],
-                            help="Choose Major")
+                            required=True, help="Choose Major")
     is_tutorial = fields.Boolean(string='Tutorial', help="Tick if this is the Tutorial")
     is_class_work = fields.Boolean(string="Class Work", help="Tick if this is the class Work")
 
@@ -33,8 +32,7 @@ class EducationSyllabus(models.Model):
 
     # add fields
     major_id = fields.Many2one('hr.department', string="Major",
-                            required=True, domain=[('is_major', '=', True)],
-                            help="Choose Major")
+                            required=True, help="Choose Major")
 
     division_id = fields.Many2one('education.division', string='Program Year', required=True,
                                   help="Select the Program Year") 

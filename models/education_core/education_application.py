@@ -124,6 +124,7 @@ class StudentApplication(models.Model):
                 'major_id' : rec.major_id.id,
                 'mother_tongue': rec.mother_tongue.id,              
                 'class_id': class_id,
+                'total_marks' : rec.total_marks,
                 'f_nrc': rec.f_nrc,
                 'f_nationality':rec.f_nationality.id,
                 'f_occupation':rec.f_occupation,
@@ -265,7 +266,7 @@ class StudentApplication(models.Model):
                             help="Choose Major to apply")
     admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
     roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
-    total_marks = fields.Char(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
+    total_marks = fields.Integer(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
 
     _sql_constraints = [
         ('admission_no_uniq', 'unique(admission_no)', "Another Student already exists with this admission_no !"),
