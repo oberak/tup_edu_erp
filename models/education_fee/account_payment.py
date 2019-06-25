@@ -17,5 +17,5 @@ class account_payment(models.Model):
           if rec.invoice_ids.application_id.student_type == 'is_new_candidate':
             rec.invoice_ids.application_id.write({ 'state': 'fee' })
           else:
-            rec.invoice_ids.application_id.write({ 'state': 'approve' })
+            rec.invoice_ids.application_id.write({ 'state': 'major' })
       return res
