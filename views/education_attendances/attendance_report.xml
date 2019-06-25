@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="education_attendances_report_form" model="ir.ui.view">
+            <field name="name">education_attendances_report_form.form</field>
+            <field name="model">education.attendances.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_attendance_report_sent" type="object" string="Attendance Warning" 
+                             class="oe_highlight" groups="tup_edu_erp.group_education_haa"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" required="1"  />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>                               
+                                <field name="ay_id"  options="{'no_create_edit': True, 'no_create': True}" readonly="1"/>                               
+                            </group>
+                            <group>                               
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" required='1' attrs="{'readonly': [('state', '=', 'done')]}"/>                               
+                            </group>                           
+                        </group>
+                         <div style="padding-bottom: 10px;">
+                            <button
+                                style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;"
+                                string="Get Overall Attendances" name="get_overall_attendances" type="object"
+                                class="oe_highlight" states="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                        </div>
+                        <notebook>
+                            <page string="Attendances Report">
+                                <field name="student_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                    <tree create="0" editable="bottom" decoration-danger="stu_overall_percent &lt; 75.0">
+                                        <field name="student_id" />
+                                        <field name="stu_overall_attendances" readonly="1" />                                        
+                                        <field name="stu_overall_percent" readonly="1" />                                        
+                                    </tree>                                    
+                                </field>
+                            </page>
+                        </notebook> 
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="education_attendances_report_tree" model="ir.ui.view">
+            <field name="name">education_attendances_report_tree.tree</field>
+            <field name="model">education.attendances.report</field>
+            <field name="arch" type="xml">
+                <tree>                    
+                    <field name="class_division"/>                                    
+                </tree>
+            </field>
+        </record>
+         <record id="act_attendances_report_view" model="ir.actions.act_window">
+            <field name="name">Student Attendance Report</field>
+            <field name="res_model">education.attendances.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student here.
+            </p>
+        </field>
+        </record>
+        
+        <menuitem id="student_attendance_report_sub_menu" parent="student_overall_attendances_main_menu"
+                  action="act_attendances_report_view" name="Attendance Report" sequence="13"/>
+       
+    </data>
+</odoo>

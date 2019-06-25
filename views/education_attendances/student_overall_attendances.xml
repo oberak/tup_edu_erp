@@ -93,7 +93,6 @@
         
         <menuitem id="student_overall_attendance_sub_menu" parent="student_overall_attendances_main_menu"
                   action="act_overall_attendances_view" name="Overall Attendance" sequence="12"/>
-
        
     </data>
 </odoo>

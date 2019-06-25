@@ -209,6 +209,7 @@ class EducationStudentsOverallAttendance(models.Model):
     stu_overall_attendances = fields.Float('Overall Attendance')
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')],string='State', default='draft', track_visibility='onchange')
     matt_ids = fields.One2many('education.monthly.attendances','oatt_id',string='Monthly Attendance Ids')
+    report_id = fields.Many2one('education.attendances.report',string='Report ID')
 
     @api.onchange('class_division')
     def _onchange_class(self):
@@ -258,3 +259,50 @@ class EducationStudentsOverallAttendance(models.Model):
                 _('Overall Attendance  of %s is already created on "%s"', ) % (res.student_id.name, res.class_division.name))
         return res       
         
+class EducationStudentsAttendanceReport(models.Model):
+    _name = 'education.attendances.report'
+
+    ay_id = fields.Many2one('education.academic.year',string='Academic Year',default=lambda self: self.env['education.academic.year']._get_current_ay())
+    class_division = fields.Many2one('education.class.division', string='Class', required=True, 
+        domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
+    state = fields.Selection([('draft', 'Draft'), ('done', 'Done')],string='State', default='draft', track_visibility='onchange')
+    student_ids = fields.One2many('education.overall.attendances','report_id',string='Student Attendance Ids')
+
+    def get_overall_attendances(self):
+        this_ay = self.env['education.academic.year']._get_current_ay()
+        for rec in self:    
+            obj = self.env['education.overall.attendances'].search([('class_division','=',self.class_division.id),('ay_id','=',this_ay.id)])
+            if obj :
+                for result in obj:                    
+                    result.report_id = self.id
+                    data ={
+                        'report_id' : result.report_id.id,
+                    }
+                    self.env['education.overall.attendances'].update(data)                    
+            rec.state = 'done' 
+
+    @api.multi
+    def action_attendance_report_sent(self):
+        """ Open a window to compose an email"""
+        self.ensure_one()
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        return {
+            'name': _('Compose Email'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',            
+        }
+    @api.model
+    def create(self, vals):
+        res = super(EducationStudentsAttendanceReport, self).create(vals)        
+        report = self.env['education.attendances.report'].search(
+            [('class_division', '=', res.class_division.id), ('ay_id', '=', res.ay_id.id) ])
+        if len(report) > 1:
+            raise ValidationError(
+                _('Attendance  Report of %s is already created"', ) % (res.class_division.name))
+        return res 
+
