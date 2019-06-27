@@ -29,7 +29,7 @@
                         <notebook>
                             <page string="Attendances Report">
                                 <field name="student_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
-                                    <tree create="0" editable="bottom" decoration-danger="stu_overall_percent &lt; 75.0">
+                                    <tree create="false" delete="false" decoration-danger="stu_overall_percent &lt; 75.0">
                                         <field name="student_id" />
                                         <field name="stu_overall_attendances" readonly="1" />                                        
                                         <field name="stu_overall_percent" readonly="1" />                                        

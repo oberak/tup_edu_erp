@@ -8,7 +8,7 @@ class EducationStudentsAttendance(models.Model):
 
     name = fields.Char(compute='get_name', string='Attendance Sheet Name', default='New')
     # class_id = fields.Many2one('education.class', string='Class')
-    class_division = fields.Many2one('education.class.division', string='Class', required=True, 
+    class_division = fields.Many2one('education.class.division', string='Class', 
         domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
     date = fields.Date(string='Date', default=fields.Date.today, required=True)
     attendance_line = fields.One2many('education.attendances.line', 'attendance_id', string='Attendance Line')
@@ -20,7 +20,7 @@ class EducationStudentsAttendance(models.Model):
     # add fields to relate timetable
     #week_day = fields.Date(string='Week Day', default=datetime.today().strftime("%A"))
     week_day = fields.Char('Week Day')
-    subject = fields.Many2one('education.subject', string='Subject', required=True)
+    subject = fields.Many2one('education.subject', string='Subject')
     # application_id = fields.Many2one('education.application', string='Application No',
                                     #  domain="[('state', 'in', ['draft', 'verification', 'fee'])]")
 
@@ -69,7 +69,6 @@ class EducationStudentsAttendance(models.Model):
         for record in self:
             if this_semester and record.class_division:
                 timetable = self.env['education.timetable'].search([('semester', '=', this_semester.id), ('class_division', '=', record.class_division.id)])
-
         if wday == 'Monday' :
             week_day = '0'
         elif wday == 'Tuesday' :
@@ -84,27 +83,61 @@ class EducationStudentsAttendance(models.Model):
             week_day = '5'
         else :
             week_day ='6'
-
-        schedule = self.env['education.timetable.schedule'].search([('timetable_id','=',timetable.id),('week_day','=',week_day),('subject','=',self.subject.id)])            
-        self.name = str(self.date)
+        
         attendance_line_obj = self.env['education.attendances.line'] 
-        students = self.class_division.student_ids
-        if len(students) < 1:
-            raise UserError(_('There are no students in this Class'))
-        for student in students:
-            data = {
-                'name': self.name,
-                'attendance_id': self.id,
-                'student_id': student.id,
-                'student_name': student.name,
-                'period' : schedule.period_id.id,
-                'hours':schedule.hours,
-                'class_division': self.class_division.id,
-                'date': self.date,
-            }
-            attendance_line_obj.sudo().create(data)        
-        self.attendance_created = True
-           
+        if self.class_division.id and self.subject.id: # select class and subject  
+            schedule = self.env['education.timetable.schedule'].search([('timetable_id','=',timetable.id),('week_day','=',week_day),('subject','=',self.subject.id)])
+            if schedule: 
+                self.name = str(self.date)                
+                students = self.class_division.student_ids
+                if len(students) < 1:
+                    raise UserError(_('There are no students in this Class'))
+                for student in students:
+                    data = {
+                        'name': self.name,
+                        'attendance_id': self.id,
+                        'student_id': student.id,
+                        'student_name': student.name,
+                        'period' : schedule.period_id.id,
+                        'hours':schedule.hours,
+                        'class_division': self.class_division.id,
+                        'date': self.date,
+                    }
+                    attendance_line_obj.sudo().create(data) 
+                self.attendance_created = True       
+        elif self.class_division.id and not self.subject.id:            
+            schedule=self.env['education.timetable.schedule'].search([('timetable_id','=',timetable.id),('week_day','=',week_day)])    
+            if schedule:
+                self.name = str(self.date)
+                students = self.class_division.student_ids               
+                for sub in schedule:
+                    if sub.subject.id != False:
+                        name=str(self.class_division.name) + "/" + str(self.date)
+                        attendance_created = True
+                        if len(students) < 1:
+                            attendance_created = False
+                        data1 = {
+                                'name': name,
+                                'date': self.date,
+                                'week_day':self.week_day,
+                                'class_division':self.class_division.id,
+                                'subject': sub.subject.id,
+                                'attendance_created': attendance_created,
+                        }                    
+                        sheet_id=self.env['education.attendances'].sudo().create(data1)                                                
+                        for student in students:                                             
+                            data = {
+                                'name': self.name,
+                                'attendance_id': sheet_id.id,
+                                'student_id': student.id,
+                                'student_name': student.name,
+                                'period' : sub.period_id.id,
+                                'hours':sub.hours,
+                                'class_division': self.class_division.id,
+                                'date': self.date,
+                            }
+                            attendance_line_obj.sudo().create(data)        
+                                   
     @api.multi
     def attendance_done(self):
         for records in self.attendance_line:
@@ -128,9 +161,10 @@ class EducationAttendanceLine(models.Model):
     date = fields.Date(string='Date')   
     # add periods
     period= fields.Many2one('timetable.period', string="Period")
-    hours = fields.Float('Durition')
+    hours = fields.Float('Duration in hours')
     remark = fields.Boolean(string='Present')
     sub_att_id = fields.Many2one('education.subject.attendances',string='Monlhly Attendance ID')
+    subject = fields.Many2one('education.subject', string='Subject')
 
     state = fields.Selection([('draft', 'Draft'), ('done', 'Done')], string='State', default='draft')
 #     academic_year = fields.Many2one('education.academic.year', string='Academic Year',
