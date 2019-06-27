@@ -32,7 +32,7 @@
                         <notebook>
                             <page string="Daily Attendance">
                                 <field name="d_att_ids">
-                                    <tree create="0" editable="bottom">
+                                    <tree editable="bottom"  create="false" delete="false">
                                         <field name="date" readonly= '1'/>
                                         <field name="hours" readonly= '1'/>
                                         <field name="remark" widget="boolean_toggle" readonly= '1'/>                                       

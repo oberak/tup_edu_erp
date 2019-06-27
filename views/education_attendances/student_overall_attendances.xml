@@ -31,7 +31,7 @@
                         <notebook>
                             <page string="Monthly Attendance">
                                 <field name="matt_ids">
-                                    <tree create="0" editable="bottom">
+                                    <tree editable="bottom"  create="false" delete="false">
                                         <field name="month" />
                                         <field name="total_attendances" />
                                         <field name="stu_m_attendances" readonly="1"/>                                        

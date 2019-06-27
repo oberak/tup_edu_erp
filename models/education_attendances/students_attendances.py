@@ -99,6 +99,7 @@ class EducationStudentsAttendance(models.Model):
                         'student_id': student.id,
                         'student_name': student.name,
                         'period' : schedule.period_id.id,
+                        'period_to': schedule.period_id_to.id,
                         'hours':schedule.hours,
                         'class_division': self.class_division.id,
                         'date': self.date,
@@ -132,6 +133,7 @@ class EducationStudentsAttendance(models.Model):
                                 'student_id': student.id,
                                 'student_name': student.name,
                                 'period' : sub.period_id.id,
+                                'period_to': sub.period_id_to.id,
                                 'hours':sub.hours,
                                 'class_division': self.class_division.id,
                                 'date': self.date,
@@ -160,7 +162,8 @@ class EducationAttendanceLine(models.Model):
     class_division = fields.Many2one('education.class.division', string='Class')
     date = fields.Date(string='Date')   
     # add periods
-    period= fields.Many2one('timetable.period', string="Period")
+    period= fields.Many2one('timetable.period', string="Period (From)")
+    period_to = fields.Many2one('timetable.period', string="Period (To)")
     hours = fields.Float('Duration in hours')
     remark = fields.Boolean(string='Present')
     sub_att_id = fields.Many2one('education.subject.attendances',string='Monlhly Attendance ID')

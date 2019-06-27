@@ -47,6 +47,7 @@
                                     <field name="student_id" invisible="1" />
                                     <field name="student_name" readonly="1" style=" width: 500px; " />
                                     <field name="period" readonly="1" />
+                                    <field name="period_to" readonly="1" />
                                     <field name="hours" readonly="1"/>
                                     <field name="remark" />
                                 </tree>
