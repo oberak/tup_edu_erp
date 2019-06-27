@@ -6,7 +6,7 @@ class EducationTimeTable(models.Model):
     _inherit = 'education.timetable'
 
     # to modify the name (get_name) 
-    name = fields.Char(compute='get_name')
+    name = fields.Char(compute='get_name') 
         
     # add fields
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
@@ -68,6 +68,11 @@ class EducationTimeTableSchedule(models.Model):
     _inherit = 'education.timetable.schedule'
     _rec_name = 'period_id'
    
+    # modify field name
+    period_id = fields.Many2one('timetable.period', string="Period (from)", required=True)
+      
+    # add fields
+    period_id_to= fields.Many2one('timetable.period', string="Period (to)", required=True)  
     hours = fields.Float(string='Hours', required=True)
     description = fields.Text(string='Syllabus Modules')
     classroom = fields.Char(string='Class Room')
