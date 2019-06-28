@@ -138,7 +138,8 @@ class EducationStudentsAttendance(models.Model):
                                 'class_division': self.class_division.id,
                                 'date': self.date,
                             }
-                            attendance_line_obj.sudo().create(data)        
+                            attendance_line_obj.sudo().create(data)
+                self.search([('id', '=', self.id)]).unlink()        
                                    
     @api.multi
     def attendance_done(self):
