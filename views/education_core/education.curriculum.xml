@@ -19,7 +19,8 @@
                         </group>
                         <group >  
                             <group>                             
-                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" /> 
+                                <field name="program_year"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" /> 
+                                <field name="major_id"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" /> 
                                 <field name="semester_id"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}"/>
                             </group>  
                             <group>                               
@@ -56,11 +57,23 @@
                 </tree>
             </field>
         </record>
+         <record id="curriculum_search" model="ir.ui.view">
+            <field name="name">Curriculum</field>
+            <field name="model">education.curriculum</field>
+            <field name="arch" type="xml">
+            <search string="Search Curriculum">
+                    <filter string="My department" name="user_department" domain="[('user_subjects','=', 1)]" groups="tup_edu_erp.group_education_teacher"/>
+            </search>
+            </field>
+        </record>
+
          <record id="action_education_curriculum" model="ir.actions.act_window">
             <field name="name">Curriculum</field>
             <field name="res_model">education.curriculum</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="curriculum_search"/>
+            <field name="context">{'search_default_user_department': 1}</field>
             <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first here.

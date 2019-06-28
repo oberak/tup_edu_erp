@@ -11,7 +11,6 @@ class EducationSubject(models.Model):
     is_language = fields.Boolean(string="Lecture", help="Tick if this subject is a lecture")
     is_tutorial = fields.Boolean(string='Tutorial', help="Tick if this is the Tutorial")
     is_class_work = fields.Boolean(string="Class Work", help="Tick if this is the class Work")
-
     # check logged user's department
     user_subjects=fields.Char(compute="_compute_user_subjects",search='user_subjects_search')
 
@@ -34,10 +33,23 @@ class EducationSyllabus(models.Model):
     # add fields
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, help="Choose Major")
-
+    semester_id =fields.Many2one('education.semester', string="Semester" , required=True,
+                    domain=lambda self: [('academic_year', '=', self.env['education.academic.year']._get_current_ay().id)])
     division_id = fields.Many2one('education.division', string='Program Year', required=True,
-                                  help="Select the Program Year") 
-    syllabus_ids = fields.One2many('education.syllabuses', 'syllabus_id', string="Syllabus")   
+                                  help="Select the Program Year")
+    state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft')
+    cur_ids = fields.One2many('education.curriculum', 'course_id', string="Curriculum") 
+    # For logged user's department
+    user_subjects=fields.Char(compute="_compute_user_subjects",search='user_subjects_search')  
+
+    @api.one
+    @api.depends('major_id')
+    def _compute_user_subjects(self):
+        print('View my departemnt subjects')
+    
+    def user_subjects_search(self, operator, operand):
+        employee_ids = self.env['hr.employee'].search([('user_id','in',self.env.user.login)]).ids
+        return [('major_id.member_ids','in',employee_ids)]
 
     # add functions
     # override for name
@@ -50,44 +62,19 @@ class EducationSyllabus(models.Model):
         vals['name'] = name
         return super(EducationSyllabus, self).create(vals)
 
-    # override for name
     @api.multi
-    @api.depends('major_id', 'division_id')
-    def write(self, vals):
-        """Return the name as a str of Major code + Program Year"""
+    def get_curriculum(self):
         for rec in self:
-            major_code = rec.major_id.major_code
-            name = rec.division_id.name
-            if 'major_id' in vals:
-                major_code = self.env['hr.department'].browse(vals['major_id']).major_code
-            if 'division_id' in vals:
-                name = self.env['education.division'].browse(vals['division_id']).name
-            vals['name'] = str(major_code + '-' + name)
-        return super(EducationSyllabus, self).write(vals)
-
-
-# add new classes      
-class EducationSyllabuses(models.Model):
-    _name = 'education.syllabuses'
-
-    subject_id = fields.Many2one('education.subject', string='Subject')
-    lecture_hour = fields.Char(string="Lecture (hrs)", required=True, help="Pick lecture hours")
-    tutorial_hour = fields.Char(string="Tutorial (hrs)", help="Pick Tutorial hours")
-    practical_hour = fields.Char(string="Practical (hrs)", help="Pick Practical hours")
-    classwork_hour = fields.Char(string="Class Work (hrs)",  help="Pick Class Work hours") 
-    syllabus_id = fields.Many2one('education.syllabus', string ='Syllabus', help = "Select the Syllabus")  
-        
-    @api.onchange('subject_id')
-    def onchange_subject(self):
-        for rec in self:
-            if rec.subject_id.is_language:
-                rec.lecture_hour = ""
-            if rec.subject_id.is_tutorial:
-                rec.tutorial_hour = "" 
-            if rec.subject_id.is_lab:
-                rec.practical_hour = "" 
-            if rec.subject_id.is_class_work:
-                rec.classwork_hour = ""
+            if rec.major_id and rec.division_id and rec.semester_id:
+                cur_ids = self.env['education.curriculum'].search([('major_id','=',rec.major_id.id),('program_year','=',rec.division_id.id),('semester_id','=',rec.semester_id.id)])
+                if cur_ids:
+                    for cur_id in cur_ids:
+                        cur_id.course_id = self.id
+                        data={
+                            'course_id' : cur_id.course_id.id,
+                        }
+                        self.env['education.curriculum'].update(data)  
+            rec.state ='done'
 
 # add new classes      
 class EducationCurriculum(models.Model):
@@ -96,22 +83,38 @@ class EducationCurriculum(models.Model):
     name = fields.Char(compute='get_name', default='New')
     course_title = fields.Many2one('education.subject', string='Subject')
     code = fields.Char('Code')
-    lecture = fields.Integer('Lecture')
-    tutorial = fields.Integer('Tutorial')
-    practical = fields.Integer('Practical')
+    lecture = fields.Integer('Lecture (hrs)')
+    tutorial = fields.Integer('Tutorial (hrs)')
+    practical = fields.Integer('Practical (hrs)')
     total = fields.Integer('Total')
-    independent_learning = fields.Integer('Independent Learning')
-    credit_point = fields.Integer('Credit Point')
-    class_division =fields.Many2one('education.class.division', string='Class', required=True, 
-        domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
-    semester_id =fields.Many2one('education.semester', string="Semester" , default=lambda self: self.env['education.academic.year']._get_current_ay().id) 
+    independent_learning = fields.Float('Independent Learning')
+    credit_point = fields.Float('Credit Point')
+    program_year =fields.Many2one('education.division', string='Program Year', required=True)
+    major_id = fields.Many2one('hr.department', string="Major",
+                            required=True, help="Choose Major")
+    semester_id =fields.Many2one('education.semester', string="Semester" , required=True,
+                    domain=lambda self: [('academic_year', '=', self.env['education.academic.year']._get_current_ay().id)]) 
     state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft') 
+    course_id = fields.Many2one('education.syllabus', string ='Courses', help = "Select the Courses")
+    # For logged user's department
+    user_subjects=fields.Char(compute="_compute_user_subjects",search='user_subjects_search')  
+
+    @api.one
+    @api.depends('major_id')
+    def _compute_user_subjects(self):
+        print('View my departemnt subjects')
+    
+    def user_subjects_search(self, operator, operand):
+        employee_ids = self.env['hr.employee'].search([('user_id','in',self.env.user.login)]).ids
+        return [('major_id.member_ids','in',employee_ids)]
+
 
     # Naming Class/Attendance_date
     def get_name(self):
         """To generate name for the model"""
         for i in self:
-            i.name = str(i.class_division.name) + "/" + str(i.semester_id.name)
+            i.name = str(i.program_year.name)+'-'+ str(i.major_id.major_code)+'-'+ str(i.course_title.name)
+
 
     @api.onchange('course_title')
     def _onchange_subject(self):
@@ -122,7 +125,7 @@ class EducationCurriculum(models.Model):
     def confirm_curriculum(self):
         for rec in self:
             rec.total = rec.lecture + rec.tutorial + rec.practical
-            rec.independent_learning = rec.lecture * 2 + rec.tutorial * 0.5+ rec.practical * 0.5
-            rec.credit_point = rec.lecture + rec.tutorial * 0.5+ rec.practical * 0.5
+            rec.independent_learning = rec.lecture * 2 + rec.tutorial * 0.5 + rec.practical * 0.5
+            rec.credit_point = rec.lecture + rec.tutorial * 0.5 + rec.practical * 0.5
             rec.state = 'done'
     

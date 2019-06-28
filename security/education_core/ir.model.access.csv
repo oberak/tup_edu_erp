@@ -36,6 +36,12 @@ a_education_subject_t,access.education.subject,education_core.model_education_su
 a_education_subject_dc,access.education.subject,education_core.model_education_subject,group_education_teacher_dc,1,1,1,0
 a_education_subject_adc,access.education.subject,education_core.model_education_subject,group_education_teacher_adc,1,1,1,0
 
+education_core.access_education_curriculum,access.education.curriculum,model_education_curriculum,education_core.group_education_faculty,1,0,0,0
+a_education_curriculum_s,access.education.curriculum,model_education_curriculum,group_education_student,1,0,0,0
+a_education_curriculum_t,access.education.curriculum,model_education_curriculum,group_education_teacher,1,0,0,0
+a_education_curriculum_dc,access.education.curriculum,model_education_curriculum,group_education_teacher_dc,1,1,1,0
+a_education_curriculum_adc,access.education.curriculum,model_education_curriculum,group_education_teacher_adc,1,1,1,0
+
 education_core.access_education_syllabus,access.education.syllabus,education_core.model_education_syllabus,education_core.group_education_faculty,1,0,0,0
 a_education_syllabus_s,access.education.syllabus,education_core.model_education_syllabus,group_education_student,1,0,0,0
 a_education_syllabus_t,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher,1,0,0,0
@@ -43,13 +49,6 @@ a_education_syllabus_dc,access.education.syllabus,education_core.model_education
 a_education_syllabus_adc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_adc,1,1,1,1
 a_education_syllabus_aa,access.education.syllabus,education_core.model_education_syllabus,group_education_aa,1,0,0,0
 a_education_syllabus_haa,access.education.syllabus,education_core.model_education_syllabus,group_education_haa,1,0,0,0
-
-a_education_syllabuses_s,access.education.syllabuses,model_education_syllabuses,group_education_student,1,0,0,0
-a_education_syllabuses_t,access.education.syllabuses,model_education_syllabuses,group_education_teacher,1,0,0,0
-a_education_syllabuses_dc,access.education.syllabuses,model_education_syllabuses,group_education_teacher_dc,1,1,1,1
-a_education_syllabuses_dc,access.education.syllabuses,model_education_syllabuses,group_education_teacher_adc,1,1,1,1
-a_education_syllabuses_aa,access.education.syllabuses,model_education_syllabuses,group_education_aa,1,0,0,0
-a_education_syllabuses_haa,access.education.syllabuses,model_education_syllabuses,group_education_haa,1,0,0,0
 
 education_core.access_education_class,access.education.class,education_core.model_education_class,education_core.group_education_faculty,1,0,0,0
 a_education_class_s,access.education.class,education_core.model_education_class,group_education_student,0,0,0,0

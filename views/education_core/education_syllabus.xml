@@ -24,7 +24,14 @@
         <field name="name">education.syllabus.form</field>
         <field name="model">education.syllabus</field>
         <field name="inherit_id" ref="education_core.view_education_syllabus_form"/>
-        <field name="arch" type="xml">                                          
+        <field name="arch" type="xml"> 
+            <xpath expr='/form/sheet' position='before'>  
+                <header>
+                    <button name="get_curriculum" type="object"
+                        class="oe_highlight" string="Get Curriculum" states='draft' />
+                    <field name="state" readonly="1" widget="statusbar" />
+                </header>   
+            </xpath>                                 
             <field name="name" position="replace">
                 <field name="name" readonly = "True"/>           
             </field>        
@@ -32,7 +39,7 @@
                 <attribute name="required">0</attribute>
             </field>
             <field name="class_id" position="replace">
-                <field name="major_id" on_change="0"/>
+                <field name="major_id" on_change="0" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
             <field name="subject_id" position="attributes">
                 <attribute name="invisible">True</attribute>
@@ -41,34 +48,49 @@
                 <attribute name="invisible">True</attribute>
             </field>
             <field name="total_hours" position="replace">
-                <field name="division_id" on_change="0"/>
+                <field name="division_id" on_change="0" attrs="{'readonly': [('state', '=', 'done')]}"/>
+            </field>
+            <field name="division_id" position="after">
+                <field name="semester_id" on_change="0" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
             <field name="description" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
             <xpath expr="/form/sheet/group" position="after">
                 <notebook>
-                    <page string="Subjects">
-                        <field name="syllabus_ids" nolabel="1">
-                            <tree string="Syllabus Items" editable="bottom">                                
-                                <field name="subject_id" required = "1" options="{'no_create_edit': True, 'no_create': True}"/>
-                                <field name="lecture_hour" on_change="0"/>                      
-                                <field name="tutorial_hour" on_change="0"/>
-                                <field name="practical_hour" on_change="0"/>
-                                <field name="classwork_hour" on_change="0"/>                               
+                    <page string="Curriculum">
+                        <field name="cur_ids" nolabel="1">
+                            <tree string="Syllabus Items" editable="bottom" create="false" delete="false">                                
+                                <field name="course_title" readonly='1'/>
+                                <field name="lecture" readonly='1'/>                      
+                                <field name="tutorial" readonly='1'/>
+                                <field name="practical" readonly='1'/>
+                                <field name="independent_learning" readonly='1' />
+                                <field name="credit_point" readonly='1'/>                               
                             </tree>
                         </field>
                     </page>
                 </notebook>     
             </xpath>    
         </field>
-    </record>     
+    </record>   
+    <record id="courses_search" model="ir.ui.view">
+            <field name="name">Courses</field>
+            <field name="model">education.syllabus</field>
+            <field name="arch" type="xml">
+            <search string="Search Courses">
+                    <filter string="My department" name="user_department" domain="[('user_subjects','=', 1)]" groups="tup_edu_erp.group_education_teacher"/>
+            </search>
+            </field>
+        </record>  
      <record id="education_core.action_education_syllabus" model="ir.actions.act_window">
         <field name="name">Courses</field>
         <field name="res_model">education.syllabus</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="courses_search"/>
+        <field name="context">{'search_default_user_department': 1}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first syllabus here.
