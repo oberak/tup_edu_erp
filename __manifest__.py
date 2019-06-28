@@ -77,6 +77,7 @@
         'views/education_core/application_analysis.xml',
         'views/education_core/education_documents.xml',
         'views/education_core/education.curriculum.xml',
+        'views/education_core/education_student_class_division.xml',
        # 'views/education_core/education_faculty2.xml',
 
         'reports/student_application_report.xml',
@@ -95,9 +96,11 @@
 
         ## view - education_promotion
         'views/education_promotion/education_promotion.xml',
+       # 'views/education_promotion/academic_year_closing.xml',
 
         ## view - education_graduation
         'views/education_graduation/education_graduation.xml',
+        
 
     ],
     # only loaded in demonstration mode

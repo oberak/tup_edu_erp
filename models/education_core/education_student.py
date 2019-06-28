@@ -118,6 +118,7 @@ class EducationStudent(models.Model):
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
     document_count = fields.Integer(compute='_document_count', string='# Documents')
     total_marks = fields.Integer(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
+    roll_no = fields.Char('Roll No')
 
     _sql_constraints = [
         ('nrc_no_uniq', 'unique(nrc_no)', "Another Student already exists with this NRC No !"),

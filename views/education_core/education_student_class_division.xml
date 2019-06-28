@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_education_student_class_division_tree" model="ir.ui.view">
+        <field name="name">education.student.class.division.tree</field>
+        <field name="model">education.student.class.division</field>
+        <field name="arch" type="xml">
+            <tree string="Assign Roll No">
+                <field name="class_division"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_education_student_class_division_form" model="ir.ui.view">
+        <field name="name">education.student.class.division.form</field>
+        <field name="model">education.student.class.division</field>
+        <field name="arch" type="xml">
+            <form string="Assign Class">
+                <header>
+                    <button name="assign_rollno" type="object"
+                            string="Assign Roll No" class="oe_highlight"
+                            help="Click to get student list" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet string="Assign Roll No">
+                    <group>
+                        <group>
+                            <field name="class_division"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                   <notebook>
+                    <page string="Students">
+                        <field name="student_ids" nolabel="1">
+                            <tree string="Students" editable="bottom" create="false" delete="false">                                
+                                <field name="student_id" readonly='1'/>
+                                <field name="roll_no" readonly='1'/>                                                   
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>     
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_student_roll_no" model="ir.actions.act_window">
+        <field name="name">Assign Roll No</field>
+        <field name="res_model">education.student.class.division</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Assign roll no to students from here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_education_student_class_division" name="Assign Roll No" sequence="26"
+              parent="education_core.menu_education_admission" action="action_student_roll_no"/>
+
+</odoo>

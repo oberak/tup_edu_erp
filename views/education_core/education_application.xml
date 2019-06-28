@@ -154,7 +154,7 @@
                         <group>
                             <field name="admission_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />                         
                             <field name="roll_no"  attrs="{'invisible': [('student_type', '=', 'transfer_in')], 'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />
-                            <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>                                      
+                            <field name="total_marks"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" />                                      
                             <field name="first_choice"   attrs="{'invisible': [('student_type', '=', 'transfer_in')],'required': [('state', '=','apply'),('student_type', '=','is_new_candidate')],'readonly': [('state', 'in' , ['verification','fee','major','approve','done'])]}" options="{'no_create_edit': True, 'no_create': True}"/>
                         </group>
                         <group>

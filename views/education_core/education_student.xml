@@ -81,6 +81,9 @@
             <field name="class_id" position="replace">
                 <field name="class_id"  />
             </field>
+            <field name="class_id" position="after">
+                <field name="roll_no"  />
+            </field>
             <field name="caste_id" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>           

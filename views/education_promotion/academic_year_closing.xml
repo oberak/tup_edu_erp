@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_education_class_division_promotion_result_form" model="ir.ui.view">
+            <field name="name">education.division.promotion.result.form</field>
+            <field name="model">education.class.division</field>
+            <field name="inherit_id" ref="education_promotion.view_education_class_division_promotion_result_form"/>
+            <field name="arch" type="xml">
+                <field name="student_id" position="after">
+                    <field name="total_marks"  />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -36,8 +36,10 @@ class EducationPromotion(models.Model):
         #         student.unlink()
         for i in self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)]):         
                 if i.pass_or_fail == True :
+                    print('>>>>>>>>>>>>>>>>>',i.total_avg_score)
                     self.env['education.student.final.result'].create({
                         'student_id': i.student_id.id,
+                        'total_marks':i.total_avg_score,
                         'final_result': 'pass',
                         'division_id': i.class_division.id,
                         'academic_year': i.class_division.academic_year_id.id,
@@ -46,6 +48,7 @@ class EducationPromotion(models.Model):
                 else:
                     self.env['education.student.final.result'].create({
                         'student_id': i.student_id.id,
+                        'total_marks':i.total_avg_score,
                         'final_result': 'fail',
                         'division_id': i.class_division.id,
                         'academic_year': i.class_division.academic_year_id.id,
@@ -133,6 +136,7 @@ class EducationPromotion(models.Model):
                 if k.final_result == 'pass':
                     if promotion_class == False:                                               
                         k.student_id.student_state = "graduate"
+                        k.student_id.total_marks = k.total_marks
                         self.env['education.graduation'].create({
                             'graduate_class_id': graduate_class.id,                           
                             'student_id':k.student_id.id,
@@ -146,6 +150,8 @@ class EducationPromotion(models.Model):
                             'email' : k.student_id.email,
                         })               
                     else :
+                        k.student_id.total_marks = k.total_marks
+                        print('>>>>>>>>>>>>>>>>>>>>',k.total_marks)
                         self.env['education.class.history'].create({
                             'student_id':k.student_id.id,
                             'academic_year_id':promotion_class.academic_year_id.id,
@@ -158,7 +164,6 @@ class EducationPromotion(models.Model):
                             'division_id':  promotion_class.id,
                             'academic_year': promotion_class.academic_year_id.id,
                          })
-
                 elif k.final_result == 'fail':
                     c_name = str(new_academic_year.ay_code + '-' + obj3.major_id.major_code)
                     c_id = self.env['education.class'].search([('name','=',c_name)])
@@ -166,6 +171,7 @@ class EducationPromotion(models.Model):
                     current_class = self.env['education.class.division'].search([ ('class_id','=',class_id),
                                                     ('division_id', '=', obj2.division_id.id), ('academic_year_id', '=', new_academic_year.id)])
                     k.student_id.class_id = current_class.id
+                    k.student_id.total_marks = k.total_marks
                     self.env['education.class.history'].create({
                             'student_id':k.student_id.id,
                             'academic_year_id':current_class.academic_year_id.id,
@@ -177,7 +183,7 @@ class EducationPromotion(models.Model):
                         'division_id': current_class.id,
                         'academic_year': current_class.academic_year_id.id,
                     })
-        
+                   
        
 
     

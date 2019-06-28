@@ -118,7 +118,7 @@ class ExamOverallResultsLine(models.Model):
     student_id = fields.Many2one('education.student',string = 'Student')
     state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
     result_ids = fields.One2many('education.subject.overallresults','overall_result_id',string='Result Ids')
-    total_avg_score = fields.Float(string='Total Average Score', readonly= True)
+    total_avg_score = fields.Integer(string='Total Average Score', readonly= True)
     pass_or_fail = fields.Boolean(string='Pass/Fail')
    
     def get_name(self):
