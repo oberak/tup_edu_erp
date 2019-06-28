@@ -76,6 +76,7 @@
         'views/education_core/education_semester.xml',
         'views/education_core/application_analysis.xml',
         'views/education_core/education_documents.xml',
+        'views/education_core/education.curriculum.xml',
        # 'views/education_core/education_faculty2.xml',
 
         'reports/student_application_report.xml',

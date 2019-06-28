@@ -8,6 +8,7 @@ class EducationSubject(models.Model):
     
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, help="Choose Major")
+    is_language = fields.Boolean(string="Lecture", help="Tick if this subject is a lecture")
     is_tutorial = fields.Boolean(string='Tutorial', help="Tick if this is the Tutorial")
     is_class_work = fields.Boolean(string="Class Work", help="Tick if this is the class Work")
 
@@ -87,3 +88,41 @@ class EducationSyllabuses(models.Model):
                 rec.practical_hour = "" 
             if rec.subject_id.is_class_work:
                 rec.classwork_hour = ""
+
+# add new classes      
+class EducationCurriculum(models.Model):
+    _name = 'education.curriculum'
+
+    name = fields.Char(compute='get_name', default='New')
+    course_title = fields.Many2one('education.subject', string='Subject')
+    code = fields.Char('Code')
+    lecture = fields.Integer('Lecture')
+    tutorial = fields.Integer('Tutorial')
+    practical = fields.Integer('Practical')
+    total = fields.Integer('Total')
+    independent_learning = fields.Integer('Independent Learning')
+    credit_point = fields.Integer('Credit Point')
+    class_division =fields.Many2one('education.class.division', string='Class', required=True, 
+        domain=lambda self: [('academic_year_id', '=', self.env['education.academic.year']._get_current_ay().id)])
+    semester_id =fields.Many2one('education.semester', string="Semester" , default=lambda self: self.env['education.academic.year']._get_current_ay().id) 
+    state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft') 
+
+    # Naming Class/Attendance_date
+    def get_name(self):
+        """To generate name for the model"""
+        for i in self:
+            i.name = str(i.class_division.name) + "/" + str(i.semester_id.name)
+
+    @api.onchange('course_title')
+    def _onchange_subject(self):
+        for rec in self:
+            rec.code = rec.course_title.code
+
+    @api.multi
+    def confirm_curriculum(self):
+        for rec in self:
+            rec.total = rec.lecture + rec.tutorial + rec.practical
+            rec.independent_learning = rec.lecture * 2 + rec.tutorial * 0.5+ rec.practical * 0.5
+            rec.credit_point = rec.lecture + rec.tutorial * 0.5+ rec.practical * 0.5
+            rec.state = 'done'
+    

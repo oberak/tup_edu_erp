@@ -23,6 +23,9 @@
             <field name="is_language" position="before">
                 <field name="major_id"/>
             </field>
+            <field name="weightage" position="replace">
+                <field name="weightage" invisible='1'/>
+            </field>
             <field name="is_lab" position="before">
                 <field name="is_tutorial"/>
             </field>

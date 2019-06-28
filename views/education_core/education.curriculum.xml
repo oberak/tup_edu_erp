@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="education_curriculum_form" model="ir.ui.view">
+            <field name="name">education.curriculum.form</field>
+            <field name="model">education.curriculum</field>
+            <field name="arch" type="xml">
+                <form>
+                     <header>
+                        <button name="confirm_curriculum" type="object"
+                            class="oe_highlight" string="Confirm" states='draft' />
+                        <field name="state" readonly="1" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </group>
+                        <group >  
+                            <group>                             
+                                <field name="class_division"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}" /> 
+                                <field name="semester_id"  options="{'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            </group>  
+                            <group>                               
+                                <field name="course_title" attrs="{'readonly': [('state', '=', 'done')]}" /> 
+                                <field name="code" readonly='1' force_save="1"/>                                                              
+                            </group>                            
+                        </group>
+                        <group string="Period per week">
+                            <group>                               
+                                <field name="lecture" attrs="{'readonly': [('state', '=', 'done')]}" /> 
+                                <field name="tutorial" attrs="{'readonly': [('state', '=', 'done')]}"/>  
+                                <field name="practical" attrs="{'readonly': [('state', '=', 'done')]}"/>                                                                
+                            </group> 
+                            <group>                               
+                                <field name="total" readonly='1' force_save="1"/> 
+                                <field name="independent_learning" readonly='1' force_save="1" />                                                               
+                            </group>                          
+                        </group>
+                        <group string="Credit Point"> 
+                            <group>                                
+                                <field name="credit_point" readonly='1' force_save="1" />                                                              
+                            </group>                          
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="education_attendances_report_tree" model="ir.ui.view">
+            <field name="name">education.curriculum.tree</field>
+            <field name="model">education.curriculum</field>
+            <field name="arch" type="xml">
+                <tree>                    
+                    <field name="name"/>                                    
+                </tree>
+            </field>
+        </record>
+         <record id="action_education_curriculum" model="ir.actions.act_window">
+            <field name="name">Curriculum</field>
+            <field name="res_model">education.curriculum</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first here.
+            </p>
+        </field>
+        </record>
+        
+        <menuitem action="action_education_curriculum" parent="education_core.menu_education_class_conf"
+              id="menu_action_education_curriculum" sequence="6"/>
+    </data>
+</odoo>

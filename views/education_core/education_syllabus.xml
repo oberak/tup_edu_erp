@@ -48,7 +48,7 @@
             </field>
             <xpath expr="/form/sheet/group" position="after">
                 <notebook>
-                    <page string="Syllabus">
+                    <page string="Subjects">
                         <field name="syllabus_ids" nolabel="1">
                             <tree string="Syllabus Items" editable="bottom">                                
                                 <field name="subject_id" required = "1" options="{'no_create_edit': True, 'no_create': True}"/>
@@ -63,4 +63,20 @@
             </xpath>    
         </field>
     </record>     
+     <record id="education_core.action_education_syllabus" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">education.syllabus</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first syllabus here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="education_core.action_education_syllabus" parent="education_core.menu_education_class_conf"
+              id="education_core.menu_action_education_syllabus" sequence="5"/>
+
 </odoo>

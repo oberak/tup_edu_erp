@@ -245,7 +245,7 @@ class StudentApplication(models.Model):
     student_type=fields.Selection([('is_new_candidate','New Candidate'),('transfer_in','Transfer In Student')], default='is_new_candidate',required=True)
     
      #add fields to transfer in student
-    major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True)], help="Select the Major")
+    major_id = fields.Many2one('hr.department', string='Major', domain=[('is_major', '=', True),('can_enroll', '=', True)], help="Select the Major")
     division_id = fields.Many2one('education.division', string='Program Year', help="Select the Program Year")
     
     #add fields for new candidate
