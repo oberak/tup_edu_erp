@@ -283,6 +283,12 @@
         <field name="model_id" ref="model_education_overall_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
         <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+    </record>
+        <record id="student_attendance_report_request_rule" model="ir.rule">
+        <field name="name">Student Attendance Report request</field>
+        <field name="model_id" ref="model_education_attendances_report"/>
+        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
+        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
     </record>  
     <!-- Set domain for Attendance (teacher)-->
     <record id="teacher_attendance_request_rule" model="ir.rule">
@@ -312,6 +318,12 @@
     <record id="teacher_overall_attendance_results_request_rule" model="ir.rule">
         <field name="name">Teacher Overall Attendance request</field>
         <field name="model_id" ref="model_education_overall_attendances"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
+        <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
+    </record>
+    <record id="teacher_attendance_report_request_rule" model="ir.rule">
+        <field name="name">Teacher Attendance Report request</field>
+        <field name="model_id" ref="model_education_attendances_report"/>
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('class_division.id','in',user.employee_ids.get_class(user.employee_ids.id))]</field>
     </record>
@@ -346,6 +358,12 @@
         <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
         <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
     </record>
+    <record id="family_teacher_attendance_report_request_rule" model="ir.rule">
+        <field name="name">Family Teacher Attendance Report request</field>
+        <field name="model_id" ref="model_education_attendances_report"/>
+        <field name="groups" eval="[(4, ref('group_education_family_teacher'))]"/>
+        <field name="domain_force">[('class_division.faculty_id.employee_id','=', user.employee_ids.id)]</field>
+    </record>
      <!-- Set domain for Attendance (teacherdc)-->
     <record id="dc_attendance_request_rule" model="ir.rule">
         <field name="name">Teacher DC Attendance request</field>
@@ -377,19 +395,11 @@
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
         <field name="domain_force">[('class_division.class_id.major_id.id','=',user.employee_ids.department_id.ids)]</field>
     </record>
-    <!-- Set domain for subjects (student)--> 
-    <record id="student_subjects_request_rule" model="ir.rule">
-        <field name="name">Student Subjects request</field>
-        <field name="model_id" ref="model_education_subject"/>
-        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('major_id','=', user.get_major(user.login))]</field>
-    </record>
-     <!-- Set domain for syllabus (student)--> 
-    <record id="student_syllabus_request_rule" model="ir.rule">
-        <field name="name">Student Syllabus request</field>
-        <field name="model_id" ref="model_education_syllabus"/>
-        <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('major_id','=', user.get_major(user.login))]</field>
+    <record id="dc_attendance_report_request_rule" model="ir.rule">
+        <field name="name">Teacher DC Attendance Report request</field>
+        <field name="model_id" ref="model_education_attendances_report"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('class_division.class_id.major_id.id','=', user.employee_ids.department_id.ids)]</field>
     </record>
     <!--  set group for 'Application Report' menu -->
     <record id="education_core.menu_application_report" model="ir.ui.menu">

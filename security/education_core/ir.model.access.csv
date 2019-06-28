@@ -166,5 +166,6 @@ a_account_journal_hfs,access.account.journal,account.model_account_journal,group
 
 education_core.access_education_faculty_classes,access.education.faculty.classes,model_education_faculty_classes,education_core.group_education_faculty,1,0,0,0
 a_education_faculty_classes_t,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher,1,0,0,0
+a_education_faculty_classes_adc,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher_adc,1,1,1,1
 a_education_faculty_classes_dc,access.education.faculty.classes,model_education_faculty_classes,group_education_teacher_dc,1,1,1,1
 a_education_faculty_classes_hsa,access.education.faculty.classes,model_education_faculty_classes,group_education_hsa,1,1,1,1
