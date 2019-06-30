@@ -14,6 +14,19 @@
                         <field name="class_id" attrs="{'readonly': [('state','!=', 'draft')]}" 
                              options="{'no_create_edit': True, 'no_create': True}" />                                      
                 </field>
+                <xpath expr="//form/sheet/notebook/page[1]" position="replace">
+                    <notebook>
+                        <page string="Students">
+                            <field name="academic_result" nolabel="1">
+                                <tree string="Results" create="false" edit="false"  delete="false">
+                                    <field name="student_id"/>
+                                    <field name="roll_no"/>
+                                    <field name="final_result"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
             </field>
         </record>
         <record id="education_promotion_tree" model="ir.ui.view">

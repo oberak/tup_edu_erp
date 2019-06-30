@@ -30,9 +30,9 @@
             <xpath expr="//form/sheet/notebook/page[1]" position="replace">
                 <page string="Students">
                     <field name="student_ids" nolabel="1">
-                        <tree string="Students" editable="bottom" create="false">
+                        <tree string="Students" editable="bottom" create="false"  delete="false">
                             <field name="name"/>
-                            <field name="class_id"/>
+                            <field name="roll_no"/>
                         </tree>
                     </field>
                 </page>

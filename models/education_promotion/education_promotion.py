@@ -31,29 +31,31 @@ class EducationPromotion(models.Model):
    #overwrite method
     def compute_final_result(self):
         self.state = 'result_computed'        
-        # for i in self.env['education.exam.results'].search([('exam_id', '=', obj.id)]):
-        #     for student in i.division_id.students_details:
-        #         student.unlink()
-        for i in self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)]):         
-                if i.pass_or_fail == True :
-                    print('>>>>>>>>>>>>>>>>>',i.total_avg_score)
-                    self.env['education.student.final.result'].create({
-                        'student_id': i.student_id.id,
-                        'total_marks':i.total_avg_score,
-                        'final_result': 'pass',
-                        'division_id': i.class_division.id,
-                        'academic_year': i.class_division.academic_year_id.id,
-                        'closing_id': self.id,
-                    })
-                else:
-                    self.env['education.student.final.result'].create({
-                        'student_id': i.student_id.id,
-                        'total_marks':i.total_avg_score,
-                        'final_result': 'fail',
-                        'division_id': i.class_division.id,
-                        'academic_year': i.class_division.academic_year_id.id,
-                        'closing_id': self.id,
-                    })                        
+        for i in self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)]):
+            for student in i.class_division.students_details:
+                student.unlink()
+        for i in self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)]):        
+            if i.pass_or_fail == True :
+                print('>>>>>>>>>>>>>>>>>',i.total_avg_score)
+                self.env['education.student.final.result'].create({
+                    'student_id': i.student_id.id,
+                    'roll_no': i.student_id.roll_no,
+                    'total_marks':i.total_avg_score,
+                    'final_result': 'pass',
+                    'division_id': i.class_division.id,
+                    'academic_year': i.class_division.academic_year_id.id,
+                    'closing_id': self.id,
+                })
+            else:
+                self.env['education.student.final.result'].create({
+                    'student_id': i.student_id.id,
+                    'roll_no': i.student_id.roll_no,
+                    'total_marks':i.total_avg_score,
+                    'final_result': 'fail',
+                    'division_id': i.class_division.id,
+                    'academic_year': i.class_division.academic_year_id.id,
+                    'closing_id': self.id,
+                })                        
      #overwrite method
     def close_academic_year(self):
         self.state = 'close'
@@ -69,22 +71,20 @@ class EducationPromotion(models.Model):
                     'ay_end_date': str(fields.Date.from_string(self.name.ay_end_date) +
                                     relativedelta.relativedelta(months=+12))[:10],
                 })
-        obj=self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)])
-        if obj:
-            for rec in obj:
-                c_id = rec.class_division
-        obj2 = self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', c_id.id)])
-        obj3 = self.env['education.class'].search([('id', '=', obj2.class_id.id)])       
+        obj_ids=self.env['education.overall.exam.result'].search([('class_division', '=', self.class_id.id)])
+        if obj_ids:
+            for obj in obj_ids:
+                obj2 = self.env['education.class.division'].search([('academic_year_id', '=', self.name.id),('id', '=', obj.class_division.id)])
+        major_code = obj2.class_id.major_id.major_code
         
-        major_id = obj3.major_id.id
         """ Creating New Batch"""
-        batch_name = str(new_academic_year.ay_code + '-' + obj3.major_id.major_code)
+        batch_name = str(new_academic_year.ay_code + '-' + major_code)
         c_id = self.env['education.class'].search([('name','=',batch_name)]) 
         class_id=c_id.id
         if not c_id :    
             promote_batch = self.env['education.class'].create({
                         'ay_id':new_academic_year.id,
-                        'major_id':major_id,
+                        'major_id':obj2.class_id.major_id.id,
                         })
             class_id = promote_batch.id
         
@@ -165,7 +165,7 @@ class EducationPromotion(models.Model):
                             'academic_year': promotion_class.academic_year_id.id,
                          })
                 elif k.final_result == 'fail':
-                    c_name = str(new_academic_year.ay_code + '-' + obj3.major_id.major_code)
+                    c_name = str(new_academic_year.ay_code + '-' + major_code)
                     c_id = self.env['education.class'].search([('name','=',c_name)])
                     class_id = c_id.id
                     current_class = self.env['education.class.division'].search([ ('class_id','=',class_id),

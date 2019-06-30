@@ -9,6 +9,8 @@ class AcademicYearClosing(models.Model):
 
 class EducationStudentFinalResult(models.Model):
     _inherit = 'education.student.final.result'
+    _order = 'total_marks desc'
 
     #add field
     total_marks= fields.Integer('Total Marks')
+    roll_no = fields.Char('Roll No')

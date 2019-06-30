@@ -96,7 +96,7 @@
 
         ## view - education_promotion
         'views/education_promotion/education_promotion.xml',
-       # 'views/education_promotion/academic_year_closing.xml',
+        'views/education_promotion/academic_year_closing.xml',
 
         ## view - education_graduation
         'views/education_graduation/education_graduation.xml',

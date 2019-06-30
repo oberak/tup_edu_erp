@@ -17,8 +17,8 @@ class StudentAssignRollNo(models.Model):
     _name='education.student.class.division'
 
     class_division = fields.Many2one('education.class.division', string='Class')
-    state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft')
-    student_ids = fields.One2many('students.rollno.list','list_id',string='Student Attendance Ids')
+    state = fields.Selection([('draft', 'Draft'), ('done', 'Done')], default='draft')
+    student_ids = fields.One2many('students.rollno.list','list_id',string='Student Roll No')
 
     @api.multi
     def assign_rollno(self):
@@ -41,10 +41,7 @@ class StudentAssignRollNo(models.Model):
                     self.env['education.student'].update(domain)
                     self.env['students.rollno.list'].create(data)
             rec.state ='done'
-                
-
             
-
 class StudentList(models.Model):
     _name='students.rollno.list'
 

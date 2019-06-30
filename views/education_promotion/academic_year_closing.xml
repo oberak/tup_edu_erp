@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="education_promotion.view_education_class_division_promotion_result_form"/>
             <field name="arch" type="xml">
                 <field name="student_id" position="after">
-                    <field name="total_marks"  />
+                    <field name="roll_no"  />
                 </field>
             </field>
         </record>

@@ -23,7 +23,7 @@
                 <sheet string="Assign Roll No">
                     <group>
                         <group>
-                            <field name="class_division"/>
+                            <field name="class_division" attrs="{'readonly': [('state', '=', 'done')]}"/>
                         </group>
                         <group>
                         </group>

@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 class EducationStudent(models.Model):
     _name = 'education.student'
     _inherit = 'education.student'
+    _order = 'total_marks desc'
     _description = 'Student Form'
 
     @api.multi
