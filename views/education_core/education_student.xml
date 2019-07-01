@@ -152,6 +152,7 @@
         <xpath expr="//search/group" position="replace">
         <group expand='0' string='Group by...'>
                     <filter string='Class' name="group_class" icon="fa-user" domain="[]" context="{'group_by' : 'class_id'}"/>
+                    <filter string='Student State' name="group_student_state" icon="fa-user" domain="[]" context="{'group_by' : 'student_state'}"/>
                     <filter string='Gender' icon="fa-genderless" domain="[]" context="{'group_by' : 'gender'}"/>
                     <filter string='Medium' invisible="1" icon="fa-medium" domain="[]" context="{'group_by' : 'medium'}"/>
                     <filter string='Religion' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religion_id'}"/>
@@ -168,7 +169,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="student_search"/>
-        <field name="context">{'create': True, 'search_default_group_class': 1}</field>
+        <field name="context">{'create': True,'search_default_group_student_state' : 1}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create the your first student here.
