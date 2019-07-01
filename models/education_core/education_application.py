@@ -73,9 +73,8 @@ class StudentApplication(models.Model):
         """Create student from the application and data and return the student"""
         for rec in self:
             #add student ID automatically 
-            sid = 5578 + rec.id            
-            sid = str(sid)
-            student_id='ptntu - 00'+sid  
+            sid=self.env['ir.sequence'].next_by_code('education.student')
+            student_id=str(rec.academic_year_id.ay_code)+str(rec.major_id.major_id)+str(sid)
 
             # automatically assign class to student depends on academic_year and major , (for transfer in) division_id
             if rec.student_type == 'is_new_candidate':
