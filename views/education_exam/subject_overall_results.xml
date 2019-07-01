@@ -6,9 +6,12 @@
             <field name="model">education.subject.overallresults</field>
             <field name="arch" type="xml">
                 <form>
-                    <header>                                          
-                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
-                    </header>
+                    <header>
+                        <button name="confirm_result" type="object" states="confirm"
+                            class="oe_highlight" string="Confirm Result" 
+                            style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>                                          
                     <sheet>
                         <group>
                             <h1>
@@ -24,7 +27,7 @@
                             <group>
                                 <field name="actual_pact" attrs="{'readonly':[('state','=','done')]}" required='1'/>
                                 <field name="actual_midterm" attrs="{'readonly':[('state','=','done')]}" required='1'/>
-                                <field name="actual_final" attrs="{'readonly':[('state','=','done')]}" required='1'/>                                                                 
+                                <field name="actual_final" attrs="{'readonly':[('state','=','done')]}"/>                                                                 
                                 <field name="total_pass_marks" attrs="{'readonly':[('state','=','done')]}" required='1'/>        
                             </group>                         
                         </group>
@@ -32,7 +35,7 @@
                             <button
                                 style="padding: 1px 5px;background: #5fb18e !important;border-color: #63b892 !important;"
                                 string="Get Overall Results" name="get_overall_results" type="object"
-                                class="oe_highlight" states="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                                class="oe_highlight" states="draft" attrs="{'invisible':[('state','in',['confirm','done'])]}"/>
                         </div>
                         <div class="table_header_box">
                             <field name="results_line">

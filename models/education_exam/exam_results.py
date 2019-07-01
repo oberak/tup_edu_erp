@@ -31,7 +31,7 @@ class SubjectOverallResults(models.Model):
     total_pass_marks = fields.Float(string='Overall Pass Marks')
     actual_mark = fields.Float(string='Total Actual Score', store=True, readonly=True)
     pass_or_fail = fields.Boolean(string='Pass/Fail')
-    state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
+    state = fields.Selection([('draft','Draft'),('confirm','Confirm'),('done','Done')], string='State',required=True, default='draft',track_visibility='onchange')
     overall_result_id = fields.Many2one('education.overall.exam.result',string='Subjects')
 
     def get_name(self):
@@ -70,8 +70,8 @@ class SubjectOverallResults(models.Model):
             }
             return vals 
 
+    @api.multi
     def get_overall_results(self):
-        overall_marks=0.0
         actual_score=0.0
         pact =0.0
         mid_term = 0.0
@@ -144,7 +144,12 @@ class SubjectOverallResults(models.Model):
                 self.pass_or_fail = True
             else:
                 self.pass_or_fail = False
-            record.state='done'
+            record.state='confirm'
+
+    @api.multi
+    def confirm_result(self):
+        for rec in self:
+            rec.state ='done'
 
 class SubjectOverallResultsLine(models.Model):
     _name = 'education.subject.overallresult.line'
@@ -165,7 +170,7 @@ class ExamOverallResultsLine(models.Model):
     name = fields.Char(compute='get_name', string='Name', default='New')
     class_division = fields.Many2one('education.class.division', string='Class') 
     student_id = fields.Many2one('education.student',string = 'Student')
-    state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
+    state = fields.Selection([('draft','Draft'),('confirm','Confirm'),('done','Done')], string='State',required=True, default='draft',track_visibility='onchange')
     result_ids = fields.One2many('education.subject.overallresults','overall_result_id',string='Result Ids')
     total_avg_score = fields.Integer(string='Total Average Score', readonly= True)
     pass_or_fail = fields.Boolean(string='Pass/Fail')
@@ -215,8 +220,23 @@ class ExamOverallResultsLine(models.Model):
             else:
                 record.pass_or_fail = False
             record.total_avg_score = total_marks
-            record.state='done'
-                    
+            record.state='confirm'
+
+    @api.multi
+    def confirm_final_result(self):
+        for rec in self:
+            rec.state ='done'
+
+    @api.model
+    def create(self, vals):
+        res = super(ExamOverallResultsLine, self).create(vals)
+        already_created =  self.env['education.overall.exam.result'].search([('class_division','=',res.class_division.id),('student_id','=', res.student_id.id)])
+        if len(already_created) > 1:
+            raise ValidationError(
+                _('Result of " %s " in " %s" is already created', ) % (res.student_id.name,res.class_division.name))
+        return res
+    
+    
                    
     
 
