@@ -52,6 +52,7 @@
 
         ## view - education_fee
         'views/education_fee/fee_register.xml',
+        'views/education_fee/fee_menu_view.xml',
 
         ## view - hr_recruitment
         'views/hr_recruitment/hr_department.xml',
@@ -61,6 +62,7 @@
         'views/hr/hr_views.xml',
 
         ## view - education_core
+        'views/education_core/education_main_menu.xml',
         'views/education_core/education_application.xml',
         'views/education_core/education_application2.xml',
         'views/education_core/education_class_division.xml',
@@ -100,7 +102,6 @@
 
         ## view - education_graduation
         'views/education_graduation/education_graduation.xml',
-        
 
     ],
     # only loaded in demonstration mode

@@ -240,7 +240,8 @@
         <menuitem
             id="education_time_table.education_time_table_main_menu"            
             sequence="3"
-            name="Timetable"/>
+            name="Timetable"
+            web_icon="education_time_table,static/description/icon.png" />
             
     </data>
 </odoo>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="education_fee.menu_education_fee_root"  name="Fee" web_icon="education_fee,static/description/icon.png" sequence="11"/>
+</odoo>
