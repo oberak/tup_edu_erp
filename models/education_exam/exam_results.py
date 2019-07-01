@@ -22,12 +22,14 @@ class SubjectOverallResults(models.Model):
     name = fields.Char(compute='get_name', string='Name', default='New')
     class_division = fields.Many2one('education.class.division', string='Class') 
     student_id = fields.Many2one('education.student',string = 'Student')
-    overall_marks = fields.Float(string='Total Score', store=True, readonly=True)
+    overall_marks = fields.Float(string='Total Result Marks', store=True, readonly=True)
     results_line = fields.One2many('education.subject.overallresult.line', 'result_line_id', string='Result Line')
     subject_id = fields.Many2one('education.subject', string='Subject')
-    total_given_marks = fields.Float(string='Total Given Marks' , readonly=True)
+    actual_pact = fields.Integer('Actual PACT')
+    actual_midterm = fields.Integer('Actual Midterm')
+    actual_final = fields.Integer('Actual Final')
     total_pass_marks = fields.Float(string='Overall Pass Marks')
-    actual_mark = fields.Float(string='Avearage Score', store=True, readonly=True)
+    actual_mark = fields.Float(string='Total Actual Score', store=True, readonly=True)
     pass_or_fail = fields.Boolean(string='Pass/Fail')
     state = fields.Selection([('draft','Draft'),('done','Completed')], string='State',required=True, default='draft',track_visibility='onchange')
     overall_result_id = fields.Many2one('education.overall.exam.result',string='Subjects')
@@ -69,30 +71,75 @@ class SubjectOverallResults(models.Model):
             return vals 
 
     def get_overall_results(self):
-        overall_marks = 0.0
-        total_marks = 0.0
+        overall_marks=0.0
+        actual_score=0.0
+        pact =0.0
+        mid_term = 0.0
+        final =0.0
+        pact_marks=0.0
+        midterm_marks =0.0
+        final_marks=0.0
         for record in self:
             obj = self.env['results.subject.line'].search([('division_id','=',record.class_division.id),('student_id','=', record.student_id.id),('subject_id','=', record.subject_id.id)])
             obj1 = self.env['education.exam.valuation'].search([('division_id','=',record.class_division.id),('subject_id','=', record.subject_id.id)])
             if obj1:
                 for rec in obj1:
-                    total_marks += rec.mark
+                    if rec.exam_id.exam_type.school_class_division_wise =='division':
+                        pact += rec.mark
+                    elif rec.exam_id.exam_type.school_class_division_wise =='midterm':
+                        mid_term = rec.mark
+                    else:
+                        final = rec.mark                                           
             if obj :
                 for result in obj:
-                    overall_marks += result.mark_scored
-                    data = {
+                    if result.exam_id.exam_type.school_class_division_wise =='division':
+                        pact_marks += result.mark_scored
+                actual_score = record.actual_pact  * pact_marks / pact
+                print('overall PACT Mark',pact_marks)
+                data = {
+                    'class_division': record.class_division.id,
+                    'subject_id':record.subject_id.id,
+                    'student_id': record.student_id.id,
+                    'exam_type':'division',
+                    'given_marks':pact,
+                    'total_marks':pact_marks,
+                    'actual_marks':actual_score,
+                    'result_line_id':self.id,
+                }
+                self.env['education.subject.overallresult.line'].create(data)
+                for res in obj:                
+                    if res.exam_id.exam_type.school_class_division_wise =='midterm':
+                        midterm_marks = res.mark_scored
+                        actual_score =record.actual_midterm * midterm_marks / mid_term
+                        print('overall Midterm Mark',midterm_marks)
+                        data = {
                         'class_division': record.class_division.id,
                         'subject_id':record.subject_id.id,
                         'student_id': record.student_id.id,
-                        'exam_id':result.exam_id.id,
-                        'total_marks':result.mark_scored,
+                        'exam_type':'midterm',
+                        'given_marks':mid_term,
+                        'total_marks':midterm_marks,
+                        'actual_marks':actual_score,
                         'result_line_id':self.id,
-                        'pass_or_fail' : result.pass_or_fail,
-                    }
-                    self.env['education.subject.overallresult.line'].create(data)
-            record.overall_marks=overall_marks
-            record.total_given_marks = total_marks
-            record.actual_mark = overall_marks *100 / record.total_given_marks
+                        }
+                        self.env['education.subject.overallresult.line'].create(data)
+                    elif res.exam_id.exam_type.school_class_division_wise =='final':
+                        final_marks = res.mark_scored   
+                        actual_score =record.actual_final  * final_marks /final 
+                        print('overall Final Mark',final_marks)          
+                        data = {
+                            'class_division': record.class_division.id,
+                            'subject_id':record.subject_id.id,
+                            'student_id': record.student_id.id,
+                            'exam_type':'final',
+                            'given_marks':final,
+                            'total_marks':final_marks,
+                            'actual_marks':actual_score,
+                            'result_line_id':self.id,
+                        }
+                        self.env['education.subject.overallresult.line'].create(data)
+            record.overall_marks=pact_marks+ midterm_marks+ final_marks          
+            record.actual_mark = record.actual_pact  * pact_marks / pact  +  record.actual_midterm * midterm_marks / mid_term + record.actual_final  * final_marks /final
             if record.actual_mark >= record.total_pass_marks:
                 self.pass_or_fail = True
             else:
@@ -104,12 +151,14 @@ class SubjectOverallResultsLine(models.Model):
 
     class_division = fields.Many2one('education.class.division', string='Class') 
     student_id = fields.Many2one('education.student',string = 'Student')
-    exam_id = fields.Many2one('education.exam',string= 'Exam')  
-    subject_id = fields.Many2one('education.subject',string='Subject')  
-    total_marks=fields.Float(string='Score')
+    exam_type = fields.Selection([('division', 'PACT'), ('midterm', 'Midterm Exam'), ('final', 'Final Exam')],
+                                                  string='Exam Type', default='division')
+    subject_id = fields.Many2one('education.subject',string='Subject')
+    given_marks=fields.Integer('Given Marks')  
+    total_marks=fields.Float(string='Result Marks')
+    actual_marks= fields.Float('Actual Score')
     result_line_id = fields.Many2one('education.overallexam.results', string='Result Id')
-    pass_or_fail = fields.Boolean(string='Pass/Fail')
-
+    
 class ExamOverallResultsLine(models.Model):
     _name = 'education.overall.exam.result'
 

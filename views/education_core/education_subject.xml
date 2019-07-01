@@ -20,7 +20,7 @@
         <field name="model">education.subject</field>
         <field name="inherit_id" ref="education_core.view_education_subject_form"/>
         <field name="arch" type="xml">
-            <field name="is_language" position="before">
+            <field name="is_language" position="after">
                 <field name="is_tutorial"/>
             </field>
             <field name="weightage" position="replace">
