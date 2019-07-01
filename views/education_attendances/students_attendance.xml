@@ -161,7 +161,7 @@
         </record>
 
         <menuitem id="student_attendances_root_menu" name="Attendance"
-                    web_icon="tup_edu_erp,static/description/icon.png"
+                    web_icon="tup_edu_erp,static/description/attendance_icon.png"
                   sequence="12"/>
 
         <menuitem id="student_attendances_main_menu" parent="student_attendances_root_menu" name="Attendance"
