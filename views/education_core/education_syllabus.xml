@@ -53,8 +53,8 @@
             <field name="division_id" position="after">
                 <field name="semester_id" on_change="0" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
-            <field name="description" position="attributes">
-                <attribute name="invisible">True</attribute>
+            <field name="description" position="replace">
+                <field name="description" placeholder="Enter description here"/>
             </field>
             <xpath expr="/form/sheet/group" position="after">
                 <notebook>

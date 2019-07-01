@@ -37,6 +37,7 @@ class EducationSyllabus(models.Model):
                     domain=lambda self: [('academic_year', '=', self.env['education.academic.year']._get_current_ay().id)])
     division_id = fields.Many2one('education.division', string='Program Year', required=True,
                                   help="Select the Program Year")
+    description = fields.Text(string='Description')
     state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft')
     cur_ids = fields.One2many('education.curriculum', 'course_id', string="Curriculum") 
     # For logged user's department
@@ -93,9 +94,11 @@ class EducationCurriculum(models.Model):
     major_id = fields.Many2one('hr.department', string="Major",
                             required=True, help="Choose Major")
     semester_id =fields.Many2one('education.semester', string="Semester" , required=True,
-                    domain=lambda self: [('academic_year', '=', self.env['education.academic.year']._get_current_ay().id)]) 
+                    domain=lambda self: [('academic_year', '=', self.env['education.academic.year']._get_current_ay().id)])
+    description = fields.Text(string='Description') 
     state = fields.Selection([('draft', 'Draft'), ('done', 'Confirm')], default='draft') 
     course_id = fields.Many2one('education.syllabus', string ='Courses', help = "Select the Courses")
+
     # For logged user's department
     user_subjects=fields.Char(compute="_compute_user_subjects",search='user_subjects_search')  
 
