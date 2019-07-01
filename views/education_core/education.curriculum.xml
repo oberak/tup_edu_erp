@@ -54,7 +54,8 @@
             <field name="model">education.curriculum</field>
             <field name="arch" type="xml">
                 <tree>                    
-                    <field name="name"/>                                    
+                    <field name="name"/> 
+                    <field name="semester_id"/>                                   
                 </tree>
             </field>
         </record>

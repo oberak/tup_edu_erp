@@ -132,3 +132,13 @@ class EducationCurriculum(models.Model):
             rec.credit_point = rec.lecture + rec.tutorial * 0.5 + rec.practical * 0.5
             rec.state = 'done'
     
+    @api.model
+    def create(self, vals):
+        res = super(EducationCurriculum, self).create(vals)        
+        cur = self.env['education.curriculum'].search(
+            [('program_year', '=', res.program_year.id), ('major_id', '=', res.major_id.id),('semester_id', '=', res.semester_id.id),
+            ('course_title', '=', res.course_title.id) ])
+        if len(cur) > 1:
+            raise ValidationError(_('Already Created!!')) 
+        return res  
+    
