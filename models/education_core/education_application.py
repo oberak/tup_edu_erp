@@ -209,6 +209,7 @@ class StudentApplication(models.Model):
     # add fields
     m_name = fields.Char(string='Name (Myanmar)',  help="Enter First name in myanmar of Student")
     nrc_no = fields.Char(string='NRC Number',  help="Enter NRC Number of Student")
+    m_nrc_no = fields.Char(string='NRC No (Myanmar)',  help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
@@ -237,6 +238,8 @@ class StudentApplication(models.Model):
                                 string='Blood Group', required=False, default='', track_visibility='onchange',
                                 help="Your Blood Group is ")
     date_of_birth = fields.Date(string="Date Of birth", required=False, help="Enter your DOB")
+    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',
+                                 help="Select the Country", default=145)
 
     # add field for creating student    
     class_id = fields.Many2one('education.class.division', string='Class')    

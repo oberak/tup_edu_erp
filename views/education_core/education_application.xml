@@ -147,6 +147,7 @@
             </field>          
             <field name="date_of_birth" position="after">
                 <field name="nrc_no" attrs="{'readonly':[('state', '=', 'done')]}"/>
+                <field name="m_nrc_no" placeholder="NRC Number in Myanmar" attrs="{'readonly':[('state', '=', 'done')]}"/>
             </field>
             <xpath expr="/form/sheet/group[1]" position="after">
                 <field name="student_type" widget="radio"  options="{'horizontal':true}" attrs="{'invisible': [('state', 'in' , ['verification','fee','major','approve','done'])]}"/>
