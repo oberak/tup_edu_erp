@@ -8,18 +8,18 @@
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/group" position="replace">
                 <group string="Department Information" col="4">
-                    <field name="name"/>
+                    <field name="name"/>                    
                     <field name="parent_id"/>
+                    <field name="major_id" required='1'/>
                     <field name="manager_id" invisible='1'/>
                     <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                 </group>
             </xpath>
             <xpath expr="sheet" position="inside">
                 <group string="Major Information" col="4">
-                    <field name="is_major"/>                    
-                    <field name="major_code" attrs="{'required': [('is_major', '=', True)]}"/>
-                    <field name="can_enroll"/>
-                    <field name="major_id" required='1'/>
+                    <field name="is_major"/> 
+                    <field name="major_code" attrs="{'required':[('is_major', '=', True)],'invisible': [('is_major', '=', False)]}"/> 
+                    <field name="can_enroll" attrs="{'required':[('is_major', '=', True)],'invisible': [('is_major', '=', False)]}"/>                                     
                 </group>
             </xpath>
         </field>
@@ -31,11 +31,14 @@
         <field name="model">hr.department</field>
         <field name="inherit_id" ref="hr.view_department_tree"/>
         <field name="arch" type="xml">
-            <tree string="Companies">                
-                <field name="major_code"  />
+            <field name="manager_id" position="replace">
+                <field name="major_code" />
+            </field>
+            <field name="major_code" position="after">
+                <field name="major_id" />
                 <field name="is_major" />
                 <field name="can_enroll" />
-            </tree>
+            </field>           
         </field>
     </record>
 
