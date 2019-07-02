@@ -19,7 +19,7 @@
                     <field name="is_major"/>                    
                     <field name="major_code" attrs="{'required': [('is_major', '=', True)]}"/>
                     <field name="can_enroll"/>
-                    <field name="major_id" attrs="{'required': [('is_major', '=', True)]}"/>
+                    <field name="major_id" required='1'/>
                 </group>
             </xpath>
         </field>
