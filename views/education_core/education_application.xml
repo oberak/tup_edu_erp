@@ -90,14 +90,19 @@
             <field name="state" position="replace">
                 <field name="state" widget="statusbar" statusbar_visible="draft,apply,verification,approve,fee,major,done" required="1"  />
             </field>
-            <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
-                <tr>
-                    <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
-                </tr>
-                <tr>
-                    <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
-                    <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
-                </tr>
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <table>
+                    <tr>
+                        <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                        <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;" colspan="2"><field name="m_name" placeholder="Name in Myanmar" required="1" attrs="{'readonly': [('state', '=', 'done')]}"/></td>
+                    </tr>
+                </table>
             </xpath>            
             <xpath expr="//field[@name='father_name']" position="attributes">
                 <attribute name="required">0</attribute>

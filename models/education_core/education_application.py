@@ -207,12 +207,14 @@ class StudentApplication(models.Model):
             rec.receipt_count = len(receipt_ids)
 
     # add fields
+    m_name = fields.Char(string='Name (Myanmar)',  help="Enter First name in myanmar of Student")
     nrc_no = fields.Char(string='NRC Number',  help="Enter NRC Number of Student")
     is_registered = fields.Boolean(string="Check Signup", default=False)
     partner_id = fields.Many2one('res.partner', string='Partner',  ondelete="cascade") # for fee
     receipt_count = fields.Integer(compute='_receipt_count', string='# Receipts') # for fee
        
     # modify fields
+    name = fields.Char(string='Name (English)', required=True, help="Enter First name of Student")
     academic_year_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
                             default=lambda self: self.env['education.academic.year']._get_current_ay(),
                             help="Select the Academic Year")
@@ -266,7 +268,7 @@ class StudentApplication(models.Model):
                             domain=[('is_major', '=', True),('can_enroll', '=', True)],
                             help="Choose Major to apply")
     admission_no=fields.Char(string='Admission No.',  help="Enter Student ID of Student")
-    roll_no = fields.Char(string='Seat_no in Matrix Exam', help="Enter Matriculation Exam Roll Number of Student")
+    roll_no = fields.Char(string='Seat_no in Matrix Exam (Myanmar)', help="Enter Matriculation Exam Roll Number of Student")
     total_marks = fields.Integer(string='Total Marks', help="Enter Matriculation Exam Total Marks of Student")
 
     _sql_constraints = [
