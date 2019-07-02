@@ -103,6 +103,9 @@
         ## view - education_graduation
         'views/education_graduation/education_graduation.xml',
 
+        # view 
+        'views/sequence.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [
