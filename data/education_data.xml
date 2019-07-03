@@ -58,7 +58,7 @@
         <record id="major_ph" model="hr.department">
           <field name="name">Physics</field>
         </record>
-        <record id="major_ce" model="hr.department">
+        <record id="major_che" model="hr.department">
           <field name="name">Chemistry</field>
         </record>
         <record id="major_my" model="hr.department">
