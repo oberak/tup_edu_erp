@@ -8,6 +8,8 @@ a_hr_employee_haa,access.hr.employee,hr.model_hr_employee,group_education_haa,1,
 a_hr_employee_sa,access.hr.employee,hr.model_hr_employee,group_education_sa,1,1,0,0
 a_hr_employee_hsa,access.hr.employee,hr.model_hr_employee,group_education_hsa,1,1,1,1
 
+a_res_users_hsa,access.res.users,hr.model_res_users,group_education_hsa,1,1,1,1
+
 access_education_research,access.education.research,model_education_research,education_core.group_education_faculty,1,0,0,0
 a_education_research_s,access.education.research,model_education_research,group_education_student,0,0,0,0
 a_education_research_t,access.education.research,model_education_research,group_education_teacher,1,1,1,0

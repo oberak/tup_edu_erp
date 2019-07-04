@@ -6,6 +6,15 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="replace">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" groups="hr.group_hr_user,tup_edu_erp.group_education_hsa"
+                            class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button"
+                            options='{"terminology": "archive"}'/>
+                    </button>
+                </div>
+            </xpath>
             <!-- --> 
             <field name="coach_id" position="attributes">
                 <attribute name="invisible">True</attribute>
@@ -21,52 +30,47 @@
             </field>
             <field name="address_id" position="attributes">
                 <attribute name="invisible">True</attribute>
-            </field>  
-            <field name="identification_id" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>          
-            <field name="passport_id" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-             <field name="address_home_id" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
+            </field>            
             <field name="work_location" position="attributes">
                 <attribute name="invisible">True</attribute>
-            </field>
-            <field name="bank_account_id" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-            <field name="birthday" position="after">
-                <field name="place_of_birth" attrs="{'readonly': []}" />
-            </field>
-            <field name="address_home_id" position="after">
-                <field name="emergency_contact" attrs="{'readonly': []}" />
-            </field>
-            <!--  -->            
-            <field name="marital" position="after">
-                <field name="have_child" attrs="{'readonly': []}" />
-                <field name="number_of_children" attrs="{'invisible': [('have_child', '=', False)]}" />
-            </field>
-            <field name="visa_no" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-            <field name="visa_expire" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-            <field name="identification_id" position="after">
-                <field name="height" placeholder="eg. 5 feet 5 inches" attrs="{'readonly': []}" />
-                <field name="hair_color" placeholder="Black" attrs="{'readonly': []}" />
-                <field name="eye_color" placeholder="Black or Blue" attrs="{'readonly': []}" />
-                <field name="noticeable" placeholder="eg. remark left face" attrs="{'readonly': []}" />
-                <field name="complexion" placeholder="Brown or White" attrs="{'readonly': []}" />
-                <field name="weight" placeholder="120lb" attrs="{'readonly': []}" />
-            </field>
-            <xpath expr="//field[@name='permit_no']" position="attributes">
-                <attribute name="required">1</attribute>
-            </xpath>
-            <xpath expr="//field[@name='country_id']" position="attributes">
-                <attribute name="required">1</attribute>
+            </field>         
+             <xpath expr="//page[@name='personal_information']" position="replace">
+                <page name="personal_information" string="Private Information" groups="hr.group_hr_user,tup_edu_erp.group_education_hsa" >
+                    <group>
+                        <group string="Citizenship &amp; Other Information">
+                            <field name="country_id" options='{"no_open": True, "no_create": True}' required='1'/>
+                            <field name="height" placeholder="eg. 5 feet 5 inches" attrs="{'readonly': []}" />
+                            <field name="hair_color" placeholder="Black" attrs="{'readonly': []}" />
+                            <field name="eye_color" placeholder="Black or Blue" attrs="{'readonly': []}" />
+                            <field name="noticeable" placeholder="eg. remark left face" attrs="{'readonly': []}" />
+                            <field name="complexion" placeholder="Brown or White" attrs="{'readonly': []}" />
+                            <field name="weight" placeholder="120lb" attrs="{'readonly': []}" />
+                            <field name="identification_id" groups="hr.group_hr_user" invisible='1'/>
+                            <field name="passport_id" groups="hr.group_hr_user" invisible='1'/>
+                            <field name="bank_account_id" context="{'default_partner_id': address_home_id}" invisible='1'/>
+                        </group>
+                        <group string="Contact Information">
+                            <field name="emergency_contact" attrs="{'readonly': []}" />
+                            <field name="address_home_id"
+                                context="{'show_address': 1}"
+                                options='{"always_reload": True, "highlight_first_line": True}' invisible="1"/>
+                            <field name="is_address_home_a_company" invisible="1"/>
+                        </group>
+                        <group string="Status">
+                            <field name="gender"/>
+                            <field name="marital"/>
+                            <field name="have_child" attrs="{'readonly': []}" />
+                            <field name="number_of_children" attrs="{'invisible': [('have_child', '=', False)]}" />
+                        </group>
+                        <group string="Birth">
+                            <field name="birthday"/>
+                            <field name="place_of_birth" attrs="{'readonly': []}" />        
+                        </group>
+                        <group string="Work Permit" name="work_permit">                            
+                            <field name="permit_no" required='1'/>                           
+                        </group>
+                    </group>
+                </page>
             </xpath>
             <xpath expr="//page[@name='personal_information']" position="after">
                 <page string='Education History' name='edu_history' >  
@@ -134,6 +138,16 @@
                         </tree>
                     </field>
                 </page>                     
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="replace">
+                <page name="hr_settings" string="HR Settings" groups="hr.group_hr_user,tup_edu_erp.group_education_hsa">
+                    <group>
+                        <group string='Status' name="active_group">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="user_id" string="Related User"/>
+                        </group>
+                    </group>
+                </page>                                   
             </xpath>
         </field>
     </record>

@@ -18,6 +18,7 @@ class EmployeeCategory(models.Model):
         return class_list
 
     #modify fields
+    permit_no = fields.Char('Work Permit No', groups="hr.group_hr_user,tup_edu_erp.group_education_hsa")
     parent_id = fields.Many2one('hr.employee', 'Head of Department')
     country_id = fields.Many2one(
         'res.country', 'Nationality', groups="hr.group_hr_user",default=145)
