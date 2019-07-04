@@ -89,7 +89,6 @@
         </field>
         </record>
         <menuitem id="graduation_menu" name="Graduation"
-                  web_icon="tup_edu_erp,static/description/graduation_icon.png"
                   sequence="13"/>
 
         <menuitem id="student_graduation_main_menu" parent="graduation_menu" name="Graduation"
