@@ -80,10 +80,7 @@
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
             
-        </record>
-
-        <menuitem id="examination_result_main_menu" parent="education_exam.examination_main_menu" name="Exam Results"
-                  sequence="20"/>       
+        </record>    
         <menuitem id="subject_overall_result_menu" parent="education_exam.examination_result_main_menu"
                   action="act_subject_overall_result_view" name="Subject Overall Results" sequence="21"/>
     </data>
