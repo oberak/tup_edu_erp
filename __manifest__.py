@@ -34,6 +34,7 @@
         'security/education_attendances/ir.model.access.csv',
         'security/education_graduation/ir.model.access.csv',
         'security/hr/ir.model.access.csv',
+        'security/hr_recruitment/ir.model.access.csv',
         'security/ir.model.access.csv',
 
         ## data

@@ -25,21 +25,7 @@ class EmployeeCategory(models.Model):
 
     #add field
     job_position = fields.Many2one('tup.job', string='Position')
-    degree = fields.Selection([
-            ('Ph.D', 'Ph.D'),
-            ('ME', 'ME'),
-            ('MCSc', 'MCSc'), 
-            ('MSc', 'MSc'),
-            ('MA', 'MA'),
-            ('BE', 'BE'), 
-            ('DCSc', 'DCSc'),
-            ('BSc', 'BSc'),
-            ('BA', 'BA'),
-            ('B-Tech', 'B-Tech'),
-            ('A.G.T.I', 'A.G.T.I'),
-            ('Tutor', 'Tutor'),
-            ('Demostrator', 'Demostrator'), ], 
-             string='Degree')
+    degree = fields.Many2one('hr.recruitment.degree', string="Degree", Help="Select your Highest degree")
 
     ## private infomation
     place_of_birth = fields.Char(string='Place Of Birth', required=True, help="Enter Place of Birth")   

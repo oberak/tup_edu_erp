@@ -19,6 +19,8 @@ class EducationFaculty(models.Model):
                 'work_phone': rec.phone,
                 'work_mobile': rec.mobile,
                 'work_email': rec.email,
+                'department_id':rec.department_id.id,
+                'degree':rec.degree.id,
             }
             emp_id = self.env['hr.employee'].create(values)
             rec.employee_id = emp_id.id

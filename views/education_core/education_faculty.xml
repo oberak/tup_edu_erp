@@ -6,7 +6,16 @@
         <field name="model">education.faculty</field>
         <field name="inherit_id" ref="education_core.view_education_faculty_form"/>
         <field name="arch" type="xml">
-            
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <table>
+                    <tr>
+                        <td style="padding-right:10px;"><field name="name" required="1" placeholder="First Name" /></td>                        
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;"><field name="last_name" required="1" placeholder="Last Name"/></td>
+                    </tr>
+                </table>
+            </xpath>
             <field name="father_name" position="before">
                 <field name="nrc_no" attrs="{'readonly': []}"/>
             </field>

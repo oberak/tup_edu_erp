@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+a_hr_department_t,access.hr.department,hr.model_hr_department,group_education_teacher,1,0,0,0
+a_hr_department_haa,access.hr.department,hr.model_hr_department,group_education_haa,1,1,1,1
+
+access_hr_recruitment_degree,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,education_core.group_education_faculty,1,0,0,0
+a_hr_recruitment_degree_s,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_student,0,0,0,0
+a_hr_recruitment_degree_t,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_teacher,1,1,0,0
+a_hr_recruitment_degree_dc,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_teacher_dc,1,1,0,0
+a_hr_recruitment_degree_aa,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_aa,1,1,0,0
+a_hr_recruitment_degree_haa,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_haa,1,1,0,0
+a_hr_recruitment_degree_sa,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_sa,1,1,0,0
+a_hr_recruitment_degree_hsa,access.hr_recruitment.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,group_education_hsa,1,1,1,1
