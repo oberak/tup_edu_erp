@@ -270,19 +270,19 @@
         <field name="name">Student Subject Attendance request</field>
         <field name="model_id" ref="model_education_subject_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+        <field name="domain_force">[('student_id.partner_id','in', user.partner_id.ids)]</field>
     </record>
     <record id="student_monthly_attendance_request_rule" model="ir.rule">
         <field name="name">Student Monthly Attendance request</field>
         <field name="model_id" ref="model_education_monthly_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+        <field name="domain_force">[('student_id.partner_id','in', user.partner_id.ids)]</field>
     </record>
     <record id="student_overall_attendance_request_rule" model="ir.rule">
         <field name="name">Student Overall Attendance request</field>
         <field name="model_id" ref="model_education_overall_attendances"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('class_division.student_ids.partner_id','in', user.partner_id.ids)]</field>
+        <field name="domain_force">[('student_id.partner_id','in', user.partner_id.ids)]</field>
     </record>
         <record id="student_attendance_report_request_rule" model="ir.rule">
         <field name="name">Student Attendance Report request</field>
