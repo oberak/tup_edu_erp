@@ -32,6 +32,7 @@
         'security/education_promotion/ir.model.access.csv',
         'security/education_time_table/ir.model.access.csv',
         'security/education_attendances/ir.model.access.csv',
+        'security/education_graduation/ir.model.access.csv',
         'security/hr/ir.model.access.csv',
         'security/ir.model.access.csv',
 
@@ -102,6 +103,7 @@
 
         ## view - education_graduation
         'views/education_graduation/education_graduation.xml',
+        'views/education_graduation/graduation_student.xml',
 
         # view 
         'views/sequence.xml',

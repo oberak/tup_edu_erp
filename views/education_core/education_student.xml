@@ -36,7 +36,7 @@
                     <field string="Documents" name="document_count" widget="statinfo"/>
                 </button>           
                 <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_view_receipts"
-                    groups="tup_edu_erp.group_education_aa,tup_edu_erp.group_education_fa"
+                    groups="tup_edu_erp.group_education_aa,tup_edu_erp.group_education_fs"
                     attrs="{'invisible': [('state', 'in' , ['draft','verification','reject'])]}">
                     <field string="Receipts" name="receipt_count" widget="statinfo"/>
                 </button>

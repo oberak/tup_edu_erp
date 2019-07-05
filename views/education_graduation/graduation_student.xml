@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="education_graduation_class_tree" model="ir.ui.view">
+        <field name="name">graduation.student.tree</field>
+        <field name="model">graduation.student</field>
+        <field name="arch" type="xml">
+            <tree>               
+                <field name="student_id"/>
+                <field name="nrc_no"/>
+                <field name="degree"/>
+                <field name="graduated_year"/>
+                <field name="attend_or_not"/> 
+                <field name="state"/>                  
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_graduation_student_form" model="ir.ui.view">
+        <field name="name">graduation.student.form</field>
+        <field name="model">graduation.student</field>
+        <field name="arch" type="xml">
+            <form string="Graduation Student"> 
+                <header>
+                    <button name="apply" type="object" class="oe_highlight"
+                            string="Apply"  
+                            help="Click to apply for Graduation" states="draft" />
+                    <button name="cancel" type="object" context="{'default_graduation_id': active_id}"
+                            string="Cancel"   groups="tup_edu_erp.group_education_aa"
+                            help="Click to approve for Graduation" states="apply" />
+                    <button name="approve" type="object" class="oe_highlight"
+                            string="Approve"   groups="tup_edu_erp.group_education_aa"
+                            help="Click to approve for Graduation" states="apply" />
+                    <button name="confirm" type="object" class="oe_highlight"
+                            string="Done"  groups="tup_edu_erp.group_education_fs"
+                            help="Click to send the student for approve purpose" states="approve" />
+                    <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,apply,approve,done"/>
+                </header>
+                <sheet>  
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_view_receipts">
+                            <field string="Receipts" name="receipt_count" widget="statinfo"/>
+                        </button>
+                    </div>                                        
+                    <group string="Student Info">
+                        <group>
+                            <field name="student_id"/>                        
+                            <field name="nrc_no" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />                                
+                        </group>                              
+                    </group>
+                    <group string="Graduation Info">                   
+                            <group>
+                                <field name="graduated_year" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />
+                                <field name="degree" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />
+                                <field name="attend_or_not" widget="radio"  options="{'horizontal':true}"/>
+                            </group>
+                            <group>
+                                <field name="ot_degree" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                                <field name="apply_date" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                            </group>                                                            
+                    </group>
+                    <group string="Parents Info">
+                        <group>
+                            <field name="f_name" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />
+                            <field name="f_nrc_no" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                        </group>
+                        <group>
+                            <field name="m_name" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />  
+                            <field name="m_nrc_no" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                        </group>                                                            
+                    </group> 
+                    <group>
+                        <separator string="Contact Address" attrs="{'readonly': [('state', 'in', 'apply,done')]}" />
+                        <group>
+                            <div class="o_address_format">
+                                <field name="address" required="1" placeholder="Home no. / Street. / City. .." class="o_address_street" attrs="{'readonly': [('state', '=', 'apply, done')]}"/>                            
+                            </div>
+                        </group>
+                        <label for="is_same_address" class="oe_inline"/>
+                        <field name="is_same_address" />
+                        <div name="per_address" attrs="{'readonly': [('state', 'in', 'apply,done')],'invisible': [('is_same_address','=', True)]}">
+                            <separator string="Permanent Address"/>
+                            <group>
+                                <div class="o_address_format">
+                                    <field name="per_address" placeholder="Home no. / Street. / City. .." class="o_address_street" attrs="{'readonly': [('state', '=', 'apply,done')]}" />                                
+                                </div>
+                            </group>
+                        </div>
+                    </group>                
+                        <group string="Contact Details">
+                            <group>
+                                <field name="email" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                            </group>
+                            <group>
+                                <field name="phone" attrs="{'readonly': [('state', 'in', 'apply,done')]}" /> 
+                            </group>
+                        </group>
+                </sheet>
+              
+            </form>                    
+        </field>
+    </record>
+
+    <record id="action_graduation_student" model="ir.actions.act_window">
+        <field name="name">Graduation Student</field>
+        <field name="res_model">graduation.student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="search_view_id" ref="student_search"/>
+        <field name="context">{'create': False}</field> -->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first student here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_graduation_student" name="Graduation Form"
+              parent="student_graduation_main_menu" action="action_graduation_student"/>
+
+
+        
+</odoo>
