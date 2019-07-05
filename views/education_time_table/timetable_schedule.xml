@@ -6,11 +6,24 @@
             <field name="model">education.timetable.schedule</field>
             <field name="inherit_id" ref="education_time_table.education_time_table_schedule_form"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/sheet/group" position="after">                    
-                    <group>
-                        <field name = "hours" string="Hours" invisible='1'/>
-                    </group>
-                </xpath>            
+                <xpath expr="/form/sheet" position="replace">   
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="period_id"/>
+                                <field name="period_id_to"/>                                    
+                                <field name="subject"/>
+                                <field name="faculty_id"/>
+                            </group>
+                            <group>
+                                <field name="timetable_id"/>
+                                <field name="class_division"/>
+                                <field name="week_day"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </xpath>         
             </field>
         </record>
         <record id="education_time_table_schedule_tree" model="ir.ui.view">
@@ -20,13 +33,16 @@
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="attributes">
                     <attribute name="create">false</attribute>
-                </xpath> 
+                </xpath>
+                <field name="time_from" position="before"> 
+                    <field name="period_id_to"/>
+                </field>
                 <field name="time_from" position="replace">
-                    <field name="time_from" widget="float_time" class="oe_inline"/>
+                    <field name="time_from" widget="float_time" class="oe_inline" invisible='1'/>
                 </field>
                 <field name="time_till" position="replace">
-                    <field name="time_till" widget="float_time" class="oe_inline"/>
-                </field>               
+                    <field name="time_till" widget="float_time" class="oe_inline" invisible='1'/>
+                </field>                
             </field>
         </record>
          <record id="education_time_table.action_education_time_table_schedule" model="ir.actions.act_window">
