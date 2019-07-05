@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+a_education_graduation_s,access.education.graduation,model_education_graduation,group_education_student,1,0,0,0
+a_education_graduation_t,access.education.graduation,model_education_graduation,group_education_teacher,1,0,0,0
+a_education_graduation_dc,access.education.graduation,model_education_graduation,group_education_teacher_dc,1,0,0,0
+a_education_graduation_aa,access.education.graduation,model_education_graduation,group_education_aa,1,0,0,0
+a_education_graduation_haa,access.education.graduation,model_education_graduation,group_education_haa,1,0,0,0
+a_education_graduation_fs,access.education.graduation,model_education_graduation,group_education_fs,1,0,0,0
+a_education_graduation_hfs,access.education.graduation,model_education_graduation,group_education_hfs,1,0,0,0
+
+a_graduation_student_s,access.graduation.student,model_graduation_student,group_education_student,1,1,0,0
+a_graduation_student_aa,access.graduation.student,model_graduation_student,group_education_aa,1,1,1,1
+a_graduation_student_haa,access.graduation.student,model_graduation_student,group_education_haa,1,1,1,1
+a_graduation_student_fs,access.graduation.student,model_graduation_student,group_education_fs,1,1,1,0
+a_graduation_student_hfs,access.graduation.student,model_graduation_student,group_education_hfs,1,1,1,0

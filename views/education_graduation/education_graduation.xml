@@ -89,12 +89,13 @@
         </field>
         </record>
         <menuitem id="graduation_menu" name="Graduation"
-                  sequence="13"/>
+                web_icon="tup_edu_erp,static/description/graduation_icon.png"
+                sequence="13"/>
 
         <menuitem id="student_graduation_main_menu" parent="graduation_menu" name="Graduation"
-                  sequence="3"/>
+                sequence="3"/>
 
         <menuitem id="student_graduation_sub_menu" parent="student_graduation_main_menu"
-                  action="act_graduation_view" name="Graduation Info" sequence="10"/>
+                action="act_graduation_view" name="Graduated Student List" sequence="10"/>
     </data>
 </odoo>
