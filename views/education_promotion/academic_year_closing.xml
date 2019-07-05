@@ -6,6 +6,9 @@
             <field name="model">education.class.division</field>
             <field name="inherit_id" ref="education_promotion.view_education_class_division_promotion_result_form"/>
             <field name="arch" type="xml">
+                <field name="promote_class" position="attributes">
+                     <attribute name="invisible">True</attribute>
+                </field>
                 <field name="student_id" position="after">
                     <field name="roll_no"  />
                 </field>
