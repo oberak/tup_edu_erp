@@ -174,3 +174,9 @@ a_education_student_class_division_s,access.education.student.class.division,mod
 a_education_student_class_division_t,access.education.student.class.division,model_education_student_class_division,group_education_teacher,0,0,0,0
 a_education_student_class_division_aa,access.education.student.class.division,model_education_student_class_division,group_education_aa,1,1,1,0
 a_education_student_class_division_haa,access.education.student.class.division,model_education_student_class_division,group_education_haa,1,1,1,1
+
+education_core.access_students_rollno_list,access.students.rollno.list,model_students_rollno_list,education_core.group_education_faculty,0,0,0,0
+a_students_rollno_list_s,access.students.rollno.list,model_students_rollno_list,group_education_student,0,0,0,0
+a_students_rollno_list_t,access.students.rollno.list,model_students_rollno_list,group_education_teacher,0,0,0,0
+a_students_rollno_list_aa,access.students.rollno.list,model_students_rollno_list,group_education_aa,1,1,1,0
+a_students_rollno_list_haa,access.students.rollno.list,model_students_rollno_list,group_education_haa,1,1,1,1
