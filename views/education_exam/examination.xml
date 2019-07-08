@@ -67,6 +67,7 @@
             <field name="context">{'search_default_education.academic.year': 1}</field>
             <field name="search_view_id" ref="examination_search"/>            
         </record>
-        <menuitem id="education_exam.examination_root_menu" name="Exam" web_icon="education_exam,static/description/icon.png" sequence="11"/>
+  
+        <menuitem id="education_exam.examination_root_menu" name="Exam" web_icon="education_exam,static/description/icon.png" sequence="7" />
     </data>
 </odoo> 

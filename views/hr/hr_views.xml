@@ -176,7 +176,7 @@
             name="Employees"
             groups="tup_edu_erp.group_education_hsa"
             web_icon="hr,static/description/icon.png"
-            sequence="75"/>
+            sequence="10"/>
 
 </odoo>
 
