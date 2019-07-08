@@ -1,5 +1,7 @@
-from odoo import fields, models, api
-from odoo.exceptions import ValidationError
+import random
+import string
+from odoo import api, fields, models, _
+from odoo.exceptions import Warning as UserWarning
 
 class EmployeeCategory(models.Model):
     _inherit = 'hr.employee'
@@ -57,6 +59,25 @@ class EmployeeCategory(models.Model):
     relation_ids = fields.One2many('employee.relationship', 'emp_id', string="Relationship")
     #relationship
     paper_ids = fields.One2many('education.research', 'emp_id', string="Research Record")
+
+    identification_id = fields.Char(string='Identification No', copy=False)
+
+    _sql_constraints = [
+        ('identification_id_uniq', 'unique(identification_id)',
+         'The Employee Number must be unique across the company(s).'),
+    ]
+
+    #override to create employee ID
+    @api.model
+    def create(self, vals):      
+        if not vals.get('identification_id'):
+            department = self.env['hr.department'].browse(vals['department_id'])
+            empid=self.env['ir.sequence'].next_by_code('education.employee.id')            
+            year = empid[0:4]
+            seq = empid[4:8]          
+            employee_id=year+str(department.major_id)+seq
+            vals['identification_id'] = employee_id
+        return super(EmployeeCategory, self).create(vals)
 
 class ResearchRecord(models.Model):
     _name = 'education.research'

@@ -6,6 +6,13 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
+             <field name="identification_id" position="replace"/>
+                <h1 position="after">
+                    <label for="identification_id" class="oe_edit_only"/>
+                    <h3>
+                        <field name="identification_id" readonly="1"/>
+                    </h3>
+                </h1>
             <xpath expr="//div[@name='button_box']" position="replace">
                 <div class="oe_button_box" name="button_box">
                     <button name="toggle_active" type="object" groups="hr.group_hr_user,tup_edu_erp.group_education_hsa"
@@ -149,6 +156,18 @@
                     </group>
                 </page>                                   
             </xpath>
+        </field>
+    </record>
+     <record id="view_employee_tree" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="name" position="after">
+                    <field name="identification_id"/>
+                </field>
+            </data>
         </field>
     </record>
     
