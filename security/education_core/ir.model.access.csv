@@ -30,6 +30,13 @@ a_education_academic_year_dc,access.education.academic.year,education_core.model
 a_education_academic_year_aa,access.education.academic.year,education_core.model_education_academic_year,group_education_aa,1,1,1,0
 a_education_academic_year_haa,access.education.academic.year,education_core.model_education_academic_year,group_education_haa,1,1,1,1
 
+education_core.access_education_academic_calendar,access.education.academic.calendar,model_education_academic_calendar,education_core.group_education_faculty,1,0,0,0
+a_education_academic_calendar_s,access.education.academic.calendar,model_education_academic_calendar,group_education_student,1,0,0,0
+a_education_academic_calendar_t,access.education.academic.calendar,model_education_academic_calendar,group_education_teacher,1,0,0,0
+a_education_academic_calendar_dc,access.education.academic.calendar,model_education_academic_calendar,group_education_teacher_dc,1,0,0,0
+a_education_academic_calendar_aa,access.education.academic.calendar,model_education_academic_calendar,group_education_aa,1,1,1,0
+a_education_academic_calendar_haa,access.education.academic.calendar,model_education_academic_calendar,group_education_haa,1,1,1,1
+
 education_core.access_education_subject,access.education.subject,education_core.model_education_subject,education_core.group_education_faculty,1,0,0,0
 a_education_subject_s,access.education.subject,education_core.model_education_subject,group_education_student,1,0,0,0
 a_education_subject_t,access.education.subject,education_core.model_education_subject,group_education_teacher,1,0,0,0

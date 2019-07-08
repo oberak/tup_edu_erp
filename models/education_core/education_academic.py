@@ -13,7 +13,7 @@ class EducationAcademic(models.Model):
     ay_code = fields.Char(string='Code', required=False, help='Code of academic year', readonly=True)
     active = fields.Boolean(string='Active', default=True)
     no_students= fields.Integer(compute='_get_student_count', string='Number of student')
-
+  
     def _get_student_count(self):
         """Return the number of students in the class"""
         for rec in self:
@@ -45,3 +45,15 @@ class EducationAcademic(models.Model):
             vals['ay_code'] = vals['name'][:4]
         vals['ay_code'] = vals['ay_code']
         return super(EducationAcademic, self).write(vals)
+
+class EducationAcademicCalendar(models.Model):
+    _name = 'education.academic.calendar'
+
+    ay_id = fields.Many2one('education.academic.year', string='Academic Year', required=True, 
+                            help="Select the Academic Year")
+    start_date = fields.Date(string='Start date', required=True, help='Starting date of academic year')
+    end_date = fields.Date(string='End date', required=True, help='Ending of academic year')
+    period = fields.Char('Duration', help='how long have taken')
+    description = fields.Text(string='Description', help="Description about the academic year")
+
+   

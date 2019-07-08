@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_education_academic_calendar_tree" model="ir.ui.view">
+        <field name="name">education.academic.calendar.tree</field>
+        <field name="model">education.academic.calendar</field>
+        <field name="arch" type="xml">
+            <tree string="Academic Calendar">
+                <field name="description"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="academic_calendar_view" model="ir.ui.view"> 
+        <field name="model">education.academic.calendar</field> 
+        <field name="arch" type="xml"> 
+            <calendar date_start="start_date" date_stop="end_date"> 
+                <field name="description" /> 
+            </calendar> 
+        </field> 
+    </record> 
+
+    <record id="view_education_academic_calendar_form" model="ir.ui.view">
+        <field name="name">education.academic.year.form</field>
+        <field name="model">education.academic.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Academic Calendarr">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ay_id"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                             <field name="period"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_academic_calendar_search" model="ir.ui.view">
+        <field name="name">education.academic.calendar.search</field>
+        <field name="model">education.academic.calendar</field>         
+        <field name="arch" type="xml">
+            <search string="Academic Year">
+                <group expand='0' string='Group by...'>           
+                        <filter string='Academic Year' name='group_academic_year' icon="fa-user" domain="[]" context="{'group_by' : 'ay_id'}"/> 
+                    </group>  
+            </search>
+        </field>
+    </record>
+
+    <record id="action_education_academic_calendar" model="ir.actions.act_window">
+        <field name="name">Academic Calendar</field>
+        <field name="res_model">education.academic.calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="context">{'search_default_group_academic_year': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first academic calendar here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="action_education_academic_calendar" parent="education_core.menu_education_main_menu"
+              id="menu_action_education_academic_calendar" sequence="3"/>
+
+</odoo>
