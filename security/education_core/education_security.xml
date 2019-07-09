@@ -116,6 +116,17 @@
         <field name="groups" eval="[(4, ref('group_education_teacher'))]"/>
         <field name="domain_force">[('faculty_id.employee_id','=', user.employee_ids.id)]</field>
     </record>
+     <!-- Set domain for timetable (academic dc)-->
+    <record id="teacher_adc_timetable_request_rule" model="ir.rule">
+        <field name="name">Timetable request by Academic Department Chair</field>
+        <field name="model_id" ref="model_education_timetable"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_adc'))]"/>        
+    </record>
+    <record id="teacher_adc_timetable_schedule_request_rule" model="ir.rule">
+        <field name="name">timetable schedule request by Academic Department Chair</field>
+        <field name="model_id" ref="model_education_timetable_schedule"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_adc'))]"/>
+    </record>
     <!-- Set domain for timetable (teacher_dc)-->
     <record id="teacher_dc_timetable_request_rule" model="ir.rule">
         <field name="name">Department Chair timetable request</field>
