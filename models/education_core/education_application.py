@@ -92,10 +92,12 @@ class StudentApplication(models.Model):
                 raise ValidationError(_('There is no class for this student !! Need to create class first '))        
             values = {
                 'name': rec.name,
+                'm_name':rec.m_name,
                 'last_name': rec.last_name,
                 'middle_name': rec.middle_name,
                 'application_id': rec.id,
                 'nrc_no': rec.nrc_no,
+                'm_nrc_no':rec.m_nrc_no,
                 'student_id': student_id,
                 'father_name': rec.father_name,
                 'mother_name': rec.mother_name,

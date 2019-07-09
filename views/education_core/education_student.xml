@@ -52,25 +52,31 @@
                     <field name="state"  widget="statusbar"/>
                 </header>
             </xpath> 
-            <xpath expr="//div[@class='oe_title']/h1/table" position="replace">
-                <tr>
-                    <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name"/></td>
-                </tr>
-                <tr>
-                    <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" /></td>
-                    <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" /></td>
-                </tr>
-            </xpath>
-            <xpath expr="//div[@class='oe_title']/h3" position="replace">
-                <h3>
-                    <field name="student_id"  />
-                </h3>
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <table>
+                    <tr>
+                        <td style="padding-right:10px;" colspan="2"><field name="m_name" placeholder="Name (In Myanmar)"/></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name"/></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" /></td>
+                        <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" /></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;" colspan="2"><field name="student_id"/></td>
+                    </tr>
+                </table>
             </xpath>
             <xpath expr="//field[@name='last_name']" position="attributes">
                 <attribute name="required">0</attribute>
             </xpath>
             <xpath expr="//field[@name='sec_lang']" position="replace">
                 <field name="nrc_no" />
+            </xpath>
+            <xpath expr="//field[@name='nrc_no']" position="after">
+                <field name="m_nrc_no" />
             </xpath>
             <field name="medium" position="replace">
                 <field name="major_id"  />
