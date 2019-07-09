@@ -61,5 +61,4 @@
     <!-- add new menu item for major/department -->
     <menuitem action="action_tup_department" parent="education_core.menu_education_class_conf"
               id="menu_action_education_major" sequence="3"/>
-
 </odoo>
