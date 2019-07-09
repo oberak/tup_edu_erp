@@ -53,7 +53,7 @@ education_core.access_education_syllabus,access.education.syllabus,education_cor
 a_education_syllabus_s,access.education.syllabus,education_core.model_education_syllabus,group_education_student,1,0,0,0
 a_education_syllabus_t,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher,1,0,0,0
 a_education_syllabus_dc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_dc,1,1,1,1
-a_education_syllabus_adc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_adc,1,1,1,1
+a_education_syllabus_adc,access.education.syllabus,education_core.model_education_syllabus,group_education_teacher_adc,1,0,0,0
 a_education_syllabus_aa,access.education.syllabus,education_core.model_education_syllabus,group_education_aa,1,0,0,0
 a_education_syllabus_haa,access.education.syllabus,education_core.model_education_syllabus,group_education_haa,1,0,0,0
 
