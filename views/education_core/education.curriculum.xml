@@ -84,6 +84,6 @@
         </record>
         
         <menuitem action="action_education_curriculum" parent="education_core.menu_education_class_conf"
-              id="menu_action_education_curriculum" sequence="6"/>
+              id="menu_action_education_curriculum" sequence="5"/>
     </data>
 </odoo>

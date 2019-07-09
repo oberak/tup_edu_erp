@@ -99,6 +99,6 @@
     </record>
 
     <menuitem action="education_core.action_education_syllabus" parent="education_core.menu_education_class_conf"
-              id="education_core.menu_action_education_syllabus" sequence="5"/>
+              id="education_core.menu_action_education_syllabus" sequence="6"/>
 
 </odoo>

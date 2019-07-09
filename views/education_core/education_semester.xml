@@ -76,6 +76,6 @@
     </record> 
 
     <menuitem action="action_education_semester" parent="education_core.menu_education_main_menu"
-              id="menu_action_education_semester" sequence="3"/> 
+              id="menu_action_education_semester" sequence="4"/> 
 
 </odoo>
