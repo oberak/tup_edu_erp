@@ -27,7 +27,7 @@
                             string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
                             help="Click to send the student for verification purpose" states="draft" />
                     <button name="approve" type="object" class="oe_highlight"
-                            string="Approve"  groups="tup_edu_erp.group_education_aa"
+                            string="Approve"  groups="tup_edu_erp.group_education_fs"
                             help="Click to send the student for approve purpose" states="verification" />
                 </header>
             </xpath>
@@ -36,7 +36,7 @@
                     <field string="Documents" name="document_count" widget="statinfo"/>
                 </button>           
                 <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_view_receipts"
-                    groups="tup_edu_erp.group_education_aa,tup_edu_erp.group_education_fs"
+                    groups="tup_edu_erp.group_education_aa,tup_edu_erp.group_education_fs,tup_edu_erp.group_education_student"
                     attrs="{'invisible': [('state', 'in' , ['draft','verification','reject'])]}">
                     <field string="Receipts" name="receipt_count" widget="statinfo"/>
                 </button>
@@ -55,17 +55,17 @@
             <xpath expr="//div[@class='oe_title']" position="replace">
                 <table>
                     <tr>
-                        <td style="padding-right:10px;" colspan="2"><field name="m_name" placeholder="Name (In Myanmar)"/></td>
+                        <td style="padding-right:10px;" colspan="2"><field name="m_name" placeholder="Name (In Myanmar)" required='1'/></td>
                     </tr>
                     <tr>
-                        <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name"/></td>
+                        <td style="padding-right:10px;" colspan="2"><field name="name" placeholder="First Name" required='1'/></td>
                     </tr>
                     <tr>
                         <td style="padding-right:10px;"><field name="middle_name" placeholder="Middle Name" /></td>
                         <td style="padding-right:10px;"><field name="last_name" placeholder="Last Name" /></td>
                     </tr>
                     <tr>
-                        <td style="padding-right:10px;" colspan="2"><field name="student_id"/></td>
+                        <td style="padding-right:10px;" colspan="2"><field name="student_id" placeholder="Student ID" required='1'/></td>
                     </tr>
                 </table>
             </xpath>
