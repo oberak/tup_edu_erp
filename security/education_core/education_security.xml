@@ -214,7 +214,7 @@
         <field name="name">Student List request</field>
         <field name="model_id" ref="model_education_student"/>
         <field name="groups" eval="[(4, ref('group_education_student'))]"/>
-        <field name="domain_force">[('partner_id','=', user.partner_id.ids)]</field>
+        <field name="domain_force">[('email','=', user.login)]</field>
     </record>
 
     <!--  set domain for student signup -->
