@@ -27,8 +27,9 @@ class EducationFaculty(models.Model):
 
     #add field
     nrc_no = fields.Char(string='NRC Number', required=True, help="Enter NRC Number of Faculty")
-    department_id = fields.Many2one('hr.department', 'Department')
+    department_id = fields.Many2one('hr.department', 'Department' , required=True)
     class_ids = fields.One2many('education.faculty.classes', 'faculty_id', string="Classes")
+    degree = fields.Many2one('hr.recruitment.degree', string="Degree", Help="Select your Highest degree", required=True)
     
 class EducationFacultyClasses(models.Model):
     _name = 'education.faculty.classes'

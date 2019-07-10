@@ -451,10 +451,16 @@
         <field name="domain_force">[('employee_id','=', user.employee_ids.id)]</field>
     </record>
       <!-- Set domain for Faculty (Teacher DC)--> 
-    <record id="student_faculty_request_rule" model="ir.rule">
+    <record id="faculty_request_rule_by_dc" model="ir.rule">
         <field name="name">Faculty request by Teacher DC</field>
         <field name="model_id" ref="model_education_faculty"/>
         <field name="groups" eval="[(4, ref('group_education_teacher_dc'))]"/>
+        <field name="domain_force">[('department_id','=', user.employee_ids.department_id.ids)]</field>
+    </record>
+     <record id="faculty_request_rule_by_adc" model="ir.rule">
+        <field name="name">Faculty request by Teacher ADC</field>
+        <field name="model_id" ref="model_education_faculty"/>
+        <field name="groups" eval="[(4, ref('group_education_teacher_adc'))]"/>
         <field name="domain_force">[('department_id','=', user.employee_ids.department_id.ids)]</field>
     </record>
 </odoo>

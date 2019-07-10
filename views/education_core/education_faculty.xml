@@ -16,7 +16,7 @@
                     </tr>
                 </table>
             </xpath>
-            <field name="father_name" position="before">
+            <field name="father_name" position="after">
                 <field name="nrc_no" attrs="{'readonly': []}"/>
             </field>
             <field name="guardian_name" position="attributes">
