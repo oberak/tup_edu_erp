@@ -45,28 +45,22 @@
         <field name="arch" type="xml">
           <!--Access to edit important fields -->
             <xpath expr="//field[@name='student_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>
-            <xpath expr="//field[@name='middle_name']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
-            </xpath> 
-            <xpath expr="//field[@name='last_name']" position="attributes">
+            <xpath expr="//field[@name='class_history_ids']" position="attributes">
                 <attribute name="attrs">{'readonly':True}</attribute> 
             </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>       
             <xpath expr="//field[@name='nrc_no']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>  
              <xpath expr="//field[@name='major_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath> 
              <xpath expr="//field[@name='class_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
-            </xpath> 
-            <xpath expr="//field[@name='class_history_ids']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>
         </field>
     </record>
@@ -78,7 +72,7 @@
         <field name="arch" type="xml">
          <!--Access to edit important fields -->
             <xpath expr="//field[@name='student_id']" position="attributes">
-                <attribute name="attrs">{'readonly':True}</attribute> 
+                <attribute name="attrs">{'readonly':False}</attribute> 
             </xpath>
             <xpath expr="//field[@name='class_history_ids']" position="attributes">
                 <attribute name="attrs">{'readonly':True}</attribute> 
