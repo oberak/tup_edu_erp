@@ -12,7 +12,9 @@ class EducationTimeTable(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('done', 'Done')],
                              default='draft')
     semester = fields.Many2one('education.semester', string="Semester")                       
-    major_id = fields.Many2one('hr.department','Major')                      
+    major_id = fields.Many2one('hr.department','Major')
+    timetable_thu = fields.One2many('education.timetable.schedule', 'timetable_id',
+                                     domain=[('week_day', '=', '3')])                      
 
     def get_name(self):
         """To generate name for the model"""
