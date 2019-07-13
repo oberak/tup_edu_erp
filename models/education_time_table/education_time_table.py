@@ -65,6 +65,16 @@ class EducationTimeTable(models.Model):
         if len(self.timetable_mon) + len(self.timetable_tue) + len(self.timetable_wed) + len(self.timetable_thur) + len(self.timetable_fri) + len(self.timetable_sat) + len(self.timetable_sun)  < 1:
             raise UserError(_('Please Add Subject schedule'))
         self.state = 'confirm' 
+    
+    @api.model
+    def create(self, vals):
+        res = super(EducationTimeTable, self).create(vals)        
+        timetable = self.env['education.timetable'].search(
+            [('class_division', '=', res.class_division.id), ('semester', '=', res.semester.id) ])
+        if len(timetable) > 1:
+            raise ValidationError(
+                _('Timetable  of %s is already created on "%s"', ) % (res.class_division.name, res.semester.name))
+        return res
         
 class EducationTimeTableSchedule(models.Model):
     _inherit = 'education.timetable.schedule'
