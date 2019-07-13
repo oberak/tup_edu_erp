@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_student_id_card" inherit_id="education_core.report_student_id_card">
+            <xpath expr="//table[@class='table table-condensed']" position="replace">
+                <table class="table table-condensed" style="border: 3px solid black !important;">
+                    <tr>
+                        <td width="40%">
+                            <p style="text-align:center;padding-top:10px;">
+                                <img t-if="not o.image" t-att-src="'/web/static/src/img/placeholder.png'" height="120" border="1" width="120"/>
+                                <img t-if="o.image" t-att-src="'data:image/png;base64,%s' % to_text(o.image)" height="120" border="1" width="120"/>
+                            </p>
+                            <p style="text-align:center;">
+                                <strong><span t-field="o.student_id"/></strong>
+                            </p>
+                        </td>
+                        <td width="60%">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p style="text-align:left;padding-top:30px;"><strong>Name : </strong></p>
+                                        <p style="text-align:left;"><strong>Roll No : </strong></p>
+                                        <p style="text-align:left;"><strong>Major : </strong></p>
+                                        <p style="text-align:left;"><strong>NRC : </strong></p>
+                                        <p style="text-align:left;"><strong>Address : </strong></p>
+                                    </td>
+                                    <td>
+                                        <p style="text-align:left;padding-top:30px;padding-left:10px;"  t-field="o.m_name"/>
+                                        <p style="text-align:left;padding-left:10px;" t-field="o.roll_no"/>
+                                        <p style="text-align:left;padding-left:10px;" t-field="o.major_id.name"/>
+                                        <p style="text-align:left;padding-left:10px;" t-field="o.m_nrc_no"/>
+                                        <p style="text-align:left;padding-left:10px;" t-field="o.street"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</odoo>
