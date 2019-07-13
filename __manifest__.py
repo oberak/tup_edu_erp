@@ -85,7 +85,10 @@
         'views/education_core/education_student_class_division.xml',
        # 'views/education_core/education_faculty2.xml',
 
+        ## reports
         'reports/student_application_report.xml',
+        'reports/student_id_card.xml',
+        'reports/faculty_id_card.xml',
 
         ## view - education_time_table
         'views/education_time_table/education_time_table.xml',
