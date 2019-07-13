@@ -27,7 +27,7 @@
                             string="Send for Verification"  groups="tup_edu_erp.group_education_aa"
                             help="Click to send the student for verification purpose" states="draft" />
                     <button name="approve" type="object" class="oe_highlight"
-                            string="Approve"  groups="tup_edu_erp.group_education_fs"
+                            string="Approve"  groups="tup_edu_erp.group_education_aa"
                             help="Click to send the student for approve purpose" states="verification" />
                 </header>
             </xpath>
