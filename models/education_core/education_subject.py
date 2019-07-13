@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class EducationSubject(models.Model):
     _inherit = 'education.subject'    
     
-    major_id = fields.Many2one('hr.department', string="Major",
+    major_id = fields.Many2one('hr.department', string="Department",
                             required=True, help="Choose Major")
     is_language = fields.Boolean(string="Lecture", help="Tick if this subject is a lecture")
     is_tutorial = fields.Boolean(string='Tutorial', help="Tick if this is the Tutorial")
